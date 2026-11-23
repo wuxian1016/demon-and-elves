@@ -1,6 +1,9 @@
 # 恶魔与精灵（微信小游戏）· COW8D-PF1 接手仓库
 
-私有仓库。给接手的 AI（Codex 等）和开发者继续改用。
+公开仓库，不用登录就能克隆或下载。给接手的 AI（Codex 等）和开发者继续改用。
+
+- 克隆：`git clone https://github.com/wuxian1016/demon-and-elves.git`
+- 只下载修改版压缩包：<https://github.com/wuxian1016/demon-and-elves/archive/refs/tags/cow8d-pf1.zip>
 
 ## 这是什么
 
