@@ -1,0 +1,11 @@
+{
+  "version": "wechat627",
+  "preparedArt": true,
+  "assetBase": "https://demon-and-elves-whxh-d9gqr3083ac71b751.webapps.tcloudbase.com/assets/",
+  "diagnosticBuild": "BN19R10-C3-REBUILT-P0-COW8D",
+  "diagnosticRelay": {
+    "enabled": false,
+    "approvedOrigin": ""
+  },
+  "diagnosticFreezeTrace": true
+}

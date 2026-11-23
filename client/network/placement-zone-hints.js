@@ -1,0 +1,9 @@
+'use strict';
+// Advisory colour only: no geometry, snapping, availability or collision changes.
+const region=require('./camp-hint-region'),UNIT=103,frames=new WeakMap();
+function frame(g,z){let m=frames.get(g);if(!m){m=new WeakMap();frames.set(g,m);}const gate=region.gateFrame(g,z),old=m.get(z);if(old?.gate===gate)return old;const rows=(g.defenseRecommendationLayout?.(z)||[]).filter(p=>p.type==='tower'),primary=rows.find(p=>p.number===2)||rows[0];if(!primary)return null;const depth=p=>-((p.x-gate.x)*gate.ax+(p.y-gate.y)*gate.ay),side=p=>(p.x-gate.x)*-gate.ay+(p.y-gate.y)*gate.ax,axis=depth(primary),sides=rows.map(side);const f={gate,axis,lo:Math.min(...sides)-UNIT/2,hi:Math.max(...sides)+UNIT/2};m.set(z,f);return f;}
+function resourceAnchor(g,z){const f=frame(g,z);return f?{x:z.x-f.gate.ax*300,y:z.y-f.gate.ay*300}:{x:z.x,y:z.y};}
+function role(g,s,innerFlank=2.5){if(s.type==='wall')return require('./wall-advisory-grid').role(g,s)||'normal';const camp=region.campAt(g,s.x,s.y);if(!camp)return 'normal';const f=frame(g,camp.zone);if(!f)return 'normal';const depth=-((s.x-f.gate.x)*f.gate.ax+(s.y-f.gate.y)*f.gate.ay),side=(s.x-f.gate.x)*-f.gate.ay+(s.y-f.gate.y)*f.gate.ax;if(side>=f.lo-UNIT*4&&side<=f.hi+UNIT*4){if(depth>=f.axis-UNIT*1.5&&depth<f.axis+UNIT*2.5){const inward=depth<f.axis+UNIT/2?0:depth<f.axis+UNIT*1.5?1:2,flank=Math.abs(side)<=UNIT*innerFlank?0:Math.abs(side)<=UNIT*4?1:2;return ['defense','defense-mid','defense-soft'][Math.max(inward,flank)];}}const rear=resourceAnchor(g,camp.zone);if(depth>=f.axis+UNIT*3.5&&Math.hypot(s.x-rear.x,s.y-rear.y)<=450)return 'resource';return 'normal';}
+// Keep existing recommended projections when only advisory shade changes.
+const defenseGhostRole=(g,s)=>role(g,s,3);
+module.exports={defenseGhostRole,role,frame,resourceAnchor,UNIT};

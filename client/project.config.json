@@ -1,0 +1,2102 @@
+{
+  "appid": "wxe6064709895531ce",
+  "projectname": "BN19R10-SOLO-STONE",
+  "compileType": "game",
+  "setting": {
+    "urlCheck": true,
+    "es6": true,
+    "minified": true,
+    "uploadWithSourceMap": false,
+    "postcss": false,
+    "compileWorklet": false,
+    "uglifyFileName": false,
+    "enhance": false,
+    "packNpmManually": false,
+    "packNpmRelationList": [],
+    "minifyWXSS": true,
+    "minifyWXML": true,
+    "localPlugins": false,
+    "disableUseStrict": false,
+    "useCompilerPlugins": false,
+    "condition": false,
+    "babelSetting": {
+      "ignore": [],
+      "disablePlugins": [],
+      "outputPath": ""
+    }
+  },
+  "packOptions": {
+    "ignore": [
+      {"type":"file","value":"asset-manifest.json"},
+      {"type":"file","value":"art163/ghost/robot-guide-entry.js"},
+      {"type":"file","value":"art163/ghost/robot-guide-scenes.js"},
+      {"type":"file","value":"art163/ghost/robot-skill-guide.js"},
+      {"type":"file","value":"network/card-immutable-frame-cache.js"},
+      {"type":"file","value":"network/card-live-frame-tint.js"},
+      {"type":"file","value":"network/bat-authority-contract-candidate.js"},
+      {"type":"file","value":"network/bootstrap-button-motion.js"},
+      {"type":"file","value":"network/mini-demon-independent.js"},
+      {"type":"file","value":"factory-model-art/ghost-locked.webp.bin"},
+      {"type":"file","value":"dragon-tutorial-host.js"},
+      {"type":"file","value":"tutorial-presentation.js"},
+      {
+        "type": "file",
+        "value": "network/canvas-battle.js"
+      },
+      {
+        "type": "file",
+        "value": "network/fixed-build-grid-core.js"
+      },
+      {
+        "type": "file",
+        "value": "network/fixed-build-grid.js"
+      },
+      {
+        "type": "file",
+        "value": "network/presentation-identity.js"
+      },
+      {
+        "type": "file",
+        "value": "network/qa-read-only-probe.js"
+      },
+      {
+        "type": "file",
+        "value": "network/qa-window-client.js"
+      },
+      {
+        "type": "file",
+        "value": "network/wall-orientation-core.js"
+      },
+      {
+        "type": "file",
+        "value": "network/wall-orientation.js"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/antiAir-3.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/antiAir-2.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/net-3.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/net-2.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/tank-fire-drawn-bk-v2.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/robot-arms-clean-v166.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/robot-torso-clean-v166.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/cannon-approved-v289.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-418.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/stones512.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/shadows512.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/ui524.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/tutorial-scene-data.js"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-418.webp"
+      },
+      {
+        "type": "file",
+        "value": "art163/robot-arms-clean-v166.webp"
+      },
+      {
+        "type": "file",
+        "value": "art163/stones512.webp"
+      },
+      {
+        "type": "file",
+        "value": "art163/ui524.webp"
+      },
+      {
+        "type": "file",
+        "value": "art163/tank-fire-drawn-bk-v2.webp"
+      },
+      {
+        "type": "file",
+        "value": "art163/robot-torso-clean-v166.webp"
+      },
+      {
+        "type": "file",
+        "value": "art163/cannon-approved-v289.webp"
+      },
+      {
+        "type": "file",
+        "value": "art163/shadows512.webp"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/antiAir-2.webp"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/net-3.webp"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/net-2.webp"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/antiAir-3.webp"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-00.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-05.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-06.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-187.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-07.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-186.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-11.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-08.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-10.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-04.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-09.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-01.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-02.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v4/attack/attack-03.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-185.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/net/net-00.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-03.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-02.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-00.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-10.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-11.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-01.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-04.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-07.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-05.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-09.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-08.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/skills512.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-134.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/aa/aa-06.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-168.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/earth512-1.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-167.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-133.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-165.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-162.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-166.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-161.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-00.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-11.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/ui504.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-397.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-10.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-160.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-164.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-159.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-390.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-68.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-01.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-392.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-09.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-71.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-394.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-03.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-132.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-02.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-396.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-393.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-395.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-391.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-131.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/debuff557.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-158.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-08.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-04.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-169.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-05.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-139.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-172.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-06.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-129.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/v2/bat/bat-07.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-142.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-155.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-30.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-141.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-184.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-140.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-181.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-157.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-69.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-70.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-183.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-178.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-18.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-180.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-128.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-135.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-175.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-156.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-163.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-171.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-182.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-136.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-31.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-14.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-174.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-179.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-19.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-170.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-130.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-154.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-153.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-137.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-20.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-22.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-127.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/earth512-0.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-138.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-2.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-150.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/cannon-fire-zone-v317.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-149.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-29.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-173.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-151.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-59.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-21.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-177.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-145.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-126.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-28.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-200.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-24.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-23.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-152.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-57.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-176.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-147.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-15.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-243.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-146.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-5.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-148.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-240.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-64.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-245.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-124.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-125.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-25.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-67.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-246.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-6.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-27.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-248.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-242.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-4.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-144.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-17.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-251.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-241.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-143.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-203.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-26.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-249.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-62.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-123.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-244.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-201.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-61.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-247.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-250.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-254.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-16.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-257.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-252.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-255.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-202.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-253.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-7.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-13.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-60.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-3.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-8.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-65.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-44.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-256.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-66.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-63.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-118.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-47.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-1.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-10.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-117.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/tower-shadows.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-11.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-40.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-8-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-12.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-9.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-207.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-226.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-43.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-218.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-227.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-223.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-219.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-5-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-222.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-104.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-206.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-212.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-119.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-217.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-6-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-320.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-220.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-221.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-205.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-316.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-3-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-216.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-209.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-204.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-225.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-208.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-210.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/earth512-2.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-304.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-224.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-299.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-102.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-214.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-45.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-314.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-305.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-324.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-1-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-46.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-309.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-294.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-311.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-354.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-302.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-301.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-409.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-325.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-317.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-109.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-228.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-298.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-297.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-215.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-323.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-110.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-231.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-211.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-321.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-352.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-239.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-308.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-236.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-313.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-341.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-303.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-307.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-296.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-237.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-346.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-213.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-319.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-300.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-108.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-105.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-233.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-322.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-295.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-234.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-359.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-106.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-318.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-358.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-306.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-379.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-310.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-230.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-101.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-0.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-360.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-355.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-88.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-116.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-93.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-235.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-344.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-331.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-238.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-345.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-107.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-378.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-381.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-368.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-312.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-315.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-353.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-384.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-349.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-330.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-347.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-115.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-366.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-91.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-340.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-369.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-370.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-350.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-334.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-348.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-338.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-367.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-357.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-335.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-339.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-351.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-361.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-336.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-372.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-382.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-343.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-337.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-342.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-371.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-332.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-373.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-92.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-229.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-380.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-326.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-333.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-383.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-89.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-376.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-356.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-328.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-94.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-377.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-4-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-375.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-327.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-111.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-329.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-86.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-42.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-386.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-232.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-362.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-389.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-41.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-374.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-388.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-72.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-54.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-363.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-90.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-0-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-103.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-53.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-113.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-112.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-385.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-78.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-76.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-387.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-364.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-267.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-365.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-75.png"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/cargo-empty-mouth.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-95.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-77.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-195.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-265.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-269.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-258.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-266.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-80.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-85.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-96.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-279.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-114.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-79.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-50.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-264.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-259.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-49.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-268.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-263.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-262.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-278.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-7-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/water512-2-mask.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-261.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-192.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-74.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-100.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-276.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-99.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-260.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-97.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-87.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-73.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-196.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-277.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-281.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-188.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-36.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-52.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-399.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-37.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-38.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-48.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-273.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-272.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-280.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-275.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-193.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-270.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-274.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-197.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-39.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-271.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-283.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-286.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-84.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-189.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-284.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-190.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-282.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-32.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-51.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/home-chrome489.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-98.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-285.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-291.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-287.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-290.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-191.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-289.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-293.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-194.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-292.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-83.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-199.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-288.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-33.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-81.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-35.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-34.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-198.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-55.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-82.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-398.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-413.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-411.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-412.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-410.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-415.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-414.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-416.png"
+      },
+      {
+        "type": "file",
+        "value": "art163/sprite-417.png"
+      },
+      {
+        "type": "file",
+        "value": "qa-stone-live.js"
+      },
+      {
+        "type": "file",
+        "value": "art163/layout.js"
+      },
+      {
+        "type": "file",
+        "value": "art163/dragon-atlas118.js"
+      },
+      {
+        "type": "file",
+        "value": "card-art/fury.png"
+      },
+      {
+        "type": "file",
+        "value": "card-art/harvest.png"
+      },
+      {
+        "type": "file",
+        "value": "card-art/fortress.png"
+      },
+      {
+        "type": "file",
+        "value": "card-art/sanctuary.png"
+      },
+      {
+        "type": "file",
+        "value": "card-art/storm.png"
+      }
+    ],
+    "include": [
+      {"type":"file","value":"assets/forest-304.bin"},
+      {
+        "type": "file",
+        "value": "match-sprites-b/sprite-418.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art163/robot-arms-clean-v166.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art163/stones512.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art163/ui524.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art163/tank-fire-drawn-bk-v2.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art163/robot-torso-clean-v166.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art163/cannon-approved-v289.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art163/shadows512.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/antiAir-2.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/net-3.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/net-2.webp.bin"
+      },
+      {
+        "type": "file",
+        "value": "art-bat-preview/levels/antiAir-3.webp.bin"
+      }
+    ]
+  },
+  "simulatorPluginLibVersion": {},
+  "isGameTourist": false,
+  "editorSetting": {}
+}

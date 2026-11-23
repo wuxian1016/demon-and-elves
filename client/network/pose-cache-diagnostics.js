@@ -1,0 +1,4 @@
+'use strict';
+const KEYS=['groups','frames','frameBytes','bodyBytes','frameBudget','bodyBudget','evictions'];
+function capturePoseCache(art){try{const method=art&&Object.getOwnPropertyDescriptor(art,'poseCacheStats215')?.value;if(typeof method!=='function')return{available:false,reason:'unavailable'};const values=method.call(art),out={available:true};for(const key of KEYS){const d=values&&Object.getOwnPropertyDescriptor(values,key),v=d&&Object.hasOwn(d,'value')?d.value:null;out[key]=Number.isSafeInteger(v)&&v>=0&&v<=512*1024*1024?v:null;}out.withinLogicalBudgets=[out.frameBytes,out.bodyBytes,out.frameBudget,out.bodyBudget].some(v=>v===null)?null:out.frameBytes<=out.frameBudget&&out.bodyBytes<=out.bodyBudget;out.scope='Current logical canvas cache counters only; not native/GPU physical memory, peak allocation or thermal measurement.';return out;}catch{return{available:false,reason:'unavailable'};}}
+module.exports={capturePoseCache};

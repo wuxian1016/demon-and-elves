@@ -1,0 +1,52 @@
+{
+  "deviceOrientation": "portrait",
+  "showStatusBar": false,
+  "networkTimeout": {
+    "request": 60000,
+    "downloadFile": 60000
+  },
+  "subpackages": [
+    {
+      "name": "art163",
+      "root": "art163/"
+    },
+    {
+      "name": "matchSpritesA",
+      "root": "match-sprites-a/"
+    },
+    {
+      "name": "matchSpritesB",
+      "root": "match-sprites-b/"
+    },
+    {
+      "name": "batArt",
+      "root": "art-bat-preview/"
+    },
+    {
+      "name": "stoneArt",
+      "root": "stone-art/"
+    },
+    {
+      "name": "stormArt",
+      "root": "storm-art/"
+    },
+    {
+      "name": "mammothWalk",
+      "root": "mammoth-walk/"
+    },
+    {
+      "name": "mammothAttack",
+      "root": "mammoth-attack/"
+    },
+    {
+      "name": "monsterRearMotion",
+      "root": "monster-rear-motion/"
+    },
+    {
+      "name": "factoryModelArt",
+      "root": "factory-model-art/"
+    }
+  ],
+  "iOSHighPerformance": true,
+  "iOSHighPerformance+": false
+}

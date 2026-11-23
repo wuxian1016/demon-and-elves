@@ -1,0 +1,13 @@
+'use strict';
+// Stone death is evidence of a pending reward, not authority to choose its owner.
+// Snapshot persists accepted event IDs. Explicit match ID required: stoneId alone
+// can repeat after reset/save and must never be used as a global grant key.
+const valid=s=>typeof s==='string'&&/^[a-zA-Z0-9:_-]{1,96}$/.test(s);
+function validate(s){if(!s||s.version!==1||!valid(s.matchId)||!Array.isArray(s.events)||s.events.length>4096)throw Error('Invalid reward inbox');const ids=new Set();for(const e of s.events){if(!valid(e.id)||ids.has(e.id)||!Number.isInteger(e.wave)||e.wave<10||e.wave%10!==0||!Number.isInteger(e.lane)||e.lane<0||e.lane>32||![null,undefined].includes(e.sourceOwner)&&(!Number.isInteger(e.sourceOwner)||e.sourceOwner<0||e.sourceOwner>32)||!['pending','granted'].includes(e.status))throw Error('Invalid stone reward event');const count=e.cardCount??1,granted=e.cardsGranted??(e.status==='granted'?count:0);if(![1,2,3].includes(count)||!Number.isInteger(granted)||granted<0||granted>count||(granted===count)!==(e.status==='granted'))throw Error('Invalid stone card count');ids.add(e.id);}return s;}
+class RewardInbox{
+ constructor({matchId,authority=()=>false,resolveEnabled=false}){this.state=validate({version:1,matchId,events:[]});this.authority=authority;this.resolveEnabled=resolveEnabled;}
+ restore(s){validate(s);if(s.matchId!==this.state.matchId)throw Error('Wrong match');this.state=JSON.parse(JSON.stringify(s));}
+ record(event){if(!this.authority())return{ok:false,reason:'not-authority'};const old=this.state.events.find(e=>e.id===event?.id);if(old)return{ok:false,reason:old.wave===event.wave&&old.lane===event.lane&&(old.sourceOwner??null)===(event.sourceOwner??null)&&(old.cardCount??1)===(event.cardCount??1)?'duplicate-death':'death-id-conflict'};const next={...event,status:'pending'};try{validate({...this.state,events:[next]});}catch(_){return{ok:false,reason:'invalid-death'};}if(this.state.events.length>=4096)return{ok:false,reason:'inbox-capacity'};this.state.events.push(next);return{ok:true,reason:'ownership-and-random-reward-pending'};}
+ resolve(id,{owner,type},controller){if(!this.authority()||!this.resolveEnabled)return{ok:false,reason:'reward-policy-pending'};const e=this.state.events.find(x=>x.id===id);if(!e||e.status!=='pending')return{ok:false,reason:'missing-pending-reward'};const result=controller.award({owner,type,serial:controller.core.state.lastAward+1,quickCollect:(e.cardCount??1)>1});if(result.ok){e.cardsGranted=(e.cardsGranted??0)+1;if(e.cardsGranted===(e.cardCount??1))e.status='granted';}return result;}
+}
+module.exports={RewardInbox,validate};

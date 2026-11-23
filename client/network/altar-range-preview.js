@@ -1,0 +1,4 @@
+'use strict';
+// Local drawing only. Radius is taken from the same Building stats as real healing.
+function install(g,{Building}={}){if(g.altarRangePreviewBJ||typeof Building!=='function')return;let sample;const original=g.drawPlacementPreview;g.drawPlacementPreview=function(ctx,...args){const p=this.placement;if(p?.type==='altar'&&Number.isFinite(p.x+p.y)&&['aim','confirm'].includes(p.stage)){if(!sample)sample=new Building(0,0,'altar',1);ctx.save();try{ctx.globalAlpha=1;ctx.strokeStyle='rgba(113,255,174,.82)';ctx.fillStyle='rgba(71,215,132,.055)';ctx.lineWidth=3;ctx.beginPath();ctx.arc(p.x,p.y,sample.healRange,0,Math.PI*2);ctx.fill();ctx.stroke();}finally{ctx.restore();}}return original.call(this,ctx,...args);};Object.defineProperty(g,'altarRangePreviewBJ',{value:{radius:()=>sample?.healRange},configurable:true});}
+module.exports={install};

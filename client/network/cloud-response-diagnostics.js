@@ -1,0 +1,13 @@
+'use strict';
+const STAGES=new Set(['health','session','heartbeat','snapshot','input','map','scene','other']);
+const PHASES=new Set(['response-status','response-json','sdk-fail','request-timeout','request-abort','request-watchdog-abort','request-lifecycle-abort','cloud-init','route-check']);
+const KINDS=new Set(['missing','null','object','array','string','empty-text','markup-text','json-like-text','gzip-like-text','other']);
+function stageOf(url){const path=typeof url==='string'?url.replace(/^https:\/\/[^/]+/,'').split('?')[0]:'';if(path==='/api/health')return 'health';if(path==='/api/heartbeat')return 'heartbeat';if(/\/session$/.test(path))return 'session';const m=path.match(/\/battle(?:\/(input|map|scene))?$/);return m?(m[1]||'snapshot'):'other'}
+function safeRows(rows){return Array.isArray(rows)?rows.slice(-8).map(r=>({stage:STAGES.has(r?.stage)?r.stage:'other',phase:PHASES.has(r?.phase)?r.phase:'sdk-fail',firstAtMs:Number.isSafeInteger(r?.firstAtMs)&&r.firstAtMs>=0?r.firstAtMs:0,lastAtMs:Number.isSafeInteger(r?.lastAtMs)&&r.lastAtMs>=0?r.lastAtMs:0,count:Number.isInteger(r?.count)&&r.count>0?Math.min(r.count,1000000):1,status:Number.isInteger(r?.status)&&r.status>=100&&r.status<=599?r.status:null,bodyKind:KINDS.has(r?.bodyKind)?r.bodyKind:'other',bodyLength:Number.isSafeInteger(r?.bodyLength)&&r.bodyLength>=0?Math.min(r.bodyLength,100000000):null,contentType:['json','html','text','other','absent'].includes(r?.contentType)?r.contentType:'absent',encoding:['gzip','br','identity','other','absent'].includes(r?.encoding)?r.encoding:'absent'})):[]}
+function responseFields(response){
+ const data=response?.data;let bodyKind=data===undefined?'missing':data===null?'null':Array.isArray(data)?'array':typeof data==='object'?'object':typeof data==='string'?'string':'other',bodyLength=null;
+ if(typeof data==='string'){bodyLength=data.length;const start=data.slice(0,32).trimStart();bodyKind=!data.trim()?'empty-text':data.charCodeAt(0)===31&&data.charCodeAt(1)===139?'gzip-like-text':start.startsWith('<')?'markup-text':/^[\[{]/.test(start)?'json-like-text':'string';}
+ const header=response?.header||response?.headers||{},read=name=>{const key=Object.keys(header).find(k=>k.toLowerCase()===name);return key&&typeof header[key]==='string'?header[key].toLowerCase():''},type=read('content-type'),enc=read('content-encoding');
+ return{status:Number.isInteger(response?.statusCode)?response.statusCode:null,bodyKind,bodyLength,contentType:!type?'absent':type.includes('json')?'json':type.includes('html')?'html':type.startsWith('text/')?'text':'other',encoding:!enc?'absent':['gzip','br','identity'].includes(enc)?enc:'other'};
+}
+module.exports={stageOf,safeRows,responseFields};

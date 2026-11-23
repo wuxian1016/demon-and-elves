@@ -1,0 +1,11 @@
+《恶魔与精灵》COW8D · AI 接手快捷入口
+公开完整档，勿把测试状态当正式上线结果。
+
+1. 下载同一站点的 manifest.json 和 assemble.py。manifest.schema 为 demon-elves-handoff-chunks-v1，archives 下为两卷各自的严格顺序；每个字节分片有独立 URL 路径、偏移量、长度、SHA-256。清单的路径相对交接页所在目录。所有分片都是普通下载，不需要 Range 请求、不需要登录。
+2. 让 Python 3.9+ 从当前交接站拉取（将参数换成页面实际 HTTPS 地址）：
+   python3 assemble.py --url '<交接页的实际 HTTPS 地址>' --out zip-verified
+   或手动将文件保留在 manifest.json 同级的 downloads/ 下，再离线：
+   python3 assemble.py --local . --out zip-verified
+3. 必须得到 TEST-demon-elves-handoff-1-of-2.zip 和 TEST-demon-elves-handoff-2-of-2.zip。先比较 SHA256SUMS.txt，再解到同一个新目录。不要叠加既有工程。读归档内 START-HERE.md、BUILD-INDEX.json 和问题账本。需要时使用归档中的 latest/tools/handoff.py。
+4. 理解最新要求：先读同站 PERFORMANCE-PLAN.md。工程是 COW8D 微信测试预览，不是正式发行；尚未通过持续真机内存、60 FPS、温度、耗电及真实广告验收。源码保留真实技能与素材；不为提速删画质、藏警告或改玩法。
+5. 8,607 条只包括已获公开授权且脱敏的可读取游戏沟通。旧历史、附件范围和其他缺口以包内说明为准。工具不携带账户授权或外部 MCP 连接；不要导入既有个人存档或运行真实广告。

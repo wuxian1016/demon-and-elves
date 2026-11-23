@@ -1,0 +1,80 @@
+{
+  "schema": "demon-elves-handoff-chunks-v1",
+  "project": "恶魔与精灵",
+  "build": "BN19R10-C3-REBUILT-P0-COW8D",
+  "scope": "WeChat test-preview development handoff, not a production release",
+  "auth": "none",
+  "restore_entry": "START-HERE.md",
+  "visible_game_messages": 8607,
+  "source": {
+    "paths": 1440,
+    "sha256": "faab82ab9bc6244391b505ca86331c1a64cdc6ad43790a0f774484cc9898e2e6"
+  },
+  "quick_start": "START-HERE.txt",
+  "performance_plan": "PERFORMANCE-PLAN.md",
+  "reassembler": "assemble.py",
+  "archives": [
+    {
+      "name": "TEST-demon-elves-handoff-1-of-2.zip",
+      "bytes": 35710303,
+      "sha256": "237ede80555a5fe63eb697ae6c5349216ff25f5bf794bd13f13af31a7fc6a92e",
+      "chunks": [
+        {
+          "path": "downloads/TEST-demon-elves-handoff-1-of-2.zip.part01",
+          "offset": 0,
+          "bytes": 10485760,
+          "sha256": "01265c0e5fa2fcba5c2fb796d5e477a3d162c1124859575adf686c0e89604d0c"
+        },
+        {
+          "path": "downloads/TEST-demon-elves-handoff-1-of-2.zip.part02",
+          "offset": 10485760,
+          "bytes": 10485760,
+          "sha256": "9caa5e18d8a653f500db078fef9059c5f577fa90a4dd9aef2d5a88125b46fdfa"
+        },
+        {
+          "path": "downloads/TEST-demon-elves-handoff-1-of-2.zip.part03",
+          "offset": 20971520,
+          "bytes": 10485760,
+          "sha256": "6bb3df8965bd59a16a07fd2210dfa2fe8982edd523c4717f5e90ff9d50301765"
+        },
+        {
+          "path": "downloads/TEST-demon-elves-handoff-1-of-2.zip.part04",
+          "offset": 31457280,
+          "bytes": 4253023,
+          "sha256": "10e8fcc728c4c6f41c5d753aac4649988477e2d314f1844e610574fffd0ef085"
+        }
+      ]
+    },
+    {
+      "name": "TEST-demon-elves-handoff-2-of-2.zip",
+      "bytes": 40048123,
+      "sha256": "5f89a9ea446c2977cce894e6a746c197c85ca86f87d3115dad4960f07e372124",
+      "chunks": [
+        {
+          "path": "downloads/TEST-demon-elves-handoff-2-of-2.zip.part01",
+          "offset": 0,
+          "bytes": 10485760,
+          "sha256": "f48d6e4a03793071e113cc35d6a37ddaaab3c229ea2fdd39c961926cf26650f7"
+        },
+        {
+          "path": "downloads/TEST-demon-elves-handoff-2-of-2.zip.part02",
+          "offset": 10485760,
+          "bytes": 10485760,
+          "sha256": "826963e6d4734504fa20f6e7c3036a133ad69205125197e1718fa6595cbbf0ed"
+        },
+        {
+          "path": "downloads/TEST-demon-elves-handoff-2-of-2.zip.part03",
+          "offset": 20971520,
+          "bytes": 10485760,
+          "sha256": "383f4aa34ab90f4d6eebbc0d5e714878f195db33a9119dc85fcff1246590e590"
+        },
+        {
+          "path": "downloads/TEST-demon-elves-handoff-2-of-2.zip.part04",
+          "offset": 31457280,
+          "bytes": 8590843,
+          "sha256": "f3de7f2b539dd71e9430772d2fa92a0377484f62f8fe258c390d5c04e64fd4f5"
+        }
+      ]
+    }
+  ]
+}

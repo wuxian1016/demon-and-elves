@@ -1,0 +1,2 @@
+237ede80555a5fe63eb697ae6c5349216ff25f5bf794bd13f13af31a7fc6a92e  TEST-demon-elves-handoff-1-of-2.zip
+5f89a9ea446c2977cce894e6a746c197c85ca86f87d3115dad4960f07e372124  TEST-demon-elves-handoff-2-of-2.zip

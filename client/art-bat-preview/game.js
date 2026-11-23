@@ -1,0 +1,1 @@
+const env=require('../runtime');env.runtime.onlineBatArtBN=env.window.batWaveCandidateBN;env.runtime.ensureBatCargoReadyBN=()=>env.runtime.batCargoReadyPromiseBN=env.window.batWaveCandidateBN?.preloadCargo?.()||Promise.resolve();env.runtime.ensureBatCargoReadyBN().catch(()=>{});env.runtime.batArtReadyBN=true;

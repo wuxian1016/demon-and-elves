@@ -1,0 +1,43 @@
+{
+  "title": "恶魔与精灵",
+  "build": "BN19R10-C3-REBUILT-P0-COW8D",
+  "scope": "最新微信官方测试预览（非正式生产）",
+  "client": "latest/client",
+  "manifest": "latest/source.sha256",
+  "source_sha256": "faab82ab9bc6244391b505ca86331c1a64cdc6ad43790a0f774484cc9898e2e6",
+  "files": 1440,
+  "functional_parent_sha256": "9a24797ac75cd166629f550833334df62a73c8e7ca6b1f76473db32a88295a39",
+  "tag_only_delta": [
+    "asset-config.js",
+    "release.json",
+    "single-player-build.js"
+  ],
+  "sdk": {
+    "verified_utc": "2026-11-23T11:36:20Z",
+    "scope": "WeChat official test preview only, not production",
+    "paths": 1440,
+    "source_unchanged": true,
+    "app_identity_verified": true,
+    "main_bytes": 4172284,
+    "total_bytes": 31269070,
+    "main_headroom_bytes": 22020,
+    "total_headroom_bytes": 188210
+  },
+  "open": [
+    "iPhone startup and long sessions",
+    "real WeChat ad fill and watch/return",
+    "actual 60 fps and thermals",
+    "six-player network"
+  ],
+  "mac_sprite_paired_max_ms": 59.948875,
+  "communications_visible_messages": 8607,
+  "historical_official_previews": [
+    {
+      "tag": "COW8C",
+      "files": 1390,
+      "manifest_sha256": "26a0b1f692dbf37a31901a70f4d16468f444ffde7686b1682d511052489a776b"
+    }
+  ],
+  "has_verified_matching_backend": false,
+  "qr_in_handoff": false
+}
