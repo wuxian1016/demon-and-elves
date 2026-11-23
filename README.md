@@ -3,7 +3,7 @@
 公开仓库，不用登录就能克隆或下载。给接手的 AI（Codex 等）和开发者继续改用。
 
 - 克隆：`git clone https://github.com/wuxian1016/demon-and-elves.git`
-- 只下载修改版压缩包：<https://github.com/wuxian1016/demon-and-elves/archive/refs/tags/cow8d-pf1.zip>
+- 只下载最新版压缩包（不用 git）：<https://github.com/wuxian1016/demon-and-elves/archive/refs/heads/main.zip>
 
 ## 这是什么
 
