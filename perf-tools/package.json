@@ -1,0 +1,7 @@
+{
+  "name": "cow8d-perf-harness",
+  "private": true,
+  "description": "在电脑上跑《恶魔与精灵》COW8D 客户端，量帧耗时、画布像素、内存分配、长帧来源，并做逐帧像素/状态回归对比",
+  "dependencies": { "@napi-rs/canvas": "0.1.65", "image-size": "1.1.1" },
+  "devDependencies": { "eslint": "9.13.0", "globals": "15.11.0" }
+}

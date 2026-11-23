@@ -1,0 +1,17 @@
+{
+ "statesCompared": 240,
+ "firstStateDiff": null,
+ "pixelFramesCompared": 180,
+ "pixelDiffFrames": [],
+ "pixelDiffCount": 0,
+ "timing": {
+  "a": {
+   "framesMs": 5.81,
+   "drawMs": 4.99
+  },
+  "b": {
+   "framesMs": 5.78,
+   "drawMs": 5.04
+  }
+ }
+}

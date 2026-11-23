@@ -1,0 +1,130 @@
+{
+ "checks": [
+  {
+   "name": "reached hunt",
+   "ok": true,
+   "detail": {
+    "state": "hunt",
+    "wave": 4
+   }
+  },
+  {
+   "name": "pause menu after returning from background",
+   "ok": true,
+   "detail": {
+    "menu": true
+   }
+  },
+  {
+   "name": "world unchanged while backgrounded",
+   "ok": true,
+   "detail": {
+    "before": {
+     "hunt": 89.983,
+     "wave": 4,
+     "gold": 0,
+     "wood": 80,
+     "px": 8145,
+     "py": 4005,
+     "hounds": 108,
+     "bld": 45,
+     "demonHp": 5312
+    },
+    "afterShow": {
+     "hunt": 89.983,
+     "wave": 4,
+     "gold": 0,
+     "wood": 80,
+     "px": 8145,
+     "py": 4005,
+     "hounds": 108,
+     "bld": 45,
+     "demonHp": 5312
+    }
+   }
+  },
+  {
+   "name": "time advances after resume",
+   "ok": true,
+   "detail": {
+    "afterShow": 89.983,
+    "afterResume": 91.95
+   }
+  },
+  {
+   "name": "serializeProgress works",
+   "ok": true,
+   "detail": {
+    "bytes": 1341797,
+    "err": ""
+   }
+  },
+  {
+   "name": "loadProgress restores saved state",
+   "ok": true,
+   "detail": {
+    "err": "",
+    "diff": {},
+    "loaded": "boolean"
+   }
+  },
+  {
+   "name": "landscape resize applies",
+   "ok": true,
+   "detail": {
+    "canvas": [
+     1688,
+     780
+    ],
+    "view": {
+     "width": 844,
+     "height": 390,
+     "pixelRatio": 3,
+     "fullHeight": 390,
+     "top": 0,
+     "bottom": 0,
+     "safeTop": 0,
+     "safeBottom": 0,
+     "safeLeft": 44,
+     "safeRight": 44,
+     "formFactor": "phone"
+    }
+   }
+  },
+  {
+   "name": "portrait resize applies",
+   "ok": true,
+   "detail": {
+    "canvas": [
+     780,
+     1688
+    ],
+    "view": {
+     "width": 390,
+     "height": 844,
+     "pixelRatio": 3,
+     "fullHeight": 844,
+     "top": 0,
+     "bottom": 0,
+     "safeTop": 0,
+     "safeBottom": 0,
+     "safeLeft": 0,
+     "safeRight": 0,
+     "formFactor": "phone"
+    }
+   }
+  },
+  {
+   "name": "game still running after long background + memory warning",
+   "ok": true,
+   "detail": {
+    "state": "hunt",
+    "paused": false
+   }
+  }
+ ],
+ "runtimeErrors": [
+  "memory: 15"
+ ],
+ "logs": []
+}

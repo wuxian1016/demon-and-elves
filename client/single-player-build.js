@@ -43,8 +43,8 @@ function* prepare(env, {installActions=true,offline=()=>true}={}, attach, cement
   require('./network/resource-three-tier').protectSlotOverwrites(runtime,typeof wx==='undefined'?null:wx);
   const flags=typeof GameGlobal==='undefined'?{}:GameGlobal;
   const mode=flags.isIOSHighPerformanceModePlus===true?'高性能+':flags.isIOSHighPerformanceMode===true?'高性能':flags.isIOSHighPerformanceMode===false&&flags.isIOSHighPerformanceModePlus===false?'普通模式':'模式待确认';
-  const testLabel='C3-REBUILT-P0-COW8D · 单人测试 · '+mode;
-  runtime.releaseLabel = 'C3-REBUILT-P0-COW8D · 单人测试 · '+mode;
+  const testLabel='COW8D-PF1 · 单人测试 · '+mode;
+  runtime.releaseLabel = 'COW8D-PF1 · 单人测试 · '+mode;
   installPreparedAttach(function(game) {
     attach.call(this, game);
     env.window.batSoloPolicyBN?.install(game);

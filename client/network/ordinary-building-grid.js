@@ -5,7 +5,13 @@ const data=require('./placement-geometry-data');
 const CELL=90,UNIT=103,BASE_SIZE=193;
 const ordinary=type=>!!data.types[type]&&type!=='house'&&!data.types[type].defense;
 const gridded=type=>!!data.types[type];
-function zoneAt(g,x,y){let best=null,nearest=Infinity;for(const z of g?.resourceZones||[]){const d=Math.hypot(x-z.x,y-z.y);if(!Number.isFinite(z.gateX+z.gateY)||d>(z.radius||1120)||d>=nearest)continue;const dx=z.x-z.gateX,dy=z.y-z.gateY,nx=Math.abs(dx)>Math.abs(dy)?Math.sign(dx):0,ny=nx?0:Math.sign(dy);if((x-z.gateX)*nx+(y-z.gateY)*ny>=-1e-6){best=z;nearest=d;}}return best;}
+// PERF-L2: zoneAt is called several times per placement query by the AI planners (footprint ->
+// recommendation -> cell -> origin all ask for the same point). Same result as before: a far zone is
+// rejected with a squared test before the exact hypot, and repeated points hit a 16-entry memo that is
+// only used during play (zone geometry is fixed then) and is dropped whenever the zone list changes.
+const zoneMemoX=new Float64Array(16),zoneMemoY=new Float64Array(16),zoneMemoR=new Array(16).fill(null);let zoneMemoList=null,zoneMemoSig=NaN,zoneMemoLen=-1,zoneMemoN=0,zoneMemoAt=0;
+function zoneAtCompute(g,x,y){let best=null,nearest=Infinity;const zones=g?.resourceZones||[];for(let i=0;i<zones.length;i++){const z=zones[i],ddx=x-z.x,ddy=y-z.y,lim=(z.radius||1120);if(ddx*ddx+ddy*ddy>lim*lim*1.000001+1)continue;const d=Math.hypot(ddx,ddy);if(!Number.isFinite(z.gateX+z.gateY)||d>lim||d>=nearest)continue;const dx=z.x-z.gateX,dy=z.y-z.gateY,nx=Math.abs(dx)>Math.abs(dy)?Math.sign(dx):0,ny=nx?0:Math.sign(dy);if((x-z.gateX)*nx+(y-z.gateY)*ny>=-1e-6){best=z;nearest=d;}}return best;}
+function zoneAt(g,x,y){const zones=g?.resourceZones;if(!zones||g.resourceSpacingGeneratingAD||g.roundStarting||(g.state!=='prep'&&g.state!=='hunt'))return zoneAtCompute(g,x,y);let sig=0;for(let i=0;i<zones.length;i++){const z=zones[i];sig+=z.x*3+z.y*7+z.gateX*11+z.gateY*13+(z.radius||1120)*17;}if(zones!==zoneMemoList||zones.length!==zoneMemoLen||sig!==zoneMemoSig){zoneMemoList=zones;zoneMemoLen=zones.length;zoneMemoSig=sig;zoneMemoN=0;zoneMemoAt=0;}for(let i=0;i<zoneMemoN;i++)if(zoneMemoX[i]===x&&zoneMemoY[i]===y)return zoneMemoR[i];const best=zoneAtCompute(g,x,y);zoneMemoX[zoneMemoAt]=x;zoneMemoY[zoneMemoAt]=y;zoneMemoR[zoneMemoAt]=best;zoneMemoAt=(zoneMemoAt+1)&15;if(zoneMemoN<16)zoneMemoN++;return best;}
 const inFixedArea=(g,x,y)=>!!zoneAt(g,x,y);
 const worldOrigins=new WeakMap();
 function origin(z,g){if(!z||!g)return{x:z?.gateX||0,y:z?.gateY||0};let map=worldOrigins.get(g);if(!map){map=new WeakMap();worldOrigins.set(g,map);}let o=map.get(z);if(o){if(Object.isExtensible(z)&&!Number.isFinite(z.gridOriginXAQ+z.gridOriginYAQ)){z.gridOriginXAQ=o.x;z.gridOriginYAQ=o.y;}return o;}if(Number.isFinite(z.gridOriginXAQ)&&Number.isFinite(z.gridOriginYAQ)){o=Object.freeze({x:z.gridOriginXAQ,y:z.gridOriginYAQ});map.set(z,o);return o;}

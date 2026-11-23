@@ -1,0 +1,6169 @@
+{
+ "scenario": "default",
+ "viewport": {
+  "W": 390,
+  "H": 844,
+  "PR": 3
+ },
+ "allies": 8,
+ "steps": [
+  {
+   "alloc": {
+    "totalMBPerSec": 8.12,
+    "KBPerFrame": 138.7,
+    "top": [
+     [
+      "startLayout js/main.js:2266",
+      "19.5 KB/f"
+     ],
+     [
+      "nativeText runtime.js:2",
+      "8.9 KB/f"
+     ],
+     [
+      "drawScreenBitmap411 js/main.js:4133 [via join]",
+      "7.2 KB/f"
+     ],
+     [
+      "startDesignButton459 js/main.js:2268",
+      "6.3 KB/f"
+     ],
+     [
+      "drawScreenBitmap411 js/main.js:4133 [via split]",
+      "4.8 KB/f"
+     ],
+     [
+      "track network/button-bounce.js:10",
+      "4.4 KB/f"
+     ],
+     [
+      "drawStartState459 js/main.js:4854",
+      "4 KB/f"
+     ],
+     [
+      "g.drawStartState459 network/home-options-bounce.js:6",
+      "3.7 KB/f"
+     ],
+     [
+      "g.drawStartScreen network/home-options-bounce.js:11",
+      "3.3 KB/f"
+     ],
+     [
+      "uiSafeRect396 js/main.js:2893",
+      "3 KB/f"
+     ],
+     [
+      "drawRoundRect js/main.js:186",
+      "2.9 KB/f"
+     ],
+     [
+      "CanvasTeam.wrapper network/canvas-team.js:38 [via normalizeString]",
+      "2.5 KB/f"
+     ],
+     [
+      "flame js/main.js:4887",
+      "2.5 KB/f"
+     ],
+     [
+      "pose network/button-bounce.js:11",
+      "2.3 KB/f"
+     ],
+     [
+      "pool js/main.js:4885",
+      "2.1 KB/f"
+     ],
+     [
+      "(anon) network/ownership-colors.js:11",
+      "2 KB/f"
+     ],
+     [
+      "drawStartState459 js/main.js:4854 [via Float64Array]",
+      "1.8 KB/f"
+     ],
+     [
+      "(anon) js/main.js:2307",
+      "1.8 KB/f"
+     ]
+    ]
+   },
+   "label": "home-idle",
+   "frames": 240,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 0,
+    "MB": 0,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 0,
+    "misses": 0,
+    "staticEntries": 0,
+    "animatedEntries": 0
+   },
+   "state": "start",
+   "wave": 0,
+   "huntElapsed": 0,
+   "entities": {
+    "hounds": 0,
+    "peasants": 1,
+    "buildings": 1,
+    "allies": 0,
+    "projectiles": 0,
+    "particles": 0,
+    "tanks": 0
+   },
+   "hostFrameMs": {
+    "p50": 2.65,
+    "p95": 3.45,
+    "p99": 3.74,
+    "max": 3.81,
+    "mean": 2.65
+   },
+   "updateMsPerFrame": 0,
+   "drawMsPerFrame": 2.63,
+   "updatesPerFrame": 0,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "save": 49,
+    "restore": 49,
+    "beginPath": 33,
+    "fill": 24,
+    "fillRect": 20,
+    "fillText": 14,
+    "stroke": 12,
+    "measureText": 12,
+    "createRadialGradient": 10,
+    "clip": 9,
+    "setTransform": 6,
+    "createLinearGradient": 6,
+    "drawImage": 1,
+    "strokeRect": 1
+   },
+   "perFrameOffscreen": {},
+   "mainFillMpxPerFrame": 1.54,
+   "offscreenFillMpxPerFrame": 0,
+   "shadowDrawsPerFrame": 0,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {
+    "screen": 1440
+   },
+   "canvasesCreated": 0,
+   "createdSites": [],
+   "bigMainLayers": [
+    [
+     "drawImage 780x1688 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4133:281 < TrollAndElvesGame.drawStartScreen js/main.js:4911:6",
+     1.32
+    ]
+   ],
+   "topOffscreen": [],
+   "timersPerSecond": 0,
+   "topTimerOrigins": [],
+   "storageWritesPerMin": 0,
+   "storageKBPerMin": 0,
+   "longFrames": [],
+   "longCount": {
+    "over12": 0,
+    "over16": 0,
+    "over33": 0,
+    "over50": 0
+   }
+  },
+  {
+   "alloc": {
+    "totalMBPerSec": 86.16,
+    "KBPerFrame": 1470.5,
+    "top": [
+     [
+      "(anon) js/main.js:3630",
+      "155.4 KB/f"
+     ],
+     [
+      "slimeCentralPoint js/main.js:3629",
+      "121.7 KB/f"
+     ],
+     [
+      "bake js/unit-motion.js:5",
+      "107.2 KB/f"
+     ],
+     [
+      "pickTarget js/main.js:669",
+      "66.5 KB/f"
+     ],
+     [
+      "updateWaveHound js/main.js:1173",
+      "56.9 KB/f"
+     ],
+     [
+      "dist js/main.js:186",
+      "32.4 KB/f"
+     ],
+     [
+      "update js/main.js:3927 [via next]",
+      "28.5 KB/f"
+     ],
+     [
+      "(anon) js/main.js:3630 [via hypot]",
+      "25.8 KB/f"
+     ],
+     [
+      "nearest network/monster-shared-route.js:4",
+      "24.4 KB/f"
+     ],
+     [
+      "animTrack js/main.js:495",
+      "20.2 KB/f"
+     ],
+     [
+      "slimeCentralPoint js/main.js:3629 [via hypot]",
+      "18.5 KB/f"
+     ],
+     [
+      "pickTarget js/main.js:669 [via next]",
+      "16.5 KB/f"
+     ],
+     [
+      "drawResourceBodies js/main.js:4139",
+      "16.5 KB/f"
+     ],
+     [
+      "demonBlockingBuilding js/main.js:1977",
+      "15.2 KB/f"
+     ],
+     [
+      "drawSmoothFrame js/main.js:5182",
+      "14.6 KB/f"
+     ],
+     [
+      "drawResourceBodies js/main.js:4139 [via next]",
+      "14.6 KB/f"
+     ],
+     [
+      "minimapStateChanged js/main.js:4563 [via next]",
+      "14.2 KB/f"
+     ],
+     [
+      "moveEntityTerrainStep js/main.js:1926",
+      "13.3 KB/f"
+     ]
+    ]
+   },
+   "label": "prep-start",
+   "frames": 300,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 62,
+    "MB": 3.9,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 582,
+    "misses": 24,
+    "staticEntries": 2,
+    "animatedEntries": 26
+   },
+   "state": "prep",
+   "wave": 1,
+   "huntElapsed": 0,
+   "entities": {
+    "hounds": 90,
+    "peasants": 1,
+    "buildings": 14,
+    "allies": 8,
+    "projectiles": 0,
+    "particles": 0,
+    "tanks": 0
+   },
+   "hostFrameMs": {
+    "p50": 16.12,
+    "p95": 26.75,
+    "p99": 40.64,
+    "max": 70.42,
+    "mean": 16.82
+   },
+   "updateMsPerFrame": 4.71,
+   "drawMsPerFrame": 11.95,
+   "updatesPerFrame": 1,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "drawImage": 34.6,
+    "save": 33.6,
+    "restore": 33.6,
+    "fillRect": 25.8,
+    "beginPath": 16.6,
+    "setTransform": 15,
+    "stroke": 11,
+    "arc": 8,
+    "fill": 7.6,
+    "fillText": 3.6,
+    "clearRect": 1,
+    "strokeText": 1,
+    "clip": 1,
+    "strokeRect": 1,
+    "measureText": 0.2
+   },
+   "perFrameOffscreen": {
+    "fillRect": 11.1,
+    "stroke": 0.8,
+    "beginPath": 0.7,
+    "drawImage": 0.7,
+    "arc": 0.7,
+    "setTransform": 0.3,
+    "save": 0.2,
+    "restore": 0.2,
+    "fillText": 0.2,
+    "fill": 0.2,
+    "clearRect": 0.1,
+    "putImageData": 0.1,
+    "shadow:fillText": 0,
+    "getImageData": 0
+   },
+   "mainFillMpxPerFrame": 3.71,
+   "offscreenFillMpxPerFrame": 0.01,
+   "shadowDrawsPerFrame": 0,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {
+    "source-in": 24
+   },
+   "canvasesCreated": 98,
+   "createdSites": [
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20",
+     60
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < castShadow js/woodland-art.js:90:158",
+     24
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < Peasant.draw js/main.js:1458:65",
+     6
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:17:19 < api.character js/woodland-art.js:394:20",
+     4
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < TrollAndElvesGame.drawResourceBodies js/main.js:4185:221",
+     2
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218",
+     2
+    ]
+   ],
+   "bigMainLayers": [
+    [
+     "drawImage 812x1720 @ SceneTiles200.draw js/main.js:1610:232 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4523:11",
+     1.4
+    ],
+    [
+     "fillRect 780x1688 @ TrollAndElvesGame.drawHUD js/main.js:5056:71 < g.drawHUD art163/ghost/ghost-copy.js:372:21",
+     1.32
+    ],
+    [
+     "drawImage 396x512 @ TrollAndElvesGame.drawSceneLayerOccBN js/main.js:4128:1223 < TrollAndElvesGame.drawResourceBodies js/main.js:4185:55",
+     0.2
+    ],
+    [
+     "drawImage 780x248 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4133:281 < TrollAndElvesGame.drawStatusCached504 js/main.js:4825:6",
+     0.19
+    ]
+   ],
+   "topOffscreen": [
+    {
+     "size": "306x245",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 11.1,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawHUD js/main.js:5038:391 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588",
+     "firstDraw": "TrollAndElvesGame.drawHUD js/main.js:5039:404 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588 < g.drawHUD art163/ghost/approved-guide-entry.js:76:18"
+    },
+    {
+     "size": "780x248",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.run js/main.js:4369:333 < TrollAndElvesGame.prepareHudCachesViewAsync js/main.js:4373:31 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4662:15",
+     "firstDraw": "TrollAndElvesGame.uiFrame504 js/main.js:4808:143 < TrollAndElvesGame.drawStatus504 js/main.js:4826:1599 < TrollAndElvesGame.drawStatusCached504 js/main.js:4824:171 < TrollAndElvesGame.drawHUD js/main.js:5038:139"
+    },
+    {
+     "size": "1036x1792",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0.2,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawResourceBodies js/main.js:4166:37 < snap js/main.js:4626:26 < TrollAndElvesGame.prepareSoloVisibleCaches200 js/main.js:4633:121",
+     "firstDraw": "castShadow js/woodland-art.js:96:81 < blit js/woodland-art.js:108:215 < api.mine js/woodland-art.js:214:453 < TrollAndElvesGame.drawResourceBodies js/main.js:4178:110"
+    },
+    {
+     "size": "92x106",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "api.character js/woodland-art.js:391:305 < Peasant.draw js/main.js:1457:136 < TrollAndElvesGame.drawFrame398 js/main.js:4735:207 < g.drawFrame398 network/placement-sites.js:118:87"
+    },
+    {
+     "size": "84x106",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "api.character js/woodland-art.js:391:305 < Peasant.draw js/main.js:1457:136 < TrollAndElvesGame.drawFrame398 js/main.js:4735:207 < g.drawFrame398 network/placement-sites.js:118:87"
+    },
+    {
+     "size": "124x138",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "limb js/unit-motion.js:20:1100 < Object.bake js/unit-motion.js:20:1129 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136"
+    },
+    {
+     "size": "118x138",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "limb js/unit-motion.js:20:1100 < Object.bake js/unit-motion.js:20:1129 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136"
+    },
+    {
+     "size": "118x138",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "limb js/unit-motion.js:20:1100 < Object.bake js/unit-motion.js:20:1129 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136"
+    }
+   ],
+   "timersPerSecond": 2,
+   "topTimerOrigins": [
+    [
+     "network/freeze-trace.js:59:19",
+     10
+    ]
+   ],
+   "storageWritesPerMin": 24,
+   "storageKBPerMin": 32.9,
+   "longFrames": [
+    {
+     "i": 0,
+     "ms": 13.9,
+     "upd": 0,
+     "draw": 13.8,
+     "wave": 0
+    },
+    {
+     "i": 1,
+     "ms": 70.4,
+     "upd": 53.2,
+     "draw": 16.9,
+     "wave": 1
+    },
+    {
+     "i": 2,
+     "ms": 23.2,
+     "upd": 11.8,
+     "draw": 11.1,
+     "wave": 1
+    },
+    {
+     "i": 4,
+     "ms": 19.3,
+     "upd": 7.5,
+     "draw": 11.6,
+     "wave": 1
+    },
+    {
+     "i": 5,
+     "ms": 20.5,
+     "upd": 8.5,
+     "draw": 11.7,
+     "wave": 1
+    },
+    {
+     "i": 7,
+     "ms": 21.5,
+     "upd": 6.7,
+     "draw": 14.5,
+     "wave": 1
+    },
+    {
+     "i": 8,
+     "ms": 20.3,
+     "upd": 9.5,
+     "draw": 10.5,
+     "wave": 1
+    },
+    {
+     "i": 10,
+     "ms": 15.6,
+     "upd": 5.1,
+     "draw": 10.3,
+     "wave": 1
+    },
+    {
+     "i": 11,
+     "ms": 23.7,
+     "upd": 12.2,
+     "draw": 11.1,
+     "wave": 1
+    },
+    {
+     "i": 13,
+     "ms": 16.9,
+     "upd": 6,
+     "draw": 10.7,
+     "wave": 1
+    },
+    {
+     "i": 14,
+     "ms": 26,
+     "upd": 10.6,
+     "draw": 15.2,
+     "wave": 1
+    },
+    {
+     "i": 16,
+     "ms": 46.4,
+     "upd": 4.6,
+     "draw": 41.7,
+     "wave": 1
+    },
+    {
+     "i": 17,
+     "ms": 26.6,
+     "upd": 10.6,
+     "draw": 15.6,
+     "wave": 1
+    },
+    {
+     "i": 19,
+     "ms": 28.8,
+     "upd": 4.2,
+     "draw": 24.4,
+     "wave": 1
+    },
+    {
+     "i": 20,
+     "ms": 34.5,
+     "upd": 9.9,
+     "draw": 24.3,
+     "wave": 1
+    },
+    {
+     "i": 22,
+     "ms": 27.3,
+     "upd": 2.9,
+     "draw": 24.1,
+     "wave": 1
+    },
+    {
+     "i": 23,
+     "ms": 33.5,
+     "upd": 9.1,
+     "draw": 24.1,
+     "wave": 1
+    },
+    {
+     "i": 25,
+     "ms": 26,
+     "upd": 4.4,
+     "draw": 21.4,
+     "wave": 1
+    },
+    {
+     "i": 26,
+     "ms": 36,
+     "upd": 8.8,
+     "draw": 27.1,
+     "wave": 1
+    },
+    {
+     "i": 28,
+     "ms": 20.7,
+     "upd": 5.1,
+     "draw": 15.4,
+     "wave": 1
+    },
+    {
+     "i": 29,
+     "ms": 25.7,
+     "upd": 9.9,
+     "draw": 15.5,
+     "wave": 1
+    },
+    {
+     "i": 31,
+     "ms": 19.1,
+     "upd": 4.1,
+     "draw": 14.8,
+     "wave": 1
+    },
+    {
+     "i": 32,
+     "ms": 23.8,
+     "upd": 8.6,
+     "draw": 15,
+     "wave": 1
+    },
+    {
+     "i": 34,
+     "ms": 19.6,
+     "upd": 4.2,
+     "draw": 15.2,
+     "wave": 1
+    },
+    {
+     "i": 35,
+     "ms": 24.8,
+     "upd": 7.6,
+     "draw": 17,
+     "wave": 1
+    },
+    {
+     "i": 37,
+     "ms": 21.4,
+     "upd": 3.3,
+     "draw": 17.9,
+     "wave": 1
+    },
+    {
+     "i": 38,
+     "ms": 22.8,
+     "upd": 6.7,
+     "draw": 16,
+     "wave": 1
+    },
+    {
+     "i": 40,
+     "ms": 20,
+     "upd": 3.2,
+     "draw": 16.7,
+     "wave": 1
+    },
+    {
+     "i": 41,
+     "ms": 24.6,
+     "upd": 6.4,
+     "draw": 18.1,
+     "wave": 1
+    },
+    {
+     "i": 43,
+     "ms": 20.7,
+     "upd": 5,
+     "draw": 15.5,
+     "wave": 1
+    },
+    {
+     "i": 44,
+     "ms": 27.7,
+     "upd": 8.9,
+     "draw": 18.7,
+     "wave": 1
+    },
+    {
+     "i": 46,
+     "ms": 20.4,
+     "upd": 4.9,
+     "draw": 15.3,
+     "wave": 1
+    },
+    {
+     "i": 47,
+     "ms": 26.8,
+     "upd": 11,
+     "draw": 15.6,
+     "wave": 1
+    },
+    {
+     "i": 48,
+     "ms": 12.5,
+     "upd": 0,
+     "draw": 12.4,
+     "wave": 1
+    },
+    {
+     "i": 49,
+     "ms": 19.6,
+     "upd": 6.4,
+     "draw": 13,
+     "wave": 1
+    },
+    {
+     "i": 50,
+     "ms": 21.1,
+     "upd": 10.3,
+     "draw": 10.5,
+     "wave": 1
+    },
+    {
+     "i": 52,
+     "ms": 15.3,
+     "upd": 4.7,
+     "draw": 10.5,
+     "wave": 1
+    },
+    {
+     "i": 53,
+     "ms": 19.7,
+     "upd": 6.6,
+     "draw": 13,
+     "wave": 1
+    },
+    {
+     "i": 55,
+     "ms": 18.7,
+     "upd": 4.8,
+     "draw": 13.7,
+     "wave": 1
+    },
+    {
+     "i": 56,
+     "ms": 19.2,
+     "upd": 9.4,
+     "draw": 9.7,
+     "wave": 1
+    },
+    {
+     "i": 57,
+     "ms": 13.1,
+     "upd": 0,
+     "draw": 13,
+     "wave": 1
+    },
+    {
+     "i": 58,
+     "ms": 18.3,
+     "upd": 5.3,
+     "draw": 12.8,
+     "wave": 1
+    },
+    {
+     "i": 59,
+     "ms": 18.7,
+     "upd": 8.1,
+     "draw": 10.4,
+     "wave": 1
+    },
+    {
+     "i": 61,
+     "ms": 19,
+     "upd": 3.7,
+     "draw": 15.2,
+     "wave": 1
+    },
+    {
+     "i": 62,
+     "ms": 18,
+     "upd": 6.3,
+     "draw": 11.5,
+     "wave": 1
+    },
+    {
+     "i": 63,
+     "ms": 14.7,
+     "upd": 0,
+     "draw": 14.6,
+     "wave": 1
+    },
+    {
+     "i": 64,
+     "ms": 14.7,
+     "upd": 4.7,
+     "draw": 9.8,
+     "wave": 1
+    },
+    {
+     "i": 65,
+     "ms": 17.6,
+     "upd": 6,
+     "draw": 11.5,
+     "wave": 1
+    },
+    {
+     "i": 67,
+     "ms": 15.9,
+     "upd": 4,
+     "draw": 11.8,
+     "wave": 1
+    },
+    {
+     "i": 68,
+     "ms": 18.4,
+     "upd": 6.2,
+     "draw": 12,
+     "wave": 1
+    },
+    {
+     "i": 70,
+     "ms": 17.1,
+     "upd": 4.6,
+     "draw": 12.4,
+     "wave": 1
+    },
+    {
+     "i": 71,
+     "ms": 17.9,
+     "upd": 6.9,
+     "draw": 10.8,
+     "wave": 1
+    },
+    {
+     "i": 73,
+     "ms": 14.2,
+     "upd": 3.4,
+     "draw": 10.7,
+     "wave": 1
+    },
+    {
+     "i": 74,
+     "ms": 17.7,
+     "upd": 7.1,
+     "draw": 10.4,
+     "wave": 1
+    },
+    {
+     "i": 75,
+     "ms": 13.1,
+     "upd": 0,
+     "draw": 13,
+     "wave": 1
+    },
+    {
+     "i": 76,
+     "ms": 12.9,
+     "upd": 3.3,
+     "draw": 9.5,
+     "wave": 1
+    },
+    {
+     "i": 77,
+     "ms": 18.1,
+     "upd": 8.7,
+     "draw": 9.2,
+     "wave": 1
+    },
+    {
+     "i": 78,
+     "ms": 12.9,
+     "upd": 0,
+     "draw": 12.8,
+     "wave": 1
+    },
+    {
+     "i": 79,
+     "ms": 14.4,
+     "upd": 2.9,
+     "draw": 11.4,
+     "wave": 1
+    },
+    {
+     "i": 80,
+     "ms": 22.9,
+     "upd": 8.1,
+     "draw": 14.6,
+     "wave": 1
+    },
+    {
+     "i": 82,
+     "ms": 15.8,
+     "upd": 3.2,
+     "draw": 12.5,
+     "wave": 1
+    },
+    {
+     "i": 83,
+     "ms": 17.9,
+     "upd": 6.6,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 84,
+     "ms": 12.3,
+     "upd": 0,
+     "draw": 12.2,
+     "wave": 1
+    },
+    {
+     "i": 85,
+     "ms": 13.4,
+     "upd": 3.2,
+     "draw": 10.1,
+     "wave": 1
+    },
+    {
+     "i": 86,
+     "ms": 20.2,
+     "upd": 8.8,
+     "draw": 11.1,
+     "wave": 1
+    },
+    {
+     "i": 88,
+     "ms": 15.3,
+     "upd": 2.9,
+     "draw": 12.3,
+     "wave": 1
+    },
+    {
+     "i": 89,
+     "ms": 17.2,
+     "upd": 7.7,
+     "draw": 9.3,
+     "wave": 1
+    },
+    {
+     "i": 91,
+     "ms": 14.8,
+     "upd": 4.5,
+     "draw": 10.1,
+     "wave": 1
+    },
+    {
+     "i": 92,
+     "ms": 19.9,
+     "upd": 10.1,
+     "draw": 9.5,
+     "wave": 1
+    },
+    {
+     "i": 94,
+     "ms": 15.8,
+     "upd": 3.3,
+     "draw": 12.4,
+     "wave": 1
+    },
+    {
+     "i": 95,
+     "ms": 17.6,
+     "upd": 7.5,
+     "draw": 9.9,
+     "wave": 1
+    },
+    {
+     "i": 97,
+     "ms": 14.5,
+     "upd": 3.5,
+     "draw": 10.8,
+     "wave": 1
+    },
+    {
+     "i": 98,
+     "ms": 20.2,
+     "upd": 10.3,
+     "draw": 9.7,
+     "wave": 1
+    },
+    {
+     "i": 99,
+     "ms": 12.5,
+     "upd": 0,
+     "draw": 12.4,
+     "wave": 1
+    },
+    {
+     "i": 100,
+     "ms": 13.5,
+     "upd": 3.2,
+     "draw": 10.2,
+     "wave": 1
+    },
+    {
+     "i": 101,
+     "ms": 20,
+     "upd": 8.9,
+     "draw": 10.8,
+     "wave": 1
+    },
+    {
+     "i": 103,
+     "ms": 14.6,
+     "upd": 4.4,
+     "draw": 10,
+     "wave": 1
+    },
+    {
+     "i": 104,
+     "ms": 17.3,
+     "upd": 7.7,
+     "draw": 9.5,
+     "wave": 1
+    },
+    {
+     "i": 106,
+     "ms": 13.7,
+     "upd": 4.3,
+     "draw": 9.3,
+     "wave": 1
+    },
+    {
+     "i": 107,
+     "ms": 30,
+     "upd": 20.1,
+     "draw": 9.7,
+     "wave": 1
+    },
+    {
+     "i": 109,
+     "ms": 15.4,
+     "upd": 3.4,
+     "draw": 11.8,
+     "wave": 1
+    },
+    {
+     "i": 110,
+     "ms": 19.4,
+     "upd": 8.6,
+     "draw": 10.6,
+     "wave": 1
+    },
+    {
+     "i": 112,
+     "ms": 19.1,
+     "upd": 8.2,
+     "draw": 10.7,
+     "wave": 1
+    },
+    {
+     "i": 113,
+     "ms": 19.2,
+     "upd": 8.6,
+     "draw": 10.4,
+     "wave": 1
+    },
+    {
+     "i": 114,
+     "ms": 12.2,
+     "upd": 0,
+     "draw": 12.1,
+     "wave": 1
+    },
+    {
+     "i": 115,
+     "ms": 17.5,
+     "upd": 6.6,
+     "draw": 10.8,
+     "wave": 1
+    },
+    {
+     "i": 116,
+     "ms": 21.3,
+     "upd": 8.8,
+     "draw": 12.1,
+     "wave": 1
+    },
+    {
+     "i": 118,
+     "ms": 16.5,
+     "upd": 4.6,
+     "draw": 11.7,
+     "wave": 1
+    },
+    {
+     "i": 119,
+     "ms": 17.3,
+     "upd": 5.7,
+     "draw": 11.3,
+     "wave": 1
+    },
+    {
+     "i": 121,
+     "ms": 16.1,
+     "upd": 3.2,
+     "draw": 12.8,
+     "wave": 1
+    },
+    {
+     "i": 122,
+     "ms": 19,
+     "upd": 8.9,
+     "draw": 9.9,
+     "wave": 1
+    },
+    {
+     "i": 124,
+     "ms": 14.5,
+     "upd": 3.9,
+     "draw": 10.4,
+     "wave": 1
+    },
+    {
+     "i": 125,
+     "ms": 18,
+     "upd": 9,
+     "draw": 8.9,
+     "wave": 1
+    },
+    {
+     "i": 127,
+     "ms": 16.1,
+     "upd": 4.7,
+     "draw": 11.3,
+     "wave": 1
+    },
+    {
+     "i": 128,
+     "ms": 25.2,
+     "upd": 16.4,
+     "draw": 8.7,
+     "wave": 1
+    },
+    {
+     "i": 130,
+     "ms": 15.3,
+     "upd": 2.8,
+     "draw": 12.4,
+     "wave": 1
+    },
+    {
+     "i": 131,
+     "ms": 25.6,
+     "upd": 9.1,
+     "draw": 16.3,
+     "wave": 1
+    },
+    {
+     "i": 133,
+     "ms": 14.3,
+     "upd": 3.9,
+     "draw": 10.3,
+     "wave": 1
+    },
+    {
+     "i": 134,
+     "ms": 17,
+     "upd": 5.7,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 135,
+     "ms": 12.6,
+     "upd": 0,
+     "draw": 12.5,
+     "wave": 1
+    },
+    {
+     "i": 136,
+     "ms": 13.9,
+     "upd": 3,
+     "draw": 10.7,
+     "wave": 1
+    },
+    {
+     "i": 137,
+     "ms": 25.1,
+     "upd": 15.1,
+     "draw": 9.8,
+     "wave": 1
+    },
+    {
+     "i": 138,
+     "ms": 12.3,
+     "upd": 0,
+     "draw": 12.2,
+     "wave": 1
+    },
+    {
+     "i": 139,
+     "ms": 15.3,
+     "upd": 3.1,
+     "draw": 12.1,
+     "wave": 1
+    },
+    {
+     "i": 140,
+     "ms": 27.9,
+     "upd": 16.8,
+     "draw": 10.9,
+     "wave": 1
+    },
+    {
+     "i": 142,
+     "ms": 16,
+     "upd": 4.2,
+     "draw": 11.6,
+     "wave": 1
+    },
+    {
+     "i": 143,
+     "ms": 17.9,
+     "upd": 6.5,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 145,
+     "ms": 17.4,
+     "upd": 7.6,
+     "draw": 9.6,
+     "wave": 1
+    },
+    {
+     "i": 146,
+     "ms": 24.7,
+     "upd": 10,
+     "draw": 14.5,
+     "wave": 1
+    },
+    {
+     "i": 147,
+     "ms": 12.9,
+     "upd": 0,
+     "draw": 12.7,
+     "wave": 1
+    },
+    {
+     "i": 148,
+     "ms": 13.7,
+     "upd": 4.3,
+     "draw": 9.2,
+     "wave": 1
+    },
+    {
+     "i": 149,
+     "ms": 21.7,
+     "upd": 9.5,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 151,
+     "ms": 14.7,
+     "upd": 4.8,
+     "draw": 9.7,
+     "wave": 1
+    },
+    {
+     "i": 152,
+     "ms": 19.3,
+     "upd": 9.2,
+     "draw": 9.9,
+     "wave": 1
+    },
+    {
+     "i": 153,
+     "ms": 12.7,
+     "upd": 0,
+     "draw": 12.6,
+     "wave": 1
+    },
+    {
+     "i": 154,
+     "ms": 15.4,
+     "upd": 5,
+     "draw": 10.2,
+     "wave": 1
+    },
+    {
+     "i": 155,
+     "ms": 16.3,
+     "upd": 6.2,
+     "draw": 9.9,
+     "wave": 1
+    },
+    {
+     "i": 157,
+     "ms": 14.7,
+     "upd": 3.4,
+     "draw": 11.1,
+     "wave": 1
+    },
+    {
+     "i": 158,
+     "ms": 18.7,
+     "upd": 6.2,
+     "draw": 12.3,
+     "wave": 1
+    },
+    {
+     "i": 160,
+     "ms": 16.6,
+     "upd": 3.3,
+     "draw": 13.1,
+     "wave": 1
+    },
+    {
+     "i": 161,
+     "ms": 17.5,
+     "upd": 8.1,
+     "draw": 9.1,
+     "wave": 1
+    },
+    {
+     "i": 163,
+     "ms": 14.1,
+     "upd": 4.6,
+     "draw": 9.4,
+     "wave": 1
+    },
+    {
+     "i": 164,
+     "ms": 18.9,
+     "upd": 6.8,
+     "draw": 12,
+     "wave": 1
+    },
+    {
+     "i": 166,
+     "ms": 23.2,
+     "upd": 9.3,
+     "draw": 13.7,
+     "wave": 1
+    },
+    {
+     "i": 167,
+     "ms": 19.7,
+     "upd": 6.9,
+     "draw": 12.6,
+     "wave": 1
+    },
+    {
+     "i": 169,
+     "ms": 13.7,
+     "upd": 3.1,
+     "draw": 10.5,
+     "wave": 1
+    },
+    {
+     "i": 170,
+     "ms": 25,
+     "upd": 13.8,
+     "draw": 10.9,
+     "wave": 1
+    },
+    {
+     "i": 172,
+     "ms": 16.7,
+     "upd": 5.1,
+     "draw": 11.4,
+     "wave": 1
+    },
+    {
+     "i": 173,
+     "ms": 21.2,
+     "upd": 11.4,
+     "draw": 9.7,
+     "wave": 1
+    },
+    {
+     "i": 175,
+     "ms": 14.4,
+     "upd": 4.4,
+     "draw": 9.9,
+     "wave": 1
+    },
+    {
+     "i": 176,
+     "ms": 19.6,
+     "upd": 9,
+     "draw": 10.4,
+     "wave": 1
+    },
+    {
+     "i": 177,
+     "ms": 12.1,
+     "upd": 0,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 178,
+     "ms": 15.6,
+     "upd": 4.9,
+     "draw": 10.5,
+     "wave": 1
+    },
+    {
+     "i": 179,
+     "ms": 22.4,
+     "upd": 10.3,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 181,
+     "ms": 18.2,
+     "upd": 5.3,
+     "draw": 12.8,
+     "wave": 1
+    },
+    {
+     "i": 182,
+     "ms": 20.3,
+     "upd": 10.9,
+     "draw": 9.2,
+     "wave": 1
+    },
+    {
+     "i": 184,
+     "ms": 17.2,
+     "upd": 5.1,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 185,
+     "ms": 19,
+     "upd": 7,
+     "draw": 11.8,
+     "wave": 1
+    },
+    {
+     "i": 187,
+     "ms": 14.1,
+     "upd": 3.7,
+     "draw": 10.3,
+     "wave": 1
+    },
+    {
+     "i": 188,
+     "ms": 17.6,
+     "upd": 8.4,
+     "draw": 8.9,
+     "wave": 1
+    },
+    {
+     "i": 190,
+     "ms": 19.3,
+     "upd": 4.2,
+     "draw": 14.9,
+     "wave": 1
+    },
+    {
+     "i": 191,
+     "ms": 27.8,
+     "upd": 18.1,
+     "draw": 9.5,
+     "wave": 1
+    },
+    {
+     "i": 192,
+     "ms": 12.3,
+     "upd": 0,
+     "draw": 12.2,
+     "wave": 1
+    },
+    {
+     "i": 193,
+     "ms": 14.5,
+     "upd": 3.8,
+     "draw": 10.5,
+     "wave": 1
+    },
+    {
+     "i": 194,
+     "ms": 22,
+     "upd": 11.1,
+     "draw": 10.6,
+     "wave": 1
+    },
+    {
+     "i": 196,
+     "ms": 14.3,
+     "upd": 3.1,
+     "draw": 11,
+     "wave": 1
+    },
+    {
+     "i": 197,
+     "ms": 21.9,
+     "upd": 11.4,
+     "draw": 10.3,
+     "wave": 1
+    },
+    {
+     "i": 199,
+     "ms": 15,
+     "upd": 4.4,
+     "draw": 10.3,
+     "wave": 1
+    },
+    {
+     "i": 200,
+     "ms": 19.1,
+     "upd": 7,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 202,
+     "ms": 14.9,
+     "upd": 3.2,
+     "draw": 11.6,
+     "wave": 1
+    },
+    {
+     "i": 203,
+     "ms": 21.2,
+     "upd": 9,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 205,
+     "ms": 15,
+     "upd": 3,
+     "draw": 11.8,
+     "wave": 1
+    },
+    {
+     "i": 206,
+     "ms": 18.5,
+     "upd": 6.2,
+     "draw": 12.1,
+     "wave": 1
+    },
+    {
+     "i": 208,
+     "ms": 16.2,
+     "upd": 4.6,
+     "draw": 11.5,
+     "wave": 1
+    },
+    {
+     "i": 209,
+     "ms": 18.4,
+     "upd": 6.4,
+     "draw": 11.8,
+     "wave": 1
+    },
+    {
+     "i": 211,
+     "ms": 12.5,
+     "upd": 3.2,
+     "draw": 9.2,
+     "wave": 1
+    },
+    {
+     "i": 212,
+     "ms": 19.8,
+     "upd": 9.4,
+     "draw": 10.2,
+     "wave": 1
+    },
+    {
+     "i": 213,
+     "ms": 15.9,
+     "upd": 0,
+     "draw": 15.8,
+     "wave": 1
+    },
+    {
+     "i": 214,
+     "ms": 14.5,
+     "upd": 5,
+     "draw": 9.3,
+     "wave": 1
+    },
+    {
+     "i": 215,
+     "ms": 20.7,
+     "upd": 8.4,
+     "draw": 12,
+     "wave": 1
+    },
+    {
+     "i": 217,
+     "ms": 16.3,
+     "upd": 3.9,
+     "draw": 12.2,
+     "wave": 1
+    },
+    {
+     "i": 218,
+     "ms": 19,
+     "upd": 7,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 220,
+     "ms": 24.4,
+     "upd": 11.3,
+     "draw": 12.9,
+     "wave": 1
+    },
+    {
+     "i": 221,
+     "ms": 20.2,
+     "upd": 7.4,
+     "draw": 12.6,
+     "wave": 1
+    },
+    {
+     "i": 223,
+     "ms": 17.3,
+     "upd": 4.6,
+     "draw": 12.5,
+     "wave": 1
+    },
+    {
+     "i": 224,
+     "ms": 18.1,
+     "upd": 6,
+     "draw": 12,
+     "wave": 1
+    },
+    {
+     "i": 226,
+     "ms": 15.2,
+     "upd": 3.3,
+     "draw": 11.7,
+     "wave": 1
+    },
+    {
+     "i": 227,
+     "ms": 19.3,
+     "upd": 8.1,
+     "draw": 11,
+     "wave": 1
+    },
+    {
+     "i": 229,
+     "ms": 15.7,
+     "upd": 4.3,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 230,
+     "ms": 27.8,
+     "upd": 9.1,
+     "draw": 18.5,
+     "wave": 1
+    },
+    {
+     "i": 232,
+     "ms": 17.8,
+     "upd": 3.8,
+     "draw": 13.8,
+     "wave": 1
+    },
+    {
+     "i": 233,
+     "ms": 19.9,
+     "upd": 6.9,
+     "draw": 12.8,
+     "wave": 1
+    },
+    {
+     "i": 235,
+     "ms": 17.7,
+     "upd": 3.4,
+     "draw": 14.1,
+     "wave": 1
+    },
+    {
+     "i": 236,
+     "ms": 19.2,
+     "upd": 6.8,
+     "draw": 12.3,
+     "wave": 1
+    },
+    {
+     "i": 238,
+     "ms": 18.3,
+     "upd": 4.9,
+     "draw": 13.2,
+     "wave": 1
+    },
+    {
+     "i": 239,
+     "ms": 19.2,
+     "upd": 6.8,
+     "draw": 12.2,
+     "wave": 1
+    },
+    {
+     "i": 240,
+     "ms": 12.1,
+     "upd": 0,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 241,
+     "ms": 21,
+     "upd": 4.5,
+     "draw": 16.3,
+     "wave": 1
+    },
+    {
+     "i": 242,
+     "ms": 21.2,
+     "upd": 9,
+     "draw": 12,
+     "wave": 1
+    },
+    {
+     "i": 244,
+     "ms": 15.7,
+     "upd": 3.5,
+     "draw": 12.1,
+     "wave": 1
+    },
+    {
+     "i": 245,
+     "ms": 26.4,
+     "upd": 14.8,
+     "draw": 11.4,
+     "wave": 1
+    },
+    {
+     "i": 247,
+     "ms": 16.8,
+     "upd": 5.6,
+     "draw": 11.1,
+     "wave": 1
+    },
+    {
+     "i": 248,
+     "ms": 23.9,
+     "upd": 13.3,
+     "draw": 10.4,
+     "wave": 1
+    },
+    {
+     "i": 250,
+     "ms": 16.2,
+     "upd": 4.8,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 251,
+     "ms": 19.5,
+     "upd": 7.6,
+     "draw": 11.7,
+     "wave": 1
+    },
+    {
+     "i": 253,
+     "ms": 17.3,
+     "upd": 5.3,
+     "draw": 11.8,
+     "wave": 1
+    },
+    {
+     "i": 254,
+     "ms": 21.6,
+     "upd": 6.8,
+     "draw": 14.7,
+     "wave": 1
+    },
+    {
+     "i": 256,
+     "ms": 22.4,
+     "upd": 5.7,
+     "draw": 16.5,
+     "wave": 1
+    },
+    {
+     "i": 257,
+     "ms": 22.3,
+     "upd": 6.9,
+     "draw": 15.1,
+     "wave": 1
+    },
+    {
+     "i": 259,
+     "ms": 14.6,
+     "upd": 4.7,
+     "draw": 9.8,
+     "wave": 1
+    },
+    {
+     "i": 260,
+     "ms": 24.3,
+     "upd": 9.2,
+     "draw": 14.9,
+     "wave": 1
+    },
+    {
+     "i": 262,
+     "ms": 15.3,
+     "upd": 3.5,
+     "draw": 11.6,
+     "wave": 1
+    },
+    {
+     "i": 263,
+     "ms": 19,
+     "upd": 9.3,
+     "draw": 9.5,
+     "wave": 1
+    },
+    {
+     "i": 264,
+     "ms": 12.5,
+     "upd": 0,
+     "draw": 12.4,
+     "wave": 1
+    },
+    {
+     "i": 265,
+     "ms": 14.5,
+     "upd": 3.1,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 266,
+     "ms": 23,
+     "upd": 10.6,
+     "draw": 12.2,
+     "wave": 1
+    },
+    {
+     "i": 268,
+     "ms": 14.4,
+     "upd": 3,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 269,
+     "ms": 20.5,
+     "upd": 8,
+     "draw": 12.3,
+     "wave": 1
+    },
+    {
+     "i": 271,
+     "ms": 17.2,
+     "upd": 5.1,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 272,
+     "ms": 19.1,
+     "upd": 8,
+     "draw": 10.9,
+     "wave": 1
+    },
+    {
+     "i": 273,
+     "ms": 13.8,
+     "upd": 0,
+     "draw": 13.6,
+     "wave": 1
+    },
+    {
+     "i": 274,
+     "ms": 21.5,
+     "upd": 9.5,
+     "draw": 11.8,
+     "wave": 1
+    },
+    {
+     "i": 275,
+     "ms": 17.6,
+     "upd": 7.8,
+     "draw": 9.6,
+     "wave": 1
+    },
+    {
+     "i": 276,
+     "ms": 12.2,
+     "upd": 0,
+     "draw": 12.1,
+     "wave": 1
+    },
+    {
+     "i": 277,
+     "ms": 15.2,
+     "upd": 3.9,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 278,
+     "ms": 23,
+     "upd": 13.8,
+     "draw": 9,
+     "wave": 1
+    },
+    {
+     "i": 280,
+     "ms": 16.5,
+     "upd": 4,
+     "draw": 12.3,
+     "wave": 1
+    },
+    {
+     "i": 281,
+     "ms": 25.6,
+     "upd": 14.1,
+     "draw": 11.2,
+     "wave": 1
+    },
+    {
+     "i": 283,
+     "ms": 15.5,
+     "upd": 4.6,
+     "draw": 10.7,
+     "wave": 1
+    },
+    {
+     "i": 284,
+     "ms": 19,
+     "upd": 6,
+     "draw": 12.8,
+     "wave": 1
+    },
+    {
+     "i": 286,
+     "ms": 17.5,
+     "upd": 4.6,
+     "draw": 12.7,
+     "wave": 1
+    },
+    {
+     "i": 287,
+     "ms": 18.1,
+     "upd": 7.2,
+     "draw": 10.7,
+     "wave": 1
+    },
+    {
+     "i": 289,
+     "ms": 18.9,
+     "upd": 6.7,
+     "draw": 12,
+     "wave": 1
+    },
+    {
+     "i": 290,
+     "ms": 40.6,
+     "upd": 6.3,
+     "draw": 34.2,
+     "wave": 1
+    },
+    {
+     "i": 291,
+     "ms": 12,
+     "upd": 0,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 292,
+     "ms": 14.6,
+     "upd": 2.9,
+     "draw": 11.5,
+     "wave": 1
+    },
+    {
+     "i": 293,
+     "ms": 17.1,
+     "upd": 7.1,
+     "draw": 9.9,
+     "wave": 1
+    },
+    {
+     "i": 295,
+     "ms": 16.7,
+     "upd": 5,
+     "draw": 11.6,
+     "wave": 1
+    },
+    {
+     "i": 296,
+     "ms": 18.1,
+     "upd": 8.8,
+     "draw": 9.2,
+     "wave": 1
+    },
+    {
+     "i": 297,
+     "ms": 12,
+     "upd": 0,
+     "draw": 11.9,
+     "wave": 1
+    },
+    {
+     "i": 298,
+     "ms": 16.5,
+     "upd": 4.3,
+     "draw": 12,
+     "wave": 1
+    },
+    {
+     "i": 299,
+     "ms": 29.9,
+     "upd": 18.2,
+     "draw": 11.4,
+     "wave": 1
+    }
+   ],
+   "longCount": {
+    "over12": 222,
+    "over16": 139,
+    "over33": 6,
+    "over50": 1
+   }
+  },
+  {
+   "alloc": {
+    "totalMBPerSec": 64.23,
+    "KBPerFrame": 1096.1,
+    "top": [
+     [
+      "allyWorkPointSafe js/main.js:2718",
+      "83.4 KB/f"
+     ],
+     [
+      "waveLaneOccupancyBN js/main.js:3842",
+      "59 KB/f"
+     ],
+     [
+      "pickTarget js/main.js:669",
+      "41.9 KB/f"
+     ],
+     [
+      "semantic network/resource-three-tier.js:11",
+      "28.1 KB/f"
+     ],
+     [
+      "animTrack js/main.js:495",
+      "24.5 KB/f"
+     ],
+     [
+      "update js/main.js:3927 [via next]",
+      "22.7 KB/f"
+     ],
+     [
+      "tick network/bat-air-defense-candidate.js:70",
+      "21.1 KB/f"
+     ],
+     [
+      "drawResourceBodies js/main.js:4139",
+      "20.3 KB/f"
+     ],
+     [
+      "update js/main.js:3927",
+      "19.6 KB/f"
+     ],
+     [
+      "hostilesNear200 js/main.js:3986",
+      "18.8 KB/f"
+     ],
+     [
+      "drawResourceBodies js/main.js:4139 [via next]",
+      "18.1 KB/f"
+     ],
+     [
+      "minimapStateChanged js/main.js:4563 [via next]",
+      "15.6 KB/f"
+     ],
+     [
+      "drawSmoothFrame js/main.js:5182",
+      "15.4 KB/f"
+     ],
+     [
+      "demonRouteWaypoint js/main.js:1910",
+      "14.8 KB/f"
+     ],
+     [
+      "minimapStateChanged js/main.js:4563",
+      "13.8 KB/f"
+     ],
+     [
+      "dist js/main.js:186",
+      "12.8 KB/f"
+     ],
+     [
+      "update js/main.js:1429",
+      "10.6 KB/f"
+     ],
+     [
+      "move network/bat-wave-candidate.js:111",
+      "10.2 KB/f"
+     ]
+    ]
+   },
+   "label": "t300",
+   "frames": 300,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 62,
+    "MB": 3.9,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 606,
+    "misses": 0,
+    "staticEntries": 2,
+    "animatedEntries": 26
+   },
+   "state": "hunt",
+   "wave": 8,
+   "huntElapsed": 245,
+   "entities": {
+    "hounds": 60,
+    "peasants": 40,
+    "buildings": 70,
+    "allies": 8,
+    "projectiles": 0,
+    "particles": 34,
+    "tanks": 0
+   },
+   "hostFrameMs": {
+    "p50": 14.38,
+    "p95": 23,
+    "p99": 26.07,
+    "max": 87.91,
+    "mean": 15.04
+   },
+   "updateMsPerFrame": 3.79,
+   "drawMsPerFrame": 11.1,
+   "updatesPerFrame": 1,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "save": 31,
+    "drawImage": 31,
+    "restore": 31,
+    "setTransform": 17,
+    "beginPath": 14,
+    "stroke": 11,
+    "fillRect": 10,
+    "arc": 8,
+    "fill": 6,
+    "fillText": 4,
+    "clearRect": 1,
+    "clip": 1,
+    "strokeRect": 1,
+    "measureText": 0
+   },
+   "perFrameOffscreen": {
+    "fillRect": 42.7,
+    "save": 4.9,
+    "restore": 4.9,
+    "drawImage": 4.7,
+    "beginPath": 3.9,
+    "arc": 3.6,
+    "fill": 3.5,
+    "shadow:fill": 3.2,
+    "setTransform": 0.5,
+    "clip": 0.3,
+    "stroke": 0.2,
+    "clearRect": 0.2,
+    "fillText": 0.2,
+    "measureText": 0,
+    "createRadialGradient": 0,
+    "strokeRect": 0,
+    "strokeText": 0,
+    "createLinearGradient": 0,
+    "shadow:stroke": 0
+   },
+   "mainFillMpxPerFrame": 2.58,
+   "offscreenFillMpxPerFrame": 0.51,
+   "shadowDrawsPerFrame": 3.2,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {},
+   "canvasesCreated": 59,
+   "createdSites": [
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4820:14 < g.drawFrame398 network/resource-cap-guide.js:13:2435",
+     48
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4820:14 < paint js/main.js:5025:127",
+     4
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < stepBand art163/terrain-edge-prefetch.js:13:29",
+     2
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4820:14 < TrollAndElvesGame.uiFrame504 js/main.js:4808:16",
+     2
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4820:14 < face js/main.js:5035:99",
+     2
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4820:14 < TrollAndElvesGame.drawSettingsGear514 js/main.js:4842:79",
+     1
+    ]
+   ],
+   "bigMainLayers": [
+    [
+     "drawImage 812x1720 @ SceneTiles200.draw js/main.js:1610:232 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4523:11",
+     1.4
+    ],
+    [
+     "drawImage 652x512 @ TrollAndElvesGame.drawSceneLayerOccBN js/main.js:4128:1223 < TrollAndElvesGame.drawResourceBodies js/main.js:4185:55",
+     0.33
+    ],
+    [
+     "drawImage 780x248 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4133:281 < TrollAndElvesGame.drawStatusCached504 js/main.js:4825:6",
+     0.19
+    ]
+   ],
+   "topOffscreen": [
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.07,
+     "drawsPerFrame": 1.2,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4483:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4666:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.06,
+     "drawsPerFrame": 0.1,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < stepBand art163/terrain-edge-prefetch.js:13:29 < module.exports art163/terrain-edge-prefetch.js:68:55",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.06,
+     "drawsPerFrame": 0.6,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4483:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4666:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.05,
+     "drawsPerFrame": 0.6,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4483:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4666:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.05,
+     "drawsPerFrame": 1.1,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4483:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4666:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.04,
+     "drawsPerFrame": 0.1,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4483:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4666:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.04,
+     "drawsPerFrame": 0.1,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < stepBand art163/terrain-edge-prefetch.js:13:29 < module.exports art163/terrain-edge-prefetch.js:68:55",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.04,
+     "drawsPerFrame": 0.1,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4483:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4666:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4520:101 < stepBand art163/terrain-edge-prefetch.js:19:2 < module.exports art163/terrain-edge-prefetch.js:68:55"
+    }
+   ],
+   "timersPerSecond": 2,
+   "topTimerOrigins": [
+    [
+     "network/freeze-trace.js:59:19",
+     10
+    ]
+   ],
+   "storageWritesPerMin": 12,
+   "storageKBPerMin": 31.2,
+   "longFrames": [
+    {
+     "i": 0,
+     "ms": 87.9,
+     "upd": 3.1,
+     "draw": 82.8,
+     "wave": 8
+    },
+    {
+     "i": 1,
+     "ms": 28.1,
+     "upd": 0,
+     "draw": 27.9,
+     "wave": 8
+    },
+    {
+     "i": 2,
+     "ms": 17.1,
+     "upd": 5,
+     "draw": 11.9,
+     "wave": 8
+    },
+    {
+     "i": 3,
+     "ms": 23.2,
+     "upd": 11.4,
+     "draw": 11.5,
+     "wave": 8
+    },
+    {
+     "i": 5,
+     "ms": 16.8,
+     "upd": 2.7,
+     "draw": 13.9,
+     "wave": 8
+    },
+    {
+     "i": 6,
+     "ms": 20,
+     "upd": 5.9,
+     "draw": 14,
+     "wave": 8
+    },
+    {
+     "i": 8,
+     "ms": 16.2,
+     "upd": 4,
+     "draw": 12,
+     "wave": 8
+    },
+    {
+     "i": 9,
+     "ms": 22.9,
+     "upd": 7,
+     "draw": 15.7,
+     "wave": 8
+    },
+    {
+     "i": 11,
+     "ms": 17,
+     "upd": 4.9,
+     "draw": 11.8,
+     "wave": 8
+    },
+    {
+     "i": 12,
+     "ms": 25.6,
+     "upd": 9.7,
+     "draw": 15.8,
+     "wave": 8
+    },
+    {
+     "i": 13,
+     "ms": 12.8,
+     "upd": 0,
+     "draw": 12.6,
+     "wave": 8
+    },
+    {
+     "i": 14,
+     "ms": 17.6,
+     "upd": 3.9,
+     "draw": 13.4,
+     "wave": 8
+    },
+    {
+     "i": 15,
+     "ms": 21.4,
+     "upd": 8.8,
+     "draw": 12.4,
+     "wave": 8
+    },
+    {
+     "i": 16,
+     "ms": 13,
+     "upd": 0,
+     "draw": 12.9,
+     "wave": 8
+    },
+    {
+     "i": 17,
+     "ms": 16.3,
+     "upd": 3.4,
+     "draw": 12.7,
+     "wave": 8
+    },
+    {
+     "i": 18,
+     "ms": 23.3,
+     "upd": 9.4,
+     "draw": 13.6,
+     "wave": 8
+    },
+    {
+     "i": 20,
+     "ms": 20.1,
+     "upd": 4.6,
+     "draw": 15.4,
+     "wave": 8
+    },
+    {
+     "i": 21,
+     "ms": 18.8,
+     "upd": 6.8,
+     "draw": 11.8,
+     "wave": 8
+    },
+    {
+     "i": 22,
+     "ms": 13.8,
+     "upd": 0,
+     "draw": 13.7,
+     "wave": 8
+    },
+    {
+     "i": 23,
+     "ms": 16.2,
+     "upd": 4.3,
+     "draw": 11.7,
+     "wave": 8
+    },
+    {
+     "i": 24,
+     "ms": 20.6,
+     "upd": 7.2,
+     "draw": 13.1,
+     "wave": 8
+    },
+    {
+     "i": 25,
+     "ms": 12.7,
+     "upd": 0,
+     "draw": 12.6,
+     "wave": 8
+    },
+    {
+     "i": 26,
+     "ms": 18,
+     "upd": 4.3,
+     "draw": 13.5,
+     "wave": 8
+    },
+    {
+     "i": 27,
+     "ms": 25.8,
+     "upd": 8,
+     "draw": 17.6,
+     "wave": 8
+    },
+    {
+     "i": 28,
+     "ms": 12.9,
+     "upd": 0,
+     "draw": 12.8,
+     "wave": 8
+    },
+    {
+     "i": 29,
+     "ms": 16.4,
+     "upd": 3.2,
+     "draw": 13.1,
+     "wave": 8
+    },
+    {
+     "i": 30,
+     "ms": 22.3,
+     "upd": 7.9,
+     "draw": 14.2,
+     "wave": 8
+    },
+    {
+     "i": 31,
+     "ms": 15.6,
+     "upd": 0,
+     "draw": 15.4,
+     "wave": 8
+    },
+    {
+     "i": 32,
+     "ms": 22.5,
+     "upd": 4.6,
+     "draw": 17.7,
+     "wave": 8
+    },
+    {
+     "i": 33,
+     "ms": 23.5,
+     "upd": 9.2,
+     "draw": 14.1,
+     "wave": 8
+    },
+    {
+     "i": 34,
+     "ms": 15.8,
+     "upd": 0,
+     "draw": 15.6,
+     "wave": 8
+    },
+    {
+     "i": 35,
+     "ms": 18.1,
+     "upd": 4.3,
+     "draw": 13.7,
+     "wave": 8
+    },
+    {
+     "i": 36,
+     "ms": 24.1,
+     "upd": 10,
+     "draw": 13.9,
+     "wave": 8
+    },
+    {
+     "i": 37,
+     "ms": 15.6,
+     "upd": 0,
+     "draw": 15.4,
+     "wave": 8
+    },
+    {
+     "i": 38,
+     "ms": 18.9,
+     "upd": 4.1,
+     "draw": 14.6,
+     "wave": 8
+    },
+    {
+     "i": 39,
+     "ms": 22.9,
+     "upd": 7.2,
+     "draw": 15.4,
+     "wave": 8
+    },
+    {
+     "i": 40,
+     "ms": 15.1,
+     "upd": 0,
+     "draw": 15,
+     "wave": 8
+    },
+    {
+     "i": 41,
+     "ms": 14.5,
+     "upd": 3.8,
+     "draw": 10.6,
+     "wave": 8
+    },
+    {
+     "i": 42,
+     "ms": 21.3,
+     "upd": 6.2,
+     "draw": 15,
+     "wave": 8
+    },
+    {
+     "i": 44,
+     "ms": 13.9,
+     "upd": 3.1,
+     "draw": 10.7,
+     "wave": 8
+    },
+    {
+     "i": 45,
+     "ms": 17.2,
+     "upd": 5.8,
+     "draw": 11.3,
+     "wave": 8
+    },
+    {
+     "i": 47,
+     "ms": 14.5,
+     "upd": 4.2,
+     "draw": 10.1,
+     "wave": 8
+    },
+    {
+     "i": 48,
+     "ms": 18.5,
+     "upd": 9.1,
+     "draw": 9.2,
+     "wave": 8
+    },
+    {
+     "i": 50,
+     "ms": 17.1,
+     "upd": 5.8,
+     "draw": 11.2,
+     "wave": 8
+    },
+    {
+     "i": 51,
+     "ms": 15.8,
+     "upd": 6.9,
+     "draw": 8.8,
+     "wave": 8
+    },
+    {
+     "i": 52,
+     "ms": 12.8,
+     "upd": 0,
+     "draw": 12.7,
+     "wave": 8
+    },
+    {
+     "i": 53,
+     "ms": 14.5,
+     "upd": 3.9,
+     "draw": 10.5,
+     "wave": 8
+    },
+    {
+     "i": 54,
+     "ms": 23.5,
+     "upd": 13.5,
+     "draw": 9.9,
+     "wave": 8
+    },
+    {
+     "i": 56,
+     "ms": 16.7,
+     "upd": 4.6,
+     "draw": 11.9,
+     "wave": 8
+    },
+    {
+     "i": 57,
+     "ms": 20,
+     "upd": 8.6,
+     "draw": 11.2,
+     "wave": 8
+    },
+    {
+     "i": 59,
+     "ms": 15.5,
+     "upd": 3.9,
+     "draw": 11.4,
+     "wave": 8
+    },
+    {
+     "i": 60,
+     "ms": 24.7,
+     "upd": 10.5,
+     "draw": 14,
+     "wave": 8
+    },
+    {
+     "i": 62,
+     "ms": 13.1,
+     "upd": 4.3,
+     "draw": 8.6,
+     "wave": 8
+    },
+    {
+     "i": 63,
+     "ms": 20.2,
+     "upd": 8.5,
+     "draw": 11.5,
+     "wave": 8
+    },
+    {
+     "i": 66,
+     "ms": 21.9,
+     "upd": 8.3,
+     "draw": 13.5,
+     "wave": 8
+    },
+    {
+     "i": 68,
+     "ms": 13.5,
+     "upd": 3.7,
+     "draw": 9.6,
+     "wave": 8
+    },
+    {
+     "i": 69,
+     "ms": 18.9,
+     "upd": 5.6,
+     "draw": 13.1,
+     "wave": 8
+    },
+    {
+     "i": 71,
+     "ms": 14.7,
+     "upd": 3.9,
+     "draw": 10.6,
+     "wave": 8
+    },
+    {
+     "i": 72,
+     "ms": 20.1,
+     "upd": 9,
+     "draw": 11,
+     "wave": 8
+    },
+    {
+     "i": 74,
+     "ms": 14.3,
+     "upd": 4.6,
+     "draw": 9.6,
+     "wave": 8
+    },
+    {
+     "i": 75,
+     "ms": 18.6,
+     "upd": 6.9,
+     "draw": 11.4,
+     "wave": 8
+    },
+    {
+     "i": 77,
+     "ms": 15.4,
+     "upd": 3,
+     "draw": 12.3,
+     "wave": 8
+    },
+    {
+     "i": 78,
+     "ms": 18.1,
+     "upd": 9.8,
+     "draw": 8.2,
+     "wave": 8
+    },
+    {
+     "i": 80,
+     "ms": 14.7,
+     "upd": 4.2,
+     "draw": 10.3,
+     "wave": 8
+    },
+    {
+     "i": 81,
+     "ms": 20.2,
+     "upd": 7,
+     "draw": 13.1,
+     "wave": 8
+    },
+    {
+     "i": 83,
+     "ms": 14.7,
+     "upd": 4.3,
+     "draw": 10.2,
+     "wave": 8
+    },
+    {
+     "i": 84,
+     "ms": 23.2,
+     "upd": 8.5,
+     "draw": 14.4,
+     "wave": 8
+    },
+    {
+     "i": 86,
+     "ms": 15.3,
+     "upd": 4,
+     "draw": 11.2,
+     "wave": 8
+    },
+    {
+     "i": 87,
+     "ms": 18.9,
+     "upd": 5.4,
+     "draw": 13.3,
+     "wave": 8
+    },
+    {
+     "i": 89,
+     "ms": 15,
+     "upd": 4.1,
+     "draw": 10.7,
+     "wave": 8
+    },
+    {
+     "i": 90,
+     "ms": 19.1,
+     "upd": 7.7,
+     "draw": 11.2,
+     "wave": 8
+    },
+    {
+     "i": 92,
+     "ms": 14.1,
+     "upd": 4.3,
+     "draw": 9.5,
+     "wave": 8
+    },
+    {
+     "i": 93,
+     "ms": 18.2,
+     "upd": 6.6,
+     "draw": 11.4,
+     "wave": 8
+    },
+    {
+     "i": 95,
+     "ms": 12.8,
+     "upd": 3.5,
+     "draw": 9.1,
+     "wave": 8
+    },
+    {
+     "i": 96,
+     "ms": 20.4,
+     "upd": 8.7,
+     "draw": 11.5,
+     "wave": 8
+    },
+    {
+     "i": 98,
+     "ms": 15.4,
+     "upd": 4,
+     "draw": 11.3,
+     "wave": 8
+    },
+    {
+     "i": 99,
+     "ms": 19.8,
+     "upd": 5.3,
+     "draw": 14.3,
+     "wave": 8
+    },
+    {
+     "i": 101,
+     "ms": 14.3,
+     "upd": 2.8,
+     "draw": 11.4,
+     "wave": 8
+    },
+    {
+     "i": 102,
+     "ms": 16.8,
+     "upd": 7.1,
+     "draw": 9.6,
+     "wave": 8
+    },
+    {
+     "i": 105,
+     "ms": 17.3,
+     "upd": 8,
+     "draw": 9.1,
+     "wave": 8
+    },
+    {
+     "i": 107,
+     "ms": 15.9,
+     "upd": 4.3,
+     "draw": 11.4,
+     "wave": 8
+    },
+    {
+     "i": 108,
+     "ms": 21.8,
+     "upd": 11.1,
+     "draw": 10.4,
+     "wave": 8
+    },
+    {
+     "i": 110,
+     "ms": 13.4,
+     "upd": 3.6,
+     "draw": 9.7,
+     "wave": 8
+    },
+    {
+     "i": 111,
+     "ms": 20.3,
+     "upd": 6.1,
+     "draw": 14,
+     "wave": 8
+    },
+    {
+     "i": 113,
+     "ms": 16.9,
+     "upd": 6.3,
+     "draw": 10.4,
+     "wave": 8
+    },
+    {
+     "i": 114,
+     "ms": 18,
+     "upd": 8.2,
+     "draw": 9.6,
+     "wave": 8
+    },
+    {
+     "i": 116,
+     "ms": 17.8,
+     "upd": 7.9,
+     "draw": 9.8,
+     "wave": 8
+    },
+    {
+     "i": 117,
+     "ms": 17.4,
+     "upd": 6.7,
+     "draw": 10.5,
+     "wave": 8
+    },
+    {
+     "i": 119,
+     "ms": 13.5,
+     "upd": 4.1,
+     "draw": 9.3,
+     "wave": 8
+    },
+    {
+     "i": 120,
+     "ms": 19.7,
+     "upd": 8.5,
+     "draw": 11,
+     "wave": 8
+    },
+    {
+     "i": 122,
+     "ms": 12.1,
+     "upd": 3.5,
+     "draw": 8.5,
+     "wave": 8
+    },
+    {
+     "i": 123,
+     "ms": 20.2,
+     "upd": 9,
+     "draw": 11,
+     "wave": 8
+    },
+    {
+     "i": 125,
+     "ms": 18.5,
+     "upd": 4.2,
+     "draw": 14.1,
+     "wave": 8
+    },
+    {
+     "i": 126,
+     "ms": 17.7,
+     "upd": 6.3,
+     "draw": 11.3,
+     "wave": 8
+    },
+    {
+     "i": 128,
+     "ms": 12.8,
+     "upd": 3.9,
+     "draw": 8.7,
+     "wave": 8
+    },
+    {
+     "i": 129,
+     "ms": 17.1,
+     "upd": 7.2,
+     "draw": 9.7,
+     "wave": 8
+    },
+    {
+     "i": 131,
+     "ms": 14.9,
+     "upd": 4.4,
+     "draw": 10.4,
+     "wave": 8
+    },
+    {
+     "i": 132,
+     "ms": 18.4,
+     "upd": 6.9,
+     "draw": 11.4,
+     "wave": 8
+    },
+    {
+     "i": 134,
+     "ms": 16.5,
+     "upd": 4,
+     "draw": 12.3,
+     "wave": 8
+    },
+    {
+     "i": 135,
+     "ms": 20.5,
+     "upd": 7.3,
+     "draw": 12.9,
+     "wave": 8
+    },
+    {
+     "i": 136,
+     "ms": 12.2,
+     "upd": 0,
+     "draw": 12.1,
+     "wave": 8
+    },
+    {
+     "i": 137,
+     "ms": 13.5,
+     "upd": 3.3,
+     "draw": 10,
+     "wave": 8
+    },
+    {
+     "i": 138,
+     "ms": 19.2,
+     "upd": 8.8,
+     "draw": 10.2,
+     "wave": 8
+    },
+    {
+     "i": 140,
+     "ms": 16.3,
+     "upd": 4.3,
+     "draw": 11.8,
+     "wave": 8
+    },
+    {
+     "i": 141,
+     "ms": 17,
+     "upd": 5.9,
+     "draw": 10.9,
+     "wave": 8
+    },
+    {
+     "i": 143,
+     "ms": 13.1,
+     "upd": 4.5,
+     "draw": 8.4,
+     "wave": 8
+    },
+    {
+     "i": 144,
+     "ms": 22.3,
+     "upd": 8.7,
+     "draw": 13.4,
+     "wave": 8
+    },
+    {
+     "i": 146,
+     "ms": 12.3,
+     "upd": 3.5,
+     "draw": 8.6,
+     "wave": 8
+    },
+    {
+     "i": 147,
+     "ms": 18.7,
+     "upd": 7,
+     "draw": 11.6,
+     "wave": 8
+    },
+    {
+     "i": 149,
+     "ms": 14.2,
+     "upd": 3.2,
+     "draw": 10.8,
+     "wave": 8
+    },
+    {
+     "i": 150,
+     "ms": 20.9,
+     "upd": 8,
+     "draw": 12.7,
+     "wave": 8
+    },
+    {
+     "i": 152,
+     "ms": 18,
+     "upd": 5.2,
+     "draw": 12.7,
+     "wave": 8
+    },
+    {
+     "i": 153,
+     "ms": 20.5,
+     "upd": 9,
+     "draw": 11.4,
+     "wave": 8
+    },
+    {
+     "i": 154,
+     "ms": 12.5,
+     "upd": 0,
+     "draw": 12.4,
+     "wave": 8
+    },
+    {
+     "i": 155,
+     "ms": 14.7,
+     "upd": 4,
+     "draw": 10.6,
+     "wave": 8
+    },
+    {
+     "i": 156,
+     "ms": 21.8,
+     "upd": 10.7,
+     "draw": 10.9,
+     "wave": 8
+    },
+    {
+     "i": 158,
+     "ms": 18.2,
+     "upd": 4.8,
+     "draw": 13.2,
+     "wave": 8
+    },
+    {
+     "i": 159,
+     "ms": 15.2,
+     "upd": 5.4,
+     "draw": 9.6,
+     "wave": 8
+    },
+    {
+     "i": 161,
+     "ms": 15.4,
+     "upd": 2.9,
+     "draw": 12.5,
+     "wave": 8
+    },
+    {
+     "i": 162,
+     "ms": 21.2,
+     "upd": 10.1,
+     "draw": 10.9,
+     "wave": 8
+    },
+    {
+     "i": 164,
+     "ms": 14.4,
+     "upd": 3.1,
+     "draw": 11.1,
+     "wave": 8
+    },
+    {
+     "i": 165,
+     "ms": 16,
+     "upd": 5.5,
+     "draw": 10.3,
+     "wave": 8
+    },
+    {
+     "i": 167,
+     "ms": 18.5,
+     "upd": 6,
+     "draw": 12.3,
+     "wave": 8
+    },
+    {
+     "i": 168,
+     "ms": 23,
+     "upd": 9.3,
+     "draw": 13.4,
+     "wave": 8
+    },
+    {
+     "i": 170,
+     "ms": 14.3,
+     "upd": 3.9,
+     "draw": 10.3,
+     "wave": 8
+    },
+    {
+     "i": 171,
+     "ms": 19.7,
+     "upd": 8.1,
+     "draw": 11.5,
+     "wave": 8
+    },
+    {
+     "i": 173,
+     "ms": 13.4,
+     "upd": 2.8,
+     "draw": 10.4,
+     "wave": 8
+    },
+    {
+     "i": 174,
+     "ms": 16.8,
+     "upd": 7.9,
+     "draw": 8.7,
+     "wave": 8
+    },
+    {
+     "i": 176,
+     "ms": 14.1,
+     "upd": 4,
+     "draw": 9.9,
+     "wave": 8
+    },
+    {
+     "i": 177,
+     "ms": 19.8,
+     "upd": 8.4,
+     "draw": 11.2,
+     "wave": 8
+    },
+    {
+     "i": 179,
+     "ms": 13.3,
+     "upd": 4.1,
+     "draw": 9.1,
+     "wave": 8
+    },
+    {
+     "i": 180,
+     "ms": 23.9,
+     "upd": 9.6,
+     "draw": 14.1,
+     "wave": 8
+    },
+    {
+     "i": 181,
+     "ms": 13.1,
+     "upd": 0,
+     "draw": 13.1,
+     "wave": 8
+    },
+    {
+     "i": 182,
+     "ms": 13.7,
+     "upd": 2.8,
+     "draw": 10.7,
+     "wave": 8
+    },
+    {
+     "i": 183,
+     "ms": 26.1,
+     "upd": 15.5,
+     "draw": 10.4,
+     "wave": 8
+    },
+    {
+     "i": 185,
+     "ms": 12.8,
+     "upd": 2.7,
+     "draw": 10,
+     "wave": 8
+    },
+    {
+     "i": 186,
+     "ms": 21.5,
+     "upd": 10.5,
+     "draw": 10.8,
+     "wave": 8
+    },
+    {
+     "i": 188,
+     "ms": 15.7,
+     "upd": 4.6,
+     "draw": 10.9,
+     "wave": 8
+    },
+    {
+     "i": 189,
+     "ms": 14.9,
+     "upd": 5,
+     "draw": 9.8,
+     "wave": 8
+    },
+    {
+     "i": 191,
+     "ms": 14,
+     "upd": 2.3,
+     "draw": 11.6,
+     "wave": 8
+    },
+    {
+     "i": 192,
+     "ms": 17.7,
+     "upd": 6.5,
+     "draw": 11.1,
+     "wave": 8
+    },
+    {
+     "i": 195,
+     "ms": 19.9,
+     "upd": 7.5,
+     "draw": 12.2,
+     "wave": 8
+    },
+    {
+     "i": 197,
+     "ms": 13.5,
+     "upd": 4,
+     "draw": 9.4,
+     "wave": 8
+    },
+    {
+     "i": 198,
+     "ms": 17.7,
+     "upd": 6.3,
+     "draw": 11.2,
+     "wave": 8
+    },
+    {
+     "i": 200,
+     "ms": 15,
+     "upd": 2.8,
+     "draw": 12.1,
+     "wave": 8
+    },
+    {
+     "i": 201,
+     "ms": 14.1,
+     "upd": 6.4,
+     "draw": 7.5,
+     "wave": 8
+    },
+    {
+     "i": 203,
+     "ms": 13.9,
+     "upd": 3.9,
+     "draw": 9.9,
+     "wave": 8
+    },
+    {
+     "i": 204,
+     "ms": 17.3,
+     "upd": 5.5,
+     "draw": 11.7,
+     "wave": 8
+    },
+    {
+     "i": 206,
+     "ms": 14.2,
+     "upd": 2.6,
+     "draw": 11.5,
+     "wave": 8
+    },
+    {
+     "i": 207,
+     "ms": 16,
+     "upd": 7.2,
+     "draw": 8.7,
+     "wave": 8
+    },
+    {
+     "i": 208,
+     "ms": 12.6,
+     "upd": 0,
+     "draw": 12.5,
+     "wave": 8
+    },
+    {
+     "i": 210,
+     "ms": 19.7,
+     "upd": 8,
+     "draw": 11.6,
+     "wave": 8
+    },
+    {
+     "i": 212,
+     "ms": 15.5,
+     "upd": 4.2,
+     "draw": 11.1,
+     "wave": 8
+    },
+    {
+     "i": 213,
+     "ms": 17.6,
+     "upd": 6.8,
+     "draw": 10.6,
+     "wave": 8
+    },
+    {
+     "i": 215,
+     "ms": 15.4,
+     "upd": 3.7,
+     "draw": 11.5,
+     "wave": 8
+    },
+    {
+     "i": 216,
+     "ms": 16.7,
+     "upd": 5.7,
+     "draw": 10.8,
+     "wave": 8
+    },
+    {
+     "i": 218,
+     "ms": 13.8,
+     "upd": 2.7,
+     "draw": 11,
+     "wave": 8
+    },
+    {
+     "i": 219,
+     "ms": 15.1,
+     "upd": 4.8,
+     "draw": 10.2,
+     "wave": 8
+    },
+    {
+     "i": 221,
+     "ms": 12.3,
+     "upd": 3.7,
+     "draw": 8.5,
+     "wave": 8
+    },
+    {
+     "i": 222,
+     "ms": 17.2,
+     "upd": 7.3,
+     "draw": 9.8,
+     "wave": 8
+    },
+    {
+     "i": 224,
+     "ms": 14.6,
+     "upd": 3.5,
+     "draw": 10.9,
+     "wave": 8
+    },
+    {
+     "i": 225,
+     "ms": 14.3,
+     "upd": 4.8,
+     "draw": 9.4,
+     "wave": 8
+    },
+    {
+     "i": 228,
+     "ms": 17.7,
+     "upd": 8.6,
+     "draw": 9,
+     "wave": 8
+    },
+    {
+     "i": 231,
+     "ms": 15.5,
+     "upd": 7.3,
+     "draw": 8.1,
+     "wave": 8
+    },
+    {
+     "i": 233,
+     "ms": 12.5,
+     "upd": 3.8,
+     "draw": 8.6,
+     "wave": 8
+    },
+    {
+     "i": 234,
+     "ms": 15.9,
+     "upd": 5.1,
+     "draw": 10.7,
+     "wave": 8
+    },
+    {
+     "i": 236,
+     "ms": 12.4,
+     "upd": 2.5,
+     "draw": 9.7,
+     "wave": 8
+    },
+    {
+     "i": 237,
+     "ms": 15.3,
+     "upd": 6.4,
+     "draw": 8.8,
+     "wave": 8
+    },
+    {
+     "i": 239,
+     "ms": 13.2,
+     "upd": 3.3,
+     "draw": 9.8,
+     "wave": 8
+    },
+    {
+     "i": 240,
+     "ms": 23.9,
+     "upd": 11.9,
+     "draw": 11.8,
+     "wave": 8
+    },
+    {
+     "i": 242,
+     "ms": 16.3,
+     "upd": 3.9,
+     "draw": 12.3,
+     "wave": 8
+    },
+    {
+     "i": 243,
+     "ms": 17.1,
+     "upd": 6.5,
+     "draw": 10.5,
+     "wave": 8
+    },
+    {
+     "i": 245,
+     "ms": 13.5,
+     "upd": 2.5,
+     "draw": 10.9,
+     "wave": 8
+    },
+    {
+     "i": 246,
+     "ms": 16.3,
+     "upd": 5.9,
+     "draw": 10.3,
+     "wave": 8
+    },
+    {
+     "i": 248,
+     "ms": 13.6,
+     "upd": 2.8,
+     "draw": 10.7,
+     "wave": 8
+    },
+    {
+     "i": 249,
+     "ms": 13.8,
+     "upd": 6.1,
+     "draw": 7.6,
+     "wave": 8
+    },
+    {
+     "i": 251,
+     "ms": 12.3,
+     "upd": 3.8,
+     "draw": 8.4,
+     "wave": 8
+    },
+    {
+     "i": 252,
+     "ms": 17.8,
+     "upd": 7.7,
+     "draw": 9.9,
+     "wave": 8
+    },
+    {
+     "i": 254,
+     "ms": 14,
+     "upd": 3.4,
+     "draw": 10.5,
+     "wave": 8
+    },
+    {
+     "i": 255,
+     "ms": 14.7,
+     "upd": 5.2,
+     "draw": 9.3,
+     "wave": 8
+    },
+    {
+     "i": 257,
+     "ms": 12.6,
+     "upd": 3.6,
+     "draw": 8.9,
+     "wave": 8
+    },
+    {
+     "i": 258,
+     "ms": 19.9,
+     "upd": 7.6,
+     "draw": 12.1,
+     "wave": 8
+    },
+    {
+     "i": 260,
+     "ms": 12.5,
+     "upd": 3.6,
+     "draw": 8.9,
+     "wave": 8
+    },
+    {
+     "i": 261,
+     "ms": 15.4,
+     "upd": 6.2,
+     "draw": 8.9,
+     "wave": 8
+    },
+    {
+     "i": 263,
+     "ms": 12.4,
+     "upd": 3.3,
+     "draw": 8.9,
+     "wave": 8
+    },
+    {
+     "i": 264,
+     "ms": 17.4,
+     "upd": 7.5,
+     "draw": 9.8,
+     "wave": 8
+    },
+    {
+     "i": 266,
+     "ms": 14.5,
+     "upd": 3.6,
+     "draw": 10.8,
+     "wave": 8
+    },
+    {
+     "i": 267,
+     "ms": 16.4,
+     "upd": 4.7,
+     "draw": 11.6,
+     "wave": 8
+    },
+    {
+     "i": 270,
+     "ms": 18.1,
+     "upd": 7.1,
+     "draw": 10.8,
+     "wave": 8
+    },
+    {
+     "i": 272,
+     "ms": 13.2,
+     "upd": 3.5,
+     "draw": 9.5,
+     "wave": 8
+    },
+    {
+     "i": 273,
+     "ms": 17.5,
+     "upd": 7.9,
+     "draw": 9.4,
+     "wave": 8
+    },
+    {
+     "i": 275,
+     "ms": 14,
+     "upd": 3.4,
+     "draw": 10.4,
+     "wave": 8
+    },
+    {
+     "i": 276,
+     "ms": 17.4,
+     "upd": 6.6,
+     "draw": 10.5,
+     "wave": 8
+    },
+    {
+     "i": 278,
+     "ms": 14.9,
+     "upd": 3.9,
+     "draw": 10.9,
+     "wave": 8
+    },
+    {
+     "i": 279,
+     "ms": 16.3,
+     "upd": 6,
+     "draw": 10.2,
+     "wave": 8
+    },
+    {
+     "i": 280,
+     "ms": 12,
+     "upd": 0,
+     "draw": 11.9,
+     "wave": 8
+    },
+    {
+     "i": 281,
+     "ms": 13,
+     "upd": 3.4,
+     "draw": 9.5,
+     "wave": 8
+    },
+    {
+     "i": 282,
+     "ms": 17.8,
+     "upd": 6.9,
+     "draw": 10.7,
+     "wave": 8
+    },
+    {
+     "i": 284,
+     "ms": 14.3,
+     "upd": 2.6,
+     "draw": 11.6,
+     "wave": 8
+    },
+    {
+     "i": 285,
+     "ms": 16,
+     "upd": 7.2,
+     "draw": 8.7,
+     "wave": 8
+    },
+    {
+     "i": 287,
+     "ms": 12.5,
+     "upd": 3.3,
+     "draw": 9.1,
+     "wave": 8
+    },
+    {
+     "i": 288,
+     "ms": 18.2,
+     "upd": 7.3,
+     "draw": 10.7,
+     "wave": 8
+    },
+    {
+     "i": 290,
+     "ms": 12.7,
+     "upd": 2.5,
+     "draw": 10.1,
+     "wave": 8
+    },
+    {
+     "i": 291,
+     "ms": 18.9,
+     "upd": 7.4,
+     "draw": 11.3,
+     "wave": 8
+    },
+    {
+     "i": 293,
+     "ms": 13.1,
+     "upd": 2.5,
+     "draw": 10.4,
+     "wave": 8
+    },
+    {
+     "i": 294,
+     "ms": 18.9,
+     "upd": 7.5,
+     "draw": 11.2,
+     "wave": 8
+    },
+    {
+     "i": 296,
+     "ms": 13,
+     "upd": 2.9,
+     "draw": 9.9,
+     "wave": 8
+    },
+    {
+     "i": 297,
+     "ms": 15.6,
+     "upd": 7.4,
+     "draw": 8,
+     "wave": 8
+    },
+    {
+     "i": 299,
+     "ms": 15.7,
+     "upd": 4.7,
+     "draw": 10.9,
+     "wave": 8
+    }
+   ],
+   "longCount": {
+    "over12": 209,
+    "over16": 97,
+    "over33": 1,
+    "over50": 1
+   },
+   "memory": {
+    "offscreenCanvases": 259,
+    "offscreenMB": 58.8,
+    "bigCanvases": [
+     "1250x1000",
+     "1206x952",
+     "800x640",
+     "1036x1792",
+     "1024x2048"
+    ],
+    "decodedImages": 485,
+    "decodedImageMB": 183.4,
+    "mainCanvasMB": 5,
+    "jsHeapMB": 92.4
+   },
+   "inventory": {
+    "byImg": [
+     [
+      "/match-sprites-b/sprite-418.webp.bin",
+      "1254x1554",
+      7.43
+     ],
+     [
+      "/art163/shadows512.webp.bin",
+      "1536x1248",
+      7.31
+     ],
+     [
+      "/art163/robot-torso-clean-v166.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/robot-arms-clean-v166.webp.bin",
+      "1774x887",
+      6
+     ],
+     [
+      "/art163/cannon-approved-v289.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/stones512.webp.bin",
+      "1536x1024",
+      6
+     ],
+     [
+      "art-bat-preview/levels/antiAir-3.webp.bin",
+      "1120x1051",
+      4.49
+     ],
+     [
+      "art-bat-preview/levels/net-2.webp.bin",
+      "1004x1061",
+      4.06
+     ],
+     [
+      "art-bat-preview/levels/net-3.webp.bin",
+      "1080x933",
+      3.84
+     ],
+     [
+      "/art163/ground512.jpg",
+      "978x978",
+      3.65
+     ],
+     [
+      "art-bat-preview/levels/antiAir-2.webp.bin",
+      "821x966",
+      3.03
+     ],
+     [
+      "monster-rear-motion/stone-1.webp.bin",
+      "1280x480",
+      2.34
+     ],
+     [
+      "/match-sprites-b/sprite-186.png.webp.bin",
+      "719x717",
+      1.97
+     ],
+     [
+      "/match-sprites-b/sprite-185.png.webp.bin",
+      "679x691",
+      1.79
+     ],
+     [
+      "/match-sprites-b/sprite-187.png.webp.bin",
+      "692x661",
+      1.74
+     ],
+     [
+      "/art163/earth512-1.png.webp.bin",
+      "728x565",
+      1.57
+     ],
+     [
+      "/art163/ui524.webp.bin",
+      "768x512",
+      1.5
+     ],
+     [
+      "/art163/skills512.png.webp.bin",
+      "960x384",
+      1.41
+     ],
+     [
+      "/art163/earth512-0.png.webp.bin",
+      "552x464",
+      0.98
+     ],
+     [
+      "/match-sprites-b/sprite-172.png.webp.bin",
+      "480x515",
+      0.94
+     ],
+     [
+      "/match-sprites-a/sprite-134.png.webp.bin",
+      "469x522",
+      0.93
+     ],
+     [
+      "/match-sprites-b/sprite-169.png.webp.bin",
+      "466x504",
+      0.9
+     ],
+     [
+      "monster-rear-motion/mammoth.webp.bin",
+      "672x336",
+      0.86
+     ],
+     [
+      "/match-sprites-a/sprite-133.png.webp.bin",
+      "452x474",
+      0.82
+     ],
+     [
+      "/match-sprites-a/sprite-168.png.webp.bin",
+      "504x409",
+      0.79
+     ],
+     [
+      "/match-sprites-a/sprite-162.png.webp.bin",
+      "380x523",
+      0.76
+     ],
+     [
+      "/match-sprites-a/sprite-68.png.webp.bin",
+      "437x449",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-390.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-391.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-392.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-393.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-394.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-395.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-396.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-397.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-a/sprite-71.png.webp.bin",
+      "430x451",
+      0.74
+     ],
+     [
+      "/match-sprites-a/sprite-160.png.webp.bin",
+      "360x511",
+      0.7
+     ],
+     [
+      "/match-sprites-a/sprite-161.png.webp.bin",
+      "364x506",
+      0.7
+     ],
+     [
+      "/match-sprites-b/sprite-171.png.webp.bin",
+      "345x524",
+      0.69
+     ],
+     [
+      "art-bat-preview/aa/aa-00.png.webp.bin",
+      "420x420",
+      0.67
+     ]
+    ],
+    "byDir": {
+     "(root)": 138.56,
+     "art-bat-preview": 32.57,
+     "monster-rear-motion": 3.2,
+     "mammoth-attack": 3.02,
+     "mammoth-walk": 4.43,
+     "card-art": 1.6
+    },
+    "bySite": [
+     [
+      "?",
+      [
+       259,
+       58.7
+      ]
+     ]
+    ]
+   },
+   "stone": {
+    "report": {
+     "used": 0,
+     "peak": 0,
+     "doing": -1,
+     "decode": 0,
+     "supply": 0,
+     "misses": 0,
+     "repeated": 0,
+     "emergency": 0,
+     "evictions": 0,
+     "pkgReads": 0
+    },
+    "alive": 0
+   },
+   "memConstrained": false
+  },
+  {
+   "alloc": {
+    "totalMBPerSec": 88.01,
+    "KBPerFrame": 1502,
+    "top": [
+     [
+      "update network/stone-boss-candidate.js:207",
+      "143.6 KB/f"
+     ],
+     [
+      "allyWorkPointSafe js/main.js:2718",
+      "114.3 KB/f"
+     ],
+     [
+      "slimeLivingSignature410 js/main.js:3869",
+      "57.9 KB/f"
+     ],
+     [
+      "pickTarget js/main.js:669",
+      "57.1 KB/f"
+     ],
+     [
+      "updateWaveHound js/main.js:1173",
+      "44.7 KB/f"
+     ],
+     [
+      "animTrack js/main.js:495",
+      "41.5 KB/f"
+     ],
+     [
+      "footprint network/ordinary-building-grid.js:45",
+      "37.4 KB/f"
+     ],
+     [
+      "update js/main.js:3927",
+      "36.4 KB/f"
+     ],
+     [
+      "g.defenseRecommendationLayout network/defense-recommendation-grid.js:9",
+      "30.2 KB/f"
+     ],
+     [
+      "tick network/bat-air-defense-candidate.js:70",
+      "30.1 KB/f"
+     ],
+     [
+      "drawSmoothFrame js/main.js:5182",
+      "27.7 KB/f"
+     ],
+     [
+      "hostilesNear200 js/main.js:3986",
+      "24.9 KB/f"
+     ],
+     [
+      "update network/stone-boss-candidate.js:207 [via hypot]",
+      "22.6 KB/f"
+     ],
+     [
+      "nearby network/resource-spacing.js:5",
+      "22.1 KB/f"
+     ],
+     [
+      "slimeFixedRouteSteps588 js/main.js:3768",
+      "21.1 KB/f"
+     ],
+     [
+      "checkSlimeStall539 js/main.js:1167",
+      "16.7 KB/f"
+     ],
+     [
+      "moveEntityAroundTerrain js/main.js:1941",
+      "16.2 KB/f"
+     ],
+     [
+      "minimapStateChanged js/main.js:4563 [via next]",
+      "16.1 KB/f"
+     ]
+    ]
+   },
+   "label": "t480",
+   "frames": 300,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 63,
+    "MB": 4,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 600,
+    "misses": 0,
+    "staticEntries": 2,
+    "animatedEntries": 26
+   },
+   "state": "hunt",
+   "wave": 14,
+   "huntElapsed": 430,
+   "entities": {
+    "hounds": 117,
+    "peasants": 44,
+    "buildings": 69,
+    "allies": 7,
+    "projectiles": 4,
+    "particles": 38,
+    "tanks": 0
+   },
+   "hostFrameMs": {
+    "p50": 16.19,
+    "p95": 27.26,
+    "p99": 35.61,
+    "max": 48.1,
+    "mean": 16.93
+   },
+   "updateMsPerFrame": 5.76,
+   "drawMsPerFrame": 10.97,
+   "updatesPerFrame": 1,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "drawImage": 28,
+    "save": 21.7,
+    "restore": 21.7,
+    "fillRect": 12,
+    "setTransform": 11,
+    "beginPath": 10.7,
+    "fillText": 6.7,
+    "fill": 5.7,
+    "stroke": 3,
+    "arc": 2,
+    "clearRect": 1,
+    "clip": 1,
+    "strokeRect": 1,
+    "measureText": 0.1
+   },
+   "perFrameOffscreen": {
+    "fillRect": 28.6,
+    "arc": 2.2,
+    "fillText": 0.5,
+    "beginPath": 0.5,
+    "fill": 0.3,
+    "save": 0.2,
+    "restore": 0.2,
+    "stroke": 0.2,
+    "setTransform": 0.2,
+    "clearRect": 0.2,
+    "drawImage": 0.1,
+    "putImageData": 0,
+    "strokeRect": 0,
+    "getImageData": 0
+   },
+   "mainFillMpxPerFrame": 4.03,
+   "offscreenFillMpxPerFrame": 0.03,
+   "shadowDrawsPerFrame": 0,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {},
+   "canvasesCreated": 7,
+   "createdSites": [
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:17:19 < api.character js/woodland-art.js:394:20",
+     2
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4820:14 < TrollAndElvesGame.uiFrame504 js/main.js:4808:16",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < Player.drawCorpse js/main.js:657:114",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < Player.drawCorpse js/main.js:657:192",
+     1
+    ]
+   ],
+   "bigMainLayers": [
+    [
+     "drawImage 812x1720 @ SceneTiles200.draw js/main.js:1610:232 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4523:11",
+     1.4
+    ],
+    [
+     "fillRect 780x1688 @ TrollAndElvesGame.drawShareRescueOffer js/main.js:3439:330 < TrollAndElvesGame.draw js/main.js:4679:77",
+     1.32
+    ],
+    [
+     "drawImage 652x512 @ TrollAndElvesGame.drawSceneLayerOccBN js/main.js:4128:1223 < TrollAndElvesGame.drawResourceBodies js/main.js:4185:55",
+     0.33
+    ],
+    [
+     "drawImage 796x348 @ TrollAndElvesGame.uiFrame504 js/main.js:4808:143 < TrollAndElvesGame.drawShareRescueOffer js/main.js:3439:487",
+     0.28
+    ],
+    [
+     "drawImage 780x248 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4133:281 < TrollAndElvesGame.drawStatusCached504 js/main.js:4825:6",
+     0.19
+    ]
+   ],
+   "topOffscreen": [
+    {
+     "size": "306x245",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 28.6,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawHUD js/main.js:5038:391 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588",
+     "firstDraw": "TrollAndElvesGame.drawHUD js/main.js:5039:404 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588 < g.drawHUD art163/ghost/approved-guide-entry.js:76:18"
+    },
+    {
+     "size": "780x248",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.run js/main.js:4369:333 < TrollAndElvesGame.prepareHudCachesViewAsync js/main.js:4373:31 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4662:15",
+     "firstDraw": "TrollAndElvesGame.uiFrame504 js/main.js:4808:143 < TrollAndElvesGame.drawStatus504 js/main.js:4826:1599 < TrollAndElvesGame.drawStatusCached504 js/main.js:4824:171 < TrollAndElvesGame.drawHUD js/main.js:5038:139"
+    },
+    {
+     "size": "796x348",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4820:14 < TrollAndElvesGame.uiFrame504 js/main.js:4808:16 < TrollAndElvesGame.drawShareRescueOffer js/main.js:3439:487",
+     "firstDraw": "TrollAndElvesGame.paintUiFrame588 js/main.js:4809:168 < js/main.js:4808:97 < TrollAndElvesGame.cachedUi514 js/main.js:4820:179 < TrollAndElvesGame.uiFrame504 js/main.js:4808:16"
+    },
+    {
+     "size": "48x70",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218 < Player.drawCorpse js/main.js:656:374",
+     "firstDraw": "api.character js/woodland-art.js:391:305 < Player.drawCorpse js/main.js:656:374 < TrollAndElvesGame.drawFrame398 js/main.js:4739:154 < g.drawFrame398 network/placement-sites.js:118:87"
+    },
+    {
+     "size": "64x86",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20 < Player.drawCorpse js/main.js:656:374",
+     "firstDraw": "limb js/unit-motion.js:20:1100 < Object.bake js/unit-motion.js:20:1129 < api.character js/woodland-art.js:394:20 < Player.drawCorpse js/main.js:656:374"
+    }
+   ],
+   "timersPerSecond": 2,
+   "topTimerOrigins": [
+    [
+     "network/freeze-trace.js:59:19",
+     10
+    ]
+   ],
+   "storageWritesPerMin": 12,
+   "storageKBPerMin": 41.1,
+   "longFrames": [
+    {
+     "i": 0,
+     "ms": 38.2,
+     "upd": 8.8,
+     "draw": 27.3,
+     "wave": 14
+    },
+    {
+     "i": 2,
+     "ms": 16.3,
+     "upd": 4.2,
+     "draw": 11.9,
+     "wave": 14
+    },
+    {
+     "i": 3,
+     "ms": 26,
+     "upd": 12.3,
+     "draw": 13.4,
+     "wave": 14
+    },
+    {
+     "i": 5,
+     "ms": 21,
+     "upd": 5.9,
+     "draw": 14.8,
+     "wave": 14
+    },
+    {
+     "i": 6,
+     "ms": 29.2,
+     "upd": 16.3,
+     "draw": 12.6,
+     "wave": 14
+    },
+    {
+     "i": 8,
+     "ms": 16,
+     "upd": 4.1,
+     "draw": 11.7,
+     "wave": 14
+    },
+    {
+     "i": 9,
+     "ms": 27.1,
+     "upd": 11.1,
+     "draw": 15.7,
+     "wave": 14
+    },
+    {
+     "i": 11,
+     "ms": 19.5,
+     "upd": 6.6,
+     "draw": 12.7,
+     "wave": 14
+    },
+    {
+     "i": 12,
+     "ms": 24.8,
+     "upd": 11.1,
+     "draw": 13.4,
+     "wave": 14
+    },
+    {
+     "i": 14,
+     "ms": 16.6,
+     "upd": 3.7,
+     "draw": 12.7,
+     "wave": 14
+    },
+    {
+     "i": 15,
+     "ms": 30.4,
+     "upd": 15.2,
+     "draw": 15,
+     "wave": 14
+    },
+    {
+     "i": 17,
+     "ms": 17.6,
+     "upd": 4,
+     "draw": 13.5,
+     "wave": 14
+    },
+    {
+     "i": 18,
+     "ms": 25.1,
+     "upd": 12.7,
+     "draw": 12.2,
+     "wave": 14
+    },
+    {
+     "i": 20,
+     "ms": 17,
+     "upd": 4.4,
+     "draw": 12.4,
+     "wave": 14
+    },
+    {
+     "i": 21,
+     "ms": 18.4,
+     "upd": 7.2,
+     "draw": 11,
+     "wave": 14
+    },
+    {
+     "i": 23,
+     "ms": 18.8,
+     "upd": 8.7,
+     "draw": 10,
+     "wave": 14
+    },
+    {
+     "i": 24,
+     "ms": 22.3,
+     "upd": 11.3,
+     "draw": 10.7,
+     "wave": 14
+    },
+    {
+     "i": 26,
+     "ms": 16.7,
+     "upd": 6.5,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 27,
+     "ms": 22,
+     "upd": 10.1,
+     "draw": 11.6,
+     "wave": 14
+    },
+    {
+     "i": 29,
+     "ms": 15.2,
+     "upd": 5.7,
+     "draw": 9.1,
+     "wave": 14
+    },
+    {
+     "i": 30,
+     "ms": 27.4,
+     "upd": 16.9,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 32,
+     "ms": 20.2,
+     "upd": 4.4,
+     "draw": 15.5,
+     "wave": 14
+    },
+    {
+     "i": 33,
+     "ms": 22.9,
+     "upd": 11.3,
+     "draw": 11.4,
+     "wave": 14
+    },
+    {
+     "i": 35,
+     "ms": 21,
+     "upd": 9.7,
+     "draw": 11,
+     "wave": 14
+    },
+    {
+     "i": 36,
+     "ms": 19.8,
+     "upd": 7.2,
+     "draw": 12.4,
+     "wave": 14
+    },
+    {
+     "i": 38,
+     "ms": 16.8,
+     "upd": 5.6,
+     "draw": 11,
+     "wave": 14
+    },
+    {
+     "i": 39,
+     "ms": 27.8,
+     "upd": 16.7,
+     "draw": 10.8,
+     "wave": 14
+    },
+    {
+     "i": 41,
+     "ms": 16.9,
+     "upd": 7.2,
+     "draw": 9.5,
+     "wave": 14
+    },
+    {
+     "i": 42,
+     "ms": 25.1,
+     "upd": 14.5,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 44,
+     "ms": 15.1,
+     "upd": 5.1,
+     "draw": 9.7,
+     "wave": 14
+    },
+    {
+     "i": 45,
+     "ms": 19.2,
+     "upd": 9.9,
+     "draw": 9,
+     "wave": 14
+    },
+    {
+     "i": 46,
+     "ms": 12,
+     "upd": 0,
+     "draw": 11.8,
+     "wave": 14
+    },
+    {
+     "i": 47,
+     "ms": 18,
+     "upd": 8.7,
+     "draw": 8.9,
+     "wave": 14
+    },
+    {
+     "i": 48,
+     "ms": 27,
+     "upd": 16.1,
+     "draw": 10.6,
+     "wave": 14
+    },
+    {
+     "i": 50,
+     "ms": 15.7,
+     "upd": 4.2,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 51,
+     "ms": 19.3,
+     "upd": 8.3,
+     "draw": 10.7,
+     "wave": 14
+    },
+    {
+     "i": 53,
+     "ms": 14,
+     "upd": 4.2,
+     "draw": 9.6,
+     "wave": 14
+    },
+    {
+     "i": 54,
+     "ms": 22.9,
+     "upd": 10.5,
+     "draw": 12.1,
+     "wave": 14
+    },
+    {
+     "i": 56,
+     "ms": 16.4,
+     "upd": 5.4,
+     "draw": 10.8,
+     "wave": 14
+    },
+    {
+     "i": 57,
+     "ms": 20.4,
+     "upd": 8.3,
+     "draw": 11.9,
+     "wave": 14
+    },
+    {
+     "i": 59,
+     "ms": 15.5,
+     "upd": 4.2,
+     "draw": 11.1,
+     "wave": 14
+    },
+    {
+     "i": 60,
+     "ms": 20.8,
+     "upd": 11.5,
+     "draw": 9,
+     "wave": 14
+    },
+    {
+     "i": 62,
+     "ms": 15.4,
+     "upd": 3.9,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 63,
+     "ms": 27.2,
+     "upd": 13.5,
+     "draw": 13.4,
+     "wave": 14
+    },
+    {
+     "i": 65,
+     "ms": 16.9,
+     "upd": 5.7,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 66,
+     "ms": 22,
+     "upd": 7.1,
+     "draw": 14.7,
+     "wave": 14
+    },
+    {
+     "i": 68,
+     "ms": 16.6,
+     "upd": 5.2,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 69,
+     "ms": 18.6,
+     "upd": 7.4,
+     "draw": 11,
+     "wave": 14
+    },
+    {
+     "i": 71,
+     "ms": 15.8,
+     "upd": 4.4,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 72,
+     "ms": 21.1,
+     "upd": 10.6,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 74,
+     "ms": 15.2,
+     "upd": 3.6,
+     "draw": 11.4,
+     "wave": 14
+    },
+    {
+     "i": 75,
+     "ms": 26.7,
+     "upd": 11.2,
+     "draw": 15.3,
+     "wave": 14
+    },
+    {
+     "i": 77,
+     "ms": 17.1,
+     "upd": 4.3,
+     "draw": 12.6,
+     "wave": 14
+    },
+    {
+     "i": 78,
+     "ms": 27.7,
+     "upd": 18.2,
+     "draw": 9.2,
+     "wave": 14
+    },
+    {
+     "i": 79,
+     "ms": 12.2,
+     "upd": 0,
+     "draw": 12,
+     "wave": 14
+    },
+    {
+     "i": 80,
+     "ms": 16,
+     "upd": 6.7,
+     "draw": 9,
+     "wave": 14
+    },
+    {
+     "i": 81,
+     "ms": 21.4,
+     "upd": 11.5,
+     "draw": 9.6,
+     "wave": 14
+    },
+    {
+     "i": 83,
+     "ms": 18.9,
+     "upd": 6.5,
+     "draw": 12.2,
+     "wave": 14
+    },
+    {
+     "i": 84,
+     "ms": 19.7,
+     "upd": 9.6,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 86,
+     "ms": 14.7,
+     "upd": 4.4,
+     "draw": 10.1,
+     "wave": 14
+    },
+    {
+     "i": 87,
+     "ms": 25.1,
+     "upd": 14.3,
+     "draw": 10.6,
+     "wave": 14
+    },
+    {
+     "i": 89,
+     "ms": 16,
+     "upd": 5.8,
+     "draw": 10,
+     "wave": 14
+    },
+    {
+     "i": 90,
+     "ms": 24.2,
+     "upd": 13.5,
+     "draw": 10.4,
+     "wave": 14
+    },
+    {
+     "i": 92,
+     "ms": 15.6,
+     "upd": 5,
+     "draw": 10.4,
+     "wave": 14
+    },
+    {
+     "i": 93,
+     "ms": 23.9,
+     "upd": 12.1,
+     "draw": 11.6,
+     "wave": 14
+    },
+    {
+     "i": 95,
+     "ms": 18.7,
+     "upd": 5.9,
+     "draw": 12.5,
+     "wave": 14
+    },
+    {
+     "i": 96,
+     "ms": 25.3,
+     "upd": 14.1,
+     "draw": 11,
+     "wave": 14
+    },
+    {
+     "i": 98,
+     "ms": 15.3,
+     "upd": 4.8,
+     "draw": 10.2,
+     "wave": 14
+    },
+    {
+     "i": 99,
+     "ms": 20.9,
+     "upd": 10.5,
+     "draw": 10.1,
+     "wave": 14
+    },
+    {
+     "i": 101,
+     "ms": 16,
+     "upd": 5.5,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 102,
+     "ms": 20.4,
+     "upd": 11.4,
+     "draw": 8.7,
+     "wave": 14
+    },
+    {
+     "i": 104,
+     "ms": 15.2,
+     "upd": 4.5,
+     "draw": 10.4,
+     "wave": 14
+    },
+    {
+     "i": 105,
+     "ms": 19.2,
+     "upd": 9.3,
+     "draw": 9.7,
+     "wave": 14
+    },
+    {
+     "i": 107,
+     "ms": 17,
+     "upd": 5.6,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 108,
+     "ms": 21.6,
+     "upd": 9.9,
+     "draw": 11.4,
+     "wave": 14
+    },
+    {
+     "i": 110,
+     "ms": 15.4,
+     "upd": 3.6,
+     "draw": 11.7,
+     "wave": 14
+    },
+    {
+     "i": 111,
+     "ms": 22.2,
+     "upd": 10.7,
+     "draw": 11.3,
+     "wave": 14
+    },
+    {
+     "i": 113,
+     "ms": 14.8,
+     "upd": 3.7,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 114,
+     "ms": 23.6,
+     "upd": 11.1,
+     "draw": 12.3,
+     "wave": 14
+    },
+    {
+     "i": 116,
+     "ms": 16.2,
+     "upd": 4.5,
+     "draw": 11.5,
+     "wave": 14
+    },
+    {
+     "i": 117,
+     "ms": 19.8,
+     "upd": 8.4,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 119,
+     "ms": 21.2,
+     "upd": 8.8,
+     "draw": 12.2,
+     "wave": 14
+    },
+    {
+     "i": 120,
+     "ms": 27.9,
+     "upd": 11.9,
+     "draw": 15.7,
+     "wave": 14
+    },
+    {
+     "i": 122,
+     "ms": 14.9,
+     "upd": 4.1,
+     "draw": 10.6,
+     "wave": 14
+    },
+    {
+     "i": 123,
+     "ms": 28.2,
+     "upd": 16.8,
+     "draw": 11.1,
+     "wave": 14
+    },
+    {
+     "i": 124,
+     "ms": 12.3,
+     "upd": 0,
+     "draw": 12.1,
+     "wave": 14
+    },
+    {
+     "i": 125,
+     "ms": 16,
+     "upd": 5,
+     "draw": 10.8,
+     "wave": 14
+    },
+    {
+     "i": 126,
+     "ms": 24.5,
+     "upd": 13.4,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 128,
+     "ms": 14.5,
+     "upd": 4.4,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 129,
+     "ms": 19.3,
+     "upd": 10.1,
+     "draw": 8.9,
+     "wave": 14
+    },
+    {
+     "i": 131,
+     "ms": 14.8,
+     "upd": 4.2,
+     "draw": 10.4,
+     "wave": 14
+    },
+    {
+     "i": 132,
+     "ms": 19.7,
+     "upd": 8.9,
+     "draw": 10.6,
+     "wave": 14
+    },
+    {
+     "i": 134,
+     "ms": 16.1,
+     "upd": 4.7,
+     "draw": 11.3,
+     "wave": 14
+    },
+    {
+     "i": 135,
+     "ms": 21.3,
+     "upd": 10,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 136,
+     "ms": 12.4,
+     "upd": 0,
+     "draw": 12.3,
+     "wave": 14
+    },
+    {
+     "i": 137,
+     "ms": 14.9,
+     "upd": 4.7,
+     "draw": 10,
+     "wave": 14
+    },
+    {
+     "i": 138,
+     "ms": 22.9,
+     "upd": 12.4,
+     "draw": 10.2,
+     "wave": 14
+    },
+    {
+     "i": 139,
+     "ms": 12.4,
+     "upd": 0,
+     "draw": 12.2,
+     "wave": 14
+    },
+    {
+     "i": 140,
+     "ms": 16.1,
+     "upd": 3.8,
+     "draw": 12.1,
+     "wave": 14
+    },
+    {
+     "i": 141,
+     "ms": 29,
+     "upd": 17.5,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 143,
+     "ms": 17.2,
+     "upd": 4.1,
+     "draw": 12.9,
+     "wave": 14
+    },
+    {
+     "i": 144,
+     "ms": 24.1,
+     "upd": 12.2,
+     "draw": 11.7,
+     "wave": 14
+    },
+    {
+     "i": 146,
+     "ms": 16.2,
+     "upd": 4.5,
+     "draw": 11.6,
+     "wave": 14
+    },
+    {
+     "i": 147,
+     "ms": 21.1,
+     "upd": 9,
+     "draw": 12,
+     "wave": 14
+    },
+    {
+     "i": 149,
+     "ms": 17.8,
+     "upd": 3.9,
+     "draw": 13.8,
+     "wave": 14
+    },
+    {
+     "i": 150,
+     "ms": 27.3,
+     "upd": 16.9,
+     "draw": 10.2,
+     "wave": 14
+    },
+    {
+     "i": 152,
+     "ms": 18.8,
+     "upd": 6.2,
+     "draw": 12.5,
+     "wave": 14
+    },
+    {
+     "i": 153,
+     "ms": 22.8,
+     "upd": 10.3,
+     "draw": 12.4,
+     "wave": 14
+    },
+    {
+     "i": 155,
+     "ms": 17.8,
+     "upd": 6.3,
+     "draw": 11.3,
+     "wave": 14
+    },
+    {
+     "i": 156,
+     "ms": 21.7,
+     "upd": 11,
+     "draw": 10.6,
+     "wave": 14
+    },
+    {
+     "i": 158,
+     "ms": 18.9,
+     "upd": 7.4,
+     "draw": 11.3,
+     "wave": 14
+    },
+    {
+     "i": 159,
+     "ms": 25.9,
+     "upd": 14.4,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 161,
+     "ms": 18.5,
+     "upd": 6.2,
+     "draw": 12.1,
+     "wave": 14
+    },
+    {
+     "i": 162,
+     "ms": 23.4,
+     "upd": 13.1,
+     "draw": 10.1,
+     "wave": 14
+    },
+    {
+     "i": 163,
+     "ms": 12.1,
+     "upd": 0,
+     "draw": 12,
+     "wave": 14
+    },
+    {
+     "i": 164,
+     "ms": 14.5,
+     "upd": 3.8,
+     "draw": 10.5,
+     "wave": 14
+    },
+    {
+     "i": 165,
+     "ms": 22.6,
+     "upd": 13,
+     "draw": 9.3,
+     "wave": 14
+    },
+    {
+     "i": 166,
+     "ms": 12.2,
+     "upd": 0,
+     "draw": 12.1,
+     "wave": 14
+    },
+    {
+     "i": 167,
+     "ms": 16.8,
+     "upd": 8,
+     "draw": 8.5,
+     "wave": 14
+    },
+    {
+     "i": 168,
+     "ms": 24.7,
+     "upd": 13.5,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 170,
+     "ms": 16.4,
+     "upd": 5.7,
+     "draw": 10.5,
+     "wave": 14
+    },
+    {
+     "i": 171,
+     "ms": 19.4,
+     "upd": 9.8,
+     "draw": 9.4,
+     "wave": 14
+    },
+    {
+     "i": 173,
+     "ms": 15,
+     "upd": 3.4,
+     "draw": 11.5,
+     "wave": 14
+    },
+    {
+     "i": 174,
+     "ms": 18.6,
+     "upd": 9,
+     "draw": 9.4,
+     "wave": 14
+    },
+    {
+     "i": 175,
+     "ms": 12.3,
+     "upd": 0,
+     "draw": 12.2,
+     "wave": 14
+    },
+    {
+     "i": 176,
+     "ms": 13.4,
+     "upd": 4.6,
+     "draw": 8.6,
+     "wave": 14
+    },
+    {
+     "i": 177,
+     "ms": 24.4,
+     "upd": 11.6,
+     "draw": 12.5,
+     "wave": 14
+    },
+    {
+     "i": 179,
+     "ms": 13.2,
+     "upd": 4.6,
+     "draw": 8.5,
+     "wave": 14
+    },
+    {
+     "i": 180,
+     "ms": 25.1,
+     "upd": 11.1,
+     "draw": 13.8,
+     "wave": 14
+    },
+    {
+     "i": 182,
+     "ms": 16,
+     "upd": 5.7,
+     "draw": 10.1,
+     "wave": 14
+    },
+    {
+     "i": 183,
+     "ms": 22.9,
+     "upd": 11.7,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 185,
+     "ms": 15.5,
+     "upd": 3.7,
+     "draw": 11.6,
+     "wave": 14
+    },
+    {
+     "i": 186,
+     "ms": 19.8,
+     "upd": 10.2,
+     "draw": 9.3,
+     "wave": 14
+    },
+    {
+     "i": 188,
+     "ms": 13.7,
+     "upd": 4.1,
+     "draw": 9.4,
+     "wave": 14
+    },
+    {
+     "i": 189,
+     "ms": 35.6,
+     "upd": 23.9,
+     "draw": 11.5,
+     "wave": 14
+    },
+    {
+     "i": 191,
+     "ms": 18.2,
+     "upd": 8.8,
+     "draw": 9.2,
+     "wave": 14
+    },
+    {
+     "i": 192,
+     "ms": 31,
+     "upd": 20.4,
+     "draw": 10.4,
+     "wave": 14
+    },
+    {
+     "i": 194,
+     "ms": 17,
+     "upd": 5.1,
+     "draw": 11.7,
+     "wave": 14
+    },
+    {
+     "i": 195,
+     "ms": 25.1,
+     "upd": 12.5,
+     "draw": 12.4,
+     "wave": 14
+    },
+    {
+     "i": 197,
+     "ms": 15.7,
+     "upd": 6.5,
+     "draw": 9,
+     "wave": 14
+    },
+    {
+     "i": 198,
+     "ms": 23.7,
+     "upd": 14.6,
+     "draw": 8.9,
+     "wave": 14
+    },
+    {
+     "i": 200,
+     "ms": 15.4,
+     "upd": 5.3,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 201,
+     "ms": 19,
+     "upd": 8,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 203,
+     "ms": 18.1,
+     "upd": 7.1,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 204,
+     "ms": 21.7,
+     "upd": 7.5,
+     "draw": 14,
+     "wave": 14
+    },
+    {
+     "i": 206,
+     "ms": 12.9,
+     "upd": 4,
+     "draw": 8.7,
+     "wave": 14
+    },
+    {
+     "i": 207,
+     "ms": 32.3,
+     "upd": 19.7,
+     "draw": 12.4,
+     "wave": 14
+    },
+    {
+     "i": 209,
+     "ms": 16.5,
+     "upd": 5.5,
+     "draw": 10.8,
+     "wave": 14
+    },
+    {
+     "i": 210,
+     "ms": 21.3,
+     "upd": 10.5,
+     "draw": 10.6,
+     "wave": 14
+    },
+    {
+     "i": 212,
+     "ms": 19.3,
+     "upd": 5.3,
+     "draw": 13.8,
+     "wave": 14
+    },
+    {
+     "i": 213,
+     "ms": 22.5,
+     "upd": 11.7,
+     "draw": 10.5,
+     "wave": 14
+    },
+    {
+     "i": 215,
+     "ms": 14.5,
+     "upd": 4.2,
+     "draw": 10.1,
+     "wave": 14
+    },
+    {
+     "i": 216,
+     "ms": 26,
+     "upd": 12.6,
+     "draw": 13.1,
+     "wave": 14
+    },
+    {
+     "i": 218,
+     "ms": 15.3,
+     "upd": 3.6,
+     "draw": 11.6,
+     "wave": 14
+    },
+    {
+     "i": 219,
+     "ms": 21.3,
+     "upd": 8.5,
+     "draw": 12.6,
+     "wave": 14
+    },
+    {
+     "i": 221,
+     "ms": 16.5,
+     "upd": 4.4,
+     "draw": 11.9,
+     "wave": 14
+    },
+    {
+     "i": 222,
+     "ms": 24.4,
+     "upd": 12.7,
+     "draw": 11.6,
+     "wave": 14
+    },
+    {
+     "i": 224,
+     "ms": 14,
+     "upd": 3.9,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 225,
+     "ms": 21.8,
+     "upd": 10.5,
+     "draw": 11.1,
+     "wave": 14
+    },
+    {
+     "i": 227,
+     "ms": 14.8,
+     "upd": 6.1,
+     "draw": 8.5,
+     "wave": 14
+    },
+    {
+     "i": 228,
+     "ms": 24.8,
+     "upd": 11.7,
+     "draw": 12.9,
+     "wave": 14
+    },
+    {
+     "i": 230,
+     "ms": 14.7,
+     "upd": 4.2,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 231,
+     "ms": 22.3,
+     "upd": 13.6,
+     "draw": 8.5,
+     "wave": 14
+    },
+    {
+     "i": 233,
+     "ms": 16.6,
+     "upd": 5.5,
+     "draw": 10.8,
+     "wave": 14
+    },
+    {
+     "i": 234,
+     "ms": 22.7,
+     "upd": 13.2,
+     "draw": 9.3,
+     "wave": 14
+    },
+    {
+     "i": 235,
+     "ms": 12.2,
+     "upd": 0,
+     "draw": 12.1,
+     "wave": 14
+    },
+    {
+     "i": 236,
+     "ms": 15.8,
+     "upd": 5.8,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 237,
+     "ms": 22.1,
+     "upd": 9.5,
+     "draw": 12.3,
+     "wave": 14
+    },
+    {
+     "i": 239,
+     "ms": 17.7,
+     "upd": 8.2,
+     "draw": 9.3,
+     "wave": 14
+    },
+    {
+     "i": 240,
+     "ms": 21.9,
+     "upd": 12.4,
+     "draw": 9.3,
+     "wave": 14
+    },
+    {
+     "i": 242,
+     "ms": 15.2,
+     "upd": 4.2,
+     "draw": 10.8,
+     "wave": 14
+    },
+    {
+     "i": 243,
+     "ms": 22.6,
+     "upd": 12.5,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 245,
+     "ms": 14.3,
+     "upd": 3.7,
+     "draw": 10.5,
+     "wave": 14
+    },
+    {
+     "i": 246,
+     "ms": 18.6,
+     "upd": 8.5,
+     "draw": 9.9,
+     "wave": 14
+    },
+    {
+     "i": 248,
+     "ms": 14.8,
+     "upd": 4,
+     "draw": 10.6,
+     "wave": 14
+    },
+    {
+     "i": 249,
+     "ms": 17.8,
+     "upd": 7.6,
+     "draw": 10,
+     "wave": 14
+    },
+    {
+     "i": 251,
+     "ms": 13.2,
+     "upd": 4.5,
+     "draw": 8.5,
+     "wave": 14
+    },
+    {
+     "i": 252,
+     "ms": 19.4,
+     "upd": 10.4,
+     "draw": 8.8,
+     "wave": 14
+    },
+    {
+     "i": 254,
+     "ms": 21.9,
+     "upd": 6.4,
+     "draw": 15.4,
+     "wave": 14
+    },
+    {
+     "i": 255,
+     "ms": 20.9,
+     "upd": 8.6,
+     "draw": 12.2,
+     "wave": 14
+    },
+    {
+     "i": 257,
+     "ms": 18.4,
+     "upd": 5.8,
+     "draw": 12.4,
+     "wave": 14
+    },
+    {
+     "i": 258,
+     "ms": 24.4,
+     "upd": 9.6,
+     "draw": 14.7,
+     "wave": 14
+    },
+    {
+     "i": 260,
+     "ms": 16.9,
+     "upd": 5.8,
+     "draw": 10.9,
+     "wave": 14
+    },
+    {
+     "i": 261,
+     "ms": 20.9,
+     "upd": 9.1,
+     "draw": 11.5,
+     "wave": 14
+    },
+    {
+     "i": 263,
+     "ms": 15.6,
+     "upd": 3.9,
+     "draw": 11.4,
+     "wave": 14
+    },
+    {
+     "i": 264,
+     "ms": 30.9,
+     "upd": 17.6,
+     "draw": 13.1,
+     "wave": 14
+    },
+    {
+     "i": 266,
+     "ms": 16.6,
+     "upd": 4.7,
+     "draw": 11.7,
+     "wave": 14
+    },
+    {
+     "i": 267,
+     "ms": 20.9,
+     "upd": 10.4,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 269,
+     "ms": 14.6,
+     "upd": 3.7,
+     "draw": 10.8,
+     "wave": 14
+    },
+    {
+     "i": 270,
+     "ms": 26.1,
+     "upd": 15.6,
+     "draw": 10.2,
+     "wave": 14
+    },
+    {
+     "i": 272,
+     "ms": 14.5,
+     "upd": 4.9,
+     "draw": 9.4,
+     "wave": 14
+    },
+    {
+     "i": 273,
+     "ms": 22.7,
+     "upd": 11.3,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 275,
+     "ms": 18.8,
+     "upd": 8.3,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 276,
+     "ms": 19.5,
+     "upd": 9,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 278,
+     "ms": 18.4,
+     "upd": 4.1,
+     "draw": 14.1,
+     "wave": 14
+    },
+    {
+     "i": 279,
+     "ms": 24.3,
+     "upd": 12.9,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 280,
+     "ms": 12.4,
+     "upd": 0,
+     "draw": 12.3,
+     "wave": 14
+    },
+    {
+     "i": 281,
+     "ms": 14.7,
+     "upd": 4,
+     "draw": 10.5,
+     "wave": 14
+    },
+    {
+     "i": 282,
+     "ms": 24.6,
+     "upd": 13.2,
+     "draw": 11.2,
+     "wave": 14
+    },
+    {
+     "i": 284,
+     "ms": 16.5,
+     "upd": 4,
+     "draw": 12.4,
+     "wave": 14
+    },
+    {
+     "i": 285,
+     "ms": 19.6,
+     "upd": 7.5,
+     "draw": 11.9,
+     "wave": 14
+    },
+    {
+     "i": 287,
+     "ms": 18.1,
+     "upd": 5.8,
+     "draw": 12.1,
+     "wave": 14
+    },
+    {
+     "i": 288,
+     "ms": 48.1,
+     "upd": 36.6,
+     "draw": 11.3,
+     "wave": 14
+    },
+    {
+     "i": 290,
+     "ms": 17.4,
+     "upd": 5.3,
+     "draw": 11.9,
+     "wave": 14
+    },
+    {
+     "i": 291,
+     "ms": 17.1,
+     "upd": 8.1,
+     "draw": 8.9,
+     "wave": 14
+    },
+    {
+     "i": 293,
+     "ms": 15.8,
+     "upd": 5.3,
+     "draw": 10.3,
+     "wave": 14
+    },
+    {
+     "i": 294,
+     "ms": 25.9,
+     "upd": 15.2,
+     "draw": 10.5,
+     "wave": 14
+    },
+    {
+     "i": 296,
+     "ms": 17.1,
+     "upd": 5.6,
+     "draw": 11.3,
+     "wave": 14
+    },
+    {
+     "i": 297,
+     "ms": 21.7,
+     "upd": 7.5,
+     "draw": 14.1,
+     "wave": 14
+    },
+    {
+     "i": 299,
+     "ms": 20.6,
+     "upd": 9.1,
+     "draw": 11.3,
+     "wave": 14
+    }
+   ],
+   "longCount": {
+    "over12": 210,
+    "over16": 137,
+    "over33": 3,
+    "over50": 0
+   },
+   "memory": {
+    "offscreenCanvases": 266,
+    "offscreenMB": 59.9,
+    "bigCanvases": [
+     "1250x1000",
+     "1206x952",
+     "800x640",
+     "1036x1792",
+     "1024x2048"
+    ],
+    "decodedImages": 490,
+    "decodedImageMB": 186.8,
+    "mainCanvasMB": 5,
+    "jsHeapMB": 108.8
+   },
+   "inventory": {
+    "byImg": [
+     [
+      "/match-sprites-b/sprite-418.webp.bin",
+      "1254x1554",
+      7.43
+     ],
+     [
+      "/art163/shadows512.webp.bin",
+      "1536x1248",
+      7.31
+     ],
+     [
+      "/art163/robot-torso-clean-v166.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/robot-arms-clean-v166.webp.bin",
+      "1774x887",
+      6
+     ],
+     [
+      "/art163/cannon-approved-v289.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/stones512.webp.bin",
+      "1536x1024",
+      6
+     ],
+     [
+      "art-bat-preview/levels/antiAir-3.webp.bin",
+      "1120x1051",
+      4.49
+     ],
+     [
+      "art-bat-preview/levels/net-2.webp.bin",
+      "1004x1061",
+      4.06
+     ],
+     [
+      "art-bat-preview/levels/net-3.webp.bin",
+      "1080x933",
+      3.84
+     ],
+     [
+      "/art163/ground512.jpg",
+      "978x978",
+      3.65
+     ],
+     [
+      "art-bat-preview/levels/antiAir-2.webp.bin",
+      "821x966",
+      3.03
+     ],
+     [
+      "monster-rear-motion/stone-1.webp.bin",
+      "1280x480",
+      2.34
+     ],
+     [
+      "/match-sprites-b/sprite-186.png.webp.bin",
+      "719x717",
+      1.97
+     ],
+     [
+      "/match-sprites-b/sprite-185.png.webp.bin",
+      "679x691",
+      1.79
+     ],
+     [
+      "/match-sprites-b/sprite-187.png.webp.bin",
+      "692x661",
+      1.74
+     ],
+     [
+      "/art163/earth512-1.png.webp.bin",
+      "728x565",
+      1.57
+     ],
+     [
+      "/art163/ui524.webp.bin",
+      "768x512",
+      1.5
+     ],
+     [
+      "/art163/skills512.png.webp.bin",
+      "960x384",
+      1.41
+     ],
+     [
+      "stone-art/walk-phase1-bank00.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "stone-art/walk-phase1-bank01.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "/art163/earth512-0.png.webp.bin",
+      "552x464",
+      0.98
+     ],
+     [
+      "/match-sprites-b/sprite-172.png.webp.bin",
+      "480x515",
+      0.94
+     ],
+     [
+      "/match-sprites-a/sprite-134.png.webp.bin",
+      "469x522",
+      0.93
+     ],
+     [
+      "/match-sprites-b/sprite-169.png.webp.bin",
+      "466x504",
+      0.9
+     ],
+     [
+      "monster-rear-motion/mammoth.webp.bin",
+      "672x336",
+      0.86
+     ],
+     [
+      "/match-sprites-a/sprite-133.png.webp.bin",
+      "452x474",
+      0.82
+     ],
+     [
+      "/match-sprites-a/sprite-168.png.webp.bin",
+      "504x409",
+      0.79
+     ],
+     [
+      "/match-sprites-a/sprite-162.png.webp.bin",
+      "380x523",
+      0.76
+     ],
+     [
+      "/match-sprites-a/sprite-68.png.webp.bin",
+      "437x449",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-390.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-391.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-392.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-393.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-394.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-395.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-396.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-397.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-a/sprite-71.png.webp.bin",
+      "430x451",
+      0.74
+     ],
+     [
+      "/match-sprites-a/sprite-160.png.webp.bin",
+      "360x511",
+      0.7
+     ],
+     [
+      "/match-sprites-a/sprite-161.png.webp.bin",
+      "364x506",
+      0.7
+     ]
+    ],
+    "byDir": {
+     "(root)": 138.56,
+     "art-bat-preview": 32.57,
+     "monster-rear-motion": 3.2,
+     "stone-art": 3.42,
+     "mammoth-attack": 3.02,
+     "mammoth-walk": 4.43,
+     "card-art": 1.6
+    },
+    "bySite": [
+     [
+      "?",
+      [
+       266,
+       59.83
+      ]
+     ]
+    ]
+   },
+   "stone": {
+    "report": {
+     "used": 3587872,
+     "peak": 3587872,
+     "doing": -1,
+     "decode": 5,
+     "supply": 0,
+     "misses": 0,
+     "repeated": 0,
+     "emergency": 0,
+     "evictions": 0,
+     "pkgReads": 1
+    },
+    "alive": 3
+   },
+   "memConstrained": false
+  }
+ ],
+ "blockers": [
+  "intro"
+ ],
+ "startupMs": 883,
+ "allySlots": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "runtimeDiag": {
+  "schema": 615,
+  "sequence": 1,
+  "previous": null,
+  "current": {
+   "id": "mywpiww0-1",
+   "version": "BN19R10-C3-REBUILT-P0-COW8D",
+   "started": 1800000000000,
+   "errors": [],
+   "events": [
+    {
+     "kind": "boot",
+     "time": 1800000000000,
+     "detail": "runtime-start",
+     "metrics": ""
+    },
+    {
+     "kind": "runtime-mode",
+     "time": 1800000000000,
+     "detail": "{\"diagnosticBuild\":\"BN19R10-C3-REBUILT-P0-COW8D\",\"platform\":\"mac\",\"model\":\"Mac QA harness\",\"system\":null,\"wechatVersion\":null,\"SDKVersion\":\"host\",\"highPerformance\":null,\"highPerformancePlus\":null,\"framePolicy\":\"original-native-continuous-v6-early-frame\",\"frameApi\":\"native-raf\",\"renderer\":\"canvas2d\"}",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000004200,
+     "detail": "match-art-pack",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000005250,
+     "detail": "match-art-hydration",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000006250,
+     "detail": "prepared-sprites-and-structure-ready",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000006250,
+     "detail": "prepared-surfaces-and-bindings-ready",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000006283,
+     "detail": "match-art-ready",
+     "metrics": ""
+    }
+   ],
+   "health": [
+    {
+     "kind": "health",
+     "time": 1800000006316,
+     "detail": "frame-complete",
+     "metrics": "{\"elapsed\":0,\"buildings\":9,\"projectiles\":0,\"workers\":1,\"allies\":8,\"form\":\"initial\",\"performance\":{\"frameCount\":379,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":0,\"frames\":0,\"frameBytes\":0,\"bodyBytes\":0,\"frameBudget\":12582912,\"bodyBudget\":4194304,\"evictions\":0},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":0,\"buildingBytes\":0,\"frameHealth\":null,\"sceneCanvases\":{\"canvases\":2,\"estimatedRgbaBytes\":2058824,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+    },
+    {
+     "kind": "health",
+     "time": 1800000308718,
+     "detail": "frame-complete",
+     "metrics": "{\"elapsed\":240.00000000008313,\"buildings\":68,\"projectiles\":2,\"workers\":39,\"allies\":8,\"form\":\"initial\",\"performance\":{\"frameCount\":439,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":4,\"frames\":62,\"frameBytes\":4123184,\"bodyBytes\":360280,\"frameBudget\":12582912,\"bodyBudget\":4194304,\"evictions\":0},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":16224000,\"buildingBytes\":0,\"frameHealth\":{\"fps\":0,\"targetFps\":60,\"slowPercent\":2,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":107,\"estimatedRgbaBytes\":37547560,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+    },
+    {
+     "kind": "health",
+     "time": 1800000493719,
+     "detail": "frame-complete",
+     "metrics": "{\"elapsed\":424.9833333332755,\"buildings\":68,\"projectiles\":13,\"workers\":44,\"allies\":7,\"form\":\"initial\",\"performance\":{\"frameCount\":300,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":63,\"frameBytes\":4145200,\"bodyBytes\":389932,\"frameBudget\":12582912,\"bodyBudget\":4194304,\"evictions\":0},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":16764800,\"buildingBytes\":0,\"frameHealth\":{\"fps\":0,\"targetFps\":60,\"slowPercent\":2,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":88,\"estimatedRgbaBytes\":38054688,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+    }
+   ]
+  },
+  "writeFailures": 0,
+  "dropped": 0
+ },
+ "freezeJournal": "{\"schema\":1,\"current\":{\"boot\":1800000000000,\"build\":\"BN19R10-C3-REBUILT-P0-COW8D\",\"kind\":\"gap\",\"at\":15700,\"flags\":97,\"scene\":{\"hunt\":0,\"hounds\":90,\"buildings\":17,\"workers\":1,\"terrainBytes\":16224000,\"buildingBytes\":0,\"terrainFrontBytes\":8388608,\"poseBytes\":4483464,\"poseEvictions\":0},\"lastFrame\":13700,\"lastTouch\":4150,\"frames\":210,\"slowFrames\":0,\"memoryWarnings\":0,\"maxFrameMs\":0,\"trail\":[[3934,15616,817,5,0],[3935,15616,817,6,0],[3936,15616,817,4,0],[3937,15633,817,3,0],[3938,15633,817,5,0],[3939,15633,817,6,0],[3940,15633,817,4,0],[3941,15650,817,3,0],[3942,15650,817,5,0],[3943,15650,817,6,0],[3944,15650,817,4,0],[3945,15666,817,3,0],[3946,15666,817,5,0],[3947,15666,817,6,0],[3948,15666,817,4,0],[3949,15683,817,3,0],[3950,15683,817,5,0],[3951,15683,817,6,0],[3952,15683,817,4,0],[3953,15700,817,3,0],[3954,15700,817,5,0],[3955,15700,817,6,0],[3956,15700,817,4,0],[3957,15700,817,26,97]],\"detail\":{\"sequence\":3957,\"frame\":817,\"at\":15700,\"heartbeatGap\":2000,\"lastRaf\":13700,\"lastExit\":13700,\"inRaf\":false,\"flags\":97}},\"previous\":null}",
+ "startupDiag": {
+  "build": "BN19R10-C3-REBUILT-P0-COW8D",
+  "started": 1800000000000,
+  "events": [
+   {
+    "kind": "stage",
+    "phase": "分享入口",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "运行环境",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "建筑几何预备",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "单人注册",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "联机入口",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "加载界面",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "单人规则预备",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "单人规则就绪",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "基础素材模块",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "首页分包",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "游戏主模块",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "ready",
+    "phase": "游戏主模块",
+    "time": 1800000000000,
+    "detail": ""
+   }
+  ],
+  "previous": null,
+  "firstError": null
+ }
+}

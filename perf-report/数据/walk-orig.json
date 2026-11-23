@@ -1,0 +1,1 @@
+{"label":"walk-orig","frames":1800,"framesPaintingTiles":200,"tilesPainted":252,"avgMsWithPaint":8.85,"avgMsWithout":5.52,"p95":8.5,"p99":10.2,"max":84.6,"over12":7,"worst":[[84.6,32,0],[18.8,4,0],[18.1,3,0],[13.3,2,0],[12.7,2,0],[12.4,2,0],[12.3,2,0],[11.4,1,4.01]],"prefetchMsTotal":450.4,"prefetchMaxMs":4.13}

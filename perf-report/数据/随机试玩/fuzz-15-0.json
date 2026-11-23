@@ -1,0 +1,518 @@
+{
+ "seed": 15,
+ "allies": 0,
+ "frames": 24000,
+ "events": [
+  [
+   0,
+   "state",
+   "start",
+   0
+  ],
+  [
+   169,
+   "resize",
+   844,
+   390
+  ],
+  [
+   229,
+   "state",
+   "prep",
+   0
+  ],
+  [
+   580,
+   "memory"
+  ],
+  [
+   1454,
+   "memory"
+  ],
+  [
+   2348,
+   "memory"
+  ],
+  [
+   2717,
+   "memory"
+  ],
+  [
+   3648,
+   "memory"
+  ],
+  [
+   3717,
+   "memory"
+  ],
+  [
+   4153,
+   "state",
+   "hunt",
+   0
+  ],
+  [
+   4892,
+   "memory"
+  ],
+  [
+   4926,
+   "resize",
+   390,
+   844
+  ],
+  [
+   4964,
+   "tap",
+   "getAllySlotButtons",
+   "allySlot3"
+  ],
+  [
+   5068,
+   "memory"
+  ],
+  [
+   5139,
+   "memory"
+  ],
+  [
+   5180,
+   "memory"
+  ],
+  [
+   5624,
+   "memory"
+  ],
+  [
+   6038,
+   "resize",
+   844,
+   390
+  ],
+  [
+   6322,
+   "tap",
+   "getAllySlotButtons",
+   "allySlot7"
+  ],
+  [
+   6372,
+   "memory"
+  ],
+  [
+   6661,
+   "tap",
+   "getAllySlotButtons",
+   "allySlot6"
+  ],
+  [
+   6849,
+   "hide",
+   700
+  ],
+  [
+   7549,
+   "show"
+  ],
+  [
+   7593,
+   "menu",
+   "resume"
+  ],
+  [
+   7704,
+   "hide",
+   30
+  ],
+  [
+   7734,
+   "show"
+  ],
+  [
+   7752,
+   "menu",
+   "resume"
+  ],
+  [
+   7819,
+   "resize",
+   390,
+   844
+  ],
+  [
+   8265,
+   "hide",
+   700
+  ],
+  [
+   8965,
+   "show"
+  ],
+  [
+   8970,
+   "memory"
+  ],
+  [
+   9097,
+   "memory"
+  ],
+  [
+   9120,
+   "menu",
+   "resume"
+  ],
+  [
+   9832,
+   "memory"
+  ],
+  [
+   10036,
+   "memory"
+  ],
+  [
+   10359,
+   "memory"
+  ],
+  [
+   10489,
+   "memory"
+  ],
+  [
+   10532,
+   "menu",
+   "resume"
+  ],
+  [
+   10713,
+   "hide",
+   700
+  ],
+  [
+   11413,
+   "show"
+  ],
+  [
+   11417,
+   "menu",
+   "resume"
+  ],
+  [
+   11891,
+   "memory"
+  ],
+  [
+   11962,
+   "memory"
+  ],
+  [
+   12606,
+   "memory"
+  ],
+  [
+   12739,
+   "tap",
+   "sessionMenuButtons",
+   "save"
+  ],
+  [
+   13066,
+   "hide",
+   29
+  ],
+  [
+   13095,
+   "show"
+  ],
+  [
+   13095,
+   "menu",
+   "resume"
+  ],
+  [
+   13434,
+   "resize",
+   844,
+   390
+  ],
+  [
+   14229,
+   "memory"
+  ],
+  [
+   14428,
+   "memory"
+  ],
+  [
+   14816,
+   "resize",
+   390,
+   844
+  ],
+  [
+   14913,
+   "memory"
+  ],
+  [
+   15418,
+   "memory"
+  ],
+  [
+   15767,
+   "hide",
+   700
+  ],
+  [
+   16467,
+   "show"
+  ],
+  [
+   16471,
+   "menu",
+   "resume"
+  ],
+  [
+   16516,
+   "hide",
+   700
+  ],
+  [
+   17216,
+   "show"
+  ],
+  [
+   17232,
+   "menu",
+   "resume"
+  ],
+  [
+   17452,
+   "resize",
+   844,
+   390
+  ],
+  [
+   17823,
+   "memory"
+  ],
+  [
+   18395,
+   "memory"
+  ],
+  [
+   18628,
+   "memory"
+  ],
+  [
+   18906,
+   "hide",
+   700
+  ],
+  [
+   19606,
+   "show"
+  ],
+  [
+   19612,
+   "menu",
+   "resume"
+  ],
+  [
+   19648,
+   "memory"
+  ],
+  [
+   19729,
+   "memory"
+  ],
+  [
+   20196,
+   "resize",
+   390,
+   844
+  ],
+  [
+   20313,
+   "memory"
+  ],
+  [
+   20607,
+   "memory"
+  ],
+  [
+   21581,
+   "resize",
+   844,
+   390
+  ],
+  [
+   21686,
+   "memory"
+  ],
+  [
+   22031,
+   "tap",
+   "getStartActionButtons",
+   "loadGame"
+  ],
+  [
+   22337,
+   "tap",
+   "sessionMenuButtons",
+   "sound"
+  ],
+  [
+   22372,
+   "memory"
+  ],
+  [
+   22938,
+   "memory"
+  ],
+  [
+   23181,
+   "memory"
+  ],
+  [
+   23511,
+   "tap",
+   "sessionMenuButtons",
+   "new"
+  ]
+ ],
+ "faults": [],
+ "stalls": [],
+ "final": {
+  "state": "hunt",
+  "wave": 7,
+  "hunt": 255,
+  "games": 1,
+  "menu": false,
+  "paused": false,
+  "hiddenAtEnd": false
+ },
+ "runtimeErrors": [
+  {
+   "kind": "memory",
+   "time": 1800000089134,
+   "detail": "10",
+   "metrics": "{\"elapsed\":24.49999999999989,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":1712,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":4,\"frames\":74,\"frameBytes\":6121184,\"bodyBytes\":407268,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":783},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":71,\"estimatedRgbaBytes\":40272292,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000101600,
+   "detail": "10",
+   "metrics": "{\"elapsed\":36.96666666666585,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":660,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":4,\"frames\":67,\"frameBytes\":5511616,\"bodyBytes\":407268,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":857},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":70,\"estimatedRgbaBytes\":42454112,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000168901,
+   "detail": "10",
+   "metrics": "{\"elapsed\":55.249999999998145,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":646,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":3,\"frames\":47,\"frameBytes\":4000768,\"bodyBytes\":307256,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":924},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":8652800,\"buildingBytes\":0,\"frameHealth\":null,\"sceneCanvases\":{\"canvases\":56,\"estimatedRgbaBytes\":26248548,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000183267,
+   "detail": "10",
+   "metrics": "{\"elapsed\":67.09999999999748,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":711,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":76,\"frameBytes\":6290432,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":950},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":72,\"estimatedRgbaBytes\":35466596,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000194217,
+   "detail": "10",
+   "metrics": "{\"elapsed\":78.04999999999686,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":1368,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":56,\"frameBytes\":4939200,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1026},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":63,\"estimatedRgbaBytes\":34721280,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000229584,
+   "detail": "10",
+   "metrics": "{\"elapsed\":89.4999999999962,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":473,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":77,\"frameBytes\":6228512,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1130},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":64,\"estimatedRgbaBytes\":34035088,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000241501,
+   "detail": "10",
+   "metrics": "{\"elapsed\":101.43333333332886,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":1188,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":75,\"frameBytes\":6273920,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1233},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":63,\"estimatedRgbaBytes\":32431248,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000268551,
+   "detail": "10",
+   "metrics": "{\"elapsed\":127.96666666666069,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":1011,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":75,\"frameBytes\":6290432,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1353},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":74,\"estimatedRgbaBytes\":42895224,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000279951,
+   "detail": "10",
+   "metrics": "{\"elapsed\":139.36666666666972,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":1695,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":58,\"frameBytes\":4930944,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1428},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":67,\"estimatedRgbaBytes\":40068644,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000352451,
+   "detail": "10",
+   "metrics": "{\"elapsed\":164.15000000002277,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":271,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":73,\"frameBytes\":6279424,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1538},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":72,\"estimatedRgbaBytes\":42846240,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000365868,
+   "detail": "10",
+   "metrics": "{\"elapsed\":177.5833333333668,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":1076,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":65,\"frameBytes\":5629952,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1611},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":65,\"estimatedRgbaBytes\":34891912,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000394868,
+   "detail": "10",
+   "metrics": "{\"elapsed\":182.76666666670425,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":35,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":2,\"frames\":22,\"frameBytes\":1971168,\"bodyBytes\":199764,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1676},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":8652800,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":48,\"estimatedRgbaBytes\":30419976,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000405951,
+   "detail": "10",
+   "metrics": "{\"elapsed\":193.8500000000464,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":700,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":67,\"frameBytes\":5607936,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1698},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":69,\"estimatedRgbaBytes\":42056740,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000428835,
+   "detail": "10",
+   "metrics": "{\"elapsed\":216.75000000006463,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":273,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":3,\"frames\":54,\"frameBytes\":4538784,\"bodyBytes\":303132,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1765},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":75,\"estimatedRgbaBytes\":40974256,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000440268,
+   "detail": "10",
+   "metrics": "{\"elapsed\":228.16666666674038,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":959,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":75,\"frameBytes\":6235392,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1848},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":64,\"estimatedRgbaBytes\":34691208,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  },
+  {
+   "kind": "memory",
+   "time": 1800000453752,
+   "detail": "10",
+   "metrics": "{\"elapsed\":241.66666666675113,\"buildings\":1,\"projectiles\":0,\"workers\":1,\"allies\":0,\"form\":\"initial\",\"performance\":{\"frameCount\":1768,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":73,\"frameBytes\":6268416,\"bodyBytes\":529328,\"frameBudget\":6291456,\"bodyBudget\":2097152,\"evictions\":1923},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":60,\"targetFps\":60,\"slowPercent\":0,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":70,\"estimatedRgbaBytes\":36400648,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+  }
+ ],
+ "runtimeEvents": [
+  "boot:runtime-start",
+  "runtime-mode:{\"diagnosticBuild\":\"BN19R10-C3-REBUILT-P0-COW8D\",\"platform\":\"mac\",\"model\":\"Mac QA harness\",\"system\":null,\"wechatVersion\":null,\"SDKVersion\":\"host\",\"highPerforman",
+  "phase:match-art-pack",
+  "phase:match-art-hydration",
+  "phase:prepared-sprites-and-structure-ready",
+  "phase:prepared-surfaces-and-bindings-ready",
+  "phase:match-art-ready",
+  "hide:background",
+  "show:foreground",
+  "hide:background",
+  "show:foreground",
+  "hide:background",
+  "show:foreground",
+  "hide:background",
+  "show:foreground",
+  "hide:background",
+  "show:foreground",
+  "hide:background",
+  "show:foreground",
+  "hide:background",
+  "show:foreground",
+  "hide:background",
+  "show:foreground"
+ ],
+ "notices": [],
+ "logs": []
+}

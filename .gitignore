@@ -1,0 +1,9 @@
+node_modules/
+.DS_Store
+# outputs that qa/smoke.sh and perf-tools write next to their scripts
+qa/**/wx-*/
+qa/**/fixture-*/
+qa/**/asset-host-*/
+qa/engine/raster-after.png
+qa/troll/proof-*.json
+qa/troll/troll-16-authored-poses-mac.png

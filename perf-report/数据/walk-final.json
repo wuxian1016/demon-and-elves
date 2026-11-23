@@ -1,0 +1,1 @@
+{"label":"walk-final","frames":1800,"framesPaintingTiles":1,"tilesPainted":32,"avgMsWithPaint":85.1,"avgMsWithout":6.04,"p95":8.3,"p99":9.4,"max":85.1,"over12":1,"worst":[[85.1,32,0]],"prefetchMsTotal":929.8,"prefetchMaxMs":3.21}

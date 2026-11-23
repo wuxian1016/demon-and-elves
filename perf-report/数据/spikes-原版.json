@@ -1,0 +1,135 @@
+{
+ "home0": {
+  "canvases": 8,
+  "canvasMB": 8.8,
+  "images": 3,
+  "imageMB": 8.2,
+  "heapMB": 18
+ },
+ "round1": {
+  "canvases": 518,
+  "canvasMB": 71.1,
+  "images": 460,
+  "imageMB": 173.8,
+  "heapMB": 36.4
+ },
+ "cameraJumpFirstFrames": [
+  [
+   78.1,
+   8.8,
+   8.4,
+   8,
+   8.4,
+   8.8,
+   9.5,
+   9.1
+  ],
+  [
+   37.4,
+   9.5,
+   9.5,
+   11.1,
+   12.3,
+   7.9,
+   6.7,
+   4.9
+  ],
+  [
+   64,
+   8.7,
+   8.4,
+   8,
+   8.5,
+   9,
+   9.2,
+   8.8
+  ],
+  [
+   36.9,
+   8.7,
+   8.7,
+   12.2,
+   11.9,
+   8,
+   7,
+   5.3
+  ]
+ ],
+ "memoryWarning": {
+  "beforeMax": 7.2,
+  "afterFirst10": [
+   17.9,
+   5.6,
+   5.2,
+   5.3,
+   5.1,
+   5,
+   5.2,
+   5,
+   5,
+   5.4
+  ],
+  "afterMax": 17.9,
+  "over16": 1,
+  "memAfter": {
+   "canvases": 124,
+   "canvasMB": 37.3,
+   "images": 460,
+   "imageMB": 173.8,
+   "heapMB": 35.7
+  }
+ },
+ "rounds": [
+  {
+   "home": {
+    "canvases": 60,
+    "canvasMB": 13.5,
+    "images": 462,
+    "imageMB": 180.6,
+    "heapMB": 35.6
+   },
+   "inRound": {
+    "canvases": 437,
+    "canvasMB": 66.4,
+    "images": 460,
+    "imageMB": 173.8,
+    "heapMB": 37.4
+   },
+   "state": "hunt"
+  },
+  {
+   "home": {
+    "canvases": 60,
+    "canvasMB": 13.5,
+    "images": 462,
+    "imageMB": 180.6,
+    "heapMB": 36.8
+   },
+   "inRound": {
+    "canvases": 309,
+    "canvasMB": 64.3,
+    "images": 460,
+    "imageMB": 173.8,
+    "heapMB": 38.1
+   },
+   "state": "hunt"
+  },
+  {
+   "home": {
+    "canvases": 60,
+    "canvasMB": 13.5,
+    "images": 462,
+    "imageMB": 180.6,
+    "heapMB": 37.6
+   },
+   "inRound": {
+    "canvases": 308,
+    "canvasMB": 61.6,
+    "images": 460,
+    "imageMB": 173.8,
+    "heapMB": 38
+   },
+   "state": "hunt"
+  }
+ ]
+}

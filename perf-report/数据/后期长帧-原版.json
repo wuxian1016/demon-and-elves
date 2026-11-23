@@ -1,0 +1,1682 @@
+{
+ "scenario": "default",
+ "viewport": {
+  "W": 390,
+  "H": 844,
+  "PR": 3
+ },
+ "allies": 8,
+ "steps": [
+  {
+   "alloc": null,
+   "label": "prep-start",
+   "frames": 300,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 73,
+    "MB": 4.6,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 581,
+    "misses": 25,
+    "staticEntries": 2,
+    "animatedEntries": 27
+   },
+   "state": "prep",
+   "wave": 1,
+   "huntElapsed": 0,
+   "entities": {
+    "hounds": 90,
+    "peasants": 1,
+    "buildings": 14,
+    "allies": 8,
+    "projectiles": 0,
+    "particles": 0,
+    "tanks": 0
+   },
+   "hostFrameMs": {
+    "p50": 5.51,
+    "p95": 7.96,
+    "p99": 9.17,
+    "max": 22.9,
+    "mean": 6
+   },
+   "updateMsPerFrame": 0.82,
+   "drawMsPerFrame": 5.15,
+   "updatesPerFrame": 1,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "save": 33.6,
+    "restore": 33.6,
+    "drawImage": 29.6,
+    "fillRect": 25.9,
+    "beginPath": 16.6,
+    "setTransform": 15,
+    "stroke": 11,
+    "arc": 8,
+    "fill": 7.6,
+    "fillText": 3.6,
+    "clearRect": 1,
+    "strokeText": 1,
+    "clip": 1,
+    "strokeRect": 1,
+    "measureText": 0.2
+   },
+   "perFrameOffscreen": {
+    "fillRect": 11.1,
+    "stroke": 1,
+    "beginPath": 0.8,
+    "drawImage": 0.8,
+    "arc": 0.7,
+    "setTransform": 0.3,
+    "save": 0.2,
+    "restore": 0.2,
+    "fillText": 0.2,
+    "fill": 0.2,
+    "clearRect": 0.1,
+    "putImageData": 0.1,
+    "shadow:fillText": 0,
+    "getImageData": 0
+   },
+   "mainFillMpxPerFrame": 4.64,
+   "offscreenFillMpxPerFrame": 0.01,
+   "shadowDrawsPerFrame": 0,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {
+    "source-in": 25
+   },
+   "canvasesCreated": 110,
+   "createdSites": [
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20",
+     71
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < castShadow js/woodland-art.js:90:158",
+     25
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < Peasant.draw js/main.js:1458:65",
+     6
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:17:19 < api.character js/woodland-art.js:394:20",
+     4
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < TrollAndElvesGame.drawResourceBodies js/main.js:4183:185",
+     2
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218",
+     2
+    ]
+   ],
+   "bigMainLayers": [
+    [
+     "drawImage 812x1720 @ SceneTiles200.draw js/main.js:1609:142 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4521:11",
+     1.4
+    ],
+    [
+     "fillRect 780x1688 @ TrollAndElvesGame.drawHUD js/main.js:5054:71 < g.drawHUD art163/ghost/ghost-copy.js:372:21",
+     1.32
+    ],
+    [
+     "drawImage 780x1664 @ TrollAndElvesGame.drawSceneLayer js/main.js:4129:10 < TrollAndElvesGame.drawResourceBodies js/main.js:4183:24",
+     1.3
+    ],
+    [
+     "drawImage 780x248 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4131:281 < TrollAndElvesGame.drawStatusCached504 js/main.js:4823:6",
+     0.19
+    ]
+   ],
+   "topOffscreen": [
+    {
+     "size": "306x245",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 11.1,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawHUD js/main.js:5036:391 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588",
+     "firstDraw": "TrollAndElvesGame.drawHUD js/main.js:5037:404 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588 < g.drawHUD art163/ghost/approved-guide-entry.js:76:18"
+    },
+    {
+     "size": "780x248",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.run js/main.js:4367:333 < TrollAndElvesGame.prepareHudCachesViewAsync js/main.js:4371:31 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4660:15",
+     "firstDraw": "TrollAndElvesGame.uiFrame504 js/main.js:4806:143 < TrollAndElvesGame.drawStatus504 js/main.js:4824:1599 < TrollAndElvesGame.drawStatusCached504 js/main.js:4822:171 < TrollAndElvesGame.drawHUD js/main.js:5036:139"
+    },
+    {
+     "size": "1036x1792",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0.2,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawResourceBodies js/main.js:4164:37 < snap js/main.js:4624:26 < TrollAndElvesGame.prepareSoloVisibleCaches200 js/main.js:4631:121",
+     "firstDraw": "castShadow js/woodland-art.js:96:81 < blit js/woodland-art.js:108:215 < api.mine js/woodland-art.js:214:453 < TrollAndElvesGame.drawResourceBodies js/main.js:4176:110"
+    },
+    {
+     "size": "92x106",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "api.character js/woodland-art.js:391:305 < Peasant.draw js/main.js:1457:136 < TrollAndElvesGame.drawFrame398 js/main.js:4733:207 < g.drawFrame398 network/placement-sites.js:118:87"
+    },
+    {
+     "size": "84x106",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "api.character js/woodland-art.js:391:305 < Peasant.draw js/main.js:1457:136 < TrollAndElvesGame.drawFrame398 js/main.js:4733:207 < g.drawFrame398 network/placement-sites.js:118:87"
+    },
+    {
+     "size": "124x138",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "limb js/unit-motion.js:20:1100 < Object.bake js/unit-motion.js:20:1129 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136"
+    },
+    {
+     "size": "118x138",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "limb js/unit-motion.js:20:1100 < Object.bake js/unit-motion.js:20:1129 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136"
+    },
+    {
+     "size": "118x138",
+     "mpxPerFrame": 0,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136",
+     "firstDraw": "limb js/unit-motion.js:20:1100 < Object.bake js/unit-motion.js:20:1129 < api.character js/woodland-art.js:394:20 < Peasant.draw js/main.js:1457:136"
+    }
+   ],
+   "timersPerSecond": 1,
+   "topTimerOrigins": [
+    [
+     "network/freeze-trace.js:59:19",
+     5
+    ]
+   ],
+   "storageWritesPerMin": 12,
+   "storageKBPerMin": 21.4,
+   "longFrames": [
+    {
+     "i": 0,
+     "ms": 22.9,
+     "upd": 14.4,
+     "draw": 8.3,
+     "wave": 1
+    }
+   ],
+   "longCount": {
+    "over12": 1,
+    "over16": 1,
+    "over33": 0,
+    "over50": 0
+   }
+  },
+  {
+   "alloc": null,
+   "label": "t480",
+   "frames": 300,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 74,
+    "MB": 4.6,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 606,
+    "misses": 0,
+    "staticEntries": 2,
+    "animatedEntries": 27
+   },
+   "state": "hunt",
+   "wave": 14,
+   "huntElapsed": 425,
+   "entities": {
+    "hounds": 125,
+    "peasants": 43,
+    "buildings": 68,
+    "allies": 7,
+    "projectiles": 6,
+    "particles": 66,
+    "tanks": 0
+   },
+   "hostFrameMs": {
+    "p50": 5.83,
+    "p95": 7.61,
+    "p99": 10.29,
+    "max": 28.95,
+    "mean": 6.2
+   },
+   "updateMsPerFrame": 1.37,
+   "drawMsPerFrame": 4.77,
+   "updatesPerFrame": 1,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "drawImage": 23,
+    "save": 21.8,
+    "restore": 21.8,
+    "fillRect": 12,
+    "setTransform": 11,
+    "beginPath": 10.8,
+    "fillText": 6.8,
+    "fill": 5.8,
+    "stroke": 3,
+    "arc": 2,
+    "clearRect": 1,
+    "clip": 1,
+    "strokeRect": 1,
+    "measureText": 0.1
+   },
+   "perFrameOffscreen": {
+    "fillRect": 32.3,
+    "arc": 2.4,
+    "drawImage": 1.1,
+    "save": 1,
+    "restore": 1,
+    "fillText": 0.5,
+    "beginPath": 0.5,
+    "fill": 0.3,
+    "setTransform": 0.3,
+    "clearRect": 0.2,
+    "stroke": 0.2,
+    "clip": 0,
+    "putImageData": 0,
+    "strokeRect": 0,
+    "getImageData": 0
+   },
+   "mainFillMpxPerFrame": 4.71,
+   "offscreenFillMpxPerFrame": 0.11,
+   "shadowDrawsPerFrame": 0,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {},
+   "canvasesCreated": 8,
+   "createdSites": [
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:17:19 < api.character js/woodland-art.js:394:20",
+     2
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < SceneTiles200.paintTileSurface200 js/main.js:1579:51",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < canvas js/woodland-art.js:6:151 < api.character js/woodland-art.js:391:218",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < Object.bake js/unit-motion.js:5:571 < api.character js/woodland-art.js:394:20",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < TrollAndElvesGame.cachedUi514 js/main.js:4818:14 < TrollAndElvesGame.uiFrame504 js/main.js:4806:16",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < Player.drawCorpse js/main.js:657:114",
+     1
+    ],
+    [
+     "390x844 @ Object.createElement runtime.js:52:136 < pixelLabel js/main.js:415:94 < Player.drawCorpse js/main.js:657:192",
+     1
+    ]
+   ],
+   "bigMainLayers": [
+    [
+     "drawImage 812x1720 @ SceneTiles200.draw js/main.js:1609:142 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4521:11",
+     1.4
+    ],
+    [
+     "fillRect 780x1688 @ TrollAndElvesGame.drawShareRescueOffer js/main.js:3442:330 < TrollAndElvesGame.draw js/main.js:4677:77",
+     1.32
+    ],
+    [
+     "drawImage 780x1664 @ TrollAndElvesGame.drawSceneLayer js/main.js:4129:10 < TrollAndElvesGame.drawResourceBodies js/main.js:4183:24",
+     1.3
+    ],
+    [
+     "drawImage 796x348 @ TrollAndElvesGame.uiFrame504 js/main.js:4806:143 < TrollAndElvesGame.drawShareRescueOffer js/main.js:3442:487",
+     0.28
+    ],
+    [
+     "drawImage 780x248 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4131:281 < TrollAndElvesGame.drawStatusCached504 js/main.js:4823:6",
+     0.19
+    ]
+   ],
+   "topOffscreen": [
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.02,
+     "drawsPerFrame": 0.3,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < SceneTiles200.paintTileSurface200 js/main.js:1579:51 < SceneTiles200.draw js/main.js:1604:420",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4518:101 < SceneTiles200.paintTileSurface200 js/main.js:1579:106 < SceneTiles200.draw js/main.js:1604:420"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4481:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4664:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4518:101 < SceneTiles200.paintTileSurface200 js/main.js:1579:106 < SceneTiles200.paint js/main.js:1581:10"
+    },
+    {
+     "size": "306x245",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 32.4,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawHUD js/main.js:5036:391 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588",
+     "firstDraw": "TrollAndElvesGame.drawHUD js/main.js:5037:404 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588 < g.drawHUD art163/ghost/approved-guide-entry.js:76:18"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 0.2,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4481:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4664:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4518:101 < SceneTiles200.paintTileSurface200 js/main.js:1579:106 < SceneTiles200.paint js/main.js:1581:10"
+    },
+    {
+     "size": "780x248",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 0.1,
+     "created": "Object.createElement runtime.js:52:136 < Object.run js/main.js:4367:333 < TrollAndElvesGame.prepareHudCachesViewAsync js/main.js:4371:31 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4660:15",
+     "firstDraw": "TrollAndElvesGame.uiFrame504 js/main.js:4806:143 < TrollAndElvesGame.drawStatus504 js/main.js:4824:1599 < TrollAndElvesGame.drawStatusCached504 js/main.js:4822:171 < TrollAndElvesGame.drawHUD js/main.js:5036:139"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4481:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4664:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4518:101 < SceneTiles200.paintTileSurface200 js/main.js:1579:106 < SceneTiles200.paint js/main.js:1581:10"
+    },
+    {
+     "size": "260x260",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 0,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.beginTileSurface200 js/main.js:1578:119 < TrollAndElvesGame.prepareTerrainTilesViewAsync js/main.js:4481:25 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4664:12",
+     "firstDraw": "api.ground js/woodland-art.js:547:61 < paint js/main.js:4518:101 < SceneTiles200.paintTileSurface200 js/main.js:1579:106 < SceneTiles200.paint js/main.js:1581:10"
+    },
+    {
+     "size": "1024x2048",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 0.1,
+     "created": "Object.createElement runtime.js:52:136 < SceneTiles200.draw js/main.js:1589:271 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4521:11 < TrollAndElvesGame.drawNativeLandscape js/main.js:4210:130",
+     "firstDraw": "SceneTiles200.draw js/main.js:1604:163 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4521:11 < TrollAndElvesGame.drawNativeLandscape js/main.js:4210:130 < TrollAndElvesGame.drawFrame398 js/main.js:4705:83"
+    }
+   ],
+   "timersPerSecond": 1,
+   "topTimerOrigins": [
+    [
+     "network/freeze-trace.js:59:19",
+     5
+    ]
+   ],
+   "storageWritesPerMin": 12,
+   "storageKBPerMin": 31.2,
+   "longFrames": [
+    {
+     "i": 0,
+     "ms": 28.9,
+     "upd": 2.1,
+     "draw": 25.5,
+     "wave": 14
+    },
+    {
+     "i": 1,
+     "ms": 12.4,
+     "upd": 1.5,
+     "draw": 10.8,
+     "wave": 14
+    }
+   ],
+   "longCount": {
+    "over12": 2,
+    "over16": 1,
+    "over33": 0,
+    "over50": 0
+   },
+   "memory": {
+    "offscreenCanvases": 216,
+    "offscreenMB": 52.3,
+    "bigCanvases": [
+     "1250x1000",
+     "1206x952",
+     "800x640",
+     "1036x1792",
+     "1024x2048"
+    ],
+    "decodedImages": 490,
+    "decodedImageMB": 186.8,
+    "mainCanvasMB": 5,
+    "jsHeapMB": 37.9
+   },
+   "inventory": {
+    "byImg": [
+     [
+      "/match-sprites-b/sprite-418.webp.bin",
+      "1254x1554",
+      7.43
+     ],
+     [
+      "/art163/shadows512.webp.bin",
+      "1536x1248",
+      7.31
+     ],
+     [
+      "/art163/robot-torso-clean-v166.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/robot-arms-clean-v166.webp.bin",
+      "1774x887",
+      6
+     ],
+     [
+      "/art163/cannon-approved-v289.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/stones512.webp.bin",
+      "1536x1024",
+      6
+     ],
+     [
+      "art-bat-preview/levels/antiAir-3.webp.bin",
+      "1120x1051",
+      4.49
+     ],
+     [
+      "art-bat-preview/levels/net-2.webp.bin",
+      "1004x1061",
+      4.06
+     ],
+     [
+      "art-bat-preview/levels/net-3.webp.bin",
+      "1080x933",
+      3.84
+     ],
+     [
+      "/art163/ground512.jpg",
+      "978x978",
+      3.65
+     ],
+     [
+      "art-bat-preview/levels/antiAir-2.webp.bin",
+      "821x966",
+      3.03
+     ],
+     [
+      "monster-rear-motion/stone-1.webp.bin",
+      "1280x480",
+      2.34
+     ],
+     [
+      "/match-sprites-b/sprite-186.png.webp.bin",
+      "719x717",
+      1.97
+     ],
+     [
+      "/match-sprites-b/sprite-185.png.webp.bin",
+      "679x691",
+      1.79
+     ],
+     [
+      "/match-sprites-b/sprite-187.png.webp.bin",
+      "692x661",
+      1.74
+     ],
+     [
+      "/art163/earth512-1.png.webp.bin",
+      "728x565",
+      1.57
+     ],
+     [
+      "/art163/ui524.webp.bin",
+      "768x512",
+      1.5
+     ],
+     [
+      "/art163/skills512.png.webp.bin",
+      "960x384",
+      1.41
+     ],
+     [
+      "stone-art/walk-phase1-bank00.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "stone-art/walk-phase1-bank01.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "/art163/earth512-0.png.webp.bin",
+      "552x464",
+      0.98
+     ],
+     [
+      "/match-sprites-b/sprite-172.png.webp.bin",
+      "480x515",
+      0.94
+     ],
+     [
+      "/match-sprites-a/sprite-134.png.webp.bin",
+      "469x522",
+      0.93
+     ],
+     [
+      "/match-sprites-b/sprite-169.png.webp.bin",
+      "466x504",
+      0.9
+     ],
+     [
+      "monster-rear-motion/mammoth.webp.bin",
+      "672x336",
+      0.86
+     ],
+     [
+      "/match-sprites-a/sprite-133.png.webp.bin",
+      "452x474",
+      0.82
+     ],
+     [
+      "/match-sprites-a/sprite-168.png.webp.bin",
+      "504x409",
+      0.79
+     ],
+     [
+      "/match-sprites-a/sprite-162.png.webp.bin",
+      "380x523",
+      0.76
+     ],
+     [
+      "/match-sprites-a/sprite-68.png.webp.bin",
+      "437x449",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-390.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-391.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-392.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-393.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-394.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-395.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-396.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-397.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-a/sprite-71.png.webp.bin",
+      "430x451",
+      0.74
+     ],
+     [
+      "/match-sprites-a/sprite-160.png.webp.bin",
+      "360x511",
+      0.7
+     ],
+     [
+      "/match-sprites-a/sprite-161.png.webp.bin",
+      "364x506",
+      0.7
+     ]
+    ],
+    "byDir": {
+     "(root)": 138.56,
+     "art-bat-preview": 32.57,
+     "monster-rear-motion": 3.2,
+     "stone-art": 3.42,
+     "mammoth-attack": 3.02,
+     "mammoth-walk": 4.43,
+     "card-art": 1.6
+    },
+    "bySite": [
+     [
+      "?",
+      [
+       216,
+       52.35
+      ]
+     ]
+    ]
+   },
+   "stone": {
+    "report": {
+     "used": 3587872,
+     "peak": 3587872,
+     "doing": -1,
+     "decode": 5,
+     "supply": 0,
+     "misses": 0,
+     "repeated": 0,
+     "emergency": 0,
+     "evictions": 0,
+     "pkgReads": 1
+    },
+    "alive": 3
+   },
+   "memConstrained": false
+  },
+  {
+   "alloc": null,
+   "label": "t600",
+   "frames": 300,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 74,
+    "MB": 4.6,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 600,
+    "misses": 0,
+    "staticEntries": 2,
+    "animatedEntries": 27
+   },
+   "state": "hunt",
+   "wave": 18,
+   "huntElapsed": 550,
+   "entities": {
+    "hounds": 58,
+    "peasants": 50,
+    "buildings": 104,
+    "allies": 5,
+    "projectiles": 0,
+    "particles": 27,
+    "tanks": 0
+   },
+   "hostFrameMs": {
+    "p50": 5.66,
+    "p95": 8.65,
+    "p99": 11.46,
+    "max": 12.79,
+    "mean": 6.03
+   },
+   "updateMsPerFrame": 1.33,
+   "drawMsPerFrame": 4.67,
+   "updatesPerFrame": 1,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "drawImage": 23,
+    "save": 22,
+    "restore": 22,
+    "fillRect": 12,
+    "setTransform": 11,
+    "beginPath": 11,
+    "fillText": 7,
+    "fill": 6,
+    "stroke": 3,
+    "arc": 2,
+    "clearRect": 1,
+    "clip": 1,
+    "strokeRect": 1,
+    "measureText": 0.2
+   },
+   "perFrameOffscreen": {
+    "fillRect": 31.2,
+    "fillText": 1.8,
+    "beginPath": 1,
+    "arc": 0.5,
+    "save": 0.4,
+    "stroke": 0.4,
+    "restore": 0.4,
+    "fill": 0.4,
+    "setTransform": 0.3,
+    "clearRect": 0.3,
+    "drawImage": 0.3
+   },
+   "mainFillMpxPerFrame": 4.71,
+   "offscreenFillMpxPerFrame": 0.06,
+   "shadowDrawsPerFrame": 0,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {},
+   "canvasesCreated": 0,
+   "createdSites": [],
+   "bigMainLayers": [
+    [
+     "drawImage 812x1720 @ SceneTiles200.draw js/main.js:1609:142 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4521:11",
+     1.4
+    ],
+    [
+     "fillRect 780x1688 @ TrollAndElvesGame.drawShareRescueOffer js/main.js:3442:330 < TrollAndElvesGame.draw js/main.js:4677:77",
+     1.32
+    ],
+    [
+     "drawImage 780x1664 @ TrollAndElvesGame.drawSceneLayer js/main.js:4129:10 < TrollAndElvesGame.drawResourceBodies js/main.js:4183:24",
+     1.3
+    ],
+    [
+     "drawImage 796x348 @ TrollAndElvesGame.uiFrame504 js/main.js:4806:143 < TrollAndElvesGame.drawShareRescueOffer js/main.js:3442:487",
+     0.28
+    ],
+    [
+     "drawImage 780x248 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4131:281 < TrollAndElvesGame.drawStatusCached504 js/main.js:4823:6",
+     0.19
+    ]
+   ],
+   "topOffscreen": [
+    {
+     "size": "780x248",
+     "mpxPerFrame": 0.05,
+     "drawsPerFrame": 0.2,
+     "created": "Object.createElement runtime.js:52:136 < Object.run js/main.js:4367:333 < TrollAndElvesGame.prepareHudCachesViewAsync js/main.js:4371:31 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4660:15",
+     "firstDraw": "TrollAndElvesGame.uiFrame504 js/main.js:4806:143 < TrollAndElvesGame.drawStatus504 js/main.js:4824:1599 < TrollAndElvesGame.drawStatusCached504 js/main.js:4822:171 < TrollAndElvesGame.drawHUD js/main.js:5036:139"
+    },
+    {
+     "size": "306x245",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 31.3,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawHUD js/main.js:5036:391 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588",
+     "firstDraw": "TrollAndElvesGame.drawHUD js/main.js:5037:404 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588 < g.drawHUD art163/ghost/approved-guide-entry.js:76:18"
+    }
+   ],
+   "timersPerSecond": 1,
+   "topTimerOrigins": [
+    [
+     "network/freeze-trace.js:59:19",
+     5
+    ]
+   ],
+   "storageWritesPerMin": 12,
+   "storageKBPerMin": 41.1,
+   "longFrames": [
+    {
+     "i": 192,
+     "ms": 12.8,
+     "upd": 7.9,
+     "draw": 4.8,
+     "wave": 18
+    }
+   ],
+   "longCount": {
+    "over12": 1,
+    "over16": 0,
+    "over33": 0,
+    "over50": 0
+   },
+   "memory": {
+    "offscreenCanvases": 216,
+    "offscreenMB": 52.3,
+    "bigCanvases": [
+     "1250x1000",
+     "1206x952",
+     "800x640",
+     "1036x1792",
+     "1024x2048"
+    ],
+    "decodedImages": 492,
+    "decodedImageMB": 189.4,
+    "mainCanvasMB": 5,
+    "jsHeapMB": 39.2
+   },
+   "inventory": {
+    "byImg": [
+     [
+      "/match-sprites-b/sprite-418.webp.bin",
+      "1254x1554",
+      7.43
+     ],
+     [
+      "/art163/shadows512.webp.bin",
+      "1536x1248",
+      7.31
+     ],
+     [
+      "/art163/robot-torso-clean-v166.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/robot-arms-clean-v166.webp.bin",
+      "1774x887",
+      6
+     ],
+     [
+      "/art163/cannon-approved-v289.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/stones512.webp.bin",
+      "1536x1024",
+      6
+     ],
+     [
+      "art-bat-preview/levels/antiAir-3.webp.bin",
+      "1120x1051",
+      4.49
+     ],
+     [
+      "art-bat-preview/levels/net-2.webp.bin",
+      "1004x1061",
+      4.06
+     ],
+     [
+      "art-bat-preview/levels/net-3.webp.bin",
+      "1080x933",
+      3.84
+     ],
+     [
+      "/art163/ground512.jpg",
+      "978x978",
+      3.65
+     ],
+     [
+      "art-bat-preview/levels/antiAir-2.webp.bin",
+      "821x966",
+      3.03
+     ],
+     [
+      "monster-rear-motion/stone-1.webp.bin",
+      "1280x480",
+      2.34
+     ],
+     [
+      "/match-sprites-b/sprite-186.png.webp.bin",
+      "719x717",
+      1.97
+     ],
+     [
+      "/match-sprites-b/sprite-185.png.webp.bin",
+      "679x691",
+      1.79
+     ],
+     [
+      "mammoth-walk/w16-armor.png",
+      "880x528",
+      1.77
+     ],
+     [
+      "/match-sprites-b/sprite-187.png.webp.bin",
+      "692x661",
+      1.74
+     ],
+     [
+      "/art163/earth512-1.png.webp.bin",
+      "728x565",
+      1.57
+     ],
+     [
+      "/art163/ui524.webp.bin",
+      "768x512",
+      1.5
+     ],
+     [
+      "/art163/skills512.png.webp.bin",
+      "960x384",
+      1.41
+     ],
+     [
+      "stone-art/walk-phase1-bank00.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "stone-art/walk-phase1-bank01.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "/art163/earth512-0.png.webp.bin",
+      "552x464",
+      0.98
+     ],
+     [
+      "/match-sprites-b/sprite-172.png.webp.bin",
+      "480x515",
+      0.94
+     ],
+     [
+      "/match-sprites-a/sprite-134.png.webp.bin",
+      "469x522",
+      0.93
+     ],
+     [
+      "/match-sprites-b/sprite-169.png.webp.bin",
+      "466x504",
+      0.9
+     ],
+     [
+      "monster-rear-motion/mammoth.webp.bin",
+      "672x336",
+      0.86
+     ],
+     [
+      "mammoth-walk/w16-armor-rear.png",
+      "672x336",
+      0.86
+     ],
+     [
+      "/match-sprites-a/sprite-133.png.webp.bin",
+      "452x474",
+      0.82
+     ],
+     [
+      "/match-sprites-a/sprite-168.png.webp.bin",
+      "504x409",
+      0.79
+     ],
+     [
+      "/match-sprites-a/sprite-162.png.webp.bin",
+      "380x523",
+      0.76
+     ],
+     [
+      "/match-sprites-a/sprite-68.png.webp.bin",
+      "437x449",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-390.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-391.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-392.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-393.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-394.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-395.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-396.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-397.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-a/sprite-71.png.webp.bin",
+      "430x451",
+      0.74
+     ]
+    ],
+    "byDir": {
+     "(root)": 138.56,
+     "art-bat-preview": 32.57,
+     "monster-rear-motion": 3.2,
+     "mammoth-walk": 7.06,
+     "stone-art": 3.42,
+     "mammoth-attack": 3.02,
+     "card-art": 1.6
+    },
+    "bySite": [
+     [
+      "?",
+      [
+       216,
+       52.35
+      ]
+     ]
+    ]
+   },
+   "stone": {
+    "report": {
+     "used": 3587872,
+     "peak": 3587872,
+     "doing": -1,
+     "decode": 5,
+     "supply": 0,
+     "misses": 0,
+     "repeated": 0,
+     "emergency": 0,
+     "evictions": 0,
+     "pkgReads": 1
+    },
+    "alive": 2
+   },
+   "memConstrained": false
+  },
+  {
+   "alloc": null,
+   "label": "t780",
+   "frames": 300,
+   "cameraTravelPx": 0,
+   "poseCache": {
+    "frames": 74,
+    "MB": 4.6,
+    "budgetMB": 12,
+    "evictionsInWindow": 0
+   },
+   "shadowCache": {
+    "hits": 600,
+    "misses": 0,
+    "staticEntries": 2,
+    "animatedEntries": 27
+   },
+   "state": "hunt",
+   "wave": 24,
+   "huntElapsed": 735,
+   "entities": {
+    "hounds": 81,
+    "peasants": 64,
+    "buildings": 118,
+    "allies": 5,
+    "projectiles": 12,
+    "particles": 112,
+    "tanks": 2
+   },
+   "hostFrameMs": {
+    "p50": 6.08,
+    "p95": 9.13,
+    "p99": 11.54,
+    "max": 20.88,
+    "mean": 6.3
+   },
+   "updateMsPerFrame": 1.58,
+   "drawMsPerFrame": 4.68,
+   "updatesPerFrame": 1,
+   "drawsPerFrame": 1,
+   "rafMissing": 0,
+   "mainCanvas": {
+    "w": 780,
+    "h": 1688
+   },
+   "perFrameMain": {
+    "drawImage": 23,
+    "save": 22,
+    "restore": 22,
+    "fillRect": 14,
+    "setTransform": 11,
+    "beginPath": 11,
+    "fillText": 7,
+    "fill": 6,
+    "stroke": 3,
+    "arc": 2,
+    "clearRect": 1,
+    "clip": 1,
+    "strokeRect": 1,
+    "measureText": 0.3
+   },
+   "perFrameOffscreen": {
+    "fillRect": 30.2,
+    "fillText": 1.4,
+    "arc": 1.3,
+    "beginPath": 0.8,
+    "fill": 0.4,
+    "save": 0.4,
+    "stroke": 0.4,
+    "restore": 0.4,
+    "setTransform": 0.3,
+    "clearRect": 0.3,
+    "drawImage": 0.2
+   },
+   "mainFillMpxPerFrame": 4.71,
+   "offscreenFillMpxPerFrame": 0.05,
+   "shadowDrawsPerFrame": 0,
+   "filterDrawsPerFrame": 0,
+   "compositeOps": {},
+   "canvasesCreated": 0,
+   "createdSites": [],
+   "bigMainLayers": [
+    [
+     "drawImage 812x1720 @ SceneTiles200.draw js/main.js:1609:142 < TrollAndElvesGame.drawTerrainTiles200 js/main.js:4521:11",
+     1.4
+    ],
+    [
+     "fillRect 780x1688 @ TrollAndElvesGame.drawShareRescueOffer js/main.js:3442:330 < TrollAndElvesGame.draw js/main.js:4677:77",
+     1.32
+    ],
+    [
+     "drawImage 780x1664 @ TrollAndElvesGame.drawSceneLayer js/main.js:4129:10 < TrollAndElvesGame.drawResourceBodies js/main.js:4183:24",
+     1.3
+    ],
+    [
+     "drawImage 796x348 @ TrollAndElvesGame.uiFrame504 js/main.js:4806:143 < TrollAndElvesGame.drawShareRescueOffer js/main.js:3442:487",
+     0.28
+    ],
+    [
+     "drawImage 780x248 @ TrollAndElvesGame.drawScreenBitmap411 js/main.js:4131:281 < TrollAndElvesGame.drawStatusCached504 js/main.js:4823:6",
+     0.19
+    ]
+   ],
+   "topOffscreen": [
+    {
+     "size": "780x248",
+     "mpxPerFrame": 0.04,
+     "drawsPerFrame": 0.1,
+     "created": "Object.createElement runtime.js:52:136 < Object.run js/main.js:4367:333 < TrollAndElvesGame.prepareHudCachesViewAsync js/main.js:4371:31 < async TrollAndElvesGame.prepareSoloDrawCaches200 js/main.js:4660:15",
+     "firstDraw": "TrollAndElvesGame.uiFrame504 js/main.js:4806:143 < TrollAndElvesGame.drawStatus504 js/main.js:4824:1599 < TrollAndElvesGame.drawStatusCached504 js/main.js:4822:171 < TrollAndElvesGame.drawHUD js/main.js:5036:139"
+    },
+    {
+     "size": "306x245",
+     "mpxPerFrame": 0.01,
+     "drawsPerFrame": 30.3,
+     "created": "Object.createElement runtime.js:52:136 < TrollAndElvesGame.drawHUD js/main.js:5036:391 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588",
+     "firstDraw": "TrollAndElvesGame.drawHUD js/main.js:5037:404 < g.drawHUD art163/ghost/ghost-copy.js:372:21 < g.drawHUD dragon-wall-hint.js:50:588 < g.drawHUD art163/ghost/approved-guide-entry.js:76:18"
+    }
+   ],
+   "timersPerSecond": 1,
+   "topTimerOrigins": [
+    [
+     "network/freeze-trace.js:59:19",
+     5
+    ]
+   ],
+   "storageWritesPerMin": 12,
+   "storageKBPerMin": 50.9,
+   "longFrames": [
+    {
+     "i": 117,
+     "ms": 20.9,
+     "upd": 14.9,
+     "draw": 6,
+     "wave": 24
+    },
+    {
+     "i": 240,
+     "ms": 13.7,
+     "upd": 8.8,
+     "draw": 4.8,
+     "wave": 24
+    }
+   ],
+   "longCount": {
+    "over12": 2,
+    "over16": 1,
+    "over33": 0,
+    "over50": 0
+   },
+   "memory": {
+    "offscreenCanvases": 216,
+    "offscreenMB": 52.3,
+    "bigCanvases": [
+     "1250x1000",
+     "1206x952",
+     "800x640",
+     "1036x1792",
+     "1024x2048"
+    ],
+    "decodedImages": 492,
+    "decodedImageMB": 189.4,
+    "mainCanvasMB": 5,
+    "jsHeapMB": 40.1
+   },
+   "inventory": {
+    "byImg": [
+     [
+      "/match-sprites-b/sprite-418.webp.bin",
+      "1254x1554",
+      7.43
+     ],
+     [
+      "/art163/shadows512.webp.bin",
+      "1536x1248",
+      7.31
+     ],
+     [
+      "/art163/robot-torso-clean-v166.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/robot-arms-clean-v166.webp.bin",
+      "1774x887",
+      6
+     ],
+     [
+      "/art163/cannon-approved-v289.webp.bin",
+      "2172x724",
+      6
+     ],
+     [
+      "/art163/stones512.webp.bin",
+      "1536x1024",
+      6
+     ],
+     [
+      "art-bat-preview/levels/antiAir-3.webp.bin",
+      "1120x1051",
+      4.49
+     ],
+     [
+      "art-bat-preview/levels/net-2.webp.bin",
+      "1004x1061",
+      4.06
+     ],
+     [
+      "art-bat-preview/levels/net-3.webp.bin",
+      "1080x933",
+      3.84
+     ],
+     [
+      "/art163/ground512.jpg",
+      "978x978",
+      3.65
+     ],
+     [
+      "art-bat-preview/levels/antiAir-2.webp.bin",
+      "821x966",
+      3.03
+     ],
+     [
+      "monster-rear-motion/stone-1.webp.bin",
+      "1280x480",
+      2.34
+     ],
+     [
+      "/match-sprites-b/sprite-186.png.webp.bin",
+      "719x717",
+      1.97
+     ],
+     [
+      "/match-sprites-b/sprite-185.png.webp.bin",
+      "679x691",
+      1.79
+     ],
+     [
+      "mammoth-walk/w16-armor.png",
+      "880x528",
+      1.77
+     ],
+     [
+      "/match-sprites-b/sprite-187.png.webp.bin",
+      "692x661",
+      1.74
+     ],
+     [
+      "/art163/earth512-1.png.webp.bin",
+      "728x565",
+      1.57
+     ],
+     [
+      "/art163/ui524.webp.bin",
+      "768x512",
+      1.5
+     ],
+     [
+      "/art163/skills512.png.webp.bin",
+      "960x384",
+      1.41
+     ],
+     [
+      "stone-art/walk-phase1-bank00.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "stone-art/walk-phase1-bank01.webp.bin",
+      "1024x256",
+      1
+     ],
+     [
+      "/art163/earth512-0.png.webp.bin",
+      "552x464",
+      0.98
+     ],
+     [
+      "/match-sprites-b/sprite-172.png.webp.bin",
+      "480x515",
+      0.94
+     ],
+     [
+      "/match-sprites-a/sprite-134.png.webp.bin",
+      "469x522",
+      0.93
+     ],
+     [
+      "/match-sprites-b/sprite-169.png.webp.bin",
+      "466x504",
+      0.9
+     ],
+     [
+      "monster-rear-motion/mammoth.webp.bin",
+      "672x336",
+      0.86
+     ],
+     [
+      "mammoth-walk/w16-armor-rear.png",
+      "672x336",
+      0.86
+     ],
+     [
+      "/match-sprites-a/sprite-133.png.webp.bin",
+      "452x474",
+      0.82
+     ],
+     [
+      "/match-sprites-a/sprite-168.png.webp.bin",
+      "504x409",
+      0.79
+     ],
+     [
+      "/match-sprites-a/sprite-162.png.webp.bin",
+      "380x523",
+      0.76
+     ],
+     [
+      "/match-sprites-a/sprite-68.png.webp.bin",
+      "437x449",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-390.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-391.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-392.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-393.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-394.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-395.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-396.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-b/sprite-397.png.webp.bin",
+      "444x444",
+      0.75
+     ],
+     [
+      "/match-sprites-a/sprite-71.png.webp.bin",
+      "430x451",
+      0.74
+     ]
+    ],
+    "byDir": {
+     "(root)": 138.56,
+     "art-bat-preview": 32.57,
+     "monster-rear-motion": 3.2,
+     "mammoth-walk": 7.06,
+     "stone-art": 3.42,
+     "mammoth-attack": 3.02,
+     "card-art": 1.6
+    },
+    "bySite": [
+     [
+      "?",
+      [
+       216,
+       52.35
+      ]
+     ]
+    ]
+   },
+   "stone": {
+    "report": {
+     "used": 3587872,
+     "peak": 3587872,
+     "doing": -1,
+     "decode": 5,
+     "supply": 0,
+     "misses": 0,
+     "repeated": 0,
+     "emergency": 0,
+     "evictions": 0,
+     "pkgReads": 1
+    },
+    "alive": 2
+   },
+   "memConstrained": false
+  }
+ ],
+ "blockers": [
+  "intro"
+ ],
+ "startupMs": 656,
+ "allySlots": [
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true,
+  true
+ ],
+ "runtimeDiag": {
+  "schema": 615,
+  "sequence": 1,
+  "previous": null,
+  "current": {
+   "id": "mywpiww0-1",
+   "version": "BN19R10-C3-REBUILT-P0-COW8D",
+   "started": 1800000000000,
+   "errors": [],
+   "events": [
+    {
+     "kind": "boot",
+     "time": 1800000000000,
+     "detail": "runtime-start",
+     "metrics": ""
+    },
+    {
+     "kind": "runtime-mode",
+     "time": 1800000000000,
+     "detail": "{\"diagnosticBuild\":\"BN19R10-C3-REBUILT-P0-COW8D\",\"platform\":\"mac\",\"model\":\"Mac QA harness\",\"system\":null,\"wechatVersion\":null,\"SDKVersion\":\"host\",\"highPerformance\":null,\"highPerformancePlus\":null,\"framePolicy\":\"original-native-continuous-v6-early-frame\",\"frameApi\":\"native-raf\",\"renderer\":\"canvas2d\"}",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000000200,
+     "detail": "match-art-pack",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000001166,
+     "detail": "match-art-hydration",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000001850,
+     "detail": "prepared-sprites-and-structure-ready",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000001850,
+     "detail": "prepared-surfaces-and-bindings-ready",
+     "metrics": ""
+    },
+    {
+     "kind": "phase",
+     "time": 1800000001866,
+     "detail": "match-art-ready",
+     "metrics": ""
+    }
+   ],
+   "health": [
+    {
+     "kind": "health",
+     "time": 1800000001883,
+     "detail": "frame-complete",
+     "metrics": "{\"elapsed\":0,\"buildings\":9,\"projectiles\":0,\"workers\":1,\"allies\":8,\"form\":\"initial\",\"performance\":{\"frameCount\":113,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":0,\"frames\":0,\"frameBytes\":0,\"bodyBytes\":0,\"frameBudget\":12582912,\"bodyBudget\":4194304,\"evictions\":0},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":0,\"buildingBytes\":0,\"frameHealth\":null,\"sceneCanvases\":{\"canvases\":2,\"estimatedRgbaBytes\":2058824,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+    },
+    {
+     "kind": "health",
+     "time": 1800000483685,
+     "detail": "frame-complete",
+     "metrics": "{\"elapsed\":419.9999999999467,\"buildings\":67,\"projectiles\":16,\"workers\":43,\"allies\":7,\"form\":\"initial\",\"performance\":{\"frameCount\":408,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":74,\"frameBytes\":4852864,\"bodyBytes\":389932,\"frameBudget\":12582912,\"bodyBudget\":4194304,\"evictions\":0},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":0,\"targetFps\":60,\"slowPercent\":2,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":62,\"estimatedRgbaBytes\":32699912,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+    },
+    {
+     "kind": "health",
+     "time": 1800000608686,
+     "detail": "frame-complete",
+     "metrics": "{\"elapsed\":544.999999999833,\"buildings\":102,\"projectiles\":9,\"workers\":50,\"allies\":5,\"form\":\"initial\",\"performance\":{\"frameCount\":300,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":74,\"frameBytes\":4852864,\"bodyBytes\":389932,\"frameBudget\":12582912,\"bodyBudget\":4194304,\"evictions\":0},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":0,\"targetFps\":60,\"slowPercent\":2,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":62,\"estimatedRgbaBytes\":32699912,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+    },
+    {
+     "kind": "health",
+     "time": 1800000793687,
+     "detail": "frame-complete",
+     "metrics": "{\"elapsed\":729.9833333329981,\"buildings\":117,\"projectiles\":4,\"workers\":64,\"allies\":5,\"form\":\"initial\",\"performance\":{\"frameCount\":300,\"frameMeanMs\":0,\"frameMaxMs\":0,\"dragon\":{\"sequences\":[],\"pages\":0,\"reservedPages\":0,\"decodedBytes\":0},\"pose\":{\"groups\":5,\"frames\":74,\"frameBytes\":4852864,\"bodyBytes\":389932,\"frameBudget\":12582912,\"bodyBudget\":4194304,\"evictions\":0},\"visual\":{\"buildings\":0,\"buildingBytes\":0,\"buildingBudget\":33554432},\"terrainBytes\":12438400,\"buildingBytes\":0,\"frameHealth\":{\"fps\":0,\"targetFps\":60,\"slowPercent\":2,\"cpuMs\":0,\"updateMs\":0,\"drawMs\":0,\"p95Ms\":17},\"sceneCanvases\":{\"canvases\":62,\"estimatedRgbaBytes\":32699912,\"excludesDecoderGpuCopiesAndHeap\":true}}}"
+    }
+   ]
+  },
+  "writeFailures": 0,
+  "dropped": 0
+ },
+ "freezeJournal": "{\"schema\":1,\"current\":{\"boot\":1800000000000,\"build\":\"BN19R10-C3-REBUILT-P0-COW8D\",\"kind\":\"gap\",\"at\":10666,\"flags\":97,\"scene\":{\"hunt\":0,\"hounds\":90,\"buildings\":17,\"workers\":1,\"terrainBytes\":12438400,\"buildingBytes\":0,\"terrainFrontBytes\":8388608,\"poseBytes\":5191128,\"poseEvictions\":0},\"lastFrame\":8666,\"lastTouch\":150,\"frames\":301,\"slowFrames\":0,\"memoryWarnings\":0,\"maxFrameMs\":0,\"trail\":[[3340,10583,520,5,0],[3341,10583,520,6,0],[3342,10583,520,4,0],[3343,10600,520,3,0],[3344,10600,520,5,0],[3345,10600,520,6,0],[3346,10600,520,4,0],[3347,10616,520,3,0],[3348,10616,520,5,0],[3349,10616,520,6,0],[3350,10616,520,4,0],[3351,10633,520,3,0],[3352,10633,520,5,0],[3353,10633,520,6,0],[3354,10633,520,4,0],[3355,10650,520,3,0],[3356,10650,520,5,0],[3357,10650,520,6,0],[3358,10650,520,4,0],[3359,10666,520,3,0],[3360,10666,520,5,0],[3361,10666,520,6,0],[3362,10666,520,4,0],[3363,10666,520,26,97]],\"detail\":{\"sequence\":3363,\"frame\":520,\"at\":10666,\"heartbeatGap\":2500,\"lastRaf\":8666,\"lastExit\":8666,\"inRaf\":false,\"flags\":97}},\"previous\":null}",
+ "startupDiag": {
+  "build": "BN19R10-C3-REBUILT-P0-COW8D",
+  "started": 1800000000000,
+  "events": [
+   {
+    "kind": "stage",
+    "phase": "分享入口",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "运行环境",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "建筑几何预备",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "单人注册",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "联机入口",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "加载界面",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "单人规则预备",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "单人规则就绪",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "基础素材模块",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "首页分包",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "stage",
+    "phase": "游戏主模块",
+    "time": 1800000000000,
+    "detail": ""
+   },
+   {
+    "kind": "ready",
+    "phase": "游戏主模块",
+    "time": 1800000000000,
+    "detail": ""
+   }
+  ],
+  "previous": null,
+  "firstError": null
+ }
+}
