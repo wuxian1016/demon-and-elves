@@ -1,0 +1,109 @@
+--- a/art163/ghost/antiair-guide-demo.js
++++ b/art163/ghost/antiair-guide-demo.js
+@@ -5,7 +5,9 @@
+  const owned=b=>b?.airDefenseKindBN==='antiAir'&&b.ownerSlot==null&&g.completedElfBuildingBN(b);
+  const text=s=>runtime.nativeText(s);
+  let generation,cardSeen=false,evidence=new WeakMap();
+- const supported=()=>offline()&&!g.tutorial&&!g.superChallenge580&&g.state==='hunt'&&!g.player?.dead&&g.batWaveCandidateBN===true;
++ const supported=()=>offline()&&!g.tutorial&&!g.superChallenge580&&g.state==='hunt'&&!g.player?.dead&&g.batWaveCandidateBN===true&&(g.operationGuideModeR13?.()??true);
++ const completed=()=>g.indexedOwnerBuildings(null).filter(owned);
++ const queued=()=>(g.getPlayerBuildQueueBN?.()||[]).filter(j=>j.buildType===kind);
+  function departure(b,shown){
+   if(generation!==g.player){generation=g.player;cardSeen=false;evidence=new WeakMap();}
+   if(g.antiAirGuideStagePreview!==0)return;
+@@ -14,20 +16,22 @@
+   const target=b.target;if(!target||evidence.get(b)===target)return;evidence.set(b,target);
+   if(!g.hounds.includes(b))return;
+   if(!(target===g.player||target?.ownerSlot==null&&g.completedElfBuildingBN(target)&&g.buildings.includes(target)))return;
+-  g.antiAirGuideStagePreview=g.indexedOwnerBuildings(null).some(owned)?2:1;
++  g.antiAirGuideStagePreview=completed().length>=2?3:1;
+  }
+  function view(skipTower=false){
+-  if(g.antiAirGuideStagePreview!==1||!supported())return null;
+-  if(g.indexedOwnerBuildings(null).some(owned)){g.antiAirGuideStagePreview=2;return null;}
++  if(![1,2].includes(g.antiAirGuideStagePreview)||!supported())return null;
++  const built=completed().length,planned=built+queued().length;
++  if(built>=2){g.antiAirGuideStagePreview=3;return null;}
++  g.antiAirGuideStagePreview=1;
++  if(planned>=2)return null;
+   if(g.baseUpgradeGuideBN||!skipTower&&g.demonTowerGuidePreview?.view()||runtime.hidden||g.wallHalfGuideDemo?.active()||g.wallBaseLevelGuideDemo?.active?.()||notice.economy(g)
+    ||g.batIntroCardBN?.visible?.()||g.dragonTutorialBL?.active||g.cardPresentation?.modal()||g.cardPresentation?.blocksDock?.()
+    ||g.rewardAdBN?.pausesLive?.()||g.sessionMenuOpen||g.saveSlotsPanel||g.demonPanel||g.relicPanel||g.allyDataPanel
+    ||g.ceremony||g.cameraScenesR7?.active()||g.rotationInputBlocked398()||g.roundLoading591||g.placement
+    ||g.goldShortageGuideBN?.busy?.()||g.resourceCapPreview?.busy?.()
+-   ||g.getPlayerBuildQueueBN?.().some(j=>j.buildType===kind)
+    ||!menuEnabled()||!g.isBuildUnlocked(entry)||g.easyOpeningGuideAllowsBuild(kind)===false)return null;
+   const p=g.player,affordable=p.wood>=entry.wood&&p.gold>=entry.gold;
+-  let copy='飞行敌人来了，建一座防空塔。',mode='down',target;
++  let copy=planned?'再建一座防空塔，保护后方。':'飞行敌人来了，先建一座防空塔。',mode='down',target;
+   if(!affordable){copy=entry.wood>p.maxWood||entry.gold>p.maxGold?'先扩仓，攒够木90、金60再建防空塔。':'准备木90、金60，再建防空塔。';return{copy,target:null,buildCost:entry};}
+   if(g.selectedBuilding)target=g.getUpgradePanelLayout().closeBtn;
+   else if(!g.buildMenu){target=g.buttons.find(b=>b.id==='moreBuilds'&&b.visible!==false);mode='dock';}
+@@ -37,12 +41,41 @@
+    else{
+     const b=L.rows.find(r=>r.entry.type===kind)?.rect;
+     target=soft.catalogRow(g,L,b,kind);mode=target?.scrollDown?'scroll':'row';
+-    if(target)copy=target.scrollDown?soft.scrollCopy('防空塔'):'点防空塔，拦截飞行敌人。';
++    if(target)copy=target.scrollDown?soft.scrollCopy('防空塔') :planned?'点防空塔，补上后方防空。':'点防空塔，拦截飞行敌人。';
+     else if(b&&L.maxScroll)copy='向上滑，找到防空塔。';
+    }
+   }
+   return{copy,target,mode};
+  }
++ function placement(p,{z,o,S,top,bottom,m}){
++  if(!supported()||![1,2].includes(g.antiAirGuideStagePreview)||runtime.hidden||notice.economy(g)
++   ||g.wallBaseLevelGuideDemo?.active?.()||g.passiveHintsR13?.quiet()||!menuEnabled()
++   ||!entry||g.player.wood<entry.wood||g.player.gold<entry.gold)return null;
++  const index=g.buildRecommendationZoneIndexBN?.()??g.playerStartZoneIndex;
++  const zone=g.resourceZones?.[index];if(!zone)return null;
++  const dx=zone.x-zone.gateX,dy=zone.y-zone.gateY,ix=Math.abs(dx)>Math.abs(dy)?Math.sign(dx):0,iy=ix?0:Math.sign(dy),sx=-iy,sy=ix;
++  if(!ix&&!iy)return null;
++  const rank=q=>(q.x-zone.gateX)*ix+(q.y-zone.gateY)*iy,across=q=>(q.x-zone.gateX)*sx+(q.y-zone.gateY)*sy;
++  const base=g.defenseRecommendationLayout(zone).find(q=>q.type==='tower');if(!base)return null;
++  const a=rank(base),b=a+206,w=103,local=g.indexedOwnerBuildings(null),jobs=queued(),placed=completed();
++  if(placed.length+jobs.length>=2)return null;
++  const used=[...placed,...jobs.map(j=>j.spot)].filter(q=>q&&Math.abs(across(q))<4*w&&rank(q)>0&&rank(q)<b+w);
++  const rear=used.some(q=>Math.abs(rank(q)-a)<=w*.8),depth=rear?b:a;
++  const front=local.filter(q=>q&&g.completedElfBuildingBN(q)&&g.isDefenseGuideTowerType(q.type)&&Math.abs(rank(q)-a)<w*.6&&Math.abs(across(q))<4*w);
++  let best=Infinity,result=null;
++  for(const q of g.placementSitesAC?.sites?.()||[]){
++   if(q.type!=='tower'||q.built||q.valid===false)continue;
++   const r=rank(q),d=Math.min(Math.abs(r-a),Math.abs(r-b)),isRear=Math.abs(r-b)<Math.abs(r-a),t=across(q);
++   if(r<=0||d>w*.64||Math.abs(t)>(isRear?2.35:3.6)*w)continue;
++   const x=((q.cx??q.x)-o.x)*z,y=((q.cy??q.y)-o.y)*z;
++   if(x<S.x+18||x>S.right-18||y<top||y>bottom||x>=m.x-18&&x<=m.x+m.w+18&&y<=m.y+m.h+32)continue;
++   const adj=front.reduce((v,s)=>Math.min(v,Math.abs(Math.abs(t-across(s))-w)),w*2);
++   const score=(Math.abs(r-depth)<=w*.64?0:5000)+3*d+(isRear?Math.abs(t)*.35:adj+Math.abs(t)*.08+t*.0001);
++   if(score>=best||g.buildQueuePlacementReasonBN?.('tower',q.x,q.y)||!g.canPlaceBuilding(q.x,q.y,p.radius,'tower'))continue;
++   best=score;result={x,y};
++  }
++  return result;
++ }
+  function draw(){
+   if(g.passiveHintsR13?.quiet())return;
+   if(g.defenseGuideDemo?.idleOwns?.())return;
+@@ -58,11 +91,11 @@
+  }
+  const commit=g.updatePlayerBuild506;
+  g.updatePlayerBuild506=function(...a){
+-  const watch=g.antiAirGuideStagePreview===1&&g.player.task?.buildType===kind,n=watch&&g.buildings.length;
++  const watch=[1,2].includes(g.antiAirGuideStagePreview)&&g.player.task?.buildType===kind,n=watch&&g.buildings.length;
+   const out=commit.apply(this,a);
+-  if(watch&&g.buildings.length>n&&owned(g.buildings[g.buildings.length-1]))g.antiAirGuideStagePreview=2;
++  if(watch&&g.buildings.length>n&&owned(g.buildings[g.buildings.length-1])&&completed().length>=2)g.antiAirGuideStagePreview=3;
+   return out;
+  };
+  const original=g.draw;g.draw=function(...args){const out=original.apply(this,args);draw();return out;};
+- g.antiAirGuidePreview={departure,view};
++ g.antiAirGuidePreview={departure,view,placement};
+ };
+--- a/js/main.js
++++ b/js/main.js
+@@ -5116,6 +5116,7 @@
+  const top=Math.max(S.y+27,this.topHudLayout().bottom+29),bottom=Math.min(S.bottom,...this.getPlacementButtons().map(b=>b.y))-10, m=this.getMinimapRect();
+  const wall=p.type==='wall',tower=this.isDefenseGuideTowerType(p.type), isType=s=>wall?s.type==='wall':tower?(s.group||s.type)==='tower':s.type===p.type;
+  const api=this.placementSitesAC;
++ if(p.airDefenseKindBN==='antiAir')return this.antiAirGuidePreview?.placement(p,{z,o,S,top,bottom,m});
+  if(p.type==='watchtower'){
+   if(p.insufficientBN||this.player.wood<p.woodCost||this.player.gold<p.goldCost||!api?.isActive?.())return null;
+   return require('../network/watchtower-placement-guide').target(this,p,api,{z,o,S,top,bottom,m},WATCHTOWER_SIGHT_RANGE+320,watchtowerBonus(2),ATTACK_TOWER_TYPES);

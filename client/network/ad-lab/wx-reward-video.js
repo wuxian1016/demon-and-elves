@@ -13,13 +13,14 @@ module.exports=function rewardVideo(wx,id,clock=Date.now,after=setTimeout,cancel
   if(r.timer!=null)cancel(r.timer);r.timer=null;
   if(r.phase==='closed')return;
   r.phase='closed';
+  try{r.ad.offLoad?.(r.load);}catch{}
   try{r.ad.offClose?.(r.close);}catch{}
   try{r.ad.offError?.(r.error);}catch{}
   try{r.ad.destroy?.();}catch{}
  };
  const settle=(r,result)=>{
   if(r.phase==='closed')return;
-  const done=r.done;if(result==='failed'&&r.phase==='loading'&&!done)loadFailure++;r.done=null;cleanup(r);if(result==='failed')retry=clock()+5000;
+  const done=r.done;if(result==='failed'&&r.phase==='loading'&&!done)loadFailure++;r.done=null;cleanup(r);if(result==='failed'||result==='unavailable')retry=clock()+5000;
   if(done)done(result);
  };
  const timer=(r,n,fn)=>{if(r.timer!=null)cancel(r.timer);r.timer=after(fn,n);};
@@ -40,17 +41,24 @@ module.exports=function rewardVideo(wx,id,clock=Date.now,after=setTimeout,cancel
    if(r.phase==='showing')return; // Promise rejection is authoritative for retrying native show().
    settle(r,'failed');
   };
+  r.load=()=>{
+   if(current!==r||r.phase!=='loading')return;
+   if(r.timer!=null)cancel(r.timer);r.timer=null;r.phase='ready';onReady?.(r);r.request?.();
+  };
+  const loadFailed=()=>{if(current===r&&r.phase==='loading')settle(r,'failed');};
   try{
    ad.onClose(r.close);ad.onError(r.error);
-   timer(r,9000,()=>settle(r,'failed'));
-   Promise.resolve(ad.load()).then(()=>{
-    if(current===r&&r.phase==='loading'){if(r.timer!=null)cancel(r.timer);r.timer=null;r.phase='ready';onReady?.(r);}
-   },()=>settle(r,'failed'));
-  }catch{settle(r,'failed');}
+   timer(r,9000,loadFailed);
+   // The native ready event and explicit Promise are alternative signals.
+   try{ad.onLoad?.(r.load);}catch{}
+   if(r.phase==='loading')Promise.resolve(ad.load()).then(r.load,loadFailed);
+  }catch{loadFailed();}
   return true;
  }
  function play(done){
   const first=current;if(first?.phase!=='ready'||typeof done!=='function')return false;
+  let possibleDisplay=false;
+  const unavailable=()=>possibleDisplay?'failed':'unavailable';
   function show(r,again){
    if(current!==r||r.phase!=='ready')return;
    r.done=done;r.early=null;r.phase='showing';
@@ -58,11 +66,12 @@ module.exports=function rewardVideo(wx,id,clock=Date.now,after=setTimeout,cancel
    timer(r,10000,fail);
    function rejected(){
     if(current!==r||r.phase!=='showing')return;
-    if(again)return fail();
+    possibleDisplay||=r.early!==null;
+    if(again)return settle(r,unavailable());
     // Exactly one load/show retry. Use a fresh SDK identity even on a rejected
     // show, so delayed callbacks from that failed playback cannot credit it.
     r.done=null;cleanup(r);
-    if(!prepare(replacement=>show(replacement,true),done))done('failed');
+    if(!prepare(replacement=>show(replacement,true),out=>done(out==='failed'?unavailable():out)))done(unavailable());
    }
    try{Promise.resolve(r.ad.show()).then(()=>{
     if(current!==r||r.phase!=='showing')return;
@@ -72,5 +81,10 @@ module.exports=function rewardVideo(wx,id,clock=Date.now,after=setTimeout,cancel
   }
   show(first,false);return true;
  }
- return {warm:()=>prepare(),ready:()=>current?.phase==='ready',play,cancel(){if(current){current.done=null;cleanup(current);}},supported,loadFailure:()=>loadFailure};
+ function request(done){
+  if(current?.phase==='ready')return play(done);
+  if(current?.phase==='loading'&&!current.done){current.done=done;current.request=()=>play(done);return true;}
+  return prepare(()=>play(done),done);
+ }
+ return {request,warm:()=>prepare(),ready:()=>current?.phase==='ready',play,cancel(){if(current){current.done=null;cleanup(current);}},supported,loadFailure:()=>loadFailure};
 };

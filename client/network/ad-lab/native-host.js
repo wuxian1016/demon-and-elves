@@ -1,6 +1,6 @@
 'use strict';
 const bridge=require('./ad-surfaces'),ledger=require('./wx-wall-reward-ledger'),footer=require('./wall-reward-footer'),nativeVehicle=require('./r93-vehicle-revive-native');
-module.exports=function install(game,{runtime,types,offline,sdk,config}){
+module.exports=function install(game,{runtime,types,offline,sdk,config,input,elfRevive}){
  if(config?.enabled!==true||sdk!==globalThis.wx||!types?.Building)return null;
  let version;try{version=sdk?.getAccountInfoSync?.()?.miniProgram?.envVersion;}catch(_){return null;}
  if(version!=='develop'&&version!=='trial')return null;
@@ -9,9 +9,10 @@ module.exports=function install(game,{runtime,types,offline,sdk,config}){
  const losses=new WeakMap(),defenseTypes=new Set(['tower','iceTower','manaTower','cannonTower','watchtower']);
  let seq=0,visit=0,lobby=null,result=null,match=null,wallMatch=null,press=null,manualPanel=null;
  const solo=()=>offline()&&!game.networkDrawCamera627&&!game.networkAuthorityPhases627&&!game.tutorial&&!game.superChallenge580;
- const roundLive=()=>solo()&&!game.roundStarting&&!game.roundLoading591&&!game.player?.dead&&['prep','hunt'].includes(game.state);
+ const soloScene=()=>solo()&&!game.roundStarting&&!game.roundLoading591&&['prep','hunt'].includes(game.state);
+ const roundLive=()=>soloScene()&&!game.player?.dead;
  const noModal=()=>!game.popupActive515()&&!game.placement&&!game.endlessOpeningIntro&&!game.ceremony&&!game.rotationInputBlocked398()&&
-  !game.shareRescueVisible616()&&!game.cardPresentation?.modal()&&!game.robotGuideBN?.playing?.()&&!game.dragonTutorialBL?.active;
+  !game.shareRescueVisible616()&&!game.cardPresentation?.modal()&&!game.cardPresentation?.expandedGhost()&&!game.robotGuideBN?.playing?.()&&!game.dragonTutorialBL?.active;
  const canOffer=()=>!runtime.hidden&&roundLive()&&noModal();
  const validKind=(b,kind)=>kind==='wall'?b.type==='wall':config.towerRecovery===true&&defenseTypes.has(b.type);
  const canRetain=r=>{
@@ -45,7 +46,7 @@ module.exports=function install(game,{runtime,types,offline,sdk,config}){
   wallHost:{wx:sdk,scope:id=>id===wallMatch&&roundLive(),canOffer,canRetain,canRebuild:canSite,
    rebuild:r=>canSite(r)&&game.restoreShareWallsBF([r.unit])===1,notify:s=>game.showToast(s),onChange:()=>runtime.wake?.(),onPresented:save},
   towerHost:config.towerRecovery===true?{...ledger(sdk,'tower'),scope:id=>id===match&&roundLive(),canOffer,canRetain,canRebuild:canSite,
-   rebuild:r=>canSite(r)&&game.restoreShareWallsBF([r.unit])===1,notify:s=>game.showToast(s),onChange:()=>runtime.wake?.()}:null,
+   rebuild:r=>canSite(r)&&game.restoreShareWallsBF([r.unit])===1,notify:s=>game.showToast(s),onChange:()=>runtime.wake?.(),onPresented:save}:null,
   vehicleHost:lv?{...ledger(sdk,'vehicle'),scope:id=>id===match&&roundLive(),canOffer,canRetain:lv.canRetain,canRestore:lv.canRestore,
    restoreVehicle:lv.restore,notify:s=>game.showToast(s),onChange:()=>runtime.wake?.(),onPresented:save}:null,
   manualHost:config.manualSaveGate===true?{live:(panel,slot,id)=>id===match&&roundLive()&&game.saveSlotsPanel===panel&&
@@ -58,11 +59,50 @@ module.exports=function install(game,{runtime,types,offline,sdk,config}){
   lobbyLive:id=>id===lobby&&id!==null&&isLobby(),lobbyLayout:()=>config.lobbyLayout?.(game,runtime.viewport()),lobbyPolicy:config.lobbyPolicy,
   lobbyMeasure:config.lobbyMeasure,otherAd:()=>!!game.shareRewardPending
  });
+ const elf=elfRevive?.(game,runtime,solo,ad.player,trackPause);
  const wallFooter=footer(ad.wall,()=>runtime.wake?.(),{title:()=> '一段城墙已被摧毁 · 可原地重建'});
  const towerFooter=ad.tower?footer(ad.tower,()=>runtime.wake?.(),{title:r=>game.buildingName(r.unit)+'已被摧毁，可选择原地重建'}):null;
  const vehicleFooter=ad.vehicle?footer({...ad.vehicle,dismiss:ad.vehicle.skip},()=>runtime.wake?.(),{
   title:r=>r.kind==='robot'?'机器人已被摧毁，可选择复活':'坦克已被摧毁，可选择复活'}):null;
- let currentFooter=null;
+ let currentFooter=null,checkPromptBeforeDraw=false,pausedPlayer=null;
+ function nextFooter(){return ad.wall.offer()?wallFooter:ad.vehicle?.offer()?vehicleFooter:ad.tower?.offer()?towerFooter:null;}
+ function blockers(){
+  const list=game.buttons.filter(b=>b.visible!==false).concat([game.toastRect,game.getMinimapRect?.(),game.sessionMenuRect?.()]).filter(b=>b?.w>0&&b?.h>0);
+  const j=game.getJoystickRect();if(j?.r)list.push({x:j.x-j.r,y:j.y-j.r,w:j.r*2,h:j.r*2});
+  return list;
+ }
+ function clearGameplayTouch(){
+  if(!input)return;
+  const stick=input.stick,held=stick?.active===true;
+  if(stick){stick.active=false;stick.dx=stick.dy=0;stick.originX=stick.originY=null;}
+  input.active=input.panning=input.panCandidate396=input.panMoved396=false;
+  input.dx=input.dy=0;input.wallWarnBN=input.wallFingerBN=null;
+  if(input.pinch)input.pinch.active=false;
+  if(held){game.player?.setMoveIntent(0,0);game.player?.drivingTank?.setMoveIntent(0,0);}
+ }
+ function trackPause(paused){
+  if(pausedPlayer&&(game.player!==pausedPlayer||!paused)){
+   if(game.player===pausedPlayer&&soloScene())clearGameplayTouch();
+   pausedPlayer=null;
+  }
+  if(paused&&game.player!==pausedPlayer){pausedPlayer=game.player;clearGameplayTouch();}
+  return paused;
+ }
+ function resetPrompt(){elf?.clear();checkPromptBeforeDraw=false;currentFooter=null;press=null;trackPause(false);}
+ // The shared rewarded port owns the gate before calling SDK show(), through its
+ // one reload/retry and terminal close/error. A drawable recovery choice also
+ // pauses before the first display: do not pause on unavailable/blocked rows.
+ function pausesLive(){
+  // Dead local elf can still be in a running solo match with surviving AI.
+  if(ad.results.busy()&&result?.kind==='lose'&&soloScene()&&isResult())return trackPause(true);
+  if(elf?.playing())return trackPause(true);
+  const playing=ad.rewardBusy();
+  if((!playing&&!currentFooter&&!checkPromptBeforeDraw)||!roundLive())return trackPause(false);
+  if(playing)return trackPause(true);
+  if(!canOffer())return trackPause(false);
+  if(currentFooter?.eligible())return trackPause(true);
+  return trackPause(checkPromptBeforeDraw&&!!nextFooter()?.place(game.uiSafeRect396(),blockers()));
+ }
  function legacyWallId(stable){
   // Native card identities contain three base36 components; replacing only
   // these fixed separators is reversible and cannot collide with new IDs.
@@ -78,7 +118,7 @@ module.exports=function install(game,{runtime,types,offline,sdk,config}){
   game.player.rewardAdV1=d;
  }
  function reset(saved,persistedMatch=null){
-  ad.reset();match=null;wallMatch=null;result=null;lobby=null;press=null;manualPanel=null;
+  ad.reset();resetPrompt();match=null;wallMatch=null;result=null;lobby=null;manualPanel=null;
   if(!solo())return;
   if(saved){
    const d=game.player.rewardAdV1;
@@ -114,33 +154,42 @@ module.exports=function install(game,{runtime,types,offline,sdk,config}){
  }
  function returnResult(kind,next){
   if(!enterResult(kind))return false;
-  return ad.results.tap(match,()=>{result=null;next();updateLobby();});
+  const hit=ad.results.tap(match,()=>{result=null;next();updateLobby();});
+  if(ad.results.busy()){game.wxUiDirty=true;runtime.wake?.();}return hit;
  }
+ const resultPlaying=()=>ad.results.busy();
+ const manualPlaying=()=>ad.rewardBusy()&&manualPanel!==null&&game.saveSlotsPanel===manualPanel;
  function draw(){
+  elf?.recheck();
   if(result&&isResult()!==true){ad.leaveResults();result=null;}
   if(game.deathResultsAD?.visible)enterResult('lose');else if(game.state==='win')enterResult('win');
   updateLobby();
   if(manualPanel&&game.saveSlotsPanel!==manualPanel){ad.leaveManual();manualPanel=null;}
-  currentFooter=null;wallFooter.invalidate();vehicleFooter?.invalidate();towerFooter?.invalidate();
+  checkPromptBeforeDraw=false;currentFooter=null;wallFooter.invalidate();vehicleFooter?.invalidate();towerFooter?.invalidate();
   if(runtime.hidden)return;
   if(match&&roundLive()&&game.state==='hunt'&&game.huntElapsed>=20&&noModal())ad.warmResults(match);
-  const next=ad.wall.offer()?wallFooter:ad.vehicle?.offer()?vehicleFooter:ad.tower?.offer()?towerFooter:null;
+  const next=nextFooter();
   if(roundLive()&&!next){ad.wall.warm();ad.vehicle?.warm();ad.tower?.warm();}
-  if(!next)return;
-  const blockers=game.buttons.filter(b=>b.visible!==false).concat([game.toastRect,game.getMinimapRect?.()]).filter(b=>b?.w>0&&b?.h>0);
-  const j=game.getJoystickRect()?.r,joystick=game.getJoystickRect();if(j)blockers.push({x:joystick.x-j,y:joystick.y-j,w:j*2,h:j*2});
-  game.ctx.save();try{game.displayTransform398(game.ctx);if(next.draw(game.ctx,game.uiSafeRect396(),blockers))currentFooter=next;}
-  finally{game.ctx.restore();}
+  // Save and final result screens reuse their own backdrop painter. Recovery
+  // and running defeat settlement paint this once over the live world.
+  const backdrop=()=>{game.ctx.globalAlpha=1;game.ctx.globalCompositeOperation='source-over';game.fillDisplay(game.pauseOverlayColorBN());};
+  const liveScrim=!game.sessionMenuOpen&&!game.saveSlotsPanel&&
+   (resultPlaying()&&soloScene()&&isResult()||ad.rewardBusy()&&roundLive()&&noModal()&&!manualPlaying());
+  if(!next&&!liveScrim)return;
+  game.ctx.save();try{game.displayTransform398(game.ctx);
+   if(next?.draw(game.ctx,game.uiSafeRect396(),blockers(),backdrop)){currentFooter=next;trackPause(true);}
+   else if(liveScrim)backdrop();
+  }finally{game.ctx.restore();}
  }
  function touch(kind,points){
   const p=points?.length===1?points[0]:null;
   if(kind==='cancel'){press=null;return false;}
   if(kind==='start'){
    if(press){press=null;return true;}
-   if(!canOffer()||!p||!currentFooter?.hit(p.clientX,p.clientY))return false;
+   if(!canOffer()||!p||!currentFooter?.hit(p.clientX,p.clientY))return pausesLive();
    press={which:currentFooter,button:currentFooter.hit(p.clientX,p.clientY),x:p.clientX,y:p.clientY,id:p.identifier,bad:false};return true;
   }
-  const r=press;if(!r)return false;
+  const r=press;if(!r)return pausesLive();
   const moved=!p||p.identifier!==r.id||Math.hypot(p.clientX-r.x,p.clientY-r.y)>8;
   if(kind==='move'){r.bad||=moved;return true;}
   press=null;
@@ -154,15 +203,15 @@ module.exports=function install(game,{runtime,types,offline,sdk,config}){
  function wallLoss(b){
   if(!wallMatch||!roundLive()||!ownWall(b)||!b.dead)return false;
   if(b.level>=10)ad.wall.unlock();
-  const offered=ad.wall.lost(receipt(b,'wall'));save();return offered;
+  const offered=ad.wall.lost(receipt(b,'wall'));checkPromptBeforeDraw||=offered;save();return offered;
  }
  function towerLoss(b){
   if(!match||!roundLive()||!(b instanceof types.Building)||b.ownerSlot!=null||!b.dead||!validKind(b,'tower')||
    b.preview||b.isPreview||b.underConstruction||b.buildTime>0&&b.buildProgress<b.buildTime)return false;
-  const offered=ad.tower?.lost(receipt(b,'tower'))??false;save();return offered;
+  const offered=ad.tower?.lost(receipt(b,'tower'))??false;checkPromptBeforeDraw||=offered;save();return offered;
  }
 
- return {reset,draw,touch,returnResult,enterResult,settlementDiagnostic:()=>adTrace.map(e=>({...e})),dispose(){ad.reset();},
+ return {reset,draw,touch,pausesLive,playerPlaying:elf?.playing,playerRevive:elf?.start,playerNotice:elf?.notice,playerSupported:elf?.supported,returnResult,enterResult,resultPlaying,manualPlaying,settlementDiagnostic:()=>adTrace.map(e=>({...e})),dispose(){ad.reset();resetPrompt();},
   setupManual(panel){if(config.manualSaveGate!==true||!match||!roundLive())return false;
    manualPanel=panel;panel.adManualBN=true;ad.prepareManual(panel,panel.selected,match);return true;},
   watchManual:(panel,slot,next)=>ad.watchManual(panel,slot,match,next),
@@ -171,6 +220,6 @@ module.exports=function install(game,{runtime,types,offline,sdk,config}){
   usesRewardedWalls:()=>!!wallMatch&&solo(),wall:wallLoss,tower:towerLoss,
   wallLevel(b){if(wallMatch&&roundLive()&&ownWall(b)&&!b.dead&&b.level>=10&&ad.wall.unlock())save();},
   wallRemoved(){}, // Native recycling must never create a rewarded destruction.
-  vehicle(v){if(!match)return;const receipt=lv?.capture(game,v);if(receipt){ad.vehicle.lost(receipt);save();}}
+  vehicle(v,driver,crew){if(!match)return;const receipt=lv?.capture(game,v,driver,crew);if(receipt){const offered=ad.vehicle.lost(receipt);checkPromptBeforeDraw||=offered;save();}}
  };
 };

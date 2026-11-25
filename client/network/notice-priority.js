@@ -4,4 +4,5 @@ function isCritical(text){const s=String(text||'');return /城墙.*(?:告急|残
 function activeToast(g){return g.toast?.time>0&&isCritical(g.toast.text);}
 function retreatActive(g){return ['prep','hunt'].includes(g.state)&&g.troll?.retreating===true&&!g.troll.dead&&!g.trollBase?.dead;}
 function active(g){return activeToast(g)||retreatActive(g);}
-module.exports={isCritical,active,activeToast,retreatActive};
+function economy(g){return active(g)||g.wallHalfGuideDemo?.urgent?.()||g.wallHalfGuideDemo?.active()||!!g.baseUpgradeGuideBN;}
+module.exports={isCritical,active,economy,activeToast,retreatActive};

@@ -10,5 +10,5 @@ module.exports=function({offline=()=>false}={}){
   g.applySavedWorld=function(...args){const result=restore.apply(this,args);if(result){register(this,false);this.ghostRelocateBN?.restore();this.cardsCandidate?.reconcileRestoredHp?.();}return result;};
   register(g,false);
  }
- return {allows,install};
+ return {allows,install,supports:eligible};
 };

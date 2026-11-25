@@ -1,0 +1,53 @@
+--- a/art163/ghost/goldmine-guide-demo.js
++++ b/art163/ghost/goldmine-guide-demo.js
+@@ -72,8 +72,8 @@
+   const eligible=b=>{const c=up(b);return c&&fits(c);};
+   let e=episode?.player===p?episode:null;
+   if(!e&&w.gold>=entry.gold)return null;
+-  let mineCount=0,b=null,best=Infinity,affordable=null,cheap=Infinity;
+-  for(const a of own){if(!done(a))continue;mineCount++;const c=up(a);if(!fits(c))continue;
++  let mineCount=0,b=null,best=Infinity,affordable=null,cheap=Infinity,storageBlocked=false;
++  for(const a of own){if(!done(a))continue;mineCount++;const c=up(a);if(!fits(c)){storageBlocked||=!!c;continue;}
+    const d=(a.x-p.x)**2+(a.y-p.y)**2;if(d<best){best=d;b=a;}
+    if(can(c)&&d<cheap){cheap=d;affordable=a;}
+   }
+@@ -101,6 +101,8 @@
+    }
+    return{kind:'upgrade',copy:'把金矿厂升到 Lv'+(chosen.level+1)+'，加快产金。',target};
+   }
++  if(mineCount&&!chosen&&(e.paidMine||mineCount>=3))
++   return storageBlocked?{kind:'upgrade',copy:'先扩建仓库，再升级金矿厂。',target:null}:null;
+   if(!canStart())return chosen&&!can(c)?fund(p,w,c,'upgrade',chosen):null;
+   let copy='建一座金矿厂，持续补充金币。',mode='down',target;
+   if(!can(entry))return fund(p,w,entry,'build',null);
+@@ -116,9 +118,11 @@
+   }
+   return{kind:'build',copy,target,mode};
+  }
++ const paintable=()=>!g.passiveHintsR13?.quiet()&&!g.defenseGuideDemo?.idleOwns?.();
++ // Queried only by the workforce paint pass, never its view()/tower arbitration.
++ const visibleAction=()=>paintable()&&!!view()?.target;
+  function draw(){
+-  if(g.passiveHintsR13?.quiet())return;
+-  if(g.defenseGuideDemo?.idleOwns?.())return;
++  if(!paintable())return;
+   const a=view();if(!a)return;
+   const C=g.ctx,S=g.uiSafeRect396(),M=g.getMinimapRect(),L=g.buildMenu?g.getBuildMenuLayout():g.selectedBuilding?g.getUpgradePanelLayout():null;
+   const box=soft.layout(C,Math.min(294,S.w-44),[[text(a.copy)]]),x=S.x+(S.w-box.w)/2;
+@@ -143,5 +147,5 @@
+  const upgrade=g.tryUpgradeBuilding;
+  g.tryUpgradeBuilding=function(b,...a){const lv=b?.level,out=upgrade.call(this,b,...a);if(out&&done(b)&&b.level>lv){if(b.level>=3){g.goldMineGuideDonePreview=true;episode=null;}else if(episode?.player===g.player)episode.target=b;}return out;};
+  const original=g.draw;g.draw=function(...args){const out=original.apply(this,args);if(g.player&&active())complete();draw();return out;};
+- g.goldMineGuidePreview={reject,view,actionPending:()=>episode?.player===g.player,ownsLate:()=>active()&&g.getOwnerMaxHouseLevel()>=3};
++ g.goldMineGuidePreview={reject,view,visibleAction,actionPending:()=>episode?.player===g.player,ownsLate:()=>active()&&g.getOwnerMaxHouseLevel()>=3};
+ };
+--- a/art163/ghost/wood-workforce-demo.js
++++ b/art163/ghost/wood-workforce-demo.js
+@@ -126,6 +126,7 @@
+  function draw(){
+   if(g.passiveHintsR13?.quiet())return;
+   const a=view();if(!a||a.type!=='earlyRecruit'&&g.defenseGuideDemo?.idleOwns?.())return;
++  if(a.type==='earlyRecruit'&&!g.selectedBuilding&&g.goldMineGuidePreview?.visibleAction?.())return;
+   const S=g.uiSafeRect396(),M=g.getMinimapRect(),L=g.buildMenu?g.getBuildMenuLayout():g.selectedBuilding?g.getUpgradePanelLayout():null,C=g.ctx;
+   const box=soft.layout(C,Math.min(303,S.w-44),[[text(a.copy)]]),x=S.x+(S.w-box.w)/2;
+   let y=Math.max(g.topHudLayout().bottom+35,M.y+M.h+25);

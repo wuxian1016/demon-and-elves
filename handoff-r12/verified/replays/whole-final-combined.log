@@ -1,0 +1,30 @@
+6cfa42d683416c8b63d767d046598bcffda0e9c0d1c8219a3a1e0fd232383a22  client/../candidate.source.sha256
+[启动163] 原生图片已就绪 423 0 ms
+01_OPEN {"at":0,"phase":"prep","prep":60,"hunt":0,"wood":0,"gold":0,"camera":[7500,3072.869573508329],"first":{"at":0,"stage":"prep","prep":60,"intro":true,"baseLevel":1,"quiet":false,"wake":false,"HUD":["先认识资源区","木材、金币：用于建造和升级","人口：已用人数 / 人口上限"],"text":[],"mode":"resourceIntro"}}
+02_REAL_IDLE_ZZZ {"at":7210,"phase":"prep","prep":52.79,"hunt":0,"wood":6,"gold":0,"camera":[7500,3072.869573508329],"from":{"t":"Zzz","x":338.0952380952385,"y":428.3271180077395,"font":"900 15.523809523809751px \"Arial Black\", Helvetica, sans-serif","color":"#FFFFFF"},"to":{"t":"Zzz","x":340.4702380952386,"y":423.70211800773944,"font":"900 16.773809523809774px \"Arial Black\", Helvetica, sans-serif","color":"#FFFFFF"}}
+02_ACTUAL_GATHER_HINT {"at":7210,"phase":"prep","prep":52.79,"hunt":0,"wood":6,"gold":0,"camera":[7500,3072.869573508329],"firstButton":"collectGold","label":"精灵在偷懒！点「采矿」补资源。"}
+BUILT {"at":28410,"phase":"prep","prep":31.59,"hunt":0,"wood":6,"gold":0,"task":"wood","camera":[7500,3072.869573508329],"k":"goldMine","paid":{"wood":40,"gold":20},"x":7990.5,"y":3915}
+BUILT {"at":37010,"phase":"prep","prep":22.99,"hunt":0,"wood":6,"gold":8,"task":"wood","camera":[7500,3072.869573508329],"k":"wall","paid":{"wood":20,"gold":5},"x":7681.5,"y":3905}
+BUILT {"at":65110,"phase":"hunt","prep":0,"hunt":5.1,"wood":6,"gold":19,"task":"wood","camera":[7384.162774917143,3049.9340087445876],"k":"cannonTower","paid":{"wood":60,"gold":35},"x":7784.5,"y":3910}
+03_FIRST_WAREHOUSE_CTA {"at":94043,"phase":"hunt","prep":0,"hunt":34.03,"wood":77,"gold":73,"camera":[7705.0167094959925,2922.7663957875834],"mode":"dock","max":[80,100],"belowFull":true,"stockFixture":"adjust below 88 after ordinary earned","naturallyEarned":[62,35]}
+04_NEAR_CAP_FIXTURE {"at":94043,"phase":"hunt","prep":0,"hunt":34.03,"wood":72,"gold":73,"camera":[7705.0167094959925,2922.7663957875834],"mode":"dock","text":["资源快满了，建仓库扩容。"]}
+BUILT {"at":94443,"phase":"hunt","prep":0,"hunt":34.43,"wood":12,"gold":53,"camera":[7705.0167094959925,2922.7663957875834],"k":"warehouse","paid":{"wood":60,"gold":20},"x":7990.5,"y":4018}
+05_AFTER_WAREHOUSE {"at":104843,"phase":"hunt","prep":0,"hunt":44.83,"wood":96,"gold":114,"task":"wood","camera":[7705.0167094959925,2922.7663957875834],"advance":["基地升到二级，解锁更多建筑。"],"homeLevel":1}
+05b_NATIVE_BASE_UPGRADE {"at":106143,"phase":"hunt","prep":0,"hunt":46.13,"wood":46,"gold":95,"task":"wood","camera":[7705.0167094959925,2922.7663957875834],"level":2,"paid":{"wood":50,"gold":20}}
+07_MAP_DEMON {"at":106143,"phase":"hunt","prep":0,"hunt":46.13,"wood":46,"gold":95,"task":"wood","camera":[7705.0167094959925,2922.7663957875834],"firstVisible":76609.9999999994}
+08_MAP_SELF {"at":106143,"phase":"hunt","prep":0,"hunt":46.13,"wood":46,"gold":95,"task":"wood","camera":[7705.0167094959925,2922.7663957875834],"firstVisible":88943.00000000298}
+09_TOWER_NATIVE_DAMAGE {"at":110143,"phase":"hunt","prep":0,"hunt":50.13,"wood":60,"gold":99,"task":"wood","camera":[7842.534930952276,3047.3904757534065],"towerDamage":[133.83333333333334,93.13092333333336]}
+10_RED_WALL_SUPERSEDES {"at":110143,"phase":"hunt","prep":0,"hunt":50.13,"wood":60,"gold":99,"task":"wood","camera":[7842.534930952276,3047.3904757534065],"towerDamage":[133.83333333333334,93.13092333333336],"wallDamage":[233.83333333333334,229.33333333333334],"open":true}
+11_PAID_WALL_RECOVERY {"at":114143,"phase":"hunt","prep":0,"hunt":54.13,"wood":38,"gold":93,"task":"wood","camera":[7252,2936],"level":2,"hp":1470,"stillDamaged":93.13092333333336}
+12_NATIVE_CONTINUOUS_GUIDED_SCROLL {"at":118362,"phase":"hunt","prep":0,"hunt":58.35,"wood":89,"gold":104,"task":"wood","selected":"watchtower","camera":[7252,2936],"scroll":[126,208],"clip":[20,92],"lateral":{"tipX":278,"tipY":596,"direction":"right","scale":1.3,"travel":2.967032967032967,"alpha":1},"cooldown":0,"unaffordableMagic":true}
+COMPLETE_ONE_NATIVE_SESSION {
+  seed: 150,
+  genuineGather: true,
+  realBuilds: 4,
+  fixtures: [
+    'near fill at89%',
+    'demon 270 units outside real zone',
+    'hurt threshold setup on two real buildings'
+  ],
+  noPhone: true
+}

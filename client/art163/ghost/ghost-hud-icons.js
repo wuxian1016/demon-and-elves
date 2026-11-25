@@ -26,12 +26,12 @@ module.exports=function create({Image,loadPackage,seed,wake,lowMemory,stealthIma
    if(type==='possess'&&icon){c.beginPath();c.arc(0,0,24,0,Math.PI*2);c.clip();c.drawImage(icon,-24,-24,48,48);return;}
    // The native dock supplies the only gold rim. Reuse the approved print's interior.
    if(stealth){c.beginPath();c.arc(0,0,25,0,Math.PI*2);c.clip();c.drawImage(stealth,72,466,82,82,-25,-25,50,50);return;}
+   // Keep the named HUD button usable while original portrait art is loading.
+   // The lower label is already visible; do not draw a substitute skill symbol.
+   if(type==='stealth'||type==='possess')return false;
    if(type==='seed'&&seed(c))return;
    c.fillStyle='#b5f7ef';c.strokeStyle='#91e8ee';c.lineWidth=3;
-   if(type==='stealth'){
-    c.beginPath();c.moveTo(-17,0);c.quadraticCurveTo(0,-19,17,0);c.quadraticCurveTo(0,19,-17,0);c.closePath();c.stroke();c.beginPath();c.arc(0,0,5,0,Math.PI*2);c.fill();
-    c.strokeStyle='#291c49';c.lineWidth=6;c.beginPath();c.moveTo(-12,12);c.lineTo(12,-12);c.stroke();c.strokeStyle='#dbacf4';c.lineWidth=3;c.stroke();
-   }else if(type==='attack'||type==='seed'){
+   if(type==='attack'||type==='seed'){
     c.beginPath();c.ellipse(0,0,10,6,-.65,0,Math.PI*2);c.fill();c.stroke();
    }else{
     c.beginPath();c.moveTo(-13,10);c.bezierCurveTo(-19,-8,-13,-17,0,-17);c.bezierCurveTo(14,-17,19,-8,13,10);c.lineTo(7,6);c.lineTo(0,11);c.lineTo(-7,6);c.closePath();c.fill();c.fillStyle='#291c49';for(const x of [-5,5]){c.beginPath();c.ellipse(x,-5,2.1,3.2,0,0,Math.PI*2);c.fill();}

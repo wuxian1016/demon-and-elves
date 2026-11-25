@@ -1,0 +1,91 @@
+--- a/art163/ghost/wall-half-guide-demo.js
++++ b/art163/ghost/wall-half-guide-demo.js
+@@ -1,13 +1,13 @@
+ 'use strict';
+ exports.install=function(g,runtime,input){
+- let wall=null,pending=0,shot,guideAt=0,initialLevel=0,own=null,under,lastCheck,lastCritical;
++ let wall=null,pending=0,shot,guideAt=0,initialLevel=0,own=null,under,lastCheck,lastCritical,handoff,handoffLevel;
+  const isLow=b=>b&&!b.dead&&b.hp>0&&b.maxHp>0&&b.hp<=b.maxHp/3;
+  const soft=require('./soft-hint'),text=s=>runtime.nativeText(s),clock=()=>g.supportTime||0;
+  function blocked(){return runtime.hidden||g.state!=='hunt'||g.player.dead||g.tutorial||g.cardPresentation?.modal()||g.rewardAdBN?.pausesLive?.()||g.shareRescueVisible616()||g.rotationInputBlocked398()||g.cameraPeek||g.ceremony||g.endlessOpeningIntro||g.cameraScenesR7?.active()||g.demonAttackFocus545||g.pendingDemonFocus545||g.firstAttackCameraFocus;}
+  const occupied=()=>g.popupActive515()||g.placement;
+  function hold(settle=true){const c=g.camera;g.cameraFollow.x=c.x;g.cameraFollow.y=c.y;if(settle){g.cameraPan.x=g.cameraPan.y=0;g.cameraRecenter.x=g.cameraRecenter.y=0;g.manualCamera394=true;}shot=null;}
+  const sync=()=>{if(own!==g.player){
+-  own=g.player;wall=shot=under=null;lastCheck=lastCritical=null;pending=guideAt=0;
++  own=g.player;wall=shot=under=handoff=null;lastCheck=lastCritical=null;pending=guideAt=0;
+   const saved=g.wallHalfPreviewTarget;if(saved&&g.buildings.includes(saved.wall)&&saved.wall.type==='wall'&&saved.wall.ownerSlot==null&&!saved.wall.dead&&saved.wall.level===saved.level){wall=saved.wall;initialLevel=saved.level;guideAt=clock()||1;}
+  }};
+  function hit(actor,target,before){
+@@ -52,28 +52,45 @@
+   g.camera.x=shot.fromX+(x-shot.fromX)*e;g.camera.y=shot.fromY+(y-shot.fromY)*e;
+   if(t===1)hold();return true;
+  }
++ const ownedWall=b=>b?.type==='wall'&&b.ownerSlot==null&&g.completedElfBuildingBN(b)&&g.buildings.includes(b);
+  function paint(){
+-  sync();if(g.operationGuideModeR13?.()===false||g.baseUpgradeGuideBN||!wall||!guideAt||blocked()||wall.dead||wall.level!==initialLevel||g.buildMenu||g.placement||g.sessionMenuOpen||g.saveSlotsPanel||g.demonPanel||g.relicPanel||g.allyDataPanel||g.selectedBuilding&&g.selectedBuilding!==wall)return;
+-  const S=g.uiSafeRect396(),mm=g.getMinimapRect(),C=g.ctx;
+-  let x,y,L;
+-  if(g.selectedBuilding===wall){
+-   L=g.getUpgradePanelLayout();const b=L.upgradeBtn;
+-   if(!b)return;x=b.x+b.w*.5;y=b.y-3;
++  sync();
++  if(g.operationGuideModeR13?.()===false||g.baseUpgradeGuideBN||runtime.hidden||g.state!=='hunt'||g.player.dead||g.tutorial||
++    !g.wallWarningReadyBN?.()||g.buildMenu||g.placement||g.sessionMenuOpen||g.saveSlotsPanel||g.demonPanel||g.relicPanel||g.allyDataPanel||
++    g.cardPresentation?.modal()||g.rewardAdBN?.pausesLive?.())return;
++  const selected=g.selectedBuilding;
++  if(handoff&&(!ownedWall(handoff)||handoff.level!==handoffLevel||selected!==handoff))handoff=null;
++  if(ownedWall(selected)&&isLow(selected)){handoff=selected;handoffLevel=selected.level;}
++  // Use the same critical target as the native banner. The cinematic is optional
++  // and must never be a prerequisite for the arrow or its panel handoff.
++  const critical=g.wallBannerBN?.target,subject=handoff||(isLow(critical)?critical:g.criticalPlayerWall399?.());
++  if(!ownedWall(subject)||selected&&selected!==subject||!selected&&blocked())return;
++  if(g.defenseGuideDemo?.wallPrerequisiteActive?.())return;
++  const price=subject.upgradeCost(),why=g.buildingUpgradeBlockReason(subject),
++   costOk=g.validUpgradeCostR12(price),w=g.buildQueueAvailableBN?.()||g.player,
++   can=subject.canUpgrade()&&!why&&costOk&&w.wood>=price.wood&&w.gold>=price.gold&&g.easyOpeningGuideAllowsUpgrade(subject)!==false;
++  const prefix=isLow(subject)?'城墙告急！':'',need=g.buildingBaseRequiredLevelBN(subject);
++  const lacks=costOk&&[price.wood>w.wood?'木 '+Math.ceil(price.wood-w.wood):'',price.gold>w.gold?'金 '+Math.ceil(price.gold-w.gold):''].filter(Boolean).join('、');
++  const label=can?prefix+(isLow(subject)?'升级城墙，恢复满血':'升级城墙，加强防御'):
++   prefix+(need?'先将基地升到 '+need+' 级':why|| (lacks?'升级还缺 '+lacks:'当前城墙不可升级'));
++  const S=g.uiSafeRect396(),mm=g.getMinimapRect(),C=g.ctx,
++   plan=soft.layout(C,Math.min(294,S.w-26),[[text(label),14]]);
++  const L=selected===subject?g.getUpgradePanelLayout():null;
++  if(L){
++   const b=can&&L.upgradeBtn;
++   if(b&&b.w>0&&b.h>0&&b.visible!==false){soft.buildArrow(g,C,b,1.28,plan);return;}
+   }else{
+-   const z=g.zoom();x=(wall.x-g.camera.x)*z;y=(wall.y-g.camera.y)*z-25;
+-   const visible=x>S.x+24&&x<S.right-24&&y>=g.topHudLayout().bottom+30&&y<=S.bottom-100;
+-   if(!visible)x=y=null;
++   const z=g.zoom(),x=(subject.x-g.camera.x)*z,y=(subject.y-g.camera.y)*z-25;
++   if(x>S.x+24&&x<S.right-24&&y>=g.topHudLayout().bottom+30&&y<=S.bottom-100){
++    soft.buildArrow(g,C,{x,y,w:0,h:0},1.34,plan);return;
++   }
+   }
+-  let top=Math.min(S.bottom-110,Math.max(S.y+8,g.topHudLayout().bottom+12,mm.y+mm.h+29));
+-  const width=Math.min(294,S.w-26);let left=S.x+(S.w-width)/2;
+-  if(L){if(L.y+L.h+35<=S.bottom-65)top=L.y+L.h+7;
+-   else if(L.y>=S.y+37)top=L.y-34;
+-   else if(L.x-S.x>=width+12){left=L.x-width-10;top=Math.max(S.y+8,L.y+4);}
++  let x=S.x+(S.w-plan.w)/2,y=Math.min(S.bottom-plan.h-12,Math.max(S.y+8,g.topHudLayout().bottom+12,mm.y+mm.h+29));
++  if(L){if(L.y+L.h+plan.h+7<=S.bottom-58)y=L.y+L.h+7;
++   else if(L.y>=S.y+plan.h+7)y=L.y-plan.h-7;
++   else if(L.x-S.x>=plan.w+12){x=L.x-plan.w-10;y=Math.max(S.y+8,L.y+4);}
+   }
+-  if(x!==null){soft.buildArrow(g,C,{x,y,w:0,h:0},1.37,soft.layout(C,width,[[text('城墙告急！升级城墙，恢复满血'),15]]));return;}
+-  C.save();C.fillStyle='rgba(11,36,24,.94)';C.strokeStyle='#7AE6A1';C.lineWidth=1;
+-  C.beginPath();C.moveTo(left+8,top);C.arcTo(left+width,top,left+width,top+28,8);C.arcTo(left+width,top+28,left,top+28,8);C.arcTo(left,top+28,left,top,8);C.arcTo(left,top,left+width,top,8);C.closePath();C.fill();C.stroke();
+-  C.textAlign='center';C.textBaseline='middle';C.font='bold 15px sans-serif';C.fillStyle='#E8FFE9';C.fillText(text('城墙告急！升级城墙，恢复满血'),left+width/2,top+14,width-14);C.restore();
++  soft.paint(C,x,y,plan);
+  }
+  // Advise only for a completed owned attack tower and never take the camera.
+  let tower=null,towerOwner=null,scanAt=0;
+--- a/art163/ghost/defense-guide-demo.js
++++ b/art163/ghost/defense-guide-demo.js
+@@ -309,5 +309,5 @@
+   // In a compressed view use HUD-side whitespace, never a caption anchored over the cannon.
+   return {x:S.x+Math.min(S.w-w/2-9,Math.max(w/2+9,tx<S.x+S.w/2?S.w-w/2-9:w/2+9)),y:Math.max(top,Math.min(y0,bottom-h))};
+  };
+- g.defenseGuideDemo={view,warehouseAhead,resourceIntroActive:()=>openingThisRound&&!g.openingMineGuideR8&&resourceIntro<4300,idleOwns:()=>idleOwns,ownsFull:()=>{const p=g.player;return !!p&&(p.wood>=p.maxWood||p.gold>=p.maxGold)&&view()?.stage===4;}};
++ g.defenseGuideDemo={view,warehouseAhead,wallPrerequisiteActive:()=>!!ordinary.wallPrerequisite(),resourceIntroActive:()=>openingThisRound&&!g.openingMineGuideR8&&resourceIntro<4300,idleOwns:()=>idleOwns,ownsFull:()=>{const p=g.player;return !!p&&(p.wood>=p.maxWood||p.gold>=p.maxGold)&&view()?.stage===4;}};
+ };

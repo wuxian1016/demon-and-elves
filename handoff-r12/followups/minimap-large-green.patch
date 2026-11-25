@@ -1,0 +1,70 @@
+--- a/client/art163/ghost/solo-cutaway.js
++++ b/client/art163/ghost/solo-cutaway.js
+@@ -136,28 +136,36 @@
+   const pos=o=>[m.x+Math.max(r,Math.min(m.w-r,o.x/full.x*m.w)),m.y+Math.max(r,Math.min(m.h-r,o.y/full.y*m.h))];
+   const [x,y]=pos(beat?p:t),other=beat&&!dem?null:pos(beat?t:p);
+   if(!Number.isFinite(x+y)||other&&Math.hypot(x-other[0],y-other[1])<r*2.7)return null;
+-  const obs=[g.sessionMenuRect(),g.resourceCapPreview?.rect(),g.goldShortageGuideBN?.layout(),g.toast?.time>0&&g.toastRect,g.minimapZoomButton515?.()];
+-  const overlaps=(a,b)=>a&&b&&b.w>0&&b.h>0&&a.x<b.x+b.w+4&&a.x+a.w+4>b.x&&a.y<b.y+b.h+4&&a.y+a.h+4>b.y;
++  const hud=g.hudGeometry504?.(),obs=[hud?.resource,hud?.demon,g.sessionMenuRect(),g.resourceCapPreview?.rect(),g.goldShortageGuideBN?.layout(),g.toast?.time>0&&g.toastRect,g.minimapZoomButton515?.()];
++  const overlaps=(a,b)=>a&&b&&b.w>0&&b.h>0&&a.x<b.x+b.w+3&&a.x+a.w+3>b.x&&a.y<b.y+b.h+3&&a.y+a.h+3>b.y;
+   const clamp=(n,a,b)=>Math.max(a,Math.min(b,n)),top=g.topHudLayout().bottom;
+-  const plan=soft.layout(c,Math.min(135,S.w-26),mapCopy[beat]);
+-  const left=m.x-plan.w-12,right=m.x+m.w+12;
+-  const rows=[{x:left,y:clamp(y-plan.h*.5,top+7,S.bottom-plan.h-8),side:-1},
+-   {x:right,y:clamp(y-plan.h*.5,top+7,S.bottom-plan.h-8),side:1},
+-   {x:clamp(m.x+m.w-plan.w,S.x+5,S.right-plan.w-5),y:Math.max(top+9,m.y+m.h+35),side:0}];
+-  for(const q of rows){
++  const plan=soft.layout(c,Math.min(135,S.w-26),mapCopy[beat]),scale=1.33,travel=27;
++  const sideY=clamp(m.y+m.h*.58-plan.h*.5,top+7,S.bottom-plan.h-26);
++  const below=Math.max(top+9,m.y+m.h+36);
++  // Captions sit outside the map at fixed map-relative positions. Neither
++  // text nor the nearest point of the animated arrow covers a portrait.
++  const spots=[
++   {x:m.x-plan.w-13,y:sideY},{x:m.x+m.w+13,y:sideY},
++   {x:clamp(m.x+m.w-plan.w,S.x+5,S.right-plan.w-5),y:below},
++   {x:clamp(m.x-plan.w-16,S.x+5,S.right-plan.w-5),y:below}
++  ];
++  const safe=(q,pad=4)=>q.x>=S.x+pad&&q.x+q.w<=S.right-pad&&q.y>=S.y+pad&&q.y+q.h<=S.bottom-pad;
++  for(const q of spots){
+    const box={...q,w:plan.w,h:plan.h};
+-   if(box.x<S.x+4||box.x+box.w>S.right-4||box.y<top+5||box.y+box.h>S.bottom-26||obs.some(o=>overlaps(box,o)))continue;
+-   const from=[q.side<0?q.x+plan.w:q.side>0?q.x:clamp(x,q.x+5,q.x+plan.w-5),q.side?q.y+plan.h*.5:q.y];
+-   const d=Math.hypot(from[0]-x,from[1]-y);
+-   if(d<12)continue;
+-   let angle=Math.atan2(y-from[1],x-from[0]);
+-   if(other&&Math.abs((other[0]-x)*Math.sin(angle)-(other[1]-y)*Math.cos(angle))<r*1.3&&
+-      (other[0]-x)*Math.cos(angle)+(other[1]-y)*Math.sin(angle)<0&&Math.hypot(other[0]-x,other[1]-y)<d){
+-    angle=Math.atan2(y-from[1]+(other[1]<y?-14:14),x-from[0]);
++   if(!safe(box)||box.y<top+5||box.y+box.h>S.bottom-26||obs.some(o=>overlaps(box,o))||overlaps(box,m))continue;
++   const dir=Math.atan2(y-(box.y+box.h*.5),x-(box.x+box.w*.5));
++   for(const turn of [0,Math.PI/4,-Math.PI/4,Math.PI/2,-Math.PI/2,Math.PI*.75,-Math.PI*.75,Math.PI]){
++    const angle=dir+turn,u=Math.cos(angle),v=Math.sin(angle),near=r+6,far=near+travel+27*scale,half=13*scale+1;
++    const tailX=x-u*far,tailY=y-v*far,headX=x-u*near,headY=y-v*near;
++    const x0=Math.min(tailX,headX)-Math.abs(v)*half,y0=Math.min(tailY,headY)-Math.abs(u)*half;
++    const sweep={x:x0,y:y0,w:Math.abs(tailX-headX)+2*Math.abs(v)*half,h:Math.abs(tailY-headY)+2*Math.abs(u)*half};
++    if(!safe(sweep,2)||overlaps(sweep,box)||obs.some(o=>overlaps(sweep,o)))continue;
++    if(other){
++     const dx=other[0]-x,dy=other[1]-y,along=-(dx*u+dy*v),across=Math.abs(-dx*v+dy*u);
++     if(along>near-r-2&&along<far+r+2&&across<half+r+2)continue;
++    }
++    return {x:box.x,y:box.y,plan,arrow:{tipX:x-u*(near+travel),tipY:y-v*(near+travel),angle,scale,travel:travel/(7*scale),color:'green'},beat};
+    }
+-   const end=[x-Math.cos(angle)*r*(beat?1.6:1.85),y-Math.sin(angle)*r*(beat?1.6:1.85)];
+-   const stem=[end[0]-Math.cos(angle)*14,end[1]-Math.sin(angle)*14];
+-   return {x:box.x,y:box.y,plan,end,stem,angle,beat};
+   }
+   return null;
+  }
+@@ -167,10 +175,7 @@
+   const age=mapAge%mapBeat,alpha=Math.max(.27,Math.min(1,(age+90)/170,(mapBeat-age+40)/175));
+   c.save();try{
+    c.globalAlpha=alpha;soft.paint(c,q.x,q.y,q.plan);
+-   c.strokeStyle=c.fillStyle=q.beat?'#8EFFAD':'#FF9C8D';c.lineWidth=2;c.beginPath();c.moveTo(...q.stem);c.lineTo(...q.end);c.stroke();
+-   c.beginPath();c.moveTo(...q.end);
+-   for(const a of [-.55,.55])c.lineTo(q.end[0]-7*Math.cos(q.angle+a),q.end[1]-7*Math.sin(q.angle+a));
+-   c.closePath();c.fill();
++   g.drawUnifiedGuidanceArrow?.(c,{...q.arrow,alpha});
+   }finally{c.restore();}
+   mapAge+=delta;
+   if(mapAge>=mapBeat){g.demonMapLessonR12=q.beat?-1:-2;mapAge=0;mapLast=null;}

@@ -1,0 +1,172 @@
+--- a/art163/ghost/wall-half-guide-demo.js
++++ b/art163/ghost/wall-half-guide-demo.js
+@@ -92,6 +92,51 @@
+   }
+   soft.paint(C,x,y,plan);
+  }
++ // Track only a genuine tower named by a visible native upgrade cue. Selecting
++ // that exact target hands off the arrow; unrelated actions still quiet hints.
++ const towerType=b=>!!b&&(b.type==='wall'||b.type==='watchtower'||g.isDefenseGuideTowerType(b.type));
++ const liveTower=b=>towerType(b)&&b.ownerSlot==null&&g.completedElfBuildingBN(b)&&g.buildings.includes(b);
++ const offers=new Map();let openTower=null;
++ const panelScope=()=>g.operationGuideModeR13?.()!==false&&['prep','hunt'].includes(g.state)&&!runtime.hidden&&!g.player.dead&&
++   g.wallWarningReadyBN?.()&&!g.buildMenu&&!g.placement&&!g.baseUpgradeGuideBN&&!g.wallHalfGuideDemo?.urgent()&&!g.cameraScenesR7?.active()&&
++   !(g.selectedBuilding&&g.rangeInspect548===g.selectedBuilding);
++ const validOffer=b=>liveTower(b)&&b.canUpgrade()&&g.easyOpeningGuideAllowsUpgrade(b)!==false&&!g.buildingUpgradeBlockReason(b);
++ const funded=(c,w)=>g.validUpgradeCostR12(c)&&w.wood>=c.wood&&w.gold>=c.gold;
++ function offer(b){
++  if(g.selectedBuilding||!panelScope()||!validOffer(b)||!funded(b.upgradeCost(),g.buildQueueAvailableBN?.()||g.player))return;
++  if(!offers.has(b)&&offers.size>=4)offers.delete(offers.keys().next().value);
++  const old=offers.get(b);if(old&&old.player===g.player&&old.level===b.level)old.at=clock();
++  else offers.set(b,{player:g.player,level:b.level,at:clock()});
++ }
++ function heldTower(){
++  const q=openTower;if(!q)return null;
++  if(g.player!==q.player||g.selectedBuilding!==q.b||q.b.level!==q.level||!liveTower(q.b)){openTower=null;return null;}
++  return q.b;
++ }
++ const owns=b=>!!b&&heldTower()===b;
++ const tap=g.handleTap;
++ g.handleTap=function(...args){
++  const before=this.selectedBuilding,out=tap.apply(this,args),b=this.selectedBuilding;
++  if(b&&b!==before&&panelScope()&&liveTower(b)){
++   const o=offers.get(b),age=o&&clock()-o.at;
++   if((o?.player===g.player&&o.level===b.level&&age>=0&&age<=850)||isLow(b)){
++    openTower={b,player:g.player,level:b.level};offers.delete(b);g.passiveHintsR13?.earned();
++   }
++  }
++  return out;
++ };
++ function paintDefensePanel(){
++  const b=heldTower();if(!b||!panelScope())return false;
++  const w=g.buildQueueAvailableBN?.()||g.player,cost=b.upgradeCost(),can=validOffer(b)&&funded(cost,w),L=g.getUpgradePanelLayout();
++  const n=g.buildingName(b.type==='tower'&&b.airDefenseKindBN?(b.airDefenseKindBN==='net'?'netTowerBN':'antiAirTowerBN'):b.type);
++  const need=g.validUpgradeCostR12(cost)&&[cost.wood>w.wood?'木 '+Math.ceil(cost.wood-w.wood):'',cost.gold>w.gold?'金 '+Math.ceil(cost.gold-w.gold):''].filter(Boolean).join('、');
++  const msg=can?'点「升级」强化'+n:g.buildingUpgradeBlockReason(b)|| (need?'升级'+n+'还缺 '+need:'这座塔暂不能升级');
++  const c=g.ctx,S=g.uiSafeRect396(),box=soft.layout(c,Math.min(266,S.w-28),[[text(msg),13]]),button=can&&L.upgradeBtn;
++  if(button&&button.w>0&&button.h>0&&button.visible!==false){soft.buildArrow(g,c,button,1.23,box);return true;}
++  const y=L.y+L.h+box.h+7<=S.bottom-58?L.y+L.h+7:Math.max(S.y+6,L.y-box.h-7);
++  soft.paint(c,S.x+(S.w-box.w)/2,y,box);return true;
++ }
++ g.defenseUpgradeHandoffR14={offer,owns};
+  // Advise only for a completed owned attack tower and never take the camera.
+  let tower=null,towerOwner=null,scanAt=0;
+  const eligibleTower=b=>isLow(b)&&b.ownerSlot==null&&g.completedElfBuildingBN(b)&&g.buildings.includes(b);
+@@ -102,7 +147,7 @@
+  }
+  function towerView(){
+   if(g.operationGuideModeR13?.()===false||!['prep','hunt'].includes(g.state)||g.player.dead||runtime.hidden||urgent()||g.passiveHintsR13?.quiet()||
+-    g.roundStarting||g.roundLoading591||g.popupActive515()&&!g.selectedBuilding||g.placement||g.tutorial||g.endlessOpeningIntro||g.cameraScenesR7?.active()||
++    g.roundStarting||g.roundLoading591||g.popupActive515()&&!g.selectedBuilding||g.selectedBuilding&&g.rangeInspect548===g.selectedBuilding||g.placement||g.tutorial||g.endlessOpeningIntro||g.cameraScenesR7?.active()||
+     g.cameraScenesR7?.mapCueVisible?.()||g.cardPresentation?.modal()||g.rewardAdBN?.pausesLive?.()||g.sessionMenuOpen||g.ceremony)return null;
+   if(towerOwner!==g.player){towerOwner=g.player;tower=null;scanAt=0;}
+   if(!eligibleTower(tower))tower=null;
+@@ -112,7 +157,7 @@
+    for(const b of g.indexedOwnerBuildings(null))if((g.isDefenseGuideTowerType(b.type)||b.type==='watchtower')&&eligibleTower(b)&&(!tower||b.hp/b.maxHp<tower.hp/tower.maxHp))tower=b;
+   }
+   if(!tower||g.selectedBuilding&&g.selectedBuilding!==tower)return null;
+-  const price=tower.upgradeCost?.(),can=price&&tower.canUpgrade()&&!g.buildingUpgradeBlockReason(tower)&&g.validUpgradeCostR12(price)&&g.player.wood>=price.wood&&g.player.gold>=price.gold;
++  const price=tower.upgradeCost?.(),can=validOffer(tower)&&funded(price,g.buildQueueAvailableBN?.()||g.player);
+   return {tower,label:g.buildingName(tower)+'告急 · 血量 '+Math.ceil(100*tower.hp/tower.maxHp)+'%',can:!!can};
+  }
+  function paintTower(){
+@@ -122,11 +167,11 @@
+   if(button){soft.buildArrow(g,c,button,1.04,plan);return;}
+   const sx=(b.x-g.camera.x)*z,sy=(b.y-g.camera.y)*z-Math.min(60,Math.max(26,b.radius*z));
+   if(!L&&sx>S.x+44&&sx<S.right-44&&sy>Math.max(m.y+m.h,g.topHudLayout().bottom)+52&&sy<S.bottom-120){
+-   soft.buildArrow(g,c,{x:sx,y:sy,w:0,h:0},.95,plan);return;
++   soft.buildArrow(g,c,{x:sx,y:sy,w:0,h:0},.95,plan);if(can)offer(b);return;
+   }
+   const x=S.x+(S.w-plan.w)/2,y=Math.max(g.topHudLayout().bottom+9,m.y+m.h+9,L?L.y+L.h+7:0);
+   if(y+plan.h<S.bottom-90)soft.paint(c,x,y,plan);
+  }
+- const draw=g.draw;g.draw=function(...a){const result=draw.apply(this,a);paint();paintTower();return result;};
++ const draw=g.draw;g.draw=function(...a){const result=draw.apply(this,a);paint();if(!paintDefensePanel())paintTower();return result;};
+  g.wallHalfGuideDemo={hit,towerHit,towerView,tick,frame,urgent,active:()=>{sync();return g.operationGuideModeR13?.()!==false&&!!wall&&!wall.dead&&wall.level===initialLevel&&g.state==='hunt'&&!g.player.dead;},state:()=>({wall,pending,shot})};
+ };
+--- a/art163/ghost/ordinary-guides.js
++++ b/art163/ghost/ordinary-guides.js
+@@ -79,7 +79,7 @@
+   if(!b)return null;
+   const afford=c=>c&&w.wood>=c.wood&&w.gold>=c.gold;
+   const canRaise=target=>payable(target)&&g.easyOpeningGuideAllowsUpgrade(target)!==false&&afford(target.upgradeCost());
+-  const suggest=(target,label)=>({...baseHint(target,label),progress:true});
++  const suggest=(target,label)=>({...baseHint(target,label),progress:true,upgradeSubject:target});
+   if(b.level===1&&canRaise(b))return suggest(b,'基地升到二级，解锁更多建筑。');
+   if(b.level<3){
+    let wall,tower;
+--- a/art163/ghost/defense-guide-demo.js
++++ b/art163/ghost/defense-guide-demo.js
+@@ -213,13 +213,14 @@
+   }
+   hudLast=null;
+   if(row?.mode==='resource'){if(lastIntro!=null&&now>=lastIntro)g.warehouseGuideIntroPreview=Math.min(2000,(g.warehouseGuideIntroPreview||0)+Math.min(100,now-lastIntro));lastIntro=now;resourceBubble(g.ctx,row.resource,row.near);return;}
+-  lastIntro=null;if(!row||g.placement)return;const c=g.ctx,t=row.target;
++  lastIntro=null;if(!row||g.placement||g.defenseUpgradeHandoffR14?.owns(row.upgradeSubject))return;const c=g.ctx,t=row.target;
+   if(!t||t.scrollDown){
+    if(!t&&(row.welcome||row.mode==='ordinary'||row.label&&!g.buildMenu))banner(c,row.welcome,row.label);
+    if(t)soft.buildArrow(g,c,t,1.33);
+    return;
+   }
+   soft.buildArrow(g,c,t,1.33,soft.layout(c,Math.min(250,g.uiSafeRect396().w-44),[[text(row.label),13]]));
++  if(!g.selectedBuilding&&row.upgradeSubject)g.defenseUpgradeHandoffR14?.offer(row.upgradeSubject);
+  }
+  const upgrade=g.tryUpgradeBuilding;
+  g.tryUpgradeBuilding=function(b,...a){const lv=b?.level,out=upgrade.call(this,b,...a);if(out&&b?.type==='warehouse'&&b.level>lv){if((g.warehouseGuideStepPreview&3)===2)g.passiveHintsR13?.earned();ledger();}return out;};
+--- a/art163/ghost/demon-tower-guide-demo.js
++++ b/art163/ghost/demon-tower-guide-demo.js
+@@ -75,7 +75,7 @@
+    const cost=b.upgradeCost();if(!cost)return null;
+    if(g.buildMenu||g.selectedBuilding&&g.selectedBuilding!==b)return null;
+    target=g.selectedBuilding?g.getUpgradePanelLayout().upgradeBtn:worldPointer(b);
+-   return{stage,title,detail,tail,target,mode};
++   return{stage,title,detail,tail,target,mode,subject:b};
+   }
+   if(ready)return{stage,title,detail,tail,target,mode};
+   if(!permit(e)||g.getPlayerBuildQueueBN?.().some(j=>j.buildType===k)||stage<=3&&g.selectedBuilding)return null;
+@@ -143,10 +143,11 @@
+   let y=Math.min(S.bottom-h-12,Math.max(g.topHudLayout().bottom+41,M.y+M.h+25));
+   if(a.wrap&&S.w>S.h)y=S.bottom-h-18;
+   if(L)y=L.y+L.h+h+7<S.bottom-55?L.y+L.h+6:Math.max(S.y+5,L.y-h-6);
++  if(g.defenseUpgradeHandoffR14?.owns(a.subject))return;
+   const t=a.target;
+   g.passiveHintsR13?.target(t);
+   if(!t){soft.paint(C,x,y,box);}
+-  if(t)soft.buildArrow(g,C,t,1.3,box);
++  if(t){soft.buildArrow(g,C,t,1.3,box);if(!g.selectedBuilding&&a.subject)g.defenseUpgradeHandoffR14?.offer(a.subject);}
+  }
+  const attack=g.recordDemonAttack545;
+  g.recordDemonAttack545=function(victim,source,...args){
+--- a/network/easy-guide-visual.js
++++ b/network/easy-guide-visual.js
+@@ -175,7 +175,7 @@
+   }finally{c.restore();}
+  }
+  function draw(a){
+-  if(!a||g.endlessOpeningIntro||g.sessionMenuOpen||g.saveSlotsPanel||g.demonPanel||g.allyDataPanel||g.relicPanel||g.ceremony||g.player?.dead)return;
++  if(!a||a.upgrade&&g.defenseUpgradeHandoffR14?.owns(a.target)||g.endlessOpeningIntro||g.sessionMenuOpen||g.saveSlotsPanel||g.demonPanel||g.allyDataPanel||g.relicPanel||g.ceremony||g.player?.dead)return;
+   if(g.easyOpeningGuideStateBN?.tank===true&&!a.cardGuideBN&&!a.cardEffectPanBN&&!a.lateArrowBN)a={...a,lateArrowBN:true};
+   const c=g.ctx,open=g.selectedBuilding||g.buildMenu||g.placement;
+   let control=a.cardGuideBN?a.cardPointerBN:g.easyOpeningGuidePointer(a);
+@@ -193,6 +193,7 @@
+    const catalog=catalogFocus(a,p);
+    if(catalog){drawCatalogFocus(c,catalog,a);return !!a.lateArrowBN;}
+    const cue=drawPointer(c,p,r,a.smallPointerBN,!open&&g.easyOnboardingBN?.scope?.()===true);
++   if(cue&&a.upgrade&&!open)g.defenseUpgradeHandoffR14?.offer(a.target);
+    if(!r)panelLabel(c,cue,p,a.lateArrowBN&&p?.guideTravelBN?'拖镜头找目标':display.title);
+    if(a.lateArrowBN&&cue)return true;
+   }
+--- a/network/ranged-watchtower-guide.js
++++ b/network/ranged-watchtower-guide.js
+@@ -65,9 +65,10 @@
+   if(!active)return false;
+   const w=active.advice.watch;
+   if(w){
++   if(g.defenseUpgradeHandoffR14?.owns(w))return false;
+    const scale=g.zoom(),safe=g.uiSafeRect396(),x=(w.x-g.camera.x)*scale,y=(w.y-g.camera.y)*scale-60;
+    if(x<safe.x+22||x>safe.right-22||y<g.topHudLayout().bottom+50||y>(g.buttonAreaTop||safe.bottom)-20)return false;
+-   g.drawUnifiedGuidanceArrow?.(c,{tipX:x,tipY:y,direction:'down',color:'green',scale:.83});return true;
++   g.drawUnifiedGuidanceArrow?.(c,{tipX:x,tipY:y,direction:'down',color:'green',scale:.83});g.defenseUpgradeHandoffR14?.offer(w);return true;
+   }
+   const b=g.buttons?.find(p=>p.id==='moreBuilds'&&p.visible!==false&&p.w>0);
+   if(!b)return false;

@@ -115,6 +115,7 @@ function install(g,{offline,catalog=[],tankCost,peasantCost={wood:15,gold:5},pea
   }
   function lateAdvice(){
    if(g.state!=='hunt')return null;
+   const midOwns=g.midEconomyGuideR13?.ownsLatePlan?.();
    const p=g.player,now=clock(),safety=p.maxWood>0&&p.maxGold>0;
    const recent=s.lateGuideSeenBN||{};
    const canBuild=type=>canSuggest(type)&&!g.buildingCountBlockReason(type)&&!pending.some(j=>j.buildType===type);
@@ -147,14 +148,14 @@ function install(g,{offline,catalog=[],tankCost,peasantCost={wood:15,gold:5},pea
     enemyAir&&!owned.some(b=>b.airDefenseKindBN==='antiAir')&&defense('antiAirTowerBN','补防空塔','准备迎战蝙蝠。'),
     towers.length<2&&defense('cannonTower','补一座防御塔','放在城墙后。'),
     nearCap&&(raise('economy',depots.find(okCost),'升级仓库','快满仓了，增加容量。')||expand('warehouse','增建仓库','增加木材与金币容量。')),
-    lowGold&&mines.length>=2&&raise('economy',mines.find(okCost),'升级金矿厂','提高产金速度。'),
-    lowGold&&mines.length<4&&expand('goldMine','增建金矿厂','补足金币收入。'),
-    lowWood&&canUseHome&&pop>=cap&&pop<16&&(()=>{const a=populationGoal(owned,p,true);return a?mark(a,a.upgrade?'upgrade:population:'+a.target.level:'build:population'):null;})(),
-    lowWood&&canUseHome&&pop<Math.min(cap,12)&&!g.peasantBlockReason(home)&&mark(workerGoal(home,'补足木材收入。'),'wood-worker'),
+    !midOwns&&lowGold&&mines.length>=2&&raise('economy',mines.find(okCost),'升级金矿厂','提高产金速度。'),
+    !midOwns&&lowGold&&mines.length<4&&expand('goldMine','增建金矿厂','补足金币收入。'),
+    !midOwns&&lowWood&&canUseHome&&pop>=cap&&pop<16&&(()=>{const a=populationGoal(owned,p,true);return a?mark(a,a.upgrade?'upgrade:population:'+a.target.level:'build:population'):null;})(),
+    !midOwns&&lowWood&&canUseHome&&pop<Math.min(cap,12)&&!g.peasantBlockReason(home)&&mark(workerGoal(home,'补足木材收入。'),'wood-worker'),
     raise('defense',weakWall,'升级城墙','强化前线防御。'),
     raise('defense',weakTower,'升级'+(g.buildingName(weakTower?.type||'tower')),'提高防御火力。'),
     towers.length<Math.min(7,3+Math.floor(wave/5))&&defense('cannonTower','增建炮塔','用范围火力清怪。'),
-    mines.length<2&&expand('goldMine','增建金矿厂','为之后的升级补收入。')
+    !midOwns&&mines.length<2&&expand('goldMine','增建金矿厂','为之后的升级补收入。')
    ];
    return options.find(open)||null;
   }
@@ -302,7 +303,7 @@ function install(g,{offline,catalog=[],tankCost,peasantCost={wood:15,gold:5},pea
  }
  // Normal solo rounds get a short, non-modal reminder only when the suggested action is affordable.
  function normalEconomyTick(){
-  if(scope()||!offline()||g.superChallenge580||g.tutorial||g.state!=='hunt'||!g.player||g.player.dead||g.player.defected){
+  if(g.midEconomyGuideR13?.ownsLatePlan?.()||scope()||!offline()||g.superChallenge580||g.tutorial||g.state!=='hunt'||!g.player||g.player.dead||g.player.defected){
    normalHint=null;return;
   }
   if(normalHintPlayer!==g.player||clock()<normalNext-2000){normalHintPlayer=g.player;normalNext=0;normalLast=-Infinity;normalHint=null;}
@@ -332,7 +333,7 @@ function install(g,{offline,catalog=[],tankCost,peasantCost={wood:15,gold:5},pea
  function considerTargetCamera(a){
   const t=a?.target,s=persist();
   if(s.tank||!a||a.phaseBN==='free'||!t||!done(t)){targetPan=null;focusedTarget=focusedStep=null;return;}
-  if(g.easyGuideTargetCameraBlockedBN?.()){targetPan=null;return;}
+  if(g.passiveHintsR13?.enabled()||g.easyGuideTargetCameraBlockedBN?.()){targetPan=null;return;}
   if(t===focusedTarget&&a.key396===focusedStep)return;
   focusedTarget=t;focusedStep=a.key396;
   const dest=g.easyGuideTargetCameraDestinationBN?.(t);if(!dest)return;

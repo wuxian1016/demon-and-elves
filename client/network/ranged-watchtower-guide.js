@@ -12,7 +12,7 @@ function install(g,{offline=()=>false,catalog=[],Building,bonus}={}){
  let active=null,lastPlayer=null,nextProbe=0,template;
  const now=()=>g.supportTime||0;
  const match=()=>offline()===true&&g.player&&!g.player.dead&&g.state==='hunt'&&!g.networkDrawCamera627&&!g.networkAuthorityPhases627&&!g.tutorial&&!g.superChallenge580;
- const busy=()=>g.roundStarting||g.roundLoading591||g.endlessOpeningIntro||g.sessionMenuOpen||g.saveSlotsPanel||g.buildMenu||g.placement||g.selectedBuilding||g.demonPanel||g.allyDataPanel||g.relicPanel||g.ceremony||g.firstAttackGuideActive||g.popupActive515?.()||g.batIntroCardBN?.visible?.()||g.dragonTutorialBL?.active||g.noBuildingWarningAZ?.remaining?.()!=null||priority.active(g)||g.goldShortageGuideBN?.busy?.()||g.easyOpeningGuideEnabled?.()&&(g.easyOpeningGuideStage||0)<10;
+ const busy=()=>g.baseUpgradeGuideBN||g.demonTowerGuidePreview?.reservesWatch?.()||g.roundStarting||g.roundLoading591||g.endlessOpeningIntro||g.sessionMenuOpen||g.saveSlotsPanel||g.buildMenu||g.placement||g.selectedBuilding||g.demonPanel||g.allyDataPanel||g.relicPanel||g.ceremony||g.firstAttackGuideActive||g.popupActive515?.()||g.batIntroCardBN?.visible?.()||g.dragonTutorialBL?.active||g.noBuildingWarningAZ?.remaining?.()!=null||priority.economy(g)||g.goldShortageGuideBN?.busy?.()||g.easyOpeningGuideEnabled?.()&&(g.easyOpeningGuideStage||0)<10;
  const eligible=(h,t)=>alive(h)&&h.waveRangedTrollBN===true&&h.waveNumber===g.waveNumber&&alive(t)&&t.ownerSlot==null&&!Number.isFinite(h.groundWaveRetireAtBN);
  function plan(h){
   template ||= new Building(0,0,'watchtower',1);
@@ -61,6 +61,7 @@ function install(g,{offline=()=>false,catalog=[],Building,bonus}={}){
   if(!q||q.watch!==active.advice.watch||q.lv!==active.advice.lv)cancel();
  }
  function draw(c){
+  if(g.passiveHintsR13?.quiet())return;
   if(!active)return false;
   const w=active.advice.watch;
   if(w){

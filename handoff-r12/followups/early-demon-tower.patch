@@ -1,0 +1,130 @@
+--- a/client/art163/ghost/demon-tower-guide-demo.js
++++ b/client/art163/ghost/demon-tower-guide-demo.js
+@@ -10,12 +10,12 @@
+  ],buildTitles=['','建造冰霜塔','建造箭塔','建造魔法光塔'];
+  const notice=require('../../network/notice-priority'),text=x=>runtime.nativeText(x),own=b=>b?.ownerSlot==null&&g.completedElfBuildingBN(b);
+  const entries=new Map(catalog.map(e=>[e.type,e]));
+- const showed=1400;
+- let visibleAt=null,wrapAt=null,generation=null,sample;
++ const showed=1400,attackLinger=4700,approachAllowance=40;
++ let visibleAt=null,wrapAt=null,generation=null,sample,lastHit=null;
+  function census(){
+   const a=g.indexedOwnerBuildings(null),now=g.supportTime||0,r=g.groundObstacleRevision,ar=g.watchtowerAuraRevision,builds=g.buildings,old=sample;
+   if(old&&old.a===a&&old.r===r&&old.ar===ar&&old.builds===builds&&old.len===builds.length&&now>=old.now&&now-old.now<220)return old;
+-  const towers={iceTower:[],tower:[],manaTower:[],watchtower:[]};
++  const towers={iceTower:[],tower:[],manaTower:[],watchtower:[],cannonTower:[]};
+   for(const b of a)if(own(b)&&Object.prototype.hasOwnProperty.call(towers,b.type)&&!(b.type==='tower'&&b.airDefenseKindBN))towers[b.type].push(b);
+   return sample={a,now,r,ar,builds,len:builds.length,towers};
+  }
+@@ -23,13 +23,27 @@
+  const watch=()=>census().towers.watchtower;
+  const readyForWatch=()=>count('iceTower')&&count('tower')>=2&&count('manaTower');
+  const scope=()=>offline()&&g.state==='hunt'&&!g.player?.dead&&!g.tutorial&&!g.superChallenge580;
+- function hit(victim,source){
+-  if((g.demonTowerGuideStagePreview??0)!==0||!scope()||source!==g.troll||!own(victim)||!g.buildings.includes(victim))return;
++ function activate(){
++  if((g.demonTowerGuideStagePreview??0)!==0)return;
+   g.demonTowerGuideStagePreview=1;g.demonTowerGuideIntroMsPreview=0;
+  }
+- function clear(){
+-  return runtime.hidden||g.baseUpgradeGuideBN||g.wallHalfGuideDemo?.active()||g.wallBaseLevelGuideDemo?.active?.()||notice.economy(g)
+-   ||g.pendingDemonFocus545||g.demonAttackFocus545||g.cameraScenesR7?.active()
++ function hit(victim,source){
++  if(!scope()||source!==g.troll||!own(victim)||!g.buildings.includes(victim)||source.retreating||source.shopping)return;
++  lastHit={player:g.player,source,at:g.supportTime||0};activate();
++ }
++ function threat(){
++  const t=g.troll,now=g.supportTime||0;
++  if(!scope()||!t||t.dead||t.retreating||t.shopping||['retreat','shopping','frozen'].includes(t.state))return false;
++  if(lastHit?.player===g.player&&lastHit.source===t&&now>=lastHit.at&&now-lastHit.at<=attackLinger)return true;
++  if(t.state!=='attack')return false;
++  const b=t.target;
++  if(!own(b)||!g.buildings.includes(b))return false;
++  const reach=t.attackReachFor?.(b)+approachAllowance;
++  return Number.isFinite(reach)&&(t.x-b.x)**2+(t.y-b.y)**2<=reach**2;
++ }
++ function clear(defending=false){
++  return runtime.hidden||g.wallHalfGuideDemo?.urgent?.()||(!defending&&(g.baseUpgradeGuideBN||g.wallHalfGuideDemo?.active()||g.wallBaseLevelGuideDemo?.active?.()||notice.economy(g)))
++   ||!defending&&(g.pendingDemonFocus545||g.demonAttackFocus545)||g.cameraScenesR7?.active()
+    ||g.batIntroCardBN?.visible?.()||g.dragonTutorialBL?.active||g.cardPresentation?.modal()||g.cardPresentation?.blocksDock?.()
+    ||g.rewardAdBN?.pausesLive?.()||g.sessionMenuOpen||g.saveSlotsPanel||g.demonPanel||g.relicPanel||g.allyDataPanel||g.ceremony
+    ||g.rotationInputBlocked398()||g.roundLoading591||g.placement;
+@@ -59,15 +73,27 @@
+   return {stage,upgrading:k,subject,title:'升级'+name+'到 2 级',detail:b?'木'+price.wood+'／金'+price.gold+'，点「升级」完成。':'点选自家'+name+'，再点「升级」。',target,mode:'down'};
+  }
+  function view(){
+-  const stage=g.demonTowerGuideStagePreview;
+-  if(!(stage>=1&&stage<=7)||!scope()||clear()||g.antiAirGuideStagePreview===1&&g.antiAirGuidePreview?.view(true))return null;
+-  if(!(stage>=5&&stage<=6)){
++  const stage=g.demonTowerGuideStagePreview,defending=stage>=1&&stage<=3&&threat();
++  if(!(stage>=1&&stage<=7)||!scope()||clear(defending)||!defending&&g.antiAirGuideStagePreview===1&&g.antiAirGuidePreview?.view(true))return null;
++  if(!defending&&!(stage>=5&&stage<=6)){
+    const m=g.goldMineGuidePreview,w=g.woodWorkforcePreview;
+    if(m?.actionPending()&&m.view(true)||w?.actionPending()&&w.view(true))return null;
+   }
+   if(stage===7||stage===4&&!readyForWatch())return upgradeView(stage);
+   if(stage===4)return null;
+-  const k=plan[stage],p=g.player,e=entries.get(k),desc=intro[stage],ready=count(k)>0;
++  const preferred=plan[stage],p=g.player,ready=count(preferred)>0,queued=g.getPlayerBuildQueueBN?.()||[];
++  let k=preferred,e=entries.get(k),desc=intro[stage];
++  if(defending&&!ready){
++   if(queued.some(j=>j.buildType===preferred))return null;
++   const alternatives=['tower','cannonTower','iceTower','manaTower'].filter(type=>type!==preferred&&!count(type)).map(type=>entries.get(type)).filter(a=>a&&permit(a));
++   if(!permit(e)||!enough(p,e)){
++    const available=alternatives.find(a=>enough(p,a)&&!queued.some(j=>j.buildType===a.type));
++    // If a practical fallback is already under construction, let it finish.
++    if(!available&&alternatives.some(a=>queued.some(j=>j.buildType===a.type)))return null;
++    const attainable=available||(!permit(e)&&alternatives.sort((a,b)=>a.wood+a.gold-b.wood-b.gold)[0]);
++    if(attainable){e=attainable;k=e.type;desc=intro[plan.indexOf(k)]||['炮塔','范围火力可压制前来进攻的敌人。'];}
++   }
++  }
+   let title=desc[0],detail=desc[1],tail=desc[2],target,mode='down';
+   if(stage===6){
+    const all=watch(),b=all.find(canUpgrade);
+@@ -78,9 +104,16 @@
+    return{stage,title,detail,tail,target,mode};
+   }
+   if(ready)return{stage,title,detail,tail,target,mode};
+-  if(!permit(e)||g.getPlayerBuildQueueBN?.().some(j=>j.buildType===k)||stage<=3&&g.selectedBuilding)return null;
+-  if(stage<=3){title=buildTitles[stage];tail=undefined;}
+-  if(!enough(p,e))return{stage,title,detail:detail+'（木'+e.wood+'／金'+e.gold+'）',target,buildCost:e};
++  if(!permit(e)||queued.some(j=>j.buildType===k)||stage<=3&&g.selectedBuilding)return null;
++  if(stage<=3){title=k===preferred?buildTitles[stage]:'建造'+e.name;tail=undefined;}
++  if(!enough(p,e)){
++   if(defending){
++    const short=p.wood<e.wood?'wood':'gold',action=short==='wood'?'伐木':'采矿';
++    if(!g.buildMenu&&!g.selectedBuilding&&p.task?.type!==short)target=g.buttons.find(b=>b.id===(short==='wood'?'collectWood':'collectGold')&&b.visible!==false&&b.w>0);
++    title=(target?'去'+action:'攒资源')+'，建造'+e.name;
++   }
++   return{stage,title,detail:detail+'（木'+e.wood+'／金'+e.gold+'）',target,buildCost:e,threatDefenseBN:defending};
++  }
+   if(g.selectedBuilding)target=g.getUpgradePanelLayout().closeBtn;
+   else if(!g.buildMenu){target=g.buttons.find(b=>b.id==='moreBuilds'&&b.visible!==false);mode='dock';}
+   else{
+@@ -92,7 +125,7 @@
+     if(!target&&c&&b&&L.maxScroll){const more='向上滑，找到'+e.name+'。';if(stage<=3)tail=more;else title=more;}
+    }
+   }
+-  return{stage,title,detail,tail,target,mode};
++  return{stage,title,detail,tail,target,mode,threatDefenseBN:defending};
+  }
+  function stepUpgrade(n,acted){
+   if(acted&&!g.demonTowerGuideWrapPreview)g.demonTowerGuideWrapPreview=-2;
+@@ -107,7 +140,7 @@
+  }
+  function draw(){
+   if(g.passiveHintsR13?.quiet())return;
+-  if(g.defenseGuideDemo?.idleOwns?.())return;
++  if(!threat()&&g.defenseGuideDemo?.idleOwns?.())return;
+   if(generation!==g.player){generation=g.player;visibleAt=wrapAt=null;}
+   const stage=g.demonTowerGuideStagePreview;
+   if(!(stage>0&&stage<=7)||!scope()){visibleAt=wrapAt=null;return;}
+@@ -159,6 +192,6 @@
+   if(n<3&&b.type===plan[n+1]&&!b.airDefenseKindBN)stepUpgrade(n+1,true);
+   if(g.demonTowerGuideStagePreview===6&&b.type==='watchtower')advance(7);
+  }return out;};
+- const original=g.draw;g.draw=function(...a){const out=original.apply(this,a);draw();return out;};
+- g.demonTowerGuidePreview={view,reservesWatch:()=>scope()&&g.demonTowerGuideStagePreview>0&&g.demonTowerGuideStagePreview<7};
++ const original=g.draw;g.draw=function(...a){if((g.demonTowerGuideStagePreview??0)===0&&threat())activate();const out=original.apply(this,a);draw();return out;};
++ g.demonTowerGuidePreview={view,threat,reservesWatch:()=>scope()&&g.demonTowerGuideStagePreview>0&&g.demonTowerGuideStagePreview<7};
+ };

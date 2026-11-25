@@ -1,0 +1,7 @@
+[启动163] 原生图片已就绪 423 0 ms
+BOTH-LOW {"wolf":["木材不够，制造伐木小精灵，让它替你伐木","金币不足，点「采矿」为金矿厂攒钱。"],"dock":["collectGold"],"guide":"collectGold","rows":["基地 Lv3","木材不够，制造伐木小精灵，让它替你伐木","。","金币不足，点「采矿」为金矿厂攒钱。"],"wood":20,"gold":5,"phase":"hunt","base":3}
+AssertionError [ERR_ASSERTION]: The expression evaluated to a falsy value:
+
+  assert(unique.length<=1)
+
+    at both-low-integrated.cjs:85:88

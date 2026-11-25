@@ -28,7 +28,7 @@ function installOfflineGateFocus(game,{enabled=()=>true,input=null}={}){
   if(this.state!=='hunt'||this.player?.dead||this.endlessOpeningIntro||this.popupActive515?.())return;
   if(raidZoneList!==this.resourceZones){raidZoneList=this.resourceZones;raidSerial=null;}
   const raid=this.troll?.raidPolicyStateAB;
-  if(!raid||raid.selectionSerial===raidSerial||raid.owner!=='self'||raid.engaged||raid.purchasePending||raid.healthReturnPending||!(raid.warningLeft>0)||this.troll.dead||this.troll.retreating||this.troll.state==='frozen'||priority.active(this))return;
+  if(!raid||raid.selectionSerial===raidSerial||raid.owner!=='self'||raid.engaged||raid.purchasePending||raid.healthReturnPending||!(raid.warningLeft>0)||this.troll.dead||this.troll.retreating||this.troll.state==='frozen'||priority.economy(this))return;
   const w=this.incomingAttackWarningStates?.().find(v=>v.raidSerialAB===raid.selectionSerial&&v.seconds>0);
   if(!w||this.attackWarningAvoidanceAZ?.arrived(w))return;
   this.showToast('恶魔正从路口来袭！');

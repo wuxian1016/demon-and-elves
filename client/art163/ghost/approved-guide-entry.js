@@ -1,5 +1,5 @@
 'use strict';
-const {create}=require('./approved-guide-flow');
+const {create,layout}=require('./approved-guide-flow');
 // Integration is modal-only and affirmative: absent original scene material never substitutes a mock.
 module.exports=function install(g,env){
  const {viewport,hidden,resetInput,wake,now,offline,iconFor=()=>null,stageFor=()=>null}=env;
@@ -88,9 +88,12 @@ module.exports=function install(g,env){
  };
  g.update=function(...args){if(!flow.combatPaused())return u.apply(this,args);};
  g.draw=function(...args){
-  const old=this.guideDockUnderPanelBN;
-  if(this.selectedBuilding&&viewport().width>viewport().height&&flow.dockNeeded())this.guideDockUnderPanelBN=true;
-  const res=(()=>{try{return d.apply(this,args);}finally{this.guideDockUnderPanelBN=old;}})();
+  const old=this.guideDockUnderPanelBN,shade=this.guideSuppressUpgradeDimBN,v=viewport();
+  if(this.selectedBuilding&&flow.dockNeeded()){
+   if(v.width>v.height)this.guideDockUnderPanelBN=true;
+   if(layout(v))this.guideSuppressUpgradeDimBN=true;
+  }
+  const res=(()=>{try{return d.apply(this,args);}finally{this.guideDockUnderPanelBN=old;this.guideSuppressUpgradeDimBN=shade;}})();
   reconcile();flow.draw(this.ctx);return res;
  };
  g.robotGuideBN=Object.assign(flow,{report:(report=>()=>({approved:report()}))(flow.report)});

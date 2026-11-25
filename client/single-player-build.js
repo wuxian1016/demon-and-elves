@@ -43,14 +43,16 @@ function* prepare(env, {installActions=true,offline=()=>true}={}, attach, cement
   require('./network/resource-three-tier').protectSlotOverwrites(runtime,typeof wx==='undefined'?null:wx);
   const flags=typeof GameGlobal==='undefined'?{}:GameGlobal;
   const mode=flags.isIOSHighPerformanceModePlus===true?'高性能+':flags.isIOSHighPerformanceMode===true?'高性能':flags.isIOSHighPerformanceMode===false&&flags.isIOSHighPerformanceModePlus===false?'普通模式':'模式待确认';
-  const testLabel='COW8D-PF1 · 单人测试 · '+mode;
-  runtime.releaseLabel = 'COW8D-PF1 · 单人测试 · '+mode;
+  const testLabel='COW8D-PF1-CLAUDE-R12-GUIDES-SOLO · 单人测试 · '+mode;
+  runtime.releaseLabel = 'COW8D-PF1-CLAUDE-R12-GUIDES-SOLO · 单人测试 · '+mode;
   installPreparedAttach(function(game) {
     attach.call(this, game);
+    const guide=()=>offline()&&game.operationGuideModeR13();
     env.window.batSoloPolicyBN?.install(game);
     env.window.ghostModulesBN.robot_factory_models.install(game,{runtime,Image:env.Image,offline,art:()=>env.window.woodlandArt,skills:()=>env.window.skillAtlas512,makeCanvas:()=>env.document.createElement('canvas'),loadPackage:typeof wx==='undefined'||!wx.loadSubpackage?null:()=>new Promise((resolve,reject)=>wx.loadSubpackage({name:'factoryModelArt',success:resolve,fail:reject}))});
     require('./network/bat-warning-avatar').install(game,{enabled:()=>env.window.batWaveCandidateBN?.enabled(game)===true,Image:env.Image});
     require('./network/wall-attack-exterior').install(game);
+    game.baseGuideR8=env.window.ghostModulesBN.base_upgrade_guide;
     require('./network/resource-three-tier').install(game,{Building:env.window.originalNetwork627?.types?.Building});
     installOwnershipColors(game,{Building:env.window.originalNetwork627?.types?.Building});
     installPlacementSites(game,{cooperativeHints:true,Building:env.window.originalNetwork627?.types?.Building,catalog:env.window.originalNetwork627?.BUILD_CATALOG,viewport:()=>runtime.viewport(),input:()=>env.window.originalNetwork627?.input,clock:()=>env.performance.now(),art:()=>env.window.woodlandArt,towerVisual:()=>env.window.batTowerVisualBN,airDefense:()=>env.window.batAirDefenseBN,text:value=>runtime.nativeText(value)});
@@ -58,14 +60,25 @@ function* prepare(env, {installActions=true,offline=()=>true}={}, attach, cement
     require('./network/altar-range-preview').install(game,{Building:env.window.originalNetwork627?.types?.Building});
     require('./network/building-visual-scale').installPicking(game,()=>env.window.woodlandArt);
     require('./network/tank-production-overlay').install(game,{art:()=>env.window.woodlandArt,text:value=>runtime.nativeText(value),offline});
-    game.resourceCapViewport=()=>runtime.viewport();require('./network/resource-cap-guide').install(game,{clock:()=>env.performance.now()});
-    require('./network/gold-shortage-guide').install(game,{costs:env.window.originalNetwork627?.paymentCostsBN,catalog:env.window.originalNetwork627?.BUILD_CATALOG,viewport:()=>runtime.viewport(),clock:()=>env.performance.now(),offline,text:value=>runtime.nativeText(value)});
+    game.resourceCapViewport=()=>runtime.viewport();env.window.ghostModulesBN.resource_cap_guide.install(game,{clock:()=>env.performance.now()});
+    require('./network/gold-shortage-guide').install(game,{costs:env.window.originalNetwork627?.paymentCostsBN,catalog:env.window.originalNetwork627?.BUILD_CATALOG,viewport:()=>runtime.viewport(),clock:()=>env.performance.now(),offline:guide,text:value=>runtime.nativeText(value)});
     require('./network/attack-warning-avoidance').install(game,{viewport:()=>runtime.viewport(),clock:()=>env.performance.now(),art:()=>env.window.woodlandArt});
     require('./network/unified-guidance-arrows').install(game,{clock:()=>env.performance.now()});
+    env.window.ghostModulesBN.solo_cutaway.install(game,runtime);
+    env.window.ghostModulesBN.wall_half_guide_demo.install(game,runtime,()=>env.window.originalNetwork627?.input);
+    env.window.ghostModulesBN.defense_guide_demo.install(game,env.window.originalNetwork627.BUILD_CATALOG,value=>runtime.nativeText(value),env.window.originalNetwork627.types.Building);
+    env.window.ghostModulesBN.wood_workforce_demo.install(game,runtime,env.window.originalNetwork627.BUILD_CATALOG,env.window.originalNetwork627.types.Building,guide);
+    env.window.ghostModulesBN.antiair_guide_demo.install(game,runtime,env.window.originalNetwork627.BUILD_CATALOG,guide,()=>env.window.batWaveCandidateBN?.menuEnabled(game));
+    env.window.ghostModulesBN.goldmine_guide_demo.install(game,runtime,env.window.originalNetwork627.BUILD_CATALOG,env.window.originalNetwork627.types.Building,guide);
+    env.window.ghostModulesBN.tank_economy_guide_demo.install(game,runtime,env.window.originalNetwork627.BUILD_CATALOG,env.window.originalNetwork627.types.Building,env.window.originalNetwork627.paymentCostsBN.TANK_COST,env.window.originalNetwork627.paymentCostsBN.ROBOT_COST,guide);
+    env.window.ghostModulesBN.vehicle_drive_guide_demo.install(game,runtime,guide);
+    env.window.ghostModulesBN.vehicle_lab_guide.install(game,runtime,env.window.originalNetwork627.BUILD_CATALOG,env.window.originalNetwork627.types.Building,guide);
+    env.window.ghostModulesBN.demon_tower_guide_demo.install(game,runtime,env.window.originalNetwork627.BUILD_CATALOG,guide);
+    env.window.ghostModulesBN.save_reminder.install(game,{offline:guide,text:value=>runtime.nativeText(value)});
     const native=env.window.originalNetwork627;
-    const rangeGuide=require('./network/ranged-watchtower-guide').install(game,{offline,catalog:native?.BUILD_CATALOG,Building:native?.types?.Building,bonus:native?.watchtowerBonus});
-    require('./network/easy-onboarding').install(game,{offline,catalog:env.window.originalNetwork627?.BUILD_CATALOG,tankCost:env.window.originalNetwork627?.paymentCostsBN?.TANK_COST});
-    require('./network/exchange-imbalance-guide').install(game,{offline,catalog:env.window.originalNetwork627?.BUILD_CATALOG});
+    const rangeGuide=require('./network/ranged-watchtower-guide').install(game,{offline:guide,catalog:native?.BUILD_CATALOG,Building:native?.types?.Building,bonus:native?.watchtowerBonus});
+    require('./network/easy-onboarding').install(game,{offline:guide,catalog:env.window.originalNetwork627?.BUILD_CATALOG,tankCost:env.window.originalNetwork627?.paymentCostsBN?.TANK_COST});
+    require('./network/exchange-imbalance-guide').install(game,{offline:guide,catalog:env.window.originalNetwork627?.BUILD_CATALOG});
     require('./network/phase-one-tank-drop').install(game,{offline,Tank:env.window.originalNetwork627?.types?.Tank});
     require('./network/attack-direction-arrow').install(game,{viewport:()=>runtime.viewport(),art:()=>env.window.woodlandArt,text:value=>runtime.nativeText(value)});
     installSummonedHoundWalls(game,{Hound:env.window.originalNetwork627?.types?.Hound,active:offline});
@@ -83,9 +96,14 @@ function* prepare(env, {installActions=true,offline=()=>true}={}, attach, cement
     installOfflineDeathResults(game,{runtime,Troll:env.window.originalNetwork627?.types?.Troll,offline});
     const placements=require('./network/ad-lab/native-placement-config');
     if(placements.enabled===true&&typeof wx!=='undefined'){
-      const ads=require('./network/ad-lab/native-host')(game,{runtime,types:env.window.originalNetwork627?.types,offline,sdk:wx,config:placements});
+      const ads=require('./network/ad-lab/native-host')(game,{runtime,types:env.window.originalNetwork627?.types,offline,sdk:wx,config:placements,elfRevive:env.window.ghostModulesBN.elf_ad_revive,input:env.window.originalNetwork627?.input});
       if(ads){
         Object.defineProperty(game,'rewardAdBN',{value:ads});
+        const update=game.update;
+        game.update=function(...args){
+          if(ads.pausesLive()){this.loopClock=null;this.simulationDebt=this.inSimulationBatch?Math.max(0,args[0]||0):0;return;}
+          return update.apply(this,args);
+        };
         const reset=game.resetSteps591;
         game.resetSteps591=function*(...args){ads.leaveLobby();const out=yield*reset.apply(this,args);ads.reset(false);return out;};
         const load=game.applySavedWorld;
@@ -124,7 +142,7 @@ function* prepare(env, {installActions=true,offline=()=>true}={}, attach, cement
       rangeGuide?.tick();
       const result = draw.apply(this, args);
       if(!offline()){hud.reset();wasActive=false;return result;}
-      if(this.robotGuideBN?.playing?.())return result;
+      if(this.robotGuideBN?.playing?.()||this.cardPresentation?.modal())return result;
       const playing=active();if(playing!==wasActive){hud.reset();wasActive=playing;}
       if(['prep','hunt'].includes(this.state)&&!this.roundStarting){
         if(this.deathResultsAD?.visible)return result;
@@ -149,6 +167,7 @@ function* prepare(env, {installActions=true,offline=()=>true}={}, attach, cement
             effects.draw(this.ctx,runtime.canvas,view,geometry,map,avoid,this.buttonAreaTop,core);
           }catch(error){if(!effectHudWarned){effectHudWarned=true;runtime.diagnosticEvent?.('card-effect-hud-error',String(error?.message||error));}}
         }
+        if(this.cardPresentation?.expandedGhost()){this.displayTransform398(this.ctx);this.cardPresentation.draw(this.ctx);}
         return result;
       }
       if (this.state !== 'start' || this.sessionMenuOpen || this.saveSlotsPanel || this.roundStarting) return result;
@@ -164,5 +183,6 @@ function* prepare(env, {installActions=true,offline=()=>true}={}, attach, cement
       } finally { ctx.restore(); }
       return result;
     };
+    env.window.ghostModulesBN.passive_hints.install(game,offline,()=>native?.input,()=>runtime.wake?.());
   });
 }

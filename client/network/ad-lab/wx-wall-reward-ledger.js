@@ -17,5 +17,10 @@ module.exports=function wallRewardLedger(wx,kind='wall'){
    wx.setStorageSync(key(id),n);return readLedger(id)===n;
   }catch{return false;}
  }
- return {readLedger,writeLedger};
+ function refundLedger(id,expected,n){
+  if(!valid(id)||!value(expected)||!value(n)||!tower&&!vehicle)return false;
+  if(tower?expected-n!==1:([1,2].includes(expected^n)&&(expected&n)===n)!==true)return false;
+  try{if((readLedger(id)??0)!==expected)return false;wx.setStorageSync(key(id),n);return readLedger(id)===n;}catch{return false;}
+ }
+ return {readLedger,writeLedger,refundLedger};
 };

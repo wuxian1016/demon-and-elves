@@ -127,7 +127,7 @@ module.exports=function install(g,{Projectile,MiniTroll,art,opened=()=>true,stic
   if(g.player.ghostRaidCargo){
    if(delivery){delivery=null;return strikeHint('已取消自动送达，资源仍在携带中');}
    const home=raidHome();if(!home)return strikeHint('自己的基地不可用，资源仍在携带中');
-   g.player.takeOverManual();g.manualCamera394=false;delivery=home;return true;
+   g.player.takeOverManual();g.manualCamera394=false;delivery=home;g.cameraScenesR7?.bat(h);return true;
   }
   if(halted(h))return strikeHint('当前被控制，解除后才能偷资源');
   if(h.attackCd>0||activeCast(h))return strikeHint('技能正在冷却');
@@ -308,5 +308,5 @@ module.exports=function install(g,{Projectile,MiniTroll,art,opened=()=>true,stic
  }
  const attackers=(list)=>host?list.filter(o=>o!==host):list;
  const targets=(list)=>stealth()?list.filter(o=>!hidden(o)):list;
- return g.ghostElfAPI={restoreHost,driveStick,controlledUpdate,syncBody,receive,hitHost:(p,n,s)=>p===g.player&&!!host&&receive(host,n,s),hostFell:h=>h===host&&leave(),canHitAir,attackValue,drawHost,tintStats:appearance.stats,clearTarget,refund,canTransform:()=>eligible()&&!g.player.ghostElf,transform,legend,button,tap,step,hostTick,paint,attackers,targets,hidden,leave,stealth,get host(){return host;},get aim(){return aim;}};
+ return g.ghostElfAPI={restoreHost,driveStick,controlledUpdate,syncBody,receive,hitHost:(p,n,s)=>p===g.player&&!!host&&receive(host,n,s),hostFell:h=>h===host&&leave(),canHitAir,attackValue,drawHost,tintStats:appearance.stats,clearTarget,refund,canTransform:()=>eligible()&&!g.player.ghostElf,transform,legend,button,tap,step,hostTick,paint,attackers,targets,hidden,leave,stealth,get deliveringR7(){return!!delivery;},get host(){return host;},get aim(){return aim;}};
 };

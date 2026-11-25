@@ -1,0 +1,4 @@
+[启动163] 原生图片已就绪 423 0 ms
+entry {"n":0,"phase":"prep","prep":60,"hunt":0,"wood":0,"gold":0,"cap":[80,100],"menu":false,"selected":null,"tutorial":false,"intro":0,"shot":false,"fault":false,"pend":1,"view":{"mode":"resourceIntro","label":"先认识资源区"}}
+MISSING_PAINT_ASSET_COUNT 0 []
+{"gatherButtonOnly":true,"noWorldMineCue":true,"resourceGateReached":true,"realFactoryBuilt":true,"orientation":"portrait"}

@@ -4,7 +4,7 @@ const validRound=id=>typeof id==='string'&&/^[a-zA-Z0-9_-]{8,100}$/.test(id);
 const validMask=n=>Number.isInteger(n)&&n>=0&&n<=3;
 const safe=(fn,...args)=>{try{return fn(...args);}catch{return undefined;}};
 module.exports=function vehicleRevive({
- video,scope,readLedger,writeLedger,canOffer,canRestore,canRetain=canRestore,restoreVehicle,reserve,notify=()=>{},onChange=()=>{},onPresented=()=>{}
+ video,scope,readLedger,writeLedger,refundLedger,canOffer,canRestore,canRetain=canRestore,restoreVehicle,reserve,notify=()=>{},onChange=()=>{},onPresented=()=>{}
 }){
  let match=null,epoch=0,mask=3,enabled=false,queued=[],playing=null;
  const active=()=>enabled&&safe(scope,match)===true;
@@ -65,6 +65,9 @@ module.exports=function vehicleRevive({
    if(serial!==epoch||playing!==p)return;
    playing=null;
    try{
+    if(result==='unavailable'&&active()&&safe(refundLedger,match,mask,mask&~row.bit)===true){
+     mask&=~row.bit;safe(onPresented);safe(notify,'广告未能打开，本次未扣车辆复活机会');
+    }
     if(result==='ended'&&active()){
      const ok=safe(canRestore,row,p.release)===true&&safe(restoreVehicle,row,p.release)===true;
      safe(notify,ok?(row.kind==='robot'?'机器人已复活':'坦克已复活'):'当前无法安全复活车辆');
@@ -73,7 +76,7 @@ module.exports=function vehicleRevive({
     release(p);safe(onChange);if(active()&&(mask<3||queued.length))safe(video.warm);
    }
   };
-  if(safe(video.play,end)!==true)end('failed');else safe(onChange);
+  if(safe(video.play,end)!==true)end('unavailable');else safe(onChange);
   return true;
  }
  return {start:id=>restore({id,mask:0}),restore,snapshot:()=>match?{id:match,mask}:null,

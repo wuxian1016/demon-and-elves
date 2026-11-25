@@ -100,7 +100,8 @@ module.exports=function install(g,{Entity,Projectile,MiniTroll,win=globalThis,of
   return spare;
  }
  function spawn(bot,d,x,y,r){
-  const v={v:1,x,y,maxHp:d.maxHp,hp:d.hp,life:LIFE,form:FORM,radius:r,damage:num(d.getDamage?.()),armor:num(d.effectiveArmor?.(),num(d.totalArmor?.())),
+  const stock=d.getGhostCopyStatsBN?.()||{maxHp:d.maxHp,hp:d.hp,damage:d.getDamage?.(),armor:num(d.effectiveArmor?.(),num(d.totalArmor?.()))};
+  const v={v:1,x,y,maxHp:stock.maxHp,hp:stock.hp,life:LIFE,form:FORM,radius:r,damage:num(stock.damage),armor:num(stock.armor),
    speed:num(d.getGhostCopySpeedBN?.()??d.getChaseSpeed?.(),num(d.getMoveSpeed?.(),num(d.speed))),reach:num(d.attackRange,40),interval:num(d.getAttackCd?.(),750),attackCd:0,taunt:bot.basicLaserRange(g),
    stage:d.dragonEvolved?2:d.evolved?1:0,breathRange:num(d.breathRange),originX:bot.x,originY:bot.y-36,facing:d.facing||1,facingV:d.facingV||1};
   if(!validRecord(v))return hint('恶魔状态已变，请重新选择');

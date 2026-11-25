@@ -11,7 +11,7 @@ module.exports=function adSurfaces({
  otherAd=()=>false,clock=Date.now,after=setTimeout,clear=clearTimeout
 }){
  const raw=rewardVideo(wx,rewardId,clock,after,clear);
- let rewardOwner=null,manualPanel=null,guard=0,skipNextLobby=false;
+ let rewardOwner=null,rewardSettling=0,manualPanel=null,guard=0,skipNextLobby=false;
  const lobby=createLobby({wx,id:lobbyId,otherIds:[rewardId,interstitialId],live:lobbyLive,layout:lobbyLayout,policy:lobbyPolicy,measure:lobbyMeasure,
   competing:()=>!!rewardOwner||!!manualPanel||results.busy()||otherAd()!==false});
  const results=createResults({wx,id:interstitialId,rewardId,live:resultsLive,warmLive:resultsWarmLive,trace:resultsTrace,now:clock,later:after,clear,
@@ -29,9 +29,10 @@ module.exports=function adSurfaces({
    const stamp=++guard;
    rewardOwner=owner;
    try{
-    if(raw.play(result=>{
+    if((owner==='player'?raw.request:raw.play)(result=>{
      if(stamp!==guard)return;
-     rewardOwner=null;done(result);
+     rewardOwner=null;rewardSettling=stamp;
+     try{done(result);}finally{if(rewardSettling===stamp)rewardSettling=0;}
     }))return true;
    }catch{}
    if(guard===stamp)rewardOwner=null;
@@ -39,17 +40,18 @@ module.exports=function adSurfaces({
   },
   cancel(){
    if(rewardOwner&&rewardOwner!==owner)return;
-   ++guard;rewardOwner=null;raw.cancel();
+   ++guard;rewardOwner=null;rewardSettling=0;raw.cancel();
   }
  });
  const wall=createWipeout({...wallHost,video:port('wall')});
  const vehicle=vehicleHost?createVehicle({...vehicleHost,video:port('vehicle'),canOffer:()=>vehicleHost.canOffer()===true&&!wall.offer()}):null;
  const tower=towerHost?createWall({...towerHost,kind:'tower',video:port('tower')}):null;
+ const player=port('player');
  const manual=manualHost?createManual({...manualHost,video:port('manual')}):null;
  const leaveManual=()=>{manual?.cancel();manualPanel=null;};
  const cancelRecovery=()=>{wall.cancel();vehicle?.cancel();tower?.cancel();};
  return {
-  wall,tower,vehicle,results,lobby,
+  wall,tower,vehicle,results,lobby,player,rewardBusy:()=>rewardOwner!==null||rewardSettling!==0,
   prepareManual(panel,slot,match){if(!manual)return false;manualPanel=panel;return manual.prepare(panel,slot,match);},
   watchManual:(panel,slot,match,save)=>manualPanel===panel?manual?.start(panel,slot,match,save):false,
   interruptManual:panel=>manual?.cancel(panel),
@@ -66,13 +68,13 @@ module.exports=function adSurfaces({
   leaveResults:()=>results.left(),
   enterLobby(visitId,{userInitiated=false}={}){
    if(typeof lobbyLive!=='function'||lobbyLive(visitId)!==true)return false;
-   const noAd=!!rewardOwner||results.busy()||skipNextLobby&&!userInitiated;
+   const noAd=!!rewardOwner||results.busy()||skipNextLobby&&!userInitiated;player.cancel();
    skipNextLobby=false;
    leaveManual();results.left();cancelRecovery();
    return lobby.entered(visitId,{noAd});
   },
   leaveLobby:()=>lobby.leave(),
   lobbyLayoutChanged:()=>lobby.layoutChanged(),
-  reset(){lobby.leave();leaveManual();results.left();cancelRecovery();skipNextLobby=false;}
+  reset(){lobby.leave();leaveManual();results.left();player.cancel();cancelRecovery();skipNextLobby=false;}
  };
 };

@@ -83,7 +83,9 @@ function create(g,{offline,viewport,hidden=()=>false,now=Date.now,wake=()=>{},re
   const root={x:s.origin.x*v.width/vx,y:s.origin.y*v.height/vy,w:s.origin.w*v.width/vx,h:s.origin.h*v.height/vy};
   const [cx,cy]=mid(l),[ox,oy]=mid(root),[tx,ty]=mid(target);
   c.save();try{
-   c.fillStyle='#161616';c.fillRect(0,0,v.width,v.fullHeight||v.height);
+   // Match the pause-layer weight over the already rendered world. No snapshot.
+   const shade=.5*(elapsed===null?1:1-zoom);
+   if(shade>0){c.fillStyle='rgba(0,0,0,'+shade+')';c.fillRect(0,-(v.top||0),v.width,v.fullHeight||v.height);}
    if(elapsed===null||elapsed<480){
     const w=elapsed===null?root.w+(l.w-root.w)*zoom:l.w+(target.w-l.w)*zoom,h=elapsed===null?root.h+(l.h-root.h)*zoom:l.h+(target.w-l.h)*zoom;
     const x=elapsed===null?ox+(cx-ox)*zoom:cx+(tx-cx)*zoom,y=elapsed===null?oy+(cy-oy)*zoom:cy+(ty-cy)*zoom;

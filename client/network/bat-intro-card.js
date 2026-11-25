@@ -6,7 +6,7 @@ module.exports=function install(g,{enabled=()=>false,stoneEnabled=enabled,viewpo
  const motion=require('./native-control-motion')(clock);
  let active=false,until=0,skipRect=null,skipSkin=null,captured=false,last=null,kind=null;
  const inside=(p,r)=>!!p&&!!r&&p.clientX>=r.x&&p.clientX<=r.x+r.w&&p.clientY>=r.y&&p.clientY<=r.y+r.h;
- const allowed=which=>(which==='stone'?stoneEnabled():enabled())===true&&['prep','hunt'].includes(g.state)&&!g.player?.dead;
+ const allowed=which=>g.operationGuideModeR13?.()!==false&&(which==='stone'?stoneEnabled():enabled())===true&&['prep','hunt'].includes(g.state)&&!g.player?.dead;
  const copy={
   bat:{title:'蝙蝠来袭',lines:['飞袭仓库偷资源；无仓库打金矿厂。','箭塔、冰塔、防空塔可对空。','捕网迫降后，所有塔都能攻击。']},
   stone:{title:'石头人来袭',lines:['啃城墙回血，投石砸附近的塔。','用魔法塔克制，先守好城墙。','击败后可获得卡牌。']}
@@ -15,7 +15,7 @@ module.exports=function install(g,{enabled=()=>false,stoneEnabled=enabled,viewpo
  function show(enemy,which,seen){if(active||!enemy||enemy.dead||g[seen]||!allowed(which)||(g.waveElapsed||0)>=600)return false;g[seen]=true;kind=which;active=true;until=clock()+10000;skipRect=skipSkin=null;return true;}
  const api={
  visible(){if(!allowed(kind)||(g.waveElapsed||0)>=600||clock()>=until)active=false;return active;},
- onDeparture(bat){return !!bat?.waveBat&&(!Number.isFinite(bat.waveNumber)||bat.waveNumber<=8)&&show(bat,'bat','batIntroSeenBN');},
+ onDeparture(bat){if(!bat?.waveBat||Number.isFinite(bat.waveNumber)&&bat.waveNumber>8)return false;const shown=show(bat,'bat','batIntroSeenBN');g.antiAirGuidePreview?.departure(bat,shown);return shown;},
  onStoneArrival(stone){return !!stone?.waveStone&&stone.waveNumber===10&&show(stone,'stone','stoneIntroSeenBN');},
  skip(){active=false;skipRect=skipSkin=null;motion.cancel();},
  reset(){motion.cancel();active=false;kind=null;skipRect=skipSkin=null;g.batIntroSeenBN=false;g.stoneIntroSeenBN=false;captured=false;last=null;},

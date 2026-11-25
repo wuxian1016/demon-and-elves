@@ -4,7 +4,7 @@
 function create({createCardInteraction,game,controller,view,clock,artReady=()=>true,warmGhost,drawFullCard,drawButton,screenToWorld}){
  if(typeof drawFullCard!=='function'||typeof drawButton!=='function'||typeof screenToWorld!=='function')throw Error('Native card presentation dependencies missing');
  let visibleIds=controller.core.state.hand.map(c=>c.id),queue=[];const g=game;
- const refresh=()=>{const v=view(),j=g.getJoystickRect(),hud=g.topHudLayout?.();Object.assign(options,{width:v.width,height:v.height,scale:v.width/552,safe:g.uiSafeRect396?.(),hudBottom:v.width>v.height?Math.max(hud?.bottom||0,(hud?.timer||0)+11):hud?.bottom,joystickX:j?.x??v.width*.16,joystickTop:j?j.y-j.r:v.height*.8});};
+ const refresh=()=>{const v=view(),j=g.getJoystickRect(),hud=g.topHudLayout?.();Object.assign(options,{width:v.width,height:v.height,displayTop:v.top,displayFull:v.fullHeight,scale:v.width/552,safe:g.uiSafeRect396?.(),hudBottom:v.width>v.height?Math.max(hud?.bottom||0,(hud?.timer||0)+11):hud?.bottom,joystickX:j?.x??v.width*.16,joystickTop:j?j.y-j.r:v.height*.8});};
  const options={ghostReveal:require('./ghost-card-reveal'),guideMode:()=>g.easyOnboardingBN?.scope?.()===true,hand:controller.core.state.hand.map(c=>c.type),drawFullCard,drawButton,getCharges:i=>controller.core.state.hand.find(c=>c.id===visibleIds[i])?.uses||0,
   getAimRadius:()=>(controller.core.storm?.radius||0)*(g.zoom?.()||1),
   onSelect:type=>{if(type==='storm')g.cardVisuals?.warmStorm();},
@@ -36,7 +36,7 @@ function create({createCardInteraction,game,controller,view,clock,artReady=()=>t
   }
   queue.push(e.card);
  if(e.card.type==='ghost'){warmGhost?.();if(active())tick();}
- },modal(){return active()&&ui.state.award==='ghost';},suspend(){ui.suspendGhost();},draw(ctx){if(!active())return;tick();ui.draw(ctx,clock());},touch(x,y){if(!active())return false;tick();return ui.pointerDown(x,y,clock());},aimTicket(){return active()?ui.state.aim:null;},castAim(x,y,ticket){return active()&&ui.castAim({x,y},ticket,clock());},blocksDock(){return active()&&(ui.state.open||!!ui.state.aim||ui.state.award==='ghost');},noteActivity(){ui.noteActivity(clock());}};
+ },expandedGhost(){return ui.state.open&&ui.state.hand[ui.state.selected]==='ghost'&&active();},modal(){return active()&&ui.state.award==='ghost';},suspend(){ui.suspendGhost();},draw(ctx){if(!active())return;tick();ui.draw(ctx,clock());},touch(x,y){if(!active())return false;tick();return ui.pointerDown(x,y,clock());},aimTicket(){return active()?ui.state.aim:null;},castAim(x,y,ticket){return active()&&ui.castAim({x,y},ticket,clock());},blocksDock(){return active()&&(ui.state.open||!!ui.state.aim||ui.state.award==='ghost');},noteActivity(){ui.noteActivity(clock());}};
  return api;
 }
 module.exports={create};

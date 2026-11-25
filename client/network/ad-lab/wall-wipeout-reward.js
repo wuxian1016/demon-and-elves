@@ -1,7 +1,7 @@
 'use strict';
 const labels=Object.freeze({watch:'看广告重建这段城墙',skip:'继续游戏'});
 const idOK=id=>typeof id==='string'&&/^[a-zA-Z0-9_-]{8,100}$/.test(id);
-const BASE_USES=2,MAX_USES=BASE_USES+1;
+const BASE_USES=2,MAX_USES=BASE_USES+1,MAX_PENDING=16;
 const valid=d=>!!d&&Number.isSafeInteger(d.used)&&d.used>=0&&d.used<=MAX_USES&&typeof d.unlocked==='boolean'&&
  Number.isSafeInteger(d.ordinal)&&d.ordinal>=d.used;
 // Older 3+1 test candidates are read once without refunding any consumed
@@ -38,8 +38,8 @@ module.exports=function create({video,wx,scope,canOffer,canRetain,canRebuild,reb
  function unlock(){
   return active()&&(!stored.unlocked?persist({...stored,unlocked:true}):true);
  }
- const totalRemaining=()=>stored&&(stored.used<(stored.unlocked?MAX_USES:BASE_USES));
- const remainingFor=row=>row.kind==='base'?stored.used<BASE_USES:stored.used===BASE_USES&&stored.unlocked;
+ const totalRemaining=()=>stored&&(stored.used<BASE_USES||stored.unlocked);
+ const remainingFor=row=>stored.used<BASE_USES||row.wall.level>=10&&stored.unlocked;
  function retire(n,unavailable=false){
   if(!armed||!stored||n<=stored.ordinal)return;
   if(!persist({...stored,ordinal:n}))return;
@@ -49,10 +49,10 @@ module.exports=function create({video,wx,scope,canOffer,canRetain,canRebuild,reb
  function prune(){
   if(!active())return;
   const loadFailure=video.loadFailure?.()??0;
-  while(queue.length){
-   const row=queue[0],unavailable=row.loadFailure!==loadFailure;
-   if(!unavailable&&canRetain(row.wall)&&(row.presented||row.n>stored.ordinal&&remainingFor(row)))break;
-   queue.shift();if(!row.presented)retire(row.n,unavailable);
+  for(let i=0;i<queue.length;){
+   const row=queue[i],unavailable=row.loadFailure!==loadFailure;
+   if(!unavailable&&canRetain(row.wall)&&(row.presented||remainingFor(row))){i++;continue;}
+   queue.splice(i,1);if(!row.presented)retire(row.n,unavailable);
    if(!armed)return;
   }
  }
@@ -68,7 +68,12 @@ module.exports=function create({video,wx,scope,canOffer,canRetain,canRebuild,reb
   if(n<=stored.ordinal)return false;
   if(video.supported?.()===false){retire(n,true);return false;}
   if(!canRetain(wall)){if(!queue.length)retire(n);return false;}
-  if(queue.length>=MAX_USES)return false;
+  if(queue.length>=MAX_PENDING){
+   if(!canRebuild(wall))return false;
+   const stale=queue.findIndex(r=>!r.presented&&!canRebuild(r.wall));
+   if(stale<0)return false;
+   queue.splice(stale,1);
+  }
   queue.push({wall,n,kind,presented:false,loadFailure:video.loadFailure?.()??0});
   safe(onChange);warm();return true;
  }
@@ -77,21 +82,23 @@ module.exports=function create({video,wx,scope,canOffer,canRetain,canRebuild,reb
   // The bonus belongs to this native destroyed wall's degree, not to a
   // historical upgrade elsewhere or the number of surviving walls.
   if(!active()||!Number.isInteger(wall?.level)||wall.level<10||
-     !stored.unlocked||stored.used>=MAX_USES||queue.some(r=>r.kind==='bonus'))return false;
+     !stored.unlocked)return false;
   return enqueue(wall,'bonus');
  }
  function warm(){if(active()&&(totalRemaining()||queue.length))safe(video.warm);}
  function offer(){
   prune();if(!active()||pending||!video.ready()||!canOffer())return null;
-  // With two not-yet-shown early rows queued, a later Lv10+ loss can wait behind
-  // them; it never spends the bonus before both early offers are truly shown.
-  const row=queue[0];return row&&canRebuild(row.wall)?row:null;
+  const shown=queue.find(r=>r.presented&&canRebuild(r.wall));
+  if(shown)return shown;
+  const failure=video.loadFailure?.()??0;
+  return queue.find(r=>!r.presented&&r.loadFailure===failure&&remainingFor(r)&&canRebuild(r.wall))??null;
  }
  function present(row){
   if(!row||offer()!==row)return false;
   if(row.presented)return true;
-  if(!persist({used:stored.used+1,unlocked:stored.unlocked,ordinal:row.n}))return false;
-  row.presented=true;safe(onPresented);return true;
+  const base=stored.used<BASE_USES;
+  if(!persist({used:stored.used+Number(base),unlocked:stored.unlocked,ordinal:Math.max(row.n,stored.ordinal)}))return false;
+  row.baseSpent=base;row.presented=true;safe(onPresented);return true;
  }
  function dismiss(row){if(!row||!row.presented||offer()!==row)return false;queue.splice(queue.indexOf(row),1);safe(onChange);return true;}
  function watch(row){
@@ -101,13 +108,16 @@ module.exports=function create({video,wx,scope,canOffer,canRetain,canRebuild,reb
   const done=result=>{
    if(sameEpoch!==epoch||sameId!==id||pending!==row)return;
    pending=null;
+   if(result==='unavailable'&&active()){
+    if(!row.baseSpent||persist({...stored,used:stored.used-1})){safe(onPresented);safe(notify,'广告未能打开，本次未扣城墙重建次数');}
+   }
    if(result==='ended'&&active()){
     const ok=safe(canRebuild,row.wall)===true&&safe(rebuild,row.wall)===true;
     safe(notify,ok?'这段城墙已原地重建':'原位置不可用，本次城墙未重建');
    }
    safe(onChange);warm();
   };
-  if(safe(video.play,done)!==true)done('failed');
+  if(safe(video.play,done)!==true)done('unavailable');
   else if(pending===row)safe(onChange);
   return true;
  }

@@ -1,21 +1,27 @@
 'use strict';
-// Visual and hitbox only. Host calls draw/tap after its UI-safe/reserved areas
-// are resolved; do not swallow joystick, world taps or unrelated HUD buttons.
+// Visual and hitbox only. Host owns modal input and simulation pause.
 module.exports=function footer(controller,wake=()=>{},opts={}){
  let visible=null;
  const overlap=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
  const inside=(b,x,y)=>x>=b.x&&x<b.x+b.w&&y>=b.y&&y<b.y+b.h;
- function draw(ctx,safe,blocked=[]){
-  visible=null;const wall=controller.offer();
-  if(!wall||!safe||![safe.x,safe.y,safe.w,safe.h].every(Number.isFinite)||safe.w<272||safe.h<104)return false;
+ function place(safe,blocked=[]){
+  if(!safe||![safe.x,safe.y,safe.w,safe.h].every(Number.isFinite)||safe.w<272||safe.h<104)return null;
   const w=Math.min(335,safe.w-12),x=safe.x+(safe.w-w)/2,h=78;
   let rect;
-  for(const inset of [8,96,184]){
+  // Keep the three familiar bottom positions first. With a boarded
+  // vehicle, its extra controls may occupy all three. Look higher only
+  // if needed and never paint or capture on top of a live control.
+  for(let inset=8;inset<=safe.h-h-8;inset+=88){
    const y=safe.y+safe.h-h-inset,possible={x,y,w,h};
    if(y>=safe.y+8&&!blocked.some(p=>overlap(possible,p))){rect=possible;break;}
   }
+  return rect||null;
+ }
+ function draw(ctx,safe,blocked=[],backdrop=null){
+  visible=null;const wall=controller.offer(),rect=wall?place(safe,blocked):null;
   if(!rect||controller.present&&controller.present(wall)!==true)return false;
-  const y=rect.y,bh=38,top=y+32,inner=w-16,bw=Math.floor((inner-8)*.60),watch={x:x+8,y:top,w:bw,h:bh},skip={x:x+16+bw,y:top,w:inner-8-bw,h:bh};
+  backdrop?.();
+  const {x,y,w,h}=rect,bh=38,top=y+32,inner=w-16,bw=Math.floor((inner-8)*.60),watch={x:x+8,y:top,w:bw,h:bh},skip={x:x+16+bw,y:top,w:inner-8-bw,h:bh};
   ctx.save();try{
    ctx.globalAlpha=1;ctx.fillStyle='rgba(18,35,29,.97)';ctx.fillRect(x,y,w,h);
    ctx.lineWidth=1.5;ctx.strokeStyle='#e0bc6b';ctx.strokeRect(x,y,w,h);
@@ -35,7 +41,7 @@ module.exports=function footer(controller,wake=()=>{},opts={}){
   else if(inside(row.skip,x,y))handled=controller.dismiss(row.wall);
   if(handled){visible=null;wake();}return handled;
  }
- return {draw,tap,hit(x,y){
+ return {draw,tap,place,eligible:()=>!!visible&&controller.offer()===visible.wall,hit(x,y){
   if(!visible||controller.offer()!==visible.wall)return null;
   return inside(visible.watch,x,y)?'watch':inside(visible.skip,x,y)?'skip':null;
  },invalidate(){visible=null;}};

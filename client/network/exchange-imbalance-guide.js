@@ -47,7 +47,7 @@ function install(g,{offline=()=>false,catalog=[]}={}){
   return {...next,step:Math.max(10,g.easyOpeningGuideStage||0),optional:true,development:true,exchangeImbalanceBN:true,key396:'resource-imbalance:episode:'+s.count};
  }
  function opportunity(prior,advance){
-  if(!ordinary())return null;
+  if(!ordinary()||g.midEconomyGuideR13?.managesExchange())return null;
   const p=g.player,now=time(),resource=rich(p,3,120,400),s=advance?record(now):g.exchangeHintEpisodesBN,blocked=higher(prior)||mayInterfere();
   // Rearm only after actually leaving the imbalance band, not after missing
   // the shop, briefly crossing the entry threshold, or reopening a saved game.
@@ -77,7 +77,8 @@ function install(g,{offline=()=>false,catalog=[]}={}){
   return started.call(this,a,...args);
  };
  function draw(ctx,inView,z,art){
-  if(!ordinary()||blockedByPrior||mayInterfere()||!presenting()||!(z>0))return null;
+  if(g.passiveHintsR13?.quiet())return null;
+  if(!ordinary()||g.midEconomyGuideR13?.managesExchange()||blockedByPrior||mayInterfere()||!presenting()||!(z>0))return null;
   const resource=rich(g.player,3,120,400);
   if(!resource||isDetailed(g.exchangeHintEpisodesBN,resource,time()))return null;
   const target=plan(resource)?.target;
@@ -91,7 +92,7 @@ function install(g,{offline=()=>false,catalog=[]}={}){
   cardRect:(a,measure)=>paint.card(a,measure),drawDetail:(a,art,text,measure)=>paint.drawDetail(a,art,{text,measure}),
   priority:()=>{
    const prior=g.developmentAdviceCache396?.advice;
-   if(!ordinary()||blockedByPrior||higher(prior)||mayInterfere())return false;
+   if(!ordinary()||g.midEconomyGuideR13?.managesExchange()||blockedByPrior||higher(prior)||mayInterfere())return false;
    const resource=rich(g.player,3,120,400);if(!resource)return false;
    const s=g.exchangeHintEpisodesBN,now=time(),next=plan(resource);
    if(!next?.actionable)return false;
