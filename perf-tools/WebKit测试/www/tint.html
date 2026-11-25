@@ -1,0 +1,5 @@
+<!doctype html><script src="tintbench.js"></script><script>
+const make = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+for (const alphaBg of [false, true]) window.webkit.messageHandlers.log.postMessage('TINT alphaBg=' + alphaBg + ' ' + JSON.stringify(tintBench(make, { alphaBg })));
+window.webkit.messageHandlers.log.postMessage('__DONE__');
+</script>

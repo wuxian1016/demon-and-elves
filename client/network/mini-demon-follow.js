@@ -77,7 +77,10 @@ module.exports=function({simulate=()=>true}={}){
     if(dist(p,b)>reach||dist(p,leader)<m.radius+(leader.radius||34)+9||g.isTerrainBlocked?.(p.x,p.y,m.radius+2))continue;
     if(buildings.some(q=>alive(q)&&dist(p,q)<m.radius+(q.type==='wall'?Math.max(46,q.radius||0):(q.radius||12))+2))continue;
     if(peers.some(q=>q.miniFollowMode==='attack'&&q.miniAttackPosition&&q.miniAttackTarget&&!q.miniAttackTarget.dead&&dist(p,q.miniAttackPosition)<m.radius+(q.radius||18)+7))continue;
-    const cost=dist(m,p)+(b===target?0:55)+(m.miniAttackTarget===b&&m.miniAttackPosition&&dist(p,m.miniAttackPosition)<2?-50:0)+(!clear(g,m,m,p,buildings)?70:0);
+    /*PERF-M1 same choice*/
+    const base=dist(m,p)+(b===target?0:55)+(m.miniAttackTarget===b&&m.miniAttackPosition&&dist(p,m.miniAttackPosition)<2?-50:0);
+    if(!(base<score))continue;
+    const cost=base+(!clear(g,m,m,p,buildings)?70:0);
     if(cost<score){score=cost;best={target:b,point:p,dir,front};}
    }
   }
@@ -104,7 +107,8 @@ module.exports=function({simulate=()=>true}={}){
    for(let i=0;i<12;i++){const a=i*Math.PI/6,p={x:leader.x+Math.cos(a)*r,y:leader.y+Math.sin(a)*r};if(!g.isTerrainBlocked?.(p.x,p.y,m.radius+2))nodes.push(p);}
    const costs=nodes.map(()=>Infinity),prev=[],done=new Set();costs[0]=0;
    for(let n=0;n<nodes.length;n++){let u=-1;for(let k=0;k<nodes.length;k++)if(!done.has(k)&&(u<0||costs[k]<costs[u]))u=k;if(u<0||!Number.isFinite(costs[u])||u===1)break;done.add(u);
-    for(let v=1;v<nodes.length;v++){if(v===u||done.has(v)||!clearPeers(nodes[u],nodes[v])||!clear(g,m,nodes[u],nodes[v],buildings))continue;const c=costs[u]+dist(nodes[u],nodes[v]);if(c<costs[v]){costs[v]=c;prev[v]=u;}}
+    /*PERF-M2 same route*/
+    for(let v=1;v<nodes.length;v++){if(v===u||done.has(v))continue;const c=costs[u]+dist(nodes[u],nodes[v]);if(!(c<costs[v]))continue;if(!clearPeers(nodes[u],nodes[v])||!clear(g,m,nodes[u],nodes[v],buildings))continue;costs[v]=c;prev[v]=u;}
    }
    if(Number.isFinite(costs[1])){const path=[];for(let k=1;k!==0;k=prev[k])path.unshift(nodes[k]);route={obstacle:leader,lx:leader.x,ly:leader.y,goal:{x:goal.x,y:goal.y},path,index:0};}
    m.miniLeaderRoute=route||null;m.miniLeaderRouteFailure=route?null:{obstacle:leader,lx:leader.x,ly:leader.y,goal:{x:goal.x,y:goal.y}};m.miniRouteProbeMs=200;

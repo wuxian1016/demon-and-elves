@@ -37,6 +37,9 @@ function makeHost(root,disk,expectQa=true,{width=414,height=896,seed=150,keyPref
   const userRoot = path.join(disk, 'files');
   const access = [];
   const events = new Map(), raf = new Map(), timers = new Set();
+  // VTIMERS=1: game timers fire on the fake clock (deterministic per frame, independent of machine speed)
+  const VT = !!process.env.VTIMERS, vtimers = new Set(); let vseq = 0;
+  const fireVirtual = () => { if (!VT) return; for (let guard = 0; guard < 10000; guard++) { let next = null; for (const h of vtimers) if (h.due <= now && (!next || h.due < next.due || (h.due === next.due && h.seq < next.seq))) next = h; if (!next) break; vtimers.delete(next); next.fn(); } };
   const notices = [];
   let serial = 0, clipboard, nextWrite, nextStorageFailure = null, visible = true;
   let setCrashPoint;
@@ -224,11 +227,12 @@ function makeHost(root,disk,expectQa=true,{width=414,height=896,seed=150,keyPref
     wx, console,Math:math,Date:HostDate,
     setTimeout(fn, ms) {
       C.timers++; if(C.traceTimers){const st=(new Error().stack.split('\n')[2]||'').replace(/^.*\/client\//,'').replace(/\)$/,'');C.timerOrigins.set(st,(C.timerOrigins.get(st)||0)+1);}
+      if (VT) { const h = { due: (now ?? Date.now()) + Math.max(0, +ms || 0), seq: ++vseq, fn }; vtimers.add(h); return h; }
       const handle = setTimeout(() => { timers.delete(handle); fn(); }, ms);
       timers.add(handle);
       return handle;
     },
-    clearTimeout(handle) { clearTimeout(handle); timers.delete(handle); },
+    clearTimeout(handle) { if (VT) { vtimers.delete(handle); return; } clearTimeout(handle); timers.delete(handle); },
     requestAnimationFrame(fn) { const id=++serial; raf.set(id,fn); return id; },
     cancelAnimationFrame:id => raf.delete(id)
   });
@@ -252,7 +256,8 @@ function makeHost(root,disk,expectQa=true,{width=414,height=896,seed=150,keyPref
     setSize(w,h){width=w;height=h;},
     counters:C, box,
     access, notices, stored, wx, loaded:()=>[...modules.keys()], evaluate:load,
-    advance(ms){now=(now??Date.now())+ms;},
+    advance(ms){now=(now??Date.now())+ms; fireVirtual();},
+    vtimerCount:()=>vtimers.size,
     pendingFrames:()=>raf.size,
     get clipboard(){return clipboard;},
     start:() => load(path.join(root,'game.js')),
@@ -271,7 +276,7 @@ function makeHost(root,disk,expectQa=true,{width=414,height=896,seed=150,keyPref
       if (job) { raf.delete(job[0]); job[1](); }
       assert(raf.size<=1,'一个待执行 RAF');
     },
-    close(){ for(const handle of timers) clearTimeout(handle); timers.clear(); raf.clear(); }
+    close(){ for(const handle of timers) clearTimeout(handle); timers.clear(); vtimers.clear(); raf.clear(); }
   };
 }
 

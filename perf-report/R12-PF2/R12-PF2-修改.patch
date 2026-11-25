@@ -1,0 +1,382 @@
+--- a/network/mini-demon-follow.js	1970-01-01 08:00:00
++++ b/network/mini-demon-follow.js	2026-11-25 16:24:35
+@@ -77,7 +77,10 @@
+     if(dist(p,b)>reach||dist(p,leader)<m.radius+(leader.radius||34)+9||g.isTerrainBlocked?.(p.x,p.y,m.radius+2))continue;
+     if(buildings.some(q=>alive(q)&&dist(p,q)<m.radius+(q.type==='wall'?Math.max(46,q.radius||0):(q.radius||12))+2))continue;
+     if(peers.some(q=>q.miniFollowMode==='attack'&&q.miniAttackPosition&&q.miniAttackTarget&&!q.miniAttackTarget.dead&&dist(p,q.miniAttackPosition)<m.radius+(q.radius||18)+7))continue;
+-    const cost=dist(m,p)+(b===target?0:55)+(m.miniAttackTarget===b&&m.miniAttackPosition&&dist(p,m.miniAttackPosition)<2?-50:0)+(!clear(g,m,m,p,buildings)?70:0);
++    /*PERF-M1 same choice*/
++    const base=dist(m,p)+(b===target?0:55)+(m.miniAttackTarget===b&&m.miniAttackPosition&&dist(p,m.miniAttackPosition)<2?-50:0);
++    if(!(base<score))continue;
++    const cost=base+(!clear(g,m,m,p,buildings)?70:0);
+     if(cost<score){score=cost;best={target:b,point:p,dir,front};}
+    }
+   }
+@@ -104,7 +107,8 @@
+    for(let i=0;i<12;i++){const a=i*Math.PI/6,p={x:leader.x+Math.cos(a)*r,y:leader.y+Math.sin(a)*r};if(!g.isTerrainBlocked?.(p.x,p.y,m.radius+2))nodes.push(p);}
+    const costs=nodes.map(()=>Infinity),prev=[],done=new Set();costs[0]=0;
+    for(let n=0;n<nodes.length;n++){let u=-1;for(let k=0;k<nodes.length;k++)if(!done.has(k)&&(u<0||costs[k]<costs[u]))u=k;if(u<0||!Number.isFinite(costs[u])||u===1)break;done.add(u);
+-    for(let v=1;v<nodes.length;v++){if(v===u||done.has(v)||!clearPeers(nodes[u],nodes[v])||!clear(g,m,nodes[u],nodes[v],buildings))continue;const c=costs[u]+dist(nodes[u],nodes[v]);if(c<costs[v]){costs[v]=c;prev[v]=u;}}
++    /*PERF-M2 same route*/
++    for(let v=1;v<nodes.length;v++){if(v===u||done.has(v))continue;const c=costs[u]+dist(nodes[u],nodes[v]);if(!(c<costs[v]))continue;if(!clearPeers(nodes[u],nodes[v])||!clear(g,m,nodes[u],nodes[v],buildings))continue;costs[v]=c;prev[v]=u;}
+    }
+    if(Number.isFinite(costs[1])){const path=[];for(let k=1;k!==0;k=prev[k])path.unshift(nodes[k]);route={obstacle:leader,lx:leader.x,ly:leader.y,goal:{x:goal.x,y:goal.y},path,index:0};}
+    m.miniLeaderRoute=route||null;m.miniLeaderRouteFailure=route?null:{obstacle:leader,lx:leader.x,ly:leader.y,goal:{x:goal.x,y:goal.y}};m.miniRouteProbeMs=200;
+--- a/art163/terrain-edge-prefetch.js	1970-01-01 08:00:00
++++ b/art163/terrain-edge-prefetch.js	2026-11-25 16:38:46
+@@ -1,69 +1,261 @@
+ 'use strict';
+-// PERF-L3 (2026-11-23): ring prefetch for terrain tiles.
+-// Keeps the 1-tile ring around the visible terrain painted ahead of time (nearest first, biased toward
+-// the camera's movement), so walking/panning never has to paint several tiles in one frame.
+-//  - A prefetched tile is painted in 4 (2 when moving fast) clipped bands over as many frames; every pixel receives
+-//    exactly the same drawing operations as a one-shot paint, so the tile is identical.
+-//  - It also keeps running after a memory warning (the old version stopped for 5 minutes, which made
+-//    every new tile row a synchronous paint); tiles stay inside the tile budget (16 MB, was 12 MB).
+-//  - It does nothing on frames where terrain already did work (same 2 ms gate as before).
+-const BANDS_SLOW=4,BANDS_FAST=2;// quarter tiles per frame normally, half tiles when the camera moves fast
+-function stepBand(cache,job,paint){
+- const n=Math.ceil(cache.size*cache.scale)+4,bleed=2/cache.scale;
+- if(!job.art){job.art=cache.beginTileSurface200({key:job.key,x:job.x,y:job.y},job.reuse||null);job.reuse=null;job.band=0;}
+- const B=job.bands||BANDS_SLOW,c=job.art.getContext('2d'),b0=Math.floor(job.band*n/B),b1=Math.floor((job.band+1)*n/B);
+- c.save();
+- c.setTransform(1,0,0,1,0,0);c.beginPath();c.rect(0,b0,n,b1-b0);c.clip();
+- c.imageSmoothingEnabled=false;
+- c.setTransform(cache.scale,0,0,cache.scale,-(job.x-bleed)*cache.scale,-(job.y-bleed)*cache.scale);
+- paint(c,job.x-bleed,job.y-bleed,job.art.width/cache.scale,job.art.height/cache.scale,job.key);
+- c.restore();
+- job.band++;
+- return job.band>=(job.bands||BANDS_SLOW);
++// PERF-L3 (11-23) ring prefetch + PERF-L4 (11-25) look-ahead for fast camera moves: tiles the moving view will reach
++// within ~0.5 s are painted first (<=2 per frame, only while terrain work < 4 ms). Same paint ops, identical pixels.
++const BANDS_SLOW = 4,
++BANDS_FAST = 2;
++const FAST_SPEED = 6, // world units per frame; walking the elf stays below this
++LOOK_FRAMES = 30, // about half a second ahead
++FAST_TILES = 2, // at most two look-ahead tiles per frame
++FAST_GATE_MS = 4;
++function stepBand(cache, job, paint) {
++const n = Math.ceil(cache.size * cache.scale) + 4,
++bleed = 2 / cache.scale;
++if (!job.art) {
++job.art = cache.beginTileSurface200({ key: job.key, x: job.x, y: job.y }, job.reuse || null);
++job.reuse = null;
++job.band = 0;
+ }
+-function commit(cache,job){
+- const n=Math.ceil(cache.size*cache.scale)+4,old=cache.tiles.get(job.key);
+- if(old)cache.bytes-=old.bytes;
+- const t={key:job.key,x:job.x,y:job.y,art:job.art,bytes:n*n*4,dirty:false};
+- cache.tiles.delete(job.key);cache.tiles.set(job.key,t);cache.bytes+=t.bytes;
+- return t;
++const B = job.bands || BANDS_SLOW,
++c = job.art.getContext('2d'),
++b0 = Math.floor((job.band * n) / B),
++b1 = Math.floor(((job.band + 1) * n) / B);
++c.save();
++c.setTransform(1, 0, 0, 1, 0, 0);
++c.beginPath();
++c.rect(0, b0, n, b1 - b0);
++c.clip();
++c.imageSmoothingEnabled = false;
++c.setTransform(cache.scale, 0, 0, cache.scale, -(job.x - bleed) * cache.scale, -(job.y - bleed) * cache.scale);
++paint(c, job.x - bleed, job.y - bleed, job.art.width / cache.scale, job.art.height / cache.scale, job.key);
++c.restore();
++job.band++;
++return job.band >= (job.bands || BANDS_SLOW);
+ }
+-module.exports=function(x,y,w,h,paint,started,wxRuntime,performance){
+- const st=this.prefStatsBN||(this.prefStatsBN={calls:0,noPrev:0,gate:0,jump:0,noBest:0,budget:0,started:0,bands:0,commits:0,dropped:0});st.calls++;
+- const prev=this.edgeView200;this.edgeView200={x,y,w,h};
+- const rect=this.visibleCells614,n=this.size;
+- if(!rect||!prev||Math.abs(prev.w-w)>.01||Math.abs(prev.h-h)>.01){st.noPrev++;this.edgeJobBN=null;return;}
+- if(performance.now()-started>=2){st.gate++;return;}
+- const dx=x-prev.x,dy=y-prev.y;
+- if(Math.abs(dx)>n||Math.abs(dy)>n){st.jump++;this.edgeJobBN=null;return;}// a camera jump: the ring is elsewhere now
+- const inRing=(gx,gy)=>gx>=rect.x0-1&&gx<=rect.x1+1&&gy>=rect.y0-1&&gy<=rect.y1+1&&!(gx>=rect.x0&&gx<=rect.x1&&gy>=rect.y0&&gy<=rect.y1);
+- let job=this.edgeJobBN;
+- if(job){
+-  const have=this.tiles.get(job.key);
+-  if(have&&!have.dirty||!inRing(job.gx,job.gy)){st.dropped++;job=this.edgeJobBN=null;}
+- }
+- if(!job){
+-  // pick the ring cell that will be needed first
+-  const mv=Math.hypot(dx,dy),ux=mv>.01?dx/mv:0,uy=mv>.01?dy/mv:0,cx=x+w/2,cy=y+h/2;
+-  let best=null,score=Infinity;
+-  for(let gy=rect.y0-1;gy<=rect.y1+1;gy++)for(let gx=rect.x0-1;gx<=rect.x1+1;gx++){
+-   if(!inRing(gx,gy))continue;
+-   const t=this.tiles.get(gx+','+gy);if(t&&!t.dirty)continue;
+-   const tx=gx*n+n/2-cx,ty=gy*n+n/2-cy,s=Math.hypot(tx,ty)-(tx*ux+ty*uy)*.9;
+-   if(s<score){score=s;best={gx,gy};}
+-  }
+-  if(!best){st.noBest++;return;}
+-  const z=this.scale,bytes=(Math.ceil(n*z)+4)**2*4,want=this.wanted566;
+-  if(this.bytes+bytes>this.budget){
+-   // only reuse budget from tiles that are neither visible nor in the ring
+-   let available=false;
+-   for(const [k,t] of this.tiles){if(!t.art||want.has(k))continue;const c=k.split(',');if(!inRing(+c[0],+c[1])){available=true;break;}}
+-   if(!available){st.budget++;return;}
+-  }
+-  // reuse the canvas of a tile that has fallen behind the camera, so memory stays flat at the budget
+-  let reuse=null;const size=Math.ceil(n*z)+4;
+-  if(this.bytes+bytes>this.budget)for(const [k,t] of this.tiles){if(!t.art||want.has(k)||t.art.width!==size||t.art.height!==size)continue;const c=k.split(',');if(inRing(+c[0],+c[1]))continue;this.tiles.delete(k);this.bytes-=t.bytes;reuse=t.art;break;}
+-  job=this.edgeJobBN={key:best.gx+','+best.gy,gx:best.gx,gy:best.gy,x:best.gx*n,y:best.gy*n,art:null,band:0,reuse,bands:Math.hypot(dx,dy)>3?BANDS_FAST:BANDS_SLOW};
+- }
+- st.bands++;if(job.band===0&&!job.art)st.started++;if(stepBand(this,job,paint)){st.commits++;this.edgeJobBN=null;commit(this,job);}
++function commit(cache, job) {
++const n = Math.ceil(cache.size * cache.scale) + 4,
++old = cache.tiles.get(job.key);
++if (old) cache.bytes -= old.bytes;
++const t = { key: job.key, x: job.x, y: job.y, art: job.art, bytes: n * n * 4, dirty: false };
++cache.tiles.delete(job.key);
++cache.tiles.set(job.key, t);
++cache.bytes += t.bytes;
++return t;
++}
++function axisWindow(pos, size, vel, c0, c1) {
++if (Math.abs(vel) < 1e-6) return pos < c1 && pos + size > c0 ? [0, Infinity] : null;
++let t0 = (c0 - size - pos) / vel,
++t1 = (c1 - pos) / vel;
++if (vel < 0) {
++const s = t0;
++t0 = t1;
++t1 = s;
++}
++t0 = Math.max(0, t0);
++return t1 > t0 ? [t0, t1] : null;
++}
++function reusable(cache, keep, size, take) {
++const want = cache.wanted566;
++for (const [k, t] of cache.tiles) {
++if (!t.art || want.has(k) || t.art.width !== size || t.art.height !== size) continue;
++const c = k.split(',');
++if (keep(+c[0], +c[1])) continue;
++if (!take) return true;
++cache.tiles.delete(k);
++cache.bytes -= t.bytes;
++return t.art;
++}
++return take ? null : false;
++}
++function lookAhead(cache, st, x, y, w, h, v, paint, started, performance) {
++const n = cache.size,
++rect = cache.visibleCells614,
++z = cache.scale,
++size = Math.ceil(n * z) + 4,
++bytes = size * size * 4,
++reach = LOOK_FRAMES,
++lx0 = Math.floor(Math.min(x, x + v.x * reach) / n),
++lx1 = Math.floor((Math.max(x, x + v.x * reach) + w - 0.001) / n),
++ly0 = Math.floor(Math.min(y, y + v.y * reach) / n),
++ly1 = Math.floor((Math.max(y, y + v.y * reach) + h - 0.001) / n);
++const inRing = (gx, gy) => gx >= rect.x0 - 1 && gx <= rect.x1 + 1 && gy >= rect.y0 - 1 && gy <= rect.y1 + 1;
++const entry = (gx, gy) => {
++const X = axisWindow(x, w, v.x, gx * n, gx * n + n),
++Y = axisWindow(y, h, v.y, gy * n, gy * n + n);
++if (!X || !Y) return Infinity;
++const t0 = Math.max(X[0], Y[0]);
++return t0 < Math.min(X[1], Y[1]) ? t0 : Infinity;
+ };
++const keep = (gx, gy) => inRing(gx, gy) || (gx >= lx0 && gx <= lx1 && gy >= ly0 && gy <= ly1 && entry(gx, gy) <= reach);
++let done = 0;
++while (done < FAST_TILES && performance.now() - started < FAST_GATE_MS) {
++let job = cache.edgeJobBN;
++if (job) {
++const have = cache.tiles.get(job.key);
++if ((have && !have.dirty) || !keep(job.gx, job.gy)) {
++st.dropped++;
++job = cache.edgeJobBN = null;
++}
++}
++if (!job) {
++let best = null,
++score = Infinity;
++for (let gy = Math.min(ly0, rect.y0 - 1); gy <= Math.max(ly1, rect.y1 + 1); gy++)
++for (let gx = Math.min(lx0, rect.x0 - 1); gx <= Math.max(lx1, rect.x1 + 1); gx++) {
++const t = cache.tiles.get(gx + ',' + gy);
++if (t && !t.dirty) continue;
++const e = entry(gx, gy);
++if (e > reach) continue;
++if (e < score) {
++score = e;
++best = { gx, gy };
++}
++}
++if (!best) {
++st.noBest++;
++return;
++}
++if (cache.bytes + bytes > cache.budget && !reusable(cache, keep, size, false)) {
++st.budget++;
++return;
++}
++const reuse = cache.bytes + bytes > cache.budget ? reusable(cache, keep, size, true) : null;
++job = cache.edgeJobBN = {
++key: best.gx + ',' + best.gy,
++gx: best.gx,
++gy: best.gy,
++x: best.gx * n,
++y: best.gy * n,
++art: null,
++band: 0,
++reuse,
++bands: 1,
++};
++st.lookStarted = (st.lookStarted || 0) + 1;
++}
++st.bands++;
++if (job.band === 0 && !job.art) st.started++;
++if (stepBand(cache, job, paint)) {
++st.commits++;
++st.lookCommits = (st.lookCommits || 0) + 1;
++cache.edgeJobBN = null;
++commit(cache, job);
++done++;
++}
++}
++}
++module.exports = function (x, y, w, h, paint, started, wxRuntime, performance) {
++const st =
++this.prefStatsBN ||
++(this.prefStatsBN = {
++calls: 0,
++noPrev: 0,
++gate: 0,
++jump: 0,
++noBest: 0,
++budget: 0,
++started: 0,
++bands: 0,
++commits: 0,
++dropped: 0,
++});
++st.calls++;
++const prev = this.edgeView200;
++this.edgeView200 = { x, y, w, h };
++const rect = this.visibleCells614,
++n = this.size;
++if (!rect || !prev || Math.abs(prev.w - w) > 0.01 || Math.abs(prev.h - h) > 0.01) {
++st.noPrev++;
++this.edgeJobBN = null;
++this.edgeVelBN = null;
++return;
++}
++const dx = x - prev.x,
++dy = y - prev.y;
++if (Math.abs(dx) > n || Math.abs(dy) > n) {
++st.jump++;
++this.edgeJobBN = null;
++this.edgeVelBN = null;
++return;
++}
++const vel = this.edgeVelBN || (this.edgeVelBN = { x: dx, y: dy });
++vel.x = vel.x * 0.6 + dx * 0.4;
++vel.y = vel.y * 0.6 + dy * 0.4;
++if (Math.hypot(vel.x, vel.y) > FAST_SPEED) {
++if (performance.now() - started >= FAST_GATE_MS) {
++st.gate++;
++return;
++}
++lookAhead(this, st, x, y, w, h, vel, paint, started, performance);
++return;
++}
++if (performance.now() - started >= 2) {
++st.gate++;
++return;
++}
++const inRing = (gx, gy) =>
++gx >= rect.x0 - 1 &&
++gx <= rect.x1 + 1 &&
++gy >= rect.y0 - 1 &&
++gy <= rect.y1 + 1 &&
++!(gx >= rect.x0 && gx <= rect.x1 && gy >= rect.y0 && gy <= rect.y1);
++let job = this.edgeJobBN;
++if (job) {
++const have = this.tiles.get(job.key);
++if ((have && !have.dirty) || !inRing(job.gx, job.gy)) {
++st.dropped++;
++job = this.edgeJobBN = null;
++}
++}
++if (!job) {
++const mv = Math.hypot(dx, dy),
++ux = mv > 0.01 ? dx / mv : 0,
++uy = mv > 0.01 ? dy / mv : 0,
++cx = x + w / 2,
++cy = y + h / 2;
++let best = null,
++score = Infinity;
++for (let gy = rect.y0 - 1; gy <= rect.y1 + 1; gy++)
++for (let gx = rect.x0 - 1; gx <= rect.x1 + 1; gx++) {
++if (!inRing(gx, gy)) continue;
++const t = this.tiles.get(gx + ',' + gy);
++if (t && !t.dirty) continue;
++const tx = gx * n + n / 2 - cx,
++ty = gy * n + n / 2 - cy,
++s = Math.hypot(tx, ty) - (tx * ux + ty * uy) * 0.9;
++if (s < score) {
++score = s;
++best = { gx, gy };
++}
++}
++if (!best) {
++st.noBest++;
++return;
++}
++const z = this.scale,
++size = Math.ceil(n * z) + 4,
++bytes = size * size * 4;
++if (this.bytes + bytes > this.budget && !reusable(this, inRing, size, false)) {
++st.budget++;
++return;
++}
++const reuse = this.bytes + bytes > this.budget ? reusable(this, inRing, size, true) : null;
++job = this.edgeJobBN = {
++key: best.gx + ',' + best.gy,
++gx: best.gx,
++gy: best.gy,
++x: best.gx * n,
++y: best.gy * n,
++art: null,
++band: 0,
++reuse,
++bands: Math.hypot(dx, dy) > 3 ? BANDS_FAST : BANDS_SLOW,
++};
++}
++st.bands++;
++if (job.band === 0 && !job.art) st.started++;
++if (stepBand(this, job, paint)) {
++st.commits++;
++this.edgeJobBN = null;
++commit(this, job);
++}
++};
+--- a/single-player-build.js	1970-01-01 08:00:00
++++ b/single-player-build.js	2026-11-25 16:24:06
+@@ -43,8 +43,8 @@
+   require('./network/resource-three-tier').protectSlotOverwrites(runtime,typeof wx==='undefined'?null:wx);
+   const flags=typeof GameGlobal==='undefined'?{}:GameGlobal;
+   const mode=flags.isIOSHighPerformanceModePlus===true?'高性能+':flags.isIOSHighPerformanceMode===true?'高性能':flags.isIOSHighPerformanceMode===false&&flags.isIOSHighPerformanceModePlus===false?'普通模式':'模式待确认';
+-  const testLabel='COW8D-PF1-CLAUDE-R12-GUIDES-SOLO · 单人测试 · '+mode;
+-  runtime.releaseLabel = 'COW8D-PF1-CLAUDE-R12-GUIDES-SOLO · 单人测试 · '+mode;
++  const testLabel='R12-PF2-CLAUDE · 单人测试 · '+mode;
++  runtime.releaseLabel = 'R12-PF2-CLAUDE · 单人测试 · '+mode;
+   installPreparedAttach(function(game) {
+     attach.call(this, game);
+     const guide=()=>offline()&&game.operationGuideModeR13();
+--- a/asset-config.js	1970-01-01 08:00:00
++++ b/asset-config.js	2026-11-25 16:24:06
+@@ -1 +1 @@
+-const manifest={};for(const [name,bytes,hash,local]of [["buildings-late-v3.webp",1182912,"69ce4dfc295aaf62e145"],["buildings-tiers-v3.webp",1913156,"3f29fed897875ea5d2cc"],["buildings-upgraded-v2.webp",2177274,"3167286b55e3ba4fb693"],["characters-v2.webp",1433336,"d378df3776d3a61b8331"],["citadel-dragon-tiers-v124.webp",1467578,"d38e1eca5aa61b1203d8"],["combat-units-v3.webp",1231128,"b10e7f9d36fdf9f39cc0"],["demon-evolved-v38.webp",2078496,"f5ad9bfe97d95037447a"],["demon-frames-v10.webp",1636930,"fd24f6f33db629f02fca"],["demon-walk-v15.webp",1310992,"aa576a4af1496cd26d0a"],["dragon-backAttack-p0-v118.webp",1390946,"43aaf59479a3c693b517"],["dragon-backAttack-p1-v118.webp",1442876,"28d760fa457775ca9813"],["dragon-backAttack-p2-v118.webp",1582238,"e74acc95fcc2ca18f1b9"],["dragon-backAttack-p3-v118.webp",1395426,"ed634b95c06cd6686555"],["dragon-backWalk-p0-v118.webp",1392932,"cf601cbe549712ecf09f"],["dragon-backWalk-p1-v118.webp",1466080,"d96811cdf2be318ce64e"],["dragon-backWalk-p2-v118.webp",1384874,"0842a77ed6f15cce50bf"],["dragon-backWalk-p3-v118.webp",1496282,"4d6cd2a569cfd487249c"],["dragon-defense-towers-v95.png",2236124,"51210abdd2532262f5cf"],["dragon-defense-walls-v95.png",1763896,"4e8909e6e348b2605da9"],["dragon-frontAttack-p0-v118.webp",1473302,"0272a21cfaffe6eaecfa"],["dragon-frontAttack-p1-v118.webp",1514726,"4002a4a0f024f044bf64"],["dragon-frontAttack-p2-v118.webp",1585872,"d26be6901ea69ff99b8b"],["dragon-frontAttack-p3-v118.webp",1675550,"f4c45fc73882c1178b50"],["dragon-frontWalk-p0-v118.webp",1462812,"a266f24135fa746fcb52"],["dragon-frontWalk-p1-v118.webp",1362130,"aa7ff3f823815c7d991b"],["dragon-frontWalk-p2-v118.webp",1436570,"eba3f3d9c43086cdea3e"],["dragon-frontWalk-p3-v118.webp",1523006,"4587b5dd33e8be60d966"],["dragon-relic-blade-v129.png",54338,"d00761ef94f0b750d92e"],["dragon-relic-shield-v129.png",171915,"6162afad44be83dedea7"],["dragon-sideAttack-p0-v118.webp",1283536,"99e38034d62572bd8fd9"],["dragon-sideAttack-p1-v118.webp",1318150,"715b9ef1ca9a1c54fe23"],["dragon-sideAttack-p2-v118.webp",1438034,"7523e89b7c7007f905bb"],["dragon-sideAttack-p3-v118.webp",1415258,"b322f8656fc9d0620cc4"],["dragon-sideWalk-p0-v118.webp",1323146,"f1182a3130285fe31d18"],["dragon-sideWalk-p1-v118.webp",1364292,"227db428ec84b3446351"],["dragon-sideWalk-p2-v118.webp",1281892,"b759f25af6274cd33bea"],["dragon-sideWalk-p3-v118.webp",1400748,"3ea9e6d5452d296f7ed3"],["evolved-back-v76.png",2331512,"568060d1fc6efb34c793"],["evolved-front-v76.png",2322797,"0623ec68b19f7b51e825"],["evolved-side-attack-v76.png",1876398,"931f9e1936dde61c9e98"],["evolved-side-walk-v76.png",1868168,"63f47d355e1d637fd6a2"],["flame-dragon-v92.png",2202060,"c103876fcbf44c1ef80f"],["hound-motion-v55.webp",1464684,"41d46beeb2684466d56a"],["houses-front-v45.webp",1807946,"98f9a0b9454c2f1f9c9c"],["nature-props-v2.webp",1361320,"fca3cccc666e3e32fe77"],["reference-materials-v5.jpg",393922,"b99109ba5c6d509da312"],["robot-arms-clean-v166.png",912085,"9a0adb4cfd56893b7e8b",true],["robot-held-upper-v136.webp",1762160,"1fa58d116d8ed084ac7c"],["robot-integrated-v135.webp",1200916,"16ab8796614bde19b9a0"],["robot-lower-kit-v136.webp",978812,"0cb9ad756b35c98ec413"],["robot-torso-clean-v166.png",896206,"5581f4950befbfc34cac",true],["terrain-grass-v161.webp",9026,"3418b5a19ee14297fa8c",true],["terrain-materials-v10.webp",1641702,"7be2ed5d1b636ca98681"],["terrain-road-0-v161.webp",125980,"71ddeb3e35c0a1d0953d",true],["terrain-road-1-v161.webp",123364,"882c60358d510e30a80e",true],["terrain-road-2-v161.webp",118238,"ec16f0baa332e22f004f",true],["terrain-road-3-v161.webp",123748,"083f6f96234940e44d07",true],["terrain-road-4-v161.webp",127298,"24e318d5a1dec9d34ef7",true],["terrain-road-5-v161.webp",124596,"16e4d48699c997b4e34c",true],["terrain-road-6-v161.webp",130338,"dd4b610334e432020d83",true],["terrain-road-7-v161.webp",125624,"b79739e0843358bef681",true],["terrain-road-8-v161.webp",126234,"75d89df1cad6c59c5865",true],["tower-front-v35.webp",1753300,"e92dd37a55ee190c40d0"],["tower-tiers-v40.webp",1981748,"b7c36325e752bfd2118e"],["tower-upgrades-v10.webp",1655004,"74381f9d58d38589023d"],["woodland-atlas-v1.webp",1755954,"7c8381c981a5da7a725a"]]){manifest[name]={bytes,hash};if(local)manifest[name].local=local;}module.exports={manifest,config:{"diagnosticFreezeTrace":true,"version":"wechat627","diagnosticBuild":"BN19R10-C3-REBUILT-P0-COW8D-PF1-CLAUDE-R12-GUIDES-SOLO","diagnosticRelay":{"enabled":false,"approvedOrigin":""},"preparedArt":true,"assetBase":"https://demon-and-elves-whxh-d9gqr3083ac71b751.webapps.tcloudbase.com/assets/"}};
++const manifest={};for(const [name,bytes,hash,local]of [["buildings-late-v3.webp",1182912,"69ce4dfc295aaf62e145"],["buildings-tiers-v3.webp",1913156,"3f29fed897875ea5d2cc"],["buildings-upgraded-v2.webp",2177274,"3167286b55e3ba4fb693"],["characters-v2.webp",1433336,"d378df3776d3a61b8331"],["citadel-dragon-tiers-v124.webp",1467578,"d38e1eca5aa61b1203d8"],["combat-units-v3.webp",1231128,"b10e7f9d36fdf9f39cc0"],["demon-evolved-v38.webp",2078496,"f5ad9bfe97d95037447a"],["demon-frames-v10.webp",1636930,"fd24f6f33db629f02fca"],["demon-walk-v15.webp",1310992,"aa576a4af1496cd26d0a"],["dragon-backAttack-p0-v118.webp",1390946,"43aaf59479a3c693b517"],["dragon-backAttack-p1-v118.webp",1442876,"28d760fa457775ca9813"],["dragon-backAttack-p2-v118.webp",1582238,"e74acc95fcc2ca18f1b9"],["dragon-backAttack-p3-v118.webp",1395426,"ed634b95c06cd6686555"],["dragon-backWalk-p0-v118.webp",1392932,"cf601cbe549712ecf09f"],["dragon-backWalk-p1-v118.webp",1466080,"d96811cdf2be318ce64e"],["dragon-backWalk-p2-v118.webp",1384874,"0842a77ed6f15cce50bf"],["dragon-backWalk-p3-v118.webp",1496282,"4d6cd2a569cfd487249c"],["dragon-defense-towers-v95.png",2236124,"51210abdd2532262f5cf"],["dragon-defense-walls-v95.png",1763896,"4e8909e6e348b2605da9"],["dragon-frontAttack-p0-v118.webp",1473302,"0272a21cfaffe6eaecfa"],["dragon-frontAttack-p1-v118.webp",1514726,"4002a4a0f024f044bf64"],["dragon-frontAttack-p2-v118.webp",1585872,"d26be6901ea69ff99b8b"],["dragon-frontAttack-p3-v118.webp",1675550,"f4c45fc73882c1178b50"],["dragon-frontWalk-p0-v118.webp",1462812,"a266f24135fa746fcb52"],["dragon-frontWalk-p1-v118.webp",1362130,"aa7ff3f823815c7d991b"],["dragon-frontWalk-p2-v118.webp",1436570,"eba3f3d9c43086cdea3e"],["dragon-frontWalk-p3-v118.webp",1523006,"4587b5dd33e8be60d966"],["dragon-relic-blade-v129.png",54338,"d00761ef94f0b750d92e"],["dragon-relic-shield-v129.png",171915,"6162afad44be83dedea7"],["dragon-sideAttack-p0-v118.webp",1283536,"99e38034d62572bd8fd9"],["dragon-sideAttack-p1-v118.webp",1318150,"715b9ef1ca9a1c54fe23"],["dragon-sideAttack-p2-v118.webp",1438034,"7523e89b7c7007f905bb"],["dragon-sideAttack-p3-v118.webp",1415258,"b322f8656fc9d0620cc4"],["dragon-sideWalk-p0-v118.webp",1323146,"f1182a3130285fe31d18"],["dragon-sideWalk-p1-v118.webp",1364292,"227db428ec84b3446351"],["dragon-sideWalk-p2-v118.webp",1281892,"b759f25af6274cd33bea"],["dragon-sideWalk-p3-v118.webp",1400748,"3ea9e6d5452d296f7ed3"],["evolved-back-v76.png",2331512,"568060d1fc6efb34c793"],["evolved-front-v76.png",2322797,"0623ec68b19f7b51e825"],["evolved-side-attack-v76.png",1876398,"931f9e1936dde61c9e98"],["evolved-side-walk-v76.png",1868168,"63f47d355e1d637fd6a2"],["flame-dragon-v92.png",2202060,"c103876fcbf44c1ef80f"],["hound-motion-v55.webp",1464684,"41d46beeb2684466d56a"],["houses-front-v45.webp",1807946,"98f9a0b9454c2f1f9c9c"],["nature-props-v2.webp",1361320,"fca3cccc666e3e32fe77"],["reference-materials-v5.jpg",393922,"b99109ba5c6d509da312"],["robot-arms-clean-v166.png",912085,"9a0adb4cfd56893b7e8b",true],["robot-held-upper-v136.webp",1762160,"1fa58d116d8ed084ac7c"],["robot-integrated-v135.webp",1200916,"16ab8796614bde19b9a0"],["robot-lower-kit-v136.webp",978812,"0cb9ad756b35c98ec413"],["robot-torso-clean-v166.png",896206,"5581f4950befbfc34cac",true],["terrain-grass-v161.webp",9026,"3418b5a19ee14297fa8c",true],["terrain-materials-v10.webp",1641702,"7be2ed5d1b636ca98681"],["terrain-road-0-v161.webp",125980,"71ddeb3e35c0a1d0953d",true],["terrain-road-1-v161.webp",123364,"882c60358d510e30a80e",true],["terrain-road-2-v161.webp",118238,"ec16f0baa332e22f004f",true],["terrain-road-3-v161.webp",123748,"083f6f96234940e44d07",true],["terrain-road-4-v161.webp",127298,"24e318d5a1dec9d34ef7",true],["terrain-road-5-v161.webp",124596,"16e4d48699c997b4e34c",true],["terrain-road-6-v161.webp",130338,"dd4b610334e432020d83",true],["terrain-road-7-v161.webp",125624,"b79739e0843358bef681",true],["terrain-road-8-v161.webp",126234,"75d89df1cad6c59c5865",true],["tower-front-v35.webp",1753300,"e92dd37a55ee190c40d0"],["tower-tiers-v40.webp",1981748,"b7c36325e752bfd2118e"],["tower-upgrades-v10.webp",1655004,"74381f9d58d38589023d"],["woodland-atlas-v1.webp",1755954,"7c8381c981a5da7a725a"]]){manifest[name]={bytes,hash};if(local)manifest[name].local=local;}module.exports={manifest,config:{"diagnosticFreezeTrace":true,"version":"wechat627","diagnosticBuild":"BN19R10-C3-REBUILT-P0-COW8D-PF1-CLAUDE-R12-GUIDES-SOLO-PF2","diagnosticRelay":{"enabled":false,"approvedOrigin":""},"preparedArt":true,"assetBase":"https://demon-and-elves-whxh-d9gqr3083ac71b751.webapps.tcloudbase.com/assets/"}};
+--- a/release.json	1970-01-01 08:00:00
++++ b/release.json	2026-11-25 16:24:06
+@@ -2,7 +2,7 @@
+   "version": "wechat627",
+   "preparedArt": true,
+   "assetBase": "https://demon-and-elves-whxh-d9gqr3083ac71b751.webapps.tcloudbase.com/assets/",
+-  "diagnosticBuild": "BN19R10-C3-REBUILT-P0-COW8D-PF1-CLAUDE-R12-GUIDES-SOLO",
++  "diagnosticBuild": "BN19R10-C3-REBUILT-P0-COW8D-PF1-CLAUDE-R12-GUIDES-SOLO-PF2",
+   "diagnosticRelay": {
+     "enabled": false,
+     "approvedOrigin": ""

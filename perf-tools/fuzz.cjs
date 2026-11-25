@@ -46,7 +46,7 @@ function buttonPool(g) {
   const { window: w, runtime } = host.env(); const g = w.game;
   await until(() => { host.advance(16.667); host.frame(); return g.homeOptionsReadyBN; }, 'home options', 20000);
   tap: {
-    tapRect(g.getDifficultyOptionButtons().find(b => b.id === 'medium'));
+    { const dbs = g.getDifficultyOptionButtons(); if (dbs.length) tapRect(dbs.find(b => b.id === 'medium')); else g.selectDifficulty(process.env.DIFF || 'crazy'); }
     for (let i = 0; i < ALLIES; i++) { const b = g.getAllySlotButtons()[i]; if (!b.selected) tapRect(b); host.advance(16.667); host.frame(); }
     tapRect(g.getStartActionButtons().find(b => b.id === 'startGame'));
   }

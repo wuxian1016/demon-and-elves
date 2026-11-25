@@ -8,7 +8,7 @@
 npm install
 ```
 
-建议都在断网沙盒里跑（和工程自带 `qa/smoke.sh` 一样）：`/usr/bin/sandbox-exec -f ../qa/network-closed.sb node <脚本> …`
+建议都在断网沙盒里跑（和工程自带 `qa/smoke.sh` 一样）：`/usr/bin/sandbox-exec -f ../恶魔与精灵_COW8D优化/qa/network-closed.sb node <脚本> …`
 
 | 脚本 | 做什么 | 用法 |
 |---|---|---|
@@ -26,3 +26,31 @@ npm install
 | `edit.py` | 对压缩过的源码做“必须恰好匹配一次”的替换 | `python3 edit.py <文件> old.txt new.txt` |
 
 说明：`IMMORTAL=1` 只为测试让精灵不死（否则空手不建房 6 分钟会被规则淘汰）；测得的毫秒数是 Mac 上 Skia 软件渲染的数，像素量、调用次数、分配量、是否现画地形这些不随机器变。
+
+## 2026-11-25 新增（R12-PF2 这轮）
+
+**确定性模式（做前后对比必须用）**：游戏里 Boss 等内容要等素材异步加载完才出场。不开这个模式时，加载完成的时刻随机器忙闲变化，同样操作跑两次局面会分叉。
+
+- `VTIMERS=1`：游戏的 `setTimeout` 按游戏时钟触发（`host.cjs`）。
+- `detgfx.cjs`：图片加载完成的通知只在固定帧统一发出（`updbench.cjs`、`longrun.cjs`、`compare.cjs` 已经在用）。
+
+| 脚本 | 做什么 | 用法 |
+|---|---|---|
+| `updbench.cjs` | 只跑游戏逻辑：每分钟的逻辑耗时、地形碰撞查询次数、视线检测次数，以及结束时的完整状态指纹。指纹相同表示玩法结果完全一致 | `VTIMERS=1 node updbench.cjs <client> 720`；`PROF_FROM=540 PROF_OUT=x.cpuprofile` 抓后段 CPU 采样 |
+| `longrun.cjs` | 整局逐帧（逻辑 + 绘制）：每秒的帧耗时、长帧数、镜头移动距离、当场现画的地形块数 | `VTIMERS=1 ALLIES=8 DIFF=crazy IMMORTAL=1 [CAM=busy] node --expose-gc longrun.cjs <client> out.json 720` |
+| `compare.cjs` | 逐秒状态、整屏像素回归；新增 `DIFF`、`BUSY=1`（镜头看最热闹处）、`PIXEL_EVERY=30` | `VTIMERS=1 DIFF=crazy [BUSY=1 PIXEL_EVERY=30] node compare.cjs <client> out.json 7200`；`--diff a.json b.json` |
+| `camtrace.cjs` | 谁在移动镜头（记录写镜头坐标的调用栈） | `AT=60 N=300 node camtrace.cjs <client> <outdir>` |
+| `incl.py` / `callers.py` | 汇总 .cpuprofile：按函数的包含时间 / 某函数被谁调用 | `python3 incl.py x.cpuprofile`；`python3 callers.py x.cpuprofile '^函数名'` |
+
+**WebKit测试/**：在 macOS 的 WKWebView 里跑整个游戏，和微信 iOS 高性能模式是同一个 WebKit 引擎。
+
+1. 编译：`swiftc -O -import-objc-header trycatch.h runner.swift -o wkrun`
+2. 起服务：`python3 serve.py 8766 www`。先在 `www/c/` 下建软链接，例如 `ln -s <client目录> www/c/r12`。
+3. 运行：`[WK_NOACCEL=1] python3 cpurun.py "http://127.0.0.1:8766/index.html?client=r12&allies=8&diff=crazy&secs=60&immortal=1&cam=busy&det=1&ff=540&warm=5" out.json 1800`
+   - `WK_NOACCEL=1`：关掉画布硬件加速，改用 CPU 画（推测更接近 iPhone 的情况）。
+   - `det=1`：确定性模式。
+   - `ff=秒`：先只跑逻辑快进到该时刻。
+   - `phases=1`：按绘制阶段计时。
+   - `scope=draw&primspy=1&primgroup=1`：逐次绘制调用计时。
+   - `skip=函数名`：去掉某个绘制函数，看能省多少。
+   - 输出里有每帧耗时、两个 WebKit 进程的 CPU 时间、结束时的状态指纹。

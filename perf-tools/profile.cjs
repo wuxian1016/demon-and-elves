@@ -221,7 +221,8 @@ async function updateOnly(g, seconds, log) {
   wrapTiming(g);
   await until(() => { host.advance(16.667); host.frame(); return g.homeOptionsReadyBN; }, 'home options', 20000);
   if (!process.env.SKIP_HOME) report.steps.push(await runFrames('home-idle', 240));
-  tap(g.getDifficultyOptionButtons().find(b => b.id === 'medium'));
+  { const dbs = g.getDifficultyOptionButtons(); const want = process.env.DIFF || 'medium'; if (dbs.length) tap(dbs.find(b => b.id === want)); else if (process.env.DIFF) g.selectDifficulty(want); }
+  report.difficulty = g.trollDifficulty;
   for (let i = 0; i < ALLIES; i++) { const b = g.getAllySlotButtons()[i]; if (!b.selected) tap(b); host.advance(16.667); host.frame(); }
   report.allySlots = g.allySlots.slice();
   tap(g.getStartActionButtons().find(b => b.id === 'startGame'));

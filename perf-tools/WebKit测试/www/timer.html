@@ -1,0 +1,5 @@
+<!doctype html><script>
+const v = new Set(); const t0 = performance.now(); let a = t0; for (let i = 0; i < 2e6; i++) { const b = performance.now(); if (b !== a) { v.add(+(b - a).toFixed(4)); a = b; } }
+window.webkit.messageHandlers.log.postMessage('isolated=' + self.crossOriginIsolated + ' steps=' + [...v].sort((x, y) => x - y).slice(0, 6).join(','));
+window.webkit.messageHandlers.log.postMessage('__DONE__');
+</script>

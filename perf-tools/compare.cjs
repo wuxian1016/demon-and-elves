@@ -19,9 +19,7 @@ const [root, outFile, framesArg = '7200'] = process.argv.slice(2);
 const FR = +framesArg;
 const SAVE = new Set((process.env.SAVE_FRAMES || '').split(',').filter(Boolean).map(Number));
 const disk = fs.mkdtempSync(path.join(os.tmpdir(), 'cow8d-cmp-')); fs.writeFileSync(path.join(disk, 'keys.json'), '{}');
-let mainCanvas = null;
-const graphics = { canvas(w, h) { const c = n.createCanvas(Math.max(1, w | 0), Math.max(1, h | 0)); c.addEventListener = () => {}; c.removeEventListener = () => {}; if (!mainCanvas) mainCanvas = c; return c; },
-  image(locate) { const i = new n.Image(); let name; const orig = Object.getOwnPropertyDescriptor(n.Image.prototype, 'src'); Object.defineProperty(i, 'src', { configurable: true, get() { return name; }, set(s) { name = s; if (!s) return; try { orig.set.call(i, fs.readFileSync(locate(s))); } catch (e) { queueMicrotask(() => i.onerror?.(e)); } } }); return i; } };
+const graphics = require('./detgfx.cjs')(n, fs);
 const host = makeHost(root, disk, false, { width: 390, height: 844, seed: 150, clockStart: 1800000000000, graphics, pixelRatio: 3 });
 const sleep = ms => new Promise(r => setTimeout(r, ms)); const hr = () => Number(process.hrtime.bigint()) / 1e6;
 let tid = 10; const touch = (type, x, y, id) => { const f = { identifier: id, clientX: x, clientY: y, x, y }; host.emit(type, { changedTouches: [f], touches: type === 'TouchEnd' ? [] : [f] }); };
@@ -36,37 +34,58 @@ function digest(g) {
 }
 (async () => {
   const states = [], pixels = []; let drawMs = 0, totalMs = 0;
-  host.start(); await until(() => host.stored()[STARTUP]?.events?.at(-1)?.kind === 'ready', 'ready', 60000);
+  const VT = !!process.env.VTIMERS;
+  host.start(); for (let k = 0; k < 200000; k++) { if (VT) host.advance(4); await graphics.flush(); if (host.stored()[STARTUP]?.events?.at(-1)?.kind === 'ready') break; }
   const { window: w } = host.env(); const g = w.game;
   const d0 = g.draw; g.draw = function (...a) { const t = hr(); try { return d0.apply(this, a); } finally { drawMs += hr() - t; } };
   // loading phases: run frames without advancing game time so the start state does not depend on real loading speed
-  for (let i = 0; i < 4000 && !g.homeOptionsReadyBN; i++) { host.frame(); await sleep(2); }
-  const homePix = crypto.createHash('sha1').update(mainCanvas.data()).digest('hex').slice(0, 16);
-  tapRect(g.getDifficultyOptionButtons().find(b => b.id === 'medium'));
+  for (let i = 0; i < 40000 && !g.homeOptionsReadyBN; i++) { if (VT) host.advance(4); host.frame(); await graphics.flush(); }
+  const homePix = crypto.createHash('sha1').update(graphics.main.data()).digest('hex').slice(0, 16);
+  { const dbs = g.getDifficultyOptionButtons(); if (process.env.DIFF) g.selectDifficulty(process.env.DIFF); else if (dbs.length) tapRect(dbs.find(b => b.id === 'medium')); }
   for (let i = 0; i < 8; i++) { const b = g.getAllySlotButtons()[i]; if (!b.selected) tapRect(b); host.frame(); }
   tapRect(g.getStartActionButtons().find(b => b.id === 'startGame'));
-  for (let i = 0; i < 30000 && !(!g.roundStarting && !g.roundLoading591 && g.state === 'prep'); i++) { host.frame(); await sleep(2); }
-  for (let i = 0; i < 50; i++) { host.frame(); await sleep(5); }
+  for (let i = 0; i < 200000 && !(!g.roundStarting && !g.roundLoading591 && g.state === 'prep'); i++) { if (VT) host.advance(4); host.frame(); await graphics.flush(); }
+  for (let i = 0; i < 50; i++) { if (VT) host.advance(4); host.frame(); await graphics.flush(); }
   g.finishEndlessOpeningIntroBH();
   const keep = () => { const p = g.player; if (p && !p.dead) { p.hp = p.maxHp; p.invincibleTime = 1e9; p.noBuildingGraceAbsentAtAZ = 1e12; } };
   const j = () => g.getJoystickRect();
   const SID = 7001; let walking = false;
+  const PIX = +(process.env.PIXEL_EVERY || 120), BUSY = !!process.env.BUSY; let camTarget = null;
+  const busyCam = (i) => {
+    const z = g.zoom(), vw = 390 / z, vh = 844 / z;
+    if (i % 120 === 0) {
+      const pts = [];
+      for (const h of g.hounds || []) if (!h.dead) pts.push(h);
+      for (const b of g.buildings || []) if (!b.dead) pts.push(b);
+      for (const p of g.peasants || []) pts.push(p);
+      for (const a of g.allies || []) if (!a.dead) pts.push(a);
+      if (g.troll && !g.troll.dead) pts.push(g.troll);
+      let best = null, bestN = -1;
+      for (let k = 0; k < pts.length; k += Math.max(1, Math.floor(pts.length / 80))) { const c = pts[k]; let n = 0; for (const p of pts) if (Math.abs(p.x - c.x) < vw / 2 && Math.abs(p.y - c.y) < vh / 2) n++; if (n > bestN) { bestN = n; best = c; } }
+      if (best) camTarget = { x: best.x - vw / 2, y: best.y - vh * 0.5 };
+    }
+    if (!camTarget) return;
+    g.manualCamera394 = true;
+    const f = g.cameraFollow, dx = camTarget.x - f.x, dy = camTarget.y - f.y, d = Math.hypot(dx, dy), step = Math.min(d, Math.max(4, d * 0.08), 25);
+    if (d > 0.5) { f.x += dx / d * step; f.y += dy / d * step; }
+  };
   for (let f = 0; f < FR; f++) {
     keep();
+    if (BUSY) busyCam(f);
     // scripted inputs: walk segments, camera jumps, pause/resume
     if (f % 900 === 300 && j()) { const r = j(); touch('TouchStart', r.x, r.y, SID); walking = true; }
     if (walking) { const r = j() || { x: 60, y: 700, r: 50 }; const a = Math.floor(f / 120) * 1.3; touch('TouchMove', r.x + Math.cos(a) * r.r, r.y + Math.sin(a) * r.r, SID); }
     if (f % 900 === 540 && walking) { touch('TouchEnd', 0, 0, SID); walking = false; }
-    if (f % 1200 === 700) { g.manualCamera394 = true; const far = (f / 1200 | 0) % 2 ? g.trollBase : g.player; g.camera.x = g.cameraFollow.x = far.x - 195 / g.zoom(); g.camera.y = g.cameraFollow.y = far.y - 422 / g.zoom(); }
-    if (f % 1200 === 760) g.manualCamera394 = false;
+    if (!BUSY && f % 1200 === 700) { g.manualCamera394 = true; const far = (f / 1200 | 0) % 2 ? g.trollBase : g.player; g.camera.x = g.cameraFollow.x = far.x - 195 / g.zoom(); g.camera.y = g.cameraFollow.y = far.y - 422 / g.zoom(); }
+    if (!BUSY && f % 1200 === 760) g.manualCamera394 = false;
     if (f % 2400 === 1500) { host.emit('Hide', {}); host.advance(5000); host.emit('Show', {}); }
     if (f % 2400 === 1530 && g.sessionMenuOpen) { const b = g.sessionMenuButtons().find(x => x.id === 'resume'); if (b) tapRect(b); }
     host.advance(16.667);
     const t = hr(); host.frame(); totalMs += hr() - t;
     if (f % 60 === 0) { const s = digest(g); states.push({ f, d: crypto.createHash('sha1').update(JSON.stringify(s)).digest('hex').slice(0, 16), s }); }
-    if (f % 120 === 1 || (f % 1200 >= 700 && f % 1200 < 705)) pixels.push({ f, h: crypto.createHash('sha1').update(mainCanvas.data()).digest('hex').slice(0, 16) });
-    if (SAVE.has(f)) fs.writeFileSync(outFile + '.f' + f + '.rgba', mainCanvas.data());
-    if (f < 600 || f % 10 === 9) await sleep(0);
+    if (f % PIX === 1 || (f % 1200 >= 700 && f % 1200 < 705)) pixels.push({ f, h: crypto.createHash('sha1').update(graphics.main.data()).digest('hex').slice(0, 16) });
+    if (SAVE.has(f)) fs.writeFileSync(outFile + '.f' + f + '.rgba', graphics.main.data());
+    if (f < 600 || f % 10 === 9) await graphics.flush();
   }
   const out = { homePix, states, pixels, timing: { framesMs: +(totalMs / FR).toFixed(2), drawMs: +(drawMs / FR).toFixed(2) }, final: digest(g) };
   fs.writeFileSync(outFile, JSON.stringify(out));
