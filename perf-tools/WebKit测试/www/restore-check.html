@@ -1,0 +1,6 @@
+<!doctype html><script>
+const c = document.createElement('canvas').getContext('2d');
+c.imageSmoothingEnabled = true; c.imageSmoothingQuality = 'high'; c.save(); c.imageSmoothingEnabled = false; c.imageSmoothingQuality = 'low'; c.setTransform(1,0,0,1,0,0); c.restore();
+window.webkit.messageHandlers.log.postMessage('WEBKIT after restore: smoothing ' + c.imageSmoothingEnabled + ' quality ' + c.imageSmoothingQuality);
+window.webkit.messageHandlers.log.postMessage('__DONE__');
+</script>

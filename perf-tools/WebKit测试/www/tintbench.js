@@ -5,7 +5,7 @@ function tintBench(make, opts = {}) {
   let seed = 12345; const rnd = () => ((seed = (Math.imul(seed, 1664525) + 1013904223) >>> 0) / 4294967296);
   const bg = make(W, H), b = bg.getContext('2d');
   for (let i = 0; i < 4000; i++) { b.fillStyle = `rgba(${(rnd() * 256) | 0},${(rnd() * 256) | 0},${(rnd() * 256) | 0},${opts.alphaBg ? (0.2 + rnd() * 0.8).toFixed(2) : 1})`; b.fillRect((rnd() * W) | 0, (rnd() * H) | 0, 4 + ((rnd() * 60) | 0), 4 + ((rnd() * 60) | 0)); }
-  const colors = ['rgba(129, 212, 250, 0.15)', 'rgba(0,0,0,.38)', 'rgba(0,0,0,0.55)', 'rgba(17,39,31,.90)', 'rgba(255,255,255,0.08)', 'rgba(28,52,36,0.72)', 'rgba(200,30,30,0.33)'];
+  const colors = opts.colors || ['rgba(129, 212, 250, 0.15)', 'rgba(0,0,0,.38)', 'rgba(0,0,0,0.55)', 'rgba(17,39,31,.90)', 'rgba(255,255,255,0.08)', 'rgba(28,52,36,0.72)', 'rgba(200,30,30,0.33)'];
   const read = (c) => c.getContext('2d').getImageData(0, 0, W, H).data;
   const now = () => (typeof performance !== 'undefined' ? performance.now() : Date.now());
   for (const col of colors) {

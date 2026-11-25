@@ -1,0 +1,6 @@
+<!doctype html><script src="tintbench.js"></script><script>
+const make = (w, h) => { const c = document.createElement('canvas'); c.width = w; c.height = h; return c; };
+const colors = ['rgba(129, 212, 250, 0.15)', 'rgba(0,0,0,.38)', 'rgba(4,15,10,.45)', 'rgba(0,0,0,0.18)', 'rgba(0,0,0,.48)', 'rgba(0,0,0,.55)', 'rgba(0,0,0,.5)', 'rgba(0,0,0,.45)', 'rgba(4,15,10,.5)', 'rgba(4,15,10,.6)'];
+for (const alphaBg of [false, true]) { const r = tintBench(make, { alphaBg, colors }); const bad = Object.entries(r).filter(([k, v]) => v.diffFull[0]).map(([k, v]) => k + ':' + v.diffFull); window.webkit.messageHandlers.log.postMessage('TINT2 alphaBg=' + alphaBg + ' differing=' + JSON.stringify(bad) + ' fillMs=' + Object.values(r).map(v => v.fillMs).join(',') + ' imgMs=' + Object.values(r).map(v => v.imgFullMs).join(',')); }
+window.webkit.messageHandlers.log.postMessage('__DONE__');
+</script>

@@ -17,6 +17,10 @@
     if (DET) { for (let k = 0; k < 200000; k++) { host.advance(4); await host.flush(); if (host.stored()['forest-startup-diagnostics-v1']?.events?.at(-1)?.kind === 'ready') break; } }
     try { await until(() => host.stored()['forest-startup-diagnostics-v1']?.events?.at(-1)?.kind === 'ready', 'Home ready', 30000); } catch (e) { send('KEYS ' + Object.keys(host.keys).join(',')); send('DIAG ' + JSON.stringify(host.stored()['forest-startup-diagnostics-v1']).slice(0, 3000)); send('MODULES ' + [...host.modules.keys()].length + ' last=' + [...host.modules.keys()].slice(-5).join(',')); throw e; }
     send('home ready ' + Math.round(performance.now() - t0) + ' ms');
+    // set test switches only after start-up: touching host.env() earlier loads runtime.js early and shifts the game clock origin
+    if (Q.tint) host.env().window.tintBlitModeBN = Q.tint;
+    if (Q.realprobe) { const Wn = host.env().window; let f = Wn.tintProbeBN; Object.defineProperty(Wn, 'tintProbeBN', { configurable: true, get: () => f && (() => host.realClock(f)), set: (v) => { f = v; } }); }
+    if (DET && Q.homeframes) { for (let k = 0; k < +Q.homeframes; k++) { host.advance(16.667); host.frame(); await host.flush(); } send('home frames ' + Q.homeframes + ' probe=' + JSON.stringify(host.env().window.screenTintStateBN?.probeLog?.() || null)); }
     const g = host.env().window.game;
     const T = { u: 0, d: 0 };
     { const u = g.update, d = g.draw; g.update = function (...a) { const t = performance.now(); try { return u.apply(this, a); } finally { T.u += performance.now() - t; } }; g.draw = function (...a) { const t = performance.now(); try { return d.apply(this, a); } finally { T.d += performance.now() - t; } }; }
@@ -196,6 +200,17 @@
       const sctx = L.getContext('2d'); res.layerAttrs = JSON.stringify(sctx.getContextAttributes ? sctx.getContextAttributes() : {}); res.mainAttrs = JSON.stringify(ctx.getContextAttributes ? ctx.getContextAttributes() : {});
       send('BENCH ' + JSON.stringify(res));
     }
+    const hashes = []; const PIX = +(Q.pixhash || 0); const tintCalls = {};
+    { const W = host.env().window; const f = W.screenTintBN; if (f) W.screenTintBN = function (c, s, w, h) { const r = f.call(this, c, s, w, h); const e = tintCalls[s] || (tintCalls[s] = [0, 0]); e[0]++; if (r) e[1]++; return r; }; }
+    const fnv = (data) => { let h1 = 0x811c9dc5 | 0, h2 = 0x01000193 | 0; for (let k = 0; k < data.length; k += 4) { const v = data[k] | (data[k + 1] << 8) | (data[k + 2] << 16) | (data[k + 3] << 24); h1 = Math.imul(h1 ^ v, 0x01000193); h2 = Math.imul(h2 + v, 0x5bd1e995) ^ (h2 >>> 13); } return (h1 >>> 0).toString(16) + (h2 >>> 0).toString(16); };
+    const menuScript = (i) => {
+      if (!Q.menus) return;
+      const k = i % 900;
+      if (k === 100) g.buildMenu = true; if (k === 190) g.buildMenu = false;
+      if (k === 300) { const b = g.buildings.find(x => !x.dead && x.ownerSlot == null) || g.buildings.find(x => !x.dead); if (b) g.selectedBuilding = b; }
+      if (k === 390) g.selectedBuilding = null;
+      if (k === 500) g.sessionMenuOpen = true; if (k === 560) g.sessionMenuOpen = false;
+    };
     const all = [], allJs = [], rows = [];
     const newSec = () => ({ f: 0, js: 0, tot: 0, max: 0, o12: 0, o16: 0, o33: 0, u: 0, d: 0 });
     let sec = newSec();
@@ -205,11 +220,13 @@
       if (Q.immortal && g.player && !g.player.dead) { g.player.hp = g.player.maxHp; g.player.invincibleTime = 1e9; }
       if (DET && i % 60 === 29) await host.flush();
       if (Q.cam === 'busy') busyCam(i);
+      menuScript(i);
       host.advance(1000 / 60);
       const u0 = T.u, d0 = T.d;
       const a = performance.now(); host.frame(); const b = performance.now();
       if (STRESS) { ctx.save(); ctx.setTransform(1, 0, 0, 1, 0, 0); ctx.globalAlpha = 0.02; for (let k = 0; k < STRESS; k++) ctx.drawImage(stressArt, (k % 3) - 1, 0); ctx.restore(); }
       if (FLUSH) ctx.getImageData(0, 0, 1, 1);
+      if (PIX && (i % PIX === PIX - 1 || (Q.menus && [101, 120, 191, 301, 330, 391, 501, 530, 561].includes(i % 900)))) hashes.push(i + ':' + fnv(ctx.getImageData(0, 0, host.mainCanvas.width, host.mainCanvas.height).data)); if (Q.dumpf && Q.dumpf.split(',').includes(String(i))) send('DUMP ' + i + ' ' + host.mainCanvas.toDataURL('image/png'));
       const c = performance.now();
       const js = b - a, tot = c - a; all.push(tot); allJs.push(js);
       sec.f++; sec.js += js; sec.tot += tot; sec.max = Math.max(sec.max, tot); if (tot > 12) sec.o12++; if (tot > 16.7) sec.o16++; if (tot > 33.3) sec.o33++; sec.u += T.u - u0; sec.d += T.d - d0;
@@ -232,7 +249,8 @@
     if (Q.scope) summary.scopeCallsPerFrame = Object.fromEntries([...CNT].map(([k, v]) => [k, +(v / nF).toFixed(1)]));
     const r6 = v => Math.round(v * 1e6) / 1e6, sm = (arr, f) => { let s = 0; for (const e of arr || []) if (!e.dead) s += f(e); return r6(s); };
     summary.digest = JSON.stringify([g.state, g.waveNumber, r6(g.huntElapsed || 0), g.hounds.filter(h => !h.dead).length, sm(g.hounds, h => h.x + h.y * 3), sm(g.hounds, h => h.hp), g.buildings.filter(b => !b.dead).length, sm(g.buildings, b => b.hp), r6(g.troll.x), r6(g.troll.y), r6(g.troll.hp)]);
-    send('RESULT ' + JSON.stringify({ query: Q, summary, phases, log, rows }));
+    summary.tintCalls = tintCalls; summary.tintMode = host.env().window.screenTintStateBN?.mode?.(); summary.probeLog = host.env().window.screenTintStateBN?.probeLog?.();
+    send('RESULT ' + JSON.stringify({ query: Q, summary, phases, log, rows, hashes }));
     send('__DONE__');
   } catch (e) { send('FAILED ' + (e && e.message) + ' | ' + (e && e.stack || e)); send('__DONE__'); }
 })();

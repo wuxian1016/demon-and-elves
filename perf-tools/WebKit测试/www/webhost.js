@@ -151,6 +151,7 @@
       async flush() { for (let k = 0; pendingImgs.size && k < 200000; k++) await yieldTask(); while (readyQ.length) { const b = readyQ.splice(0); for (const f of b) f(); } },
       pendingImages: () => pendingImgs.size,
       now: () => now,
+      realClock(fn) { const saved = now; now = null; try { return fn(); } finally { now = saved; } }, // run fn with the real Date.now (used for the canvas probe)
       pendingFrames: () => raf.size,
       start: () => load('game.js'),
       env: () => load('runtime.js'),

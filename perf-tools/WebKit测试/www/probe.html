@@ -1,0 +1,15 @@
+<!doctype html><script>
+const send = (s) => window.webkit.messageHandlers.log.postMessage(String(s));
+const src = new XMLHttpRequest(); src.open('GET', 'c/pf2/art163/screen-tint.js', false); src.send();
+const module = { exports: {} }; new Function('module', 'exports', src.responseText)(module, module.exports);
+const env = { window: {}, document: { createElement: (t) => document.createElement(t) } };
+(async () => {
+  const results = [];
+  for (let run = 0; run < 10; run++) {
+    const t = module.exports(env); let m = null, frames = 0;
+    while (!m && frames < 30) { await new Promise(r => requestAnimationFrame ? setTimeout(r, 16) : r()); m = t.step(); frames++; }
+    results.push(m + '@' + frames + JSON.stringify(t.probeLog()));
+  }
+  send('PROBE ' + results.join(' ')); send('__DONE__');
+})();
+</script>

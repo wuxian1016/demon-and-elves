@@ -33,10 +33,11 @@ function digest(g) {
   return s;
 }
 (async () => {
-  const states = [], pixels = []; let drawMs = 0, totalMs = 0;
+  const states = [], pixels = [], tr = [], calls = [], clk = []; let drawMs = 0, totalMs = 0;
   const VT = !!process.env.VTIMERS;
   host.start(); for (let k = 0; k < 200000; k++) { if (VT) host.advance(4); await graphics.flush(); if (host.stored()[STARTUP]?.events?.at(-1)?.kind === 'ready') break; }
   const { window: w } = host.env(); const g = w.game;
+  if (process.env.TINT) w.tintBlitModeBN = process.env.TINT;
   const d0 = g.draw; g.draw = function (...a) { const t = hr(); try { return d0.apply(this, a); } finally { drawMs += hr() - t; } };
   // loading phases: run frames without advancing game time so the start state does not depend on real loading speed
   for (let i = 0; i < 40000 && !g.homeOptionsReadyBN; i++) { if (VT) host.advance(4); host.frame(); await graphics.flush(); }
@@ -69,9 +70,12 @@ function digest(g) {
     const f = g.cameraFollow, dx = camTarget.x - f.x, dy = camTarget.y - f.y, d = Math.hypot(dx, dy), step = Math.min(d, Math.max(4, d * 0.08), 25);
     if (d > 0.5) { f.x += dx / d * step; f.y += dy / d * step; }
   };
+  const tintCalls = {}; { const W = host.env().window; const tf = W.screenTintBN; if (tf) W.screenTintBN = function (c, s, w, h) { tintCalls[s] = (tintCalls[s] || 0) + 1; return tf.call(this, c, s, w, h); }; }
+  const MENUS = !!process.env.MENUS;
   for (let f = 0; f < FR; f++) {
     keep();
     if (BUSY) busyCam(f);
+    if (MENUS) { const k = f % 900; if (k === 100) g.buildMenu = true; if (k === 190) g.buildMenu = false; if (k === 300) { const b = g.buildings.find(x => !x.dead && x.ownerSlot == null) || g.buildings.find(x => !x.dead); if (b) g.selectedBuilding = b; } if (k === 390) g.selectedBuilding = null; if (k === 500) g.sessionMenuOpen = true; if (k === 560) g.sessionMenuOpen = false; if ([100, 190, 300, 390, 500, 560].includes(k) && process.env.MENUWAKE) host.env().runtime.wake(); }
     // scripted inputs: walk segments, camera jumps, pause/resume
     if (f % 900 === 300 && j()) { const r = j(); touch('TouchStart', r.x, r.y, SID); walking = true; }
     if (walking) { const r = j() || { x: 60, y: 700, r: 50 }; const a = Math.floor(f / 120) * 1.3; touch('TouchMove', r.x + Math.cos(a) * r.r, r.y + Math.sin(a) * r.r, SID); }
@@ -81,13 +85,32 @@ function digest(g) {
     if (f % 2400 === 1500) { host.emit('Hide', {}); host.advance(5000); host.emit('Show', {}); }
     if (f % 2400 === 1530 && g.sessionMenuOpen) { const b = g.sessionMenuButtons().find(x => x.id === 'resume'); if (b) tapRect(b); }
     host.advance(16.667);
+    if (process.env.CLOCKTRACE && f >= 4400 && f <= 4600) { const rt = host.env(); clk.push(f + ':' + Date.now() + ':' + rt.performance.now().toFixed(3)); }
+    const CT = +(process.env.CALLTRACE || -1);
+    if (CT >= 0 && f === CT) {
+      const proto = Object.getPrototypeOf(graphics.main.getContext('2d'));
+      for (const m of ['drawImage', 'fillRect', 'fill', 'stroke', 'fillText', 'strokeText', 'clearRect', 'putImageData']) {
+        const o = proto[m];
+        proto[m] = function (...a) {
+          if (this.canvas === graphics.main) { const t = this.getTransform(); calls.push([m, a.map(v => typeof v === 'number' ? +v.toFixed(3) : (v && v.width ? 'img' + v.width + 'x' + v.height : String(v).slice(0, 30))).join(','), [t.a, t.b, t.c, t.d, t.e, t.f].map(v => +v.toFixed(3)).join(','), this.imageSmoothingEnabled, this.imageSmoothingQuality, this.globalAlpha, this.globalCompositeOperation, String(this.fillStyle).slice(0, 30)].join(' | ')); }
+          return o.apply(this, a);
+        };
+      }
+    }
+    const T0 = +(process.env.TRACEF || -1);
+    if (T0 >= 0 && f === T0) { const u = g.update, d = g.draw; g.update = function (...a) { tr.push(f + ' update'); return u.apply(this, a); }; g.draw = function (...a) { tr.push(f + ' draw'); return d.apply(this, a); };
+      const W = host.env().window; let dirty = g.wxUiDirty; const desc = Object.getOwnPropertyDescriptor(g, 'wxUiDirty'); if (desc && desc.set) { Object.defineProperty(g, 'wxUiDirty', { configurable: true, get: desc.get, set(v) { if (v) tr.push(f + ' dirty<-' + (new Error().stack.split('\n')[2] || '').trim().replace(/^at /, '').replace(/\(?[^()]*\/client\//, '').slice(0, 90)); desc.set.call(this, v); } }); } }
+    if (T0 >= 0 && f >= T0 && f < T0 + 120) tr.push(f + ' pending=' + host.pendingFrames() + ' vt=' + host.vtimerCount() + ' menu=' + g.sessionMenuOpen);
     const t = hr(); host.frame(); totalMs += hr() - t;
     if (f % 60 === 0) { const s = digest(g); states.push({ f, d: crypto.createHash('sha1').update(JSON.stringify(s)).digest('hex').slice(0, 16), s }); }
-    if (f % PIX === 1 || (f % 1200 >= 700 && f % 1200 < 705)) pixels.push({ f, h: crypto.createHash('sha1').update(graphics.main.data()).digest('hex').slice(0, 16) });
+    if (f % PIX === 1 || (f % 1200 >= 700 && f % 1200 < 705) || (MENUS && [101, 120, 191, 301, 330, 391, 501, 530, 561].includes(f % 900))) pixels.push({ f, h: crypto.createHash('sha1').update(graphics.main.data()).digest('hex').slice(0, 16) });
     if (SAVE.has(f)) fs.writeFileSync(outFile + '.f' + f + '.rgba', graphics.main.data());
     if (f < 600 || f % 10 === 9) await graphics.flush();
   }
-  const out = { homePix, states, pixels, timing: { framesMs: +(totalMs / FR).toFixed(2), drawMs: +(drawMs / FR).toFixed(2) }, final: digest(g) };
+  const out = { homePix, states, pixels, tintCalls, tintMode: host.env().window.screenTintStateBN?.mode?.() || null, timing: { framesMs: +(totalMs / FR).toFixed(2), drawMs: +(drawMs / FR).toFixed(2) }, final: digest(g) };
+  if (process.env.TRACEF) out.trace = tr;
+  if (process.env.CALLTRACE) out.calls = calls;
+  if (process.env.CLOCKTRACE) out.clk = clk;
   fs.writeFileSync(outFile, JSON.stringify(out));
   console.log(JSON.stringify({ homePix, timing: out.timing, final: out.final.slice(0, 12) }));
 })().catch(e => { console.error('FAILED', e.stack || e); process.exitCode = 1; }).finally(() => host.close());

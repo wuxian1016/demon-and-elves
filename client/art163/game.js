@@ -4,6 +4,7 @@ env.window.ghostModulesBN={passive_hints:require('./ghost/passive-hints'),elf_ad
 env.window.monsterSpeciesLiteBN=require('./species-fallback-art')(env.Image,(im,name)=>env.runtime.readPreparedPage(im,name));
 
 env.window.terrainEdgePrefetchBN=require('./terrain-edge-prefetch');
+{const t=require('./screen-tint')(env);env.window.screenTintBN=t.tint;env.window.tintProbeBN=t.step;env.window.screenTintStateBN=t;}
 env.window.cardEffectHudModuleBN=require('./card-effect-hud');
 
 env.window.soundBankCodecBN=require('./sound-bank-codec');
